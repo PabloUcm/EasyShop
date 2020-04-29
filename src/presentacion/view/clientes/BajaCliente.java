@@ -18,14 +18,21 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class BajaCliente extends JPanel {
+import negocio.ClienteObserver;
+import presentacion.controllers.ClienteController;
+
+public class BajaCliente extends JPanel implements ClienteObserver{
 	
-	public BajaCliente() {
+	ClienteController controlador;
+	
+	public BajaCliente(ClienteController c) {
+      this.controlador = c;
+      controlador.addObserver(this);
 	  initGUI();
 	}
 	
 	private JLabel idJL;
-	private JTextField idTF;
+	private JTextField dniTF;
 	private JButton baja;
 	private ImageIcon imageIcon;
 	
@@ -38,10 +45,10 @@ public class BajaCliente extends JPanel {
 	    idJL.setPreferredSize(new Dimension(300,50));
 	    idJL.setMaximumSize(idJL.getPreferredSize());
 	   
-	    idTF = new JTextField();
-	    idTF.setFont(new Font(idTF.getFont().toString(), Font.PLAIN, 45));
-	    idTF.setPreferredSize(new Dimension(300,50));
-	    idTF.setMaximumSize(idTF.getPreferredSize());
+	    dniTF = new JTextField();
+	    dniTF.setFont(new Font(dniTF.getFont().toString(), Font.PLAIN, 45));
+	    dniTF.setPreferredSize(new Dimension(300,50));
+	    dniTF.setMaximumSize(dniTF.getPreferredSize());
 	   
 	    baja = new JButton("DAR DE BAJA AL CLIENTE");
 	    baja.setContentAreaFilled(false);
@@ -61,9 +68,14 @@ public class BajaCliente extends JPanel {
 	   
 	    baja.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) { 
+	    		//Transfer Cliente = controlador.getCliente(dniTF.getText());
+	    		//pasar datos al string
 	    		String msg = "ID:\nDNI:\nNOMBRE:\nTELEFONO:\n\n ¿Quieres dar de baja a este cliente?";
 	            int input = JOptionPane.showConfirmDialog(null, msg,"Confirmar baja de cliente", 
 	            		    JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, imageIcon);
+	            //Ejecutar baja cliente
+	            if(input == JOptionPane.OK_OPTION) controlador.bajaCliente(dniTF.getText());
+	            
 	    	}
 	    });
 	   
@@ -76,7 +88,7 @@ public class BajaCliente extends JPanel {
 	    c.gridy = 0;
 	    c.gridwidth = 1;
 	    c.gridheight = 1;
-	    add(idTF, c);
+	    add(dniTF, c);
 	    c.gridx = 0;
 	    c.gridy = 1;
 	    c.gridwidth = 1;
@@ -88,6 +100,55 @@ public class BajaCliente extends JPanel {
 	    c.gridheight = 1;
 	    c.anchor = GridBagConstraints.CENTER;
 	    add(baja, c);
+	}
+
+	@Override
+	public void mostrarClientes() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mostrarClienteId() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void modificarCliente() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mostrarCliente() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void altaCliente() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void bajaCliente() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void listarClientes() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void obtenerCliente() {
+		// TODO Auto-generated method stub
+		
 	}
 }
 

@@ -7,6 +7,7 @@ import presentacion.view.CardSwitcher;
 import presentacion.view.ModuloMenu;
 import presentacion.view.ModuloPanel;
 import presentacion.view.clientes.AltaCliente;
+import presentacion.view.marcas.AltaMarca;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
@@ -26,8 +27,8 @@ public class VentasPanel extends JPanel {
 		CardSwitcher switcher = new CardSwitcher(ventasPanel, cardLayout);
 		ventasMenu = new ModuloMenu(switcher, 30);
 		
-		addFuncion(new AltaCliente(), new JButton("   Abrir venta"), "abrirventa", "AbrirVenta");
-		addFuncion(new AltaCliente(), new JButton("   Mostrar venta"), "mostrarventa", "MostrarVenta");
+		addFuncion(new AltaMarca(), new JButton("   Abrir venta"), "abrirventa", "AbrirVenta");
+		addFuncion(new AltaMarca(), new JButton("   Mostrar venta"), "mostrarventa", "MostrarVenta");
 		addFuncion(new ListarVentas(), new JButton("   Listar venta"), "listarventa", "ListarVentas");
 		
 		

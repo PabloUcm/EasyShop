@@ -1,18 +1,26 @@
 package presentacion.view.clientes;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import negocio.ClienteObserver;
+import negocio.Modelo;
+import presentacion.controllers.ClienteController;
 import presentacion.view.CardSwitcher;
 import presentacion.view.ModuloMenu;
 import presentacion.view.ModuloPanel;
 
 public class ClientesPanel extends JPanel {
+	private ClienteController controlador;
+	
 	public ClientesPanel() {
+		this.controlador = new ClienteController(Modelo.getModelo());
 		initGUI();
 	}
 	private ModuloMenu clientesMenu;
@@ -26,12 +34,12 @@ public class ClientesPanel extends JPanel {
 		CardSwitcher switcher = new CardSwitcher(clientesFuncion, cardLayout);
 		clientesMenu = new ModuloMenu(switcher, 35);
 		
-		addFuncion(new AltaCliente(), new JButton("     Alta cliente"), "altacliente", "AltaCliente");
-		addFuncion(new BajaCliente(), new JButton("     Baja cliente"), "bajacliente", "BajaCliente");
-		addFuncion(new AltaCliente(), new JButton("Modificar cliente"), "modcliente", "ModificarCliente");
-		addFuncion(new AltaCliente(), new JButton("     Mostrar cliente"), "mostrarcliente", "MostrarCliente");
-		addFuncion(new AltaCliente(), new JButton("     Listar clientes"), "listarcliente", "ListarClientes");
-		addFuncion(new AltaCliente(), new JButton("Historial cliente"), "historialcliente", "HistorialCliente");
+		addFuncion(new AltaCliente(controlador), new JButton("     Alta cliente"), "altacliente", "AltaCliente");
+		addFuncion(new BajaCliente(controlador), new JButton("     Baja cliente"), "bajacliente", "BajaCliente");
+		addFuncion(new AltaCliente(controlador), new JButton("Modificar cliente"), "modcliente", "ModificarCliente");
+		addFuncion(new AltaCliente(controlador), new JButton("     Mostrar cliente"), "mostrarcliente", "MostrarCliente");
+		addFuncion(new AltaCliente(controlador), new JButton("     Listar clientes"), "listarcliente", "ListarClientes");
+		addFuncion(new AltaCliente(controlador), new JButton("Historial cliente"), "historialcliente", "HistorialCliente");
 		
 		add(clientesFuncion, BorderLayout.CENTER);
 		add(clientesMenu, BorderLayout.NORTH);
@@ -47,4 +55,5 @@ public class ClientesPanel extends JPanel {
 		clientesFuncion.addPanel(panel, card);
 		clientesMenu.addButton(button, "Clientes/"+iconName, card);
 	}
+
 }

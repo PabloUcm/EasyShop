@@ -31,8 +31,8 @@ public class MarcasPanel extends JPanel {
 		addFuncion(new AltaMarca(), new JButton("   Alta marca"), "altamarca", "AltaMarca");
 		addFuncion(new BajaMarca(), new JButton("   Baja marca"), "bajamarca", "BajaMarca");
 		addFuncion(new AltaEmpleado(), new JButton("Modificar marca"), "modmarca", "ModificarMarca");
-		addFuncion(new BajaCliente(), new JButton("  Mostrar marca"), "mostrarmarca", "MostrarMarca");
-		addFuncion(new BajaCliente(), new JButton("   Listar marca"), "listarmarca", "ListarMarcas");
+		addFuncion(new AltaMarca(), new JButton("  Mostrar marca"), "mostrarmarca", "MostrarMarca");
+		addFuncion(new AltaMarca(), new JButton("   Listar marca"), "listarmarca", "ListarMarcas");
 		
 		add(marcasPanel, BorderLayout.CENTER);
 		add(marcasMenu, BorderLayout.NORTH);

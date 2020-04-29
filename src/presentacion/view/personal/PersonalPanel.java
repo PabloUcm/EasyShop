@@ -13,6 +13,7 @@ import presentacion.view.ModuloMenu;
 import presentacion.view.ModuloPanel;
 import presentacion.view.clientes.AltaCliente;
 import presentacion.view.clientes.BajaCliente;
+import presentacion.view.marcas.AltaMarca;
 
 public class PersonalPanel extends JPanel {
 	public PersonalPanel() {
@@ -32,9 +33,9 @@ public class PersonalPanel extends JPanel {
 		addFuncion(new AltaEmpleado(), new JButton("   Alta empleado"), "altaempleado", "AltaCliente");
 		addFuncion(new BajaEmpleado(), new JButton("   Baja empleado"), "bajaempleado", "BajaCliente");
 		addFuncion(new ModEmpleado(), new JButton("Modificar empleado"), "modempleado", "ModificarEmpleado");
-		addFuncion(new BajaCliente(), new JButton("  Mostrar empleado"), "mostrarempleado", "MostrarEmpleado");
-		addFuncion(new BajaCliente(), new JButton("   Listar empleado"), "listarempleado", "ListarClientes");
-		addFuncion(new BajaCliente(), new JButton("Historial empleado"), "historialempleado", "HistorialCliente");
+		addFuncion(new AltaMarca(), new JButton("  Mostrar empleado"), "mostrarempleado", "MostrarEmpleado");
+		addFuncion(new AltaMarca(), new JButton("   Listar empleado"), "listarempleado", "ListarClientes");
+		addFuncion(new AltaMarca(), new JButton("Historial empleado"), "historialempleado", "HistorialCliente");
 		
 		add(personalFuncion, BorderLayout.CENTER);
 		add(personalMenu, BorderLayout.NORTH);

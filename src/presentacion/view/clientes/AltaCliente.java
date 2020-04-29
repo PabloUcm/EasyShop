@@ -1,7 +1,6 @@
 package presentacion.view.clientes;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -12,17 +11,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class AltaCliente extends JPanel {
+import negocio.ClienteObserver;
+import presentacion.controllers.ClienteController;
+
+public class AltaCliente extends JPanel implements ClienteObserver {
+	private ClienteController controlador;
 	
-	public AltaCliente() {
+	public AltaCliente(ClienteController c) {
+		this.controlador = c;
+		controlador.addObserver(this);
 		initGUI();
 	}
 	
@@ -47,7 +50,7 @@ public class AltaCliente extends JPanel {
 		
 		confirmar.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e ) {
-	    		
+	    		controlador.altaCliente(dniTF.getText(),nombreTF.getText(),tfnoTF.getText());
 	    	}
 	    });
 		
@@ -128,5 +131,53 @@ public class AltaCliente extends JPanel {
 		button.setIcon(imageIcon);
 
 		return button;
+	}
+
+	@Override
+	public void mostrarClientes() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mostrarClienteId() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void modificarCliente() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mostrarCliente() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void listarClientes() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void altaCliente() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void bajaCliente() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void obtenerCliente() {
+		// TODO Auto-generated method stub
+		
 	}
 }

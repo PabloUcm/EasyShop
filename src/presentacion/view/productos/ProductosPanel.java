@@ -10,6 +10,7 @@ import presentacion.view.CardSwitcher;
 import presentacion.view.ModuloMenu;
 import presentacion.view.ModuloPanel;
 import presentacion.view.clientes.AltaCliente;
+import presentacion.view.marcas.AltaMarca;
 import presentacion.view.personal.AltaEmpleado;
 import presentacion.view.ventas.ListarVentas;
 
@@ -30,10 +31,10 @@ public class ProductosPanel extends JPanel {
 		
 		addFuncion(new AltaEmpleado(), new JButton("   Alta producto"), "altaproducto", "AltaProducto");
 		addFuncion(new ListarVentas(), new JButton("   Baja producto"), "bajaproducto", "BajaProducto");
-		addFuncion(new AltaCliente(), new JButton("Modificar producto"), "modproducto", "ModificarProducto");
-		addFuncion(new AltaCliente(), new JButton("Mostrar producto"), "mostrarproducto", "MostrarProducto");
-		addFuncion(new AltaCliente(), new JButton("Listar productos"), "listarproducto", "ListarProductos");
-		addFuncion(new AltaCliente(), new JButton("Buscar productos"), "buscarproducto", "BuscarProductos");
+		addFuncion(new AltaMarca(), new JButton("Modificar producto"), "modproducto", "ModificarProducto");
+		addFuncion(new AltaMarca(), new JButton("Mostrar producto"), "mostrarproducto", "MostrarProducto");
+		addFuncion(new AltaMarca(), new JButton("Listar productos"), "listarproducto", "ListarProductos");
+		addFuncion(new AltaMarca(), new JButton("Buscar productos"), "buscarproducto", "BuscarProductos");
 		
 		
 		add(productosPanel, BorderLayout.CENTER);
