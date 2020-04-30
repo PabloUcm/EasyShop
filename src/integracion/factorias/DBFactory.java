@@ -11,7 +11,7 @@ import integracion.util.PropertiesUtil;
 
 public class DBFactory {
 	
-	private final static String DEFAULT_DB ="DBFactory.properties";
+	private final static String DEFAULT_DB ="metaInf/DBFactory.properties";
 	private final static String DEFAULT_DB_PROPERTY="defaultDB";
 	
 	public static IDBAdapter getAdapter(DBType db) {

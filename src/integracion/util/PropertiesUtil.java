@@ -1,5 +1,6 @@
 package integracion.util;
 
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Properties;
 
@@ -9,8 +10,7 @@ public class PropertiesUtil {
 	public static Properties loadProperty(String propertiesURL) {
 		try {
 			Properties properties = new Properties();
-			InputStream inputStream = PropertiesUtil.class.getClassLoader().getResourceAsStream(propertiesURL);
-			properties.load(inputStream);
+			properties.load(new FileInputStream(propertiesURL));
 			return properties;
 		}catch(Exception e) {
 			e.printStackTrace();

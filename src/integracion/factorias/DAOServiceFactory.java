@@ -5,7 +5,7 @@ import java.util.Properties;
 import integracion.util.PropertiesUtil;
 
 public class DAOServiceFactory {
-	private final static String DAO_FACTORY="DAOFactory.properties";
+	private final static String DAO_FACTORY="metaInf/DAOFactory.properties";
 	private final static String DAO_FACTORY_PROPERTY="defaultFactory";
 
 	public static IDAOServiceFactory getDefaultFactory() {
