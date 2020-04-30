@@ -15,6 +15,7 @@ import presentacion.controllers.ClienteController;
 import presentacion.view.CardSwitcher;
 import presentacion.view.ModuloMenu;
 import presentacion.view.ModuloPanel;
+import presentacion.view.marcas.AltaMarca;
 
 public class ClientesPanel extends JPanel {
 	private ClienteController controlador;
@@ -36,10 +37,10 @@ public class ClientesPanel extends JPanel {
 		
 		addFuncion(new AltaCliente(controlador), new JButton("     Alta cliente"), "altacliente", "AltaCliente");
 		addFuncion(new BajaCliente(controlador), new JButton("     Baja cliente"), "bajacliente", "BajaCliente");
-		addFuncion(new AltaCliente(controlador), new JButton("Modificar cliente"), "modcliente", "ModificarCliente");
-		addFuncion(new AltaCliente(controlador), new JButton("     Mostrar cliente"), "mostrarcliente", "MostrarCliente");
-		addFuncion(new AltaCliente(controlador), new JButton("     Listar clientes"), "listarcliente", "ListarClientes");
-		addFuncion(new AltaCliente(controlador), new JButton("Historial cliente"), "historialcliente", "HistorialCliente");
+		addFuncion(new AltaMarca(), new JButton("Modificar cliente"), "modcliente", "ModificarCliente");
+		addFuncion(new AltaMarca(), new JButton("     Mostrar cliente"), "mostrarcliente", "MostrarCliente");
+		addFuncion(new AltaMarca(), new JButton("     Listar clientes"), "listarcliente", "ListarClientes");
+		addFuncion(new AltaMarca(), new JButton("Historial cliente"), "historialcliente", "HistorialCliente");
 		
 		add(clientesFuncion, BorderLayout.CENTER);
 		add(clientesMenu, BorderLayout.NORTH);
