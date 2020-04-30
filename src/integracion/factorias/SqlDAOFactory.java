@@ -1,13 +1,21 @@
 package integracion.factorias;
 
+import integracion.dao.IClienteDAO;
 import integracion.dao.IProductoDAO;
-import integracion.daoImpl.SqlProductDAO;
+import integracion.daoImpl.SqlClienteDAO;
 
 public class SqlDAOFactory implements IDAOServiceFactory{
 
 	@Override
-	public IProductoDAO getProductDAOService() {
-		return new SqlProductDAO();
+	public IClienteDAO getClienteDAO() {
+		return new SqlClienteDAO();
 	}
+
+	@Override
+	public IProductoDAO getProductoDAO() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

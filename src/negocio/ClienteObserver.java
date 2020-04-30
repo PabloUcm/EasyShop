@@ -1,12 +1,16 @@
 package negocio;
 
+import java.util.List;
+
+import integracion.transfers.TCliente;
+
 public interface ClienteObserver {
 	public void altaCliente();
 	public void bajaCliente();
 	public void mostrarClientes();
 	public void mostrarClienteId();
 	public void modificarCliente();
-	public void mostrarCliente();
 	public void listarClientes();
 	public void obtenerCliente();
+	void mostrarCliente(List<TCliente> clienteList);
 }

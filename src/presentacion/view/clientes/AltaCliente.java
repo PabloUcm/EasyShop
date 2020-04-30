@@ -9,6 +9,7 @@ import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -17,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import integracion.transfers.TCliente;
 import negocio.ClienteObserver;
 import presentacion.controllers.ClienteController;
 
@@ -50,7 +52,7 @@ public class AltaCliente extends JPanel implements ClienteObserver {
 		
 		confirmar.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e ) {
-	    		controlador.altaCliente(dniTF.getText(),nombreTF.getText(),tfnoTF.getText());
+	    		controlador.mostrarClientes();
 	    	}
 	    });
 		
@@ -152,8 +154,10 @@ public class AltaCliente extends JPanel implements ClienteObserver {
 	}
 
 	@Override
-	public void mostrarCliente() {
-		// TODO Auto-generated method stub
+	public void mostrarCliente(List<TCliente> clienteList) {
+		for(TCliente c: clienteList) {
+			System.out.println("Id:" +c.getId() + ", Dni:" + c.getDni() +", Nombre" + c.getNombre());
+		}
 		
 	}
 

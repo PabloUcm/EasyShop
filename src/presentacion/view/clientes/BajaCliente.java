@@ -8,6 +8,7 @@ import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -18,6 +19,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import integracion.transfers.TCliente;
 import negocio.ClienteObserver;
 import presentacion.controllers.ClienteController;
 
@@ -121,13 +123,6 @@ public class BajaCliente extends JPanel implements ClienteObserver{
 	}
 
 	@Override
-	public void mostrarCliente() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
 	public void altaCliente() {
 		// TODO Auto-generated method stub
 		
@@ -147,6 +142,12 @@ public class BajaCliente extends JPanel implements ClienteObserver{
 
 	@Override
 	public void obtenerCliente() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mostrarCliente(List<TCliente> clienteList) {
 		// TODO Auto-generated method stub
 		
 	}

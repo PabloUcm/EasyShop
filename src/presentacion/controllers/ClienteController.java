@@ -25,4 +25,8 @@ public class ClienteController {
 	public void getCliente(String dni) {
 		modelo.getCliente(dni);
 	}
+	
+	public void mostrarClientes() {
+		modelo.mostrarClientes();
+	}
 }

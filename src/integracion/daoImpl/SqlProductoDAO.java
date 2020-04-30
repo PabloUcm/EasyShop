@@ -13,11 +13,11 @@ import integracion.factorias.DBFactory;
 import integracion.transfers.TProducto;
 
 
-public class SqlProductDAO implements IProductoDAO{
+public class SqlProductoDAO implements IProductoDAO{
 
 	private IDBAdapter dbAdapter;
 	
-	public SqlProductDAO() {
+	public SqlProductoDAO() {
 		dbAdapter = DBFactory.getDefaultAdapter();
 	}
 	

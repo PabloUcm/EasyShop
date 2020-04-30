@@ -10,7 +10,7 @@ import integracion.util.PropertiesUtil;
 
 public class MySqlAdapter implements IDBAdapter{
 	
-private static final String DB_PROPERTIES = "metaInfAbstractFactory/MySql.properties";
+private static final String DB_PROPERTIES = "MySql.properties";
 	
 	//Propiedades de los archivos properties
 	private static final String DB_NAME_PROP = "dbname";
