@@ -18,12 +18,14 @@ public class ModuloMenu extends JPanel {
 		this.switcher = switcher;
 		this.iconSize = iconSize;
 		buttons = new ArrayList<>();
+		botonAct = -1;
 		initGUI();
 	}
 	
 	private CardSwitcher switcher;
 	private ArrayList<JButton> buttons;
 	private int iconSize;
+	private int botonAct;
 	
 	private void initGUI() {
 		setLayout( new FlowLayout( FlowLayout.LEFT ));
@@ -62,8 +64,13 @@ public class ModuloMenu extends JPanel {
 	}
 
 	private void botonActivado(JButton buttonActivado) {
-		for (JButton button : buttons) button.setBorder(BorderFactory.createRaisedBevelBorder());
+		if (botonAct != -1) {
+			JButton desactivarBoton = buttons.get(botonAct);
+			desactivarBoton.setBorder(BorderFactory.createRaisedBevelBorder());
+		}
 		
 		buttonActivado.setBorder(BorderFactory.createBevelBorder(1));
+		
+		botonAct = buttons.indexOf(buttonActivado);
 	}
 }

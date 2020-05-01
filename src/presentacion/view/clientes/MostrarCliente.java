@@ -158,6 +158,14 @@ public class MostrarCliente extends JPanel implements ClienteObserver {
 		    public void mouseExited(java.awt.event.MouseEvent evt) {
 		    	button.setBackground(colorNormal);
 		    }
+		    
+		    public void mousePressed(java.awt.event.MouseEvent evt) {
+		    	button.setBorder(BorderFactory.createBevelBorder(1));
+		    }
+		    
+		    public void mouseReleased(java.awt.event.MouseEvent evt) {
+		    	button.setBorder(BorderFactory.createRaisedBevelBorder());
+		    }
 		});
 
 		return button;

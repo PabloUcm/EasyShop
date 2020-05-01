@@ -7,6 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,13 +30,16 @@ public class MenuPanel extends JPanel {
 	MenuPanel(CardSwitcher switcher) {
 		this.switcher = switcher;
 		this.buttons = new ArrayList<>();
+		botonAct = -1;
 		initGUI();
 	}
 	
 	//Atributos
 	private CardSwitcher switcher;
 	private List<JButton> buttons;
-	
+	private MouseListener mlActivo;
+	private MouseListener mlNoActivo;
+	int botonAct;
 	
 	//Metodos
 	private void initGUI() {
@@ -76,15 +81,8 @@ public class MenuPanel extends JPanel {
 		imageIcon = new ImageIcon(newimg);  
 		button.setIcon(imageIcon);
 		
-		button.addMouseListener(new java.awt.event.MouseAdapter() {
-		    public void mouseEntered(java.awt.event.MouseEvent evt) {
-		    	button.setBackground(new Color(54,220,110));
-		    }
-
-		    public void mouseExited(java.awt.event.MouseEvent evt) {
-		    	button.setBackground(Color.GREEN.darker());
-		    }
-		});
+		mlNoActivo = crearMLNoActivo(button);
+		button.addMouseListener(mlNoActivo);
 		
 		button.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e ) { 
@@ -96,29 +94,45 @@ public class MenuPanel extends JPanel {
 		if (buttons.size() == 1) botonActivado(button);
 	}
 	
-	private void botonActivado(JButton buttonActivado) {
-		for (JButton button: buttons) {
-			button.setBackground(Color.GREEN.darker());
-			button.addMouseListener(new java.awt.event.MouseAdapter() {
-			    public void mouseEntered(java.awt.event.MouseEvent evt) {
+	private MouseListener crearMLActivo(JButton button) {
+		return new MouseAdapter() {
+			 public void mouseEntered(java.awt.event.MouseEvent evt) {
+			    	button.setBackground(Color.green.brighter());
+			    }
+
+			    public void mouseExited(java.awt.event.MouseEvent evt) {
+			    	button.setBackground(Color.green.brighter());
+			    }
+		};
+	}
+	
+	private MouseListener crearMLNoActivo(JButton button) {
+		return new MouseAdapter() {
+			 public void mouseEntered(java.awt.event.MouseEvent evt) {
 			    	button.setBackground(new Color(54,220,110));
 			    }
 
 			    public void mouseExited(java.awt.event.MouseEvent evt) {
 			    	button.setBackground(Color.GREEN.darker());
 			    }
-			});
+		};
+	}
+	
+	private void botonActivado(JButton buttonActivado) {
+		if(botonAct != -1) {
+			JButton desactivarBoton = buttons.get(botonAct);
+			desactivarBoton.removeMouseListener(mlActivo);
+			
+			mlNoActivo = crearMLNoActivo(desactivarBoton);
+			desactivarBoton.addMouseListener(mlNoActivo);
+			desactivarBoton.setBackground(Color.GREEN.darker());
 		}
 		
+		buttonActivado.removeMouseListener(mlNoActivo);
+		mlActivo = crearMLActivo(buttonActivado);
+		buttonActivado.addMouseListener(mlActivo);
 		buttonActivado.setBackground(Color.green.brighter());
-		buttonActivado.addMouseListener(new java.awt.event.MouseAdapter() {
-		    public void mouseEntered(java.awt.event.MouseEvent evt) {
-		    	buttonActivado.setBackground(Color.green.brighter());
-		    }
-
-		    public void mouseExited(java.awt.event.MouseEvent evt) {
-		    	buttonActivado.setBackground(Color.green.brighter());
-		    }
-		});
+		
+		botonAct = buttons.indexOf(buttonActivado);
 	}
 }

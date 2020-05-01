@@ -76,6 +76,14 @@ public class BajaCliente extends JPanel implements ClienteObserver{
 		    public void mouseExited(java.awt.event.MouseEvent evt) {
 		    	baja.setBackground(new Color(255,85,85));
 		    }
+		    
+		    public void mousePressed(java.awt.event.MouseEvent evt) {
+		    	baja.setBorder(BorderFactory.createBevelBorder(1));
+		    }
+		    
+		    public void mouseReleased(java.awt.event.MouseEvent evt) {
+		    	baja.setBorder(BorderFactory.createRaisedBevelBorder());
+		    }
 		});
 	   
 	    baja.addActionListener(new ActionListener() {
