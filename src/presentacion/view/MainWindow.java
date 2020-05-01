@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 
 import presentacion.view.clientes.ClientesPanel;
 import presentacion.view.marcas.MarcasPanel;
+import presentacion.view.menus.MainMenu;
 import presentacion.view.personal.PersonalPanel;
 import presentacion.view.productos.ProductosPanel;
 import presentacion.view.ventas.VentasPanel;
@@ -16,7 +17,7 @@ import presentacion.view.ventas.VentasPanel;
 
 public class MainWindow extends JFrame {
 	private JPanel centerPanel;
-	private MenuPanel menuPanel;
+	private MainMenu menuPanel;
 	
 	public MainWindow() {
 		super("EasyShop");
@@ -35,7 +36,7 @@ public class MainWindow extends JFrame {
 		
 		CardSwitcher switcher = new CardSwitcher(centerPanel, cardLayout);
 		
-		menuPanel = new MenuPanel(switcher);
+		menuPanel = new MainMenu(switcher);
 		
 		addModulo(new ClientesPanel(),new JButton("Gestion de clientes"), "cliente", 45, "Clientes");
 		addModulo(new PersonalPanel(),new JButton("Gestion de personal"), "empleado", 45, "Personal");

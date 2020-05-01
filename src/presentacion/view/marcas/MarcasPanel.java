@@ -7,10 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import presentacion.view.CardSwitcher;
-import presentacion.view.ModuloMenu;
-import presentacion.view.ModuloPanel;
-import presentacion.view.clientes.AltaCliente;
-import presentacion.view.clientes.BajaCliente;
+import presentacion.view.menus.ModuloMenu;
 import presentacion.view.personal.AltaEmpleado;
 
 public class MarcasPanel extends JPanel {
@@ -18,13 +15,13 @@ public class MarcasPanel extends JPanel {
 		initGUI();
 	}
 	private ModuloMenu marcasMenu;
-	private ModuloPanel marcasPanel;
+	private JPanel marcasPanel;
 	
 	private void initGUI() {
 		setLayout(new BorderLayout());
 		
 		CardLayout cardLayout = new CardLayout();
-		marcasPanel = new ModuloPanel(cardLayout);
+		marcasPanel = new JPanel(cardLayout);
 		CardSwitcher switcher = new CardSwitcher(marcasPanel, cardLayout);
 		marcasMenu = new ModuloMenu(switcher, 45);
 		
@@ -39,7 +36,7 @@ public class MarcasPanel extends JPanel {
 	}
 	
 	private void addFuncion(JPanel panel, JButton button, String iconName, String card) {
-		marcasPanel.addPanel(panel, card);
+		marcasPanel.add(panel, card);
 		marcasMenu.addButton(button, "Marcas/"+iconName, card);
 	}
 }

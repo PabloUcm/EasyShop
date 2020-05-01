@@ -1,21 +1,18 @@
 package presentacion.view.clientes;
+
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import negocio.ClienteObserver;
+
 import negocio.Modelo;
 import presentacion.controllers.ClienteController;
 import presentacion.view.CardSwitcher;
-import presentacion.view.ModuloMenu;
-import presentacion.view.ModuloPanel;
-import presentacion.view.marcas.AltaMarca;
+import presentacion.view.menus.ModuloMenu;
 
 public class ClientesPanel extends JPanel {
 	private ClienteController controlador;
@@ -25,13 +22,13 @@ public class ClientesPanel extends JPanel {
 		initGUI();
 	}
 	private ModuloMenu clientesMenu;
-	private ModuloPanel clientesFuncion;
+	private JPanel clientesFuncion;
 	
 	private void initGUI() {
 		setLayout(new BorderLayout());
 		
 		CardLayout cardLayout = new CardLayout();
-		clientesFuncion = new ModuloPanel(cardLayout);
+		clientesFuncion = new JPanel(cardLayout);
 		CardSwitcher switcher = new CardSwitcher(clientesFuncion, cardLayout);
 		clientesMenu = new ModuloMenu(switcher, 35);
 		
@@ -53,7 +50,7 @@ public class ClientesPanel extends JPanel {
 	}
 	
 	private void addFuncion(JPanel panel, JButton button, String iconName, String card) {
-		clientesFuncion.addPanel(panel, card);
+		clientesFuncion.add(panel, card);
 		clientesMenu.addButton(button, "Clientes/"+iconName, card);
 	}
 

@@ -1,4 +1,4 @@
-package presentacion.view;
+package presentacion.view.menus;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -22,12 +22,14 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 
+import presentacion.view.CardSwitcher;
 
 
-public class MenuPanel extends JPanel {
+
+public class MainMenu extends JPanel {
    
     //Constructor
-	MenuPanel(CardSwitcher switcher) {
+	public MainMenu(CardSwitcher switcher) {
 		this.switcher = switcher;
 		this.buttons = new ArrayList<>();
 		botonAct = -1;

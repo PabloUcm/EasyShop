@@ -1,4 +1,4 @@
-package presentacion.view;
+package presentacion.view.menus;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -13,7 +13,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import presentacion.view.CardSwitcher;
+
 public class ModuloMenu extends JPanel {
+	
 	public ModuloMenu(CardSwitcher switcher, int iconSize) {
 		this.switcher = switcher;
 		this.iconSize = iconSize;
