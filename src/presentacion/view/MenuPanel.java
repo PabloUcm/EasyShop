@@ -7,6 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -25,16 +27,13 @@ public class MenuPanel extends JPanel {
     //Constructor
 	MenuPanel(CardSwitcher switcher) {
 		this.switcher = switcher;
+		this.buttons = new ArrayList<>();
 		initGUI();
 	}
 	
 	//Atributos
 	private CardSwitcher switcher;
-	private JButton clientes;
-	private JButton personal;
-	private JButton productos;
-	private JButton ventas;
-	private JButton marcas;
+	private List<JButton> buttons;
 	
 	
 	//Metodos
@@ -47,52 +46,45 @@ public class MenuPanel extends JPanel {
 		setOpaque(true);
 		setBackground(Color.CYAN.darker());
 		
-		clientes = crearBoton("        Gestion de clientes", "cliente", 50, "Clientes");
-		personal = crearBoton("     Gestion de personal", "empleado", 65, "Personal");
-		ventas = crearBoton("          Gestion de ventas", "venta", 45, "Ventas");
-		productos = crearBoton("      Gestion de productos", "producto", 45, "Productos");
-		marcas = crearBoton("        Gestion de marcas", "marca", 45, "Marcas");
-		
-		clientes.setBackground(Color.green);
-		
-		
 		ImageIcon imageIcon = new ImageIcon("icons/logo.png"); 
 		Image image = imageIcon.getImage();
 		Image newimg = image.getScaledInstance(250, 120,  java.awt.Image.SCALE_SMOOTH); 
 		imageIcon = new ImageIcon(newimg); 
 		JLabel picLabel = new JLabel(imageIcon);
 		
-		
 		add(picLabel);
 		add(Box.createRigidArea(new Dimension(8, 0)));
-		add(clientes);
-		add(Box.createRigidArea(new Dimension(0, 8)));
-		add(personal);
-		add(Box.createRigidArea(new Dimension(0, 8)));
-		add(ventas);
-		add(Box.createRigidArea(new Dimension(0, 8)));
-		add(productos);
-		add(Box.createRigidArea(new Dimension(0, 8)));
-		add(marcas);
-		
 	}
 	
-	private JButton crearBoton(String nombre, String iconDir, int iconSize, String card) {
-		JButton button = new JButton(nombre);
+	public void addBoton(JButton button, String iconName, int iconSize, String card) {
+		buttons.add(button);
+		add(button);
+		add(Box.createRigidArea(new Dimension(0, 8)));
 		
 		button.setContentAreaFilled(false);
 		button.setFocusPainted(false);
 		button.setBackground(Color.GREEN.darker());
 		button.setBorder(BorderFactory.createRaisedBevelBorder());
 		button.setOpaque(true);
+		
 		button.setPreferredSize(new Dimension(252,100));
 		button.setMaximumSize(button.getPreferredSize());
 		
-		ImageIcon imageIcon = new ImageIcon("icons/"+iconDir+".png"); 
+		ImageIcon imageIcon = new ImageIcon("icons/"+iconName+".png"); 
 		Image image = imageIcon.getImage(); 
 		Image newimg = image.getScaledInstance(iconSize, iconSize,  java.awt.Image.SCALE_SMOOTH); 
 		imageIcon = new ImageIcon(newimg);  
 		button.setIcon(imageIcon);
+		
+		button.addMouseListener(new java.awt.event.MouseAdapter() {
+		    public void mouseEntered(java.awt.event.MouseEvent evt) {
+		    	button.setBackground(new Color(54,220,110));
+		    }
+
+		    public void mouseExited(java.awt.event.MouseEvent evt) {
+		    	button.setBackground(Color.GREEN.darker());
+		    }
+		});
 		
 		button.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e ) { 
@@ -101,16 +93,32 @@ public class MenuPanel extends JPanel {
 	    	}
 	    });
 		
-		return button;
+		if (buttons.size() == 1) botonActivado(button);
 	}
 	
-	private void botonActivado(JButton button) {
-		clientes.setBackground(Color.GREEN.darker());
-		personal.setBackground(Color.GREEN.darker());
-		ventas.setBackground(Color.GREEN.darker());
-		productos.setBackground(Color.GREEN.darker());
-		marcas.setBackground(Color.GREEN.darker());
+	private void botonActivado(JButton buttonActivado) {
+		for (JButton button: buttons) {
+			button.setBackground(Color.GREEN.darker());
+			button.addMouseListener(new java.awt.event.MouseAdapter() {
+			    public void mouseEntered(java.awt.event.MouseEvent evt) {
+			    	button.setBackground(new Color(54,220,110));
+			    }
+
+			    public void mouseExited(java.awt.event.MouseEvent evt) {
+			    	button.setBackground(Color.GREEN.darker());
+			    }
+			});
+		}
 		
-		button.setBackground(Color.green.brighter());
+		buttonActivado.setBackground(Color.green.brighter());
+		buttonActivado.addMouseListener(new java.awt.event.MouseAdapter() {
+		    public void mouseEntered(java.awt.event.MouseEvent evt) {
+		    	buttonActivado.setBackground(Color.green.brighter());
+		    }
+
+		    public void mouseExited(java.awt.event.MouseEvent evt) {
+		    	buttonActivado.setBackground(Color.green.brighter());
+		    }
+		});
 	}
 }

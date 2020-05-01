@@ -37,10 +37,10 @@ public class ClientesPanel extends JPanel {
 		
 		addFuncion(new AltaCliente(controlador), new JButton("     Alta cliente"), "altacliente", "AltaCliente");
 		addFuncion(new BajaCliente(controlador), new JButton("     Baja cliente"), "bajacliente", "BajaCliente");
-		addFuncion(new AltaMarca(), new JButton("Modificar cliente"), "modcliente", "ModificarCliente");
-		addFuncion(new AltaMarca(), new JButton("     Mostrar cliente"), "mostrarcliente", "MostrarCliente");
-		addFuncion(new AltaMarca(), new JButton("     Listar clientes"), "listarcliente", "ListarClientes");
-		addFuncion(new AltaMarca(), new JButton("Historial cliente"), "historialcliente", "HistorialCliente");
+		addFuncion(new ModificarCliente(controlador), new JButton("Modificar cliente"), "modcliente", "ModificarCliente");
+		addFuncion(new MostrarCliente(controlador), new JButton("     Mostrar cliente"), "mostrarcliente", "MostrarCliente");
+		addFuncion(new ListarClientes(controlador), new JButton("     Listar clientes"), "listarcliente", "ListarClientes");
+		addFuncion(new HistorialCliente(controlador), new JButton("Historial cliente"), "historialcliente", "HistorialCliente");
 		
 		add(clientesFuncion, BorderLayout.CENTER);
 		add(clientesMenu, BorderLayout.NORTH);

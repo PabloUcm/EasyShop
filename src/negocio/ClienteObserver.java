@@ -7,7 +7,6 @@ import integracion.transfers.TCliente;
 public interface ClienteObserver {
 	public void altaCliente();
 	public void bajaCliente();
-	public void mostrarClientes();
 	public void mostrarClienteId();
 	public void modificarCliente();
 	public void listarClientes();

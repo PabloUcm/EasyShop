@@ -57,16 +57,26 @@ public class BajaCliente extends JPanel implements ClienteObserver{
 	    baja.setFocusPainted(false);
 	    baja.setBorder(BorderFactory.createRaisedBevelBorder());
 	    baja.setOpaque(true);
-	    baja.setPreferredSize(new Dimension(230,80));
+	    baja.setPreferredSize(new Dimension(230,65));
 	    baja.setMaximumSize(baja.getPreferredSize());
-	    baja.setBackground(Color.RED);
+	    baja.setBackground(new Color(255,85,85));
 	    baja.setAlignmentX(CENTER_ALIGNMENT);
 	   
 	    imageIcon = new ImageIcon("icons/baja.png"); 
 	    Image image = imageIcon.getImage(); 
-	    Image newimg = image.getScaledInstance(65, 65, java.awt.Image.SCALE_SMOOTH); 
+	    Image newimg = image.getScaledInstance(45, 45, java.awt.Image.SCALE_SMOOTH); 
 	    imageIcon = new ImageIcon(newimg);  
 	    baja.setIcon(imageIcon);
+	    
+	    baja.addMouseListener(new java.awt.event.MouseAdapter() {
+		    public void mouseEntered(java.awt.event.MouseEvent evt) {
+		    	baja.setBackground(new Color(201,54,54));
+		    }
+
+		    public void mouseExited(java.awt.event.MouseEvent evt) {
+		    	baja.setBackground(new Color(255,85,85));
+		    }
+		});
 	   
 	    baja.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) { 
@@ -102,12 +112,6 @@ public class BajaCliente extends JPanel implements ClienteObserver{
 	    c.gridheight = 1;
 	    c.anchor = GridBagConstraints.CENTER;
 	    add(baja, c);
-	}
-
-	@Override
-	public void mostrarClientes() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

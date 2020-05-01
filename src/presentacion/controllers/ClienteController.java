@@ -26,7 +26,7 @@ public class ClienteController {
 		modelo.getCliente(dni);
 	}
 	
-	public void mostrarClientes() {
-		modelo.mostrarClientes();
+	public void listarClientes() {
+		modelo.listarClientes();
 	}
 }

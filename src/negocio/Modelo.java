@@ -53,7 +53,7 @@ public class Modelo {
 		
 	}
 	
-	public void mostrarClientes() {
+	public void listarClientes() {
 		SqlClienteDAO clienteDAO = (SqlClienteDAO) factoryDAO.getClienteDAO();
 		List<TCliente> clienteList = clienteDAO.getAllClientes();
 		

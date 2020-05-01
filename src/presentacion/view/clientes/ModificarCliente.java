@@ -1,4 +1,5 @@
 package presentacion.view.clientes;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -22,71 +23,76 @@ import integracion.transfers.TCliente;
 import negocio.ClienteObserver;
 import presentacion.controllers.ClienteController;
 
-public class AltaCliente extends JPanel implements ClienteObserver {
+public class ModificarCliente extends JPanel implements ClienteObserver {
 	private ClienteController controlador;
 	
-	public AltaCliente(ClienteController c) {
+	public ModificarCliente(ClienteController c) {
 		this.controlador = c;
-		controlador.addObserver(this);
 		initGUI();
 	}
 	
+	private JTextField idTF;
 	private JTextField dniTF;
 	private JTextField nombreTF;
 	private JTextField tfnoTF;
-	private JButton confirmar;
+	private JButton modificar;
 	private JButton limpiar;
 	
 	private void initGUI() {
 		setLayout(new BorderLayout());
 		setPreferredSize((new Dimension(1090,700)));
 		
-		
+		idTF = crearTextField();
 		dniTF = crearTextField();
 		nombreTF = crearTextField();
 		tfnoTF = crearTextField();
 		
-		confirmar = crearBoton("CONFIRMAR ALTA DE CLIENTE", Color.GREEN, 
-							   new Color(130,200,21), "confirmar");
+		modificar = crearBoton("MODIFICAR CLIENTE", new Color(250,243,58), 
+							   new Color(230,215,73), "modificar");
 		limpiar = crearBoton("LIMPIAR CAMPOS DE TEXTO", new Color(205,205,205), 
-				 			 new Color(166,166,166), "limpiar");
+							 new Color(166,166,166), "limpiar");
 		
-		
-		confirmar.addActionListener(new ActionListener() {
+		modificar.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e ) {
-	    		controlador.listarClientes();
+	    		
 	    	}
 	    });
 		
 		limpiar.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e ) {
+	    		idTF.setText(" ");
 	    		dniTF.setText(" ");
 	    		nombreTF.setText(" ");
 	    		tfnoTF.setText(" ");
 	    	}
 	    });
 		
-		
 		JPanel campos = new JPanel();
 		campos.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		c.gridx = 0;
 		c.gridy = 0;
-		campos.add(crearJLabel("                DNI:"), c);
+		campos.add(crearJLabel("     ID CLIENTE:"), c);
 		c.gridx = 1;
 		c.gridy = 0;
+		campos.add(idTF, c);
+		c.gridx = 0;
+		c.gridy = 1;
+		campos.add(crearJLabel("                   DNI:"), c);
+		c.gridx = 1;
+		c.gridy = 1;
 		campos.add(dniTF, c);
 		c.gridx = 0;
-		c.gridy = 1;
-		campos.add(crearJLabel("      NOMBRE:"), c);
+		c.gridy = 2;
+		campos.add(crearJLabel("         NOMBRE:"), c);
 		c.gridx = 1;
-		c.gridy = 1;
+		c.gridy = 2;
 		campos.add(nombreTF, c);
 		c.gridx = 0;
-		c.gridy = 2;
-		campos.add(crearJLabel("  TELEFONO:"), c);
+		c.gridy = 3;
+		campos.add(crearJLabel("     TELEFONO:"), c);
 		c.gridx = 1;
-		c.gridy = 2;
+		c.gridy = 3;
 		campos.add(tfnoTF, c);
 		
 		JPanel botones = new JPanel();
@@ -94,18 +100,18 @@ public class AltaCliente extends JPanel implements ClienteObserver {
 		botones.setBorder(BorderFactory.createMatteBorder(
                   1, 0, 0, 0, Color.black));
 		
-		botones.add(confirmar);
+		botones.add(modificar);
 		botones.add(limpiar);
 		
 		add(campos,BorderLayout.CENTER);
 		add(botones, BorderLayout.SOUTH);
-		
 	}
+
 	
 	private JLabel crearJLabel(String texto) {
 		JLabel jl = new JLabel(texto);
 		jl.setFont(new Font(jl.getFont().toString(), Font.BOLD, 30));
-		jl.setPreferredSize(new Dimension(200,50));
+		jl.setPreferredSize(new Dimension(230,50));
 		jl.setMaximumSize(jl.getPreferredSize());
 		return jl;
 	}
@@ -120,15 +126,12 @@ public class AltaCliente extends JPanel implements ClienteObserver {
 	
 	private JButton crearBoton(String texto, Color colorNormal, Color colorMouse, String icono) {
 		JButton button = new JButton(texto);
-		
 		button.setContentAreaFilled(false);
 		button.setFocusPainted(false);
 		button.setBorder(BorderFactory.createRaisedBevelBorder());
 		button.setOpaque(true);
-		
 		button.setPreferredSize(new Dimension(230,60));
 		button.setMaximumSize(button.getPreferredSize());
-		
 		button.setBackground(colorNormal);
 		
 		ImageIcon imageIcon = new ImageIcon("icons/"+icono+".png"); 
@@ -136,7 +139,7 @@ public class AltaCliente extends JPanel implements ClienteObserver {
 		Image newimg = image.getScaledInstance(50,50,  java.awt.Image.SCALE_SMOOTH); 
 		imageIcon = new ImageIcon(newimg);  
 		button.setIcon(imageIcon);
-
+		
 		button.addMouseListener(new java.awt.event.MouseAdapter() {
 		    public void mouseEntered(java.awt.event.MouseEvent evt) {
 		    	button.setBackground(colorMouse);
@@ -146,41 +149,16 @@ public class AltaCliente extends JPanel implements ClienteObserver {
 		    	button.setBackground(colorNormal);
 		    }
 		});
-		
+
 		return button;
 	}
-
-	@Override
-	public void mostrarClienteId() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void modificarCliente() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mostrarCliente(List<TCliente> clienteList) {
-		for(TCliente c: clienteList) {
-			System.out.println("Id:" +c.getId() + ", Dni:" + c.getDni() +", Nombre" + c.getNombre());
-		}
-		
-	}
-
-	@Override
-	public void listarClientes() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 	@Override
 	public void altaCliente() {
 		// TODO Auto-generated method stub
 		
 	}
+
 
 	@Override
 	public void bajaCliente() {
@@ -189,8 +167,37 @@ public class AltaCliente extends JPanel implements ClienteObserver {
 	}
 
 	@Override
+	public void mostrarClienteId() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void modificarCliente() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void listarClientes() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
 	public void obtenerCliente() {
 		// TODO Auto-generated method stub
 		
 	}
+
+
+	@Override
+	public void mostrarCliente(List<TCliente> clienteList) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }
