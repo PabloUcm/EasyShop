@@ -17,6 +17,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -33,7 +34,7 @@ public class MostrarCliente extends JPanel implements ClienteObserver {
 		initGUI();
 	}
 	
-	private JTextField dniTF;
+	private JTextField idTF;
 	private JTextArea datosTA;
 	private JButton buscar;
 	private JButton limpiar;
@@ -42,22 +43,27 @@ public class MostrarCliente extends JPanel implements ClienteObserver {
 		setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		
-		dniTF = crearTextField();
+		idTF = crearTextField();
 		buscar = crearBoton("BUSCAR CLIENTE", new Color(8,213,249), new Color(6,160,190), 
 							"lupa", 140, 30);
-		datosTA = crearTextArea();
 		limpiar = crearBoton("LIMPIAR BUSQUEDA", new Color(205,205,205), new Color(166,166,166), 
 							 "limpiar", 170, 45);
+		datosTA = crearTextArea();
+		JScrollPane datosSP = new JScrollPane(datosTA);
+		datosSP.setPreferredSize(new Dimension(550,250));
+		datosSP.setMaximumSize(datosSP.getPreferredSize());
 		
 		buscar.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e ) {
-	    		mostrarCliente();
+	    		TCliente cliente = new TCliente(1,"003","Manolo","125",true);
+	    		datosTA.setText(busquedaToString(cliente));
+	    		datosTA.setCaretPosition(0);
 	    	}
 	    });
 		
 		limpiar.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e ) {
-	    		dniTF.setText("");
+	    		idTF.setText("");
 	    		datosTA.setText("");
 	    	}
 	    });
@@ -65,7 +71,7 @@ public class MostrarCliente extends JPanel implements ClienteObserver {
 		JPanel barraBusqueda = new JPanel();
 		barraBusqueda.setLayout(new FlowLayout( FlowLayout.CENTER ));
 		barraBusqueda.add((crearJLabel(" ID CLIENTE:")));
-		barraBusqueda.add(dniTF);
+		barraBusqueda.add(idTF);
 		barraBusqueda.add(Box.createRigidArea(new Dimension(10, 0)));
 		barraBusqueda.add(buscar);
 		
@@ -78,7 +84,7 @@ public class MostrarCliente extends JPanel implements ClienteObserver {
 	    c.gridwidth = 1;
 	    c.gridheight = 1;
 	    c.anchor = GridBagConstraints.CENTER;
-	    add(datosTA, c);
+	    add(datosSP, c);
 	    c.weightx = 0.0;
 		c.gridx = 0;
 	    c.gridy = 2;
@@ -120,10 +126,6 @@ public class MostrarCliente extends JPanel implements ClienteObserver {
 		JTextArea ta = new JTextArea();
 		
 		ta.setFont(new Font(ta.getFont().toString(), Font.PLAIN, 15));
-		ta.setBorder(BorderFactory.createLineBorder(Color.black));
-		
-		ta.setPreferredSize(new Dimension(550,250));
-		ta.setMaximumSize(ta.getPreferredSize());
 		
 		ta.setEditable(false);
 		
@@ -171,22 +173,19 @@ public class MostrarCliente extends JPanel implements ClienteObserver {
 		return button;
 	}
 	
-	private void mostrarCliente() {
-		
-		datosTA.setText("                                             ");
-		datosTA.append("=====================\n");
-		datosTA.append("                                            ");
-		datosTA.append("      DATOS DEL CLIENTE   \n");
-		datosTA.append("                                             ");
-		datosTA.append("=====================\n\n");
-		datosTA.append("    ID: ");
-		datosTA.append("3\n\n");
-		datosTA.append("    DNI: ");
-		datosTA.append("003\n\n");
-		datosTA.append("    NOMBRE: ");
-		datosTA.append("Manolo\n\n");
-		datosTA.append("    TELEFONO: ");
-		datosTA.append("125\n\n");
+	private String busquedaToString(TCliente cliente) {
+		StringBuilder busqstr = new StringBuilder();
+		for (int i = 0; i < 45; i++) busqstr.append(" ");
+		busqstr.append("=====================\n");
+		for (int i = 0; i < 45; i++) busqstr.append(" ");
+		busqstr.append("      DATOS DEL CLIENTE   \n");
+		for (int i = 0; i < 45; i++) busqstr.append(" ");
+		busqstr.append("=====================\n\n");
+		busqstr.append("    ID: "+cliente.getId()+"\n\n");
+		busqstr.append("    DNI: "+cliente.getDni()+"\n\n");
+		busqstr.append("    NOMBRE: "+cliente.getNombre()+"\n\n");
+		busqstr.append("    TELEFONO: "+cliente.getTelefono());
+		return busqstr.toString();
 	}
 	
 	@Override
