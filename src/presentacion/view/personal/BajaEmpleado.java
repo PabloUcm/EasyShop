@@ -2,7 +2,6 @@ package presentacion.view.personal;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -19,10 +18,15 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class BajaEmpleado extends JPanel {
+import presentacion.controllers.PersonalController;
+
+public class BajaEmpleado {
 	
-	public BajaEmpleado() {
-	  initGUI();
+	private PersonalController controlador;
+	
+	public BajaEmpleado(PersonalController c) {
+		this.controlador = c;
+		initGUI();
 	}
 	
 	private JLabel idJL;
@@ -31,9 +35,6 @@ public class BajaEmpleado extends JPanel {
 	private ImageIcon imageIcon;
 	
 	private void initGUI() {
-		setLayout(new GridBagLayout());
-	    GridBagConstraints c = new GridBagConstraints();
-	   
 	    idJL = new JLabel("ID EMPLEADO:");
 	    idJL.setFont(new Font(idJL.getFont().toString(), Font.BOLD, 50));
 	    idJL.setPreferredSize(new Dimension(365,50));
@@ -52,7 +53,7 @@ public class BajaEmpleado extends JPanel {
 	    baja.setPreferredSize(new Dimension(230,80));
 	    baja.setMaximumSize(baja.getPreferredSize());
 	    baja.setBackground(Color.RED);
-	    baja.setAlignmentX(CENTER_ALIGNMENT);
+	    baja.setAlignmentX(JButton.CENTER_ALIGNMENT);
 	   
 	    imageIcon = new ImageIcon("icons/baja.png"); 
 	    Image image = imageIcon.getImage(); 
@@ -67,27 +68,34 @@ public class BajaEmpleado extends JPanel {
 	            		    JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, imageIcon);
 	    	}
 	    });
-	   
+	}
+	
+	public JPanel getDefaultLayout() {
+		JPanel bajaEmpPanel = new JPanel(new GridBagLayout());
+	    GridBagConstraints c = new GridBagConstraints();
+	    
 	    c.gridx = 0;
 	    c.gridy = 0;
 	    c.gridwidth = 1;
 	    c.gridheight = 1;
-	    add(idJL, c);
+	    bajaEmpPanel.add(idJL, c);
 	    c.gridx = 1;
 	    c.gridy = 0;
 	    c.gridwidth = 1;
 	    c.gridheight = 1;
-	    add(idTF, c);
+	    bajaEmpPanel.add(idTF, c);
 	    c.gridx = 0;
 	    c.gridy = 1;
 	    c.gridwidth = 1;
 	    c.gridheight = 1;
-	    add(Box.createRigidArea(new Dimension(0, 15)), c);
+	    bajaEmpPanel.add(Box.createRigidArea(new Dimension(0, 15)), c);
 	    c.gridx = 0;
 	    c.gridy = 2;
 	    c.gridwidth = 2;
 	    c.gridheight = 1;
 	    c.anchor = GridBagConstraints.CENTER;
-	    add(baja, c);
+	    bajaEmpPanel.add(baja, c);
+	    
+	    return bajaEmpPanel;
 	}
 }

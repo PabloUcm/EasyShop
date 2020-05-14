@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,7 +29,7 @@ import presentacion.view.CardSwitcher;
 
 
 
-public class MainMenu extends JPanel {
+public class MainMenu {
    
     //Constructor
 	public MainMenu(CardSwitcher switcher) {
@@ -36,39 +37,46 @@ public class MainMenu extends JPanel {
 		this.buttons = new ArrayList<>();
 		this.buttonListeners = new HashMap<>();
 		botonAct = -1;
-		initGUI();
 	}
 	
 	//Atributos
 	private CardSwitcher switcher;
 	private List<JButton> buttons;
-	private Map<String,MouseListener> buttonListeners;
+	private Map<JButton,MouseListener> buttonListeners;
 	int botonAct;
 	
 	//Metodos
-	private void initGUI() {
-		setLayout(new BoxLayout( this, BoxLayout.PAGE_AXIS));
-		setBorder(BorderFactory.createMatteBorder(
+
+	public JPanel getDefaultLayout() {
+		JPanel mainMenuPanel = new JPanel();
+		
+		mainMenuPanel.setLayout(new BoxLayout( mainMenuPanel, BoxLayout.PAGE_AXIS));
+		mainMenuPanel.setBorder(BorderFactory.createMatteBorder(
                   0, 0, 0, 1, Color.black));
 		
-		setPreferredSize((new Dimension(260,800)));
-		setOpaque(true);
-		setBackground(Color.CYAN.darker());
+		mainMenuPanel.setPreferredSize((new Dimension(260,800)));
+		mainMenuPanel.setOpaque(true);
+		mainMenuPanel.setBackground(Color.CYAN.darker());
 		
-		ImageIcon imageIcon = new ImageIcon("icons/logo.png"); 
-		Image image = imageIcon.getImage();
+		ImageIcon logo = new ImageIcon("icons/logo.png"); 
+		Image image = logo.getImage();
 		Image newimg = image.getScaledInstance(250, 120,  java.awt.Image.SCALE_SMOOTH); 
-		imageIcon = new ImageIcon(newimg); 
-		JLabel picLabel = new JLabel(imageIcon);
+		logo = new ImageIcon(newimg); 
+		JLabel picLabel = new JLabel(logo);
 		
-		add(picLabel);
-		add(Box.createRigidArea(new Dimension(8, 0)));
+		mainMenuPanel.add(picLabel);
+		mainMenuPanel.add(Box.createRigidArea(new Dimension(8, 0)));
+		
+		for (JButton button : buttons) {
+			mainMenuPanel.add(button);
+			mainMenuPanel.add(Box.createRigidArea(new Dimension(0, 8)));
+		}
+		
+		return mainMenuPanel;
 	}
 	
 	public void addBoton(JButton button, String iconName, int iconSize, String card) {
 		buttons.add(button);
-		add(button);
-		add(Box.createRigidArea(new Dimension(0, 8)));
 		
 		button.setContentAreaFilled(false);
 		button.setFocusPainted(false);
@@ -99,17 +107,17 @@ public class MainMenu extends JPanel {
 	
 	private void crearMLNoActivo(JButton button) {
 		MouseListener ml = new MouseAdapter() {
-			 public void mouseEntered(java.awt.event.MouseEvent evt) {
+			 public void mouseEntered(MouseEvent evt) {
 			    	button.setBackground(new Color(54,220,110));
 			    }
 
-			    public void mouseExited(java.awt.event.MouseEvent evt) {
+			    public void mouseExited(MouseEvent evt) {
 			    	button.setBackground(Color.GREEN.darker());
 			    }
 		};
 		
 		button.addMouseListener(ml);
-		buttonListeners.put(button.getText(), ml);
+		buttonListeners.put(button, ml);
 	}
 	
 	private void botonActivado(JButton buttonActivado) {
@@ -119,8 +127,8 @@ public class MainMenu extends JPanel {
 			desactivarBoton.setBackground(Color.GREEN.darker());
 		}
 		
-		buttonActivado.removeMouseListener(buttonListeners.get(buttonActivado.getText()));
-		buttonListeners.remove(buttonActivado.getText());
+		buttonActivado.removeMouseListener(buttonListeners.get(buttonActivado));
+		buttonListeners.remove(buttonActivado);
 		buttonActivado.setBackground(Color.green.brighter());
 		
 		botonAct = buttons.indexOf(buttonActivado);

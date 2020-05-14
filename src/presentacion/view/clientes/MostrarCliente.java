@@ -25,7 +25,7 @@ import integracion.transfers.TCliente;
 import negocio.ClienteObserver;
 import presentacion.controllers.ClienteController;
 
-public class MostrarCliente extends JPanel implements ClienteObserver {
+public class MostrarCliente implements ClienteObserver {
 	private ClienteController controlador;
 	
 	public MostrarCliente(ClienteController c) {
@@ -40,18 +40,12 @@ public class MostrarCliente extends JPanel implements ClienteObserver {
 	private JButton limpiar;
 	
 	private void initGUI() {
-		setLayout(new GridBagLayout());
-		GridBagConstraints c = new GridBagConstraints();
-		
 		idTF = crearTextField();
 		buscar = crearBoton("BUSCAR CLIENTE", new Color(8,213,249), new Color(6,160,190), 
 							"lupa", 140, 30);
 		limpiar = crearBoton("LIMPIAR BUSQUEDA", new Color(205,205,205), new Color(166,166,166), 
 							 "limpiar", 170, 45);
 		datosTA = crearTextArea();
-		JScrollPane datosSP = new JScrollPane(datosTA);
-		datosSP.setPreferredSize(new Dimension(550,250));
-		datosSP.setMaximumSize(datosSP.getPreferredSize());
 		
 		buscar.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e ) {
@@ -66,10 +60,18 @@ public class MostrarCliente extends JPanel implements ClienteObserver {
 	    		idTF.setText("");
 	    		datosTA.setText("");
 	    	}
-	    });
+	    });	
+	}
+	
+	public JPanel getDefaultLayout() {
+		JPanel mostrarClientePanel = new JPanel(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
 		
-		JPanel barraBusqueda = new JPanel();
-		barraBusqueda.setLayout(new FlowLayout( FlowLayout.CENTER ));
+		JScrollPane datosSP = new JScrollPane(datosTA);
+		datosSP.setPreferredSize(new Dimension(550,250));
+		datosSP.setMaximumSize(datosSP.getPreferredSize());
+		
+		JPanel barraBusqueda = new JPanel(new FlowLayout( FlowLayout.CENTER));
 		barraBusqueda.add((crearJLabel(" ID CLIENTE:")));
 		barraBusqueda.add(idTF);
 		barraBusqueda.add(Box.createRigidArea(new Dimension(10, 0)));
@@ -77,27 +79,28 @@ public class MostrarCliente extends JPanel implements ClienteObserver {
 		
 		c.gridx = 0;
 		c.gridy = 0;
-		add(barraBusqueda, c);
+		mostrarClientePanel.add(barraBusqueda, c);
 	    c.weightx = 0.5;
 		c.gridx = 0;
 	    c.gridy = 1;
 	    c.gridwidth = 1;
 	    c.gridheight = 1;
 	    c.anchor = GridBagConstraints.CENTER;
-	    add(datosSP, c);
+	    mostrarClientePanel.add(datosSP, c);
 	    c.weightx = 0.0;
 		c.gridx = 0;
 	    c.gridy = 2;
 	    c.gridwidth = 1;
 	    c.gridheight = 1;
-	    add(Box.createRigidArea(new Dimension(0,15)),c);
+	    mostrarClientePanel.add(Box.createRigidArea(new Dimension(0,15)),c);
 	    c.weightx = 0.5;
 		c.gridx = 0;
 	    c.gridy = 3;
 	    c.gridwidth = 1;
 	    c.gridheight = 1;
-	    add(limpiar,c);
+	    mostrarClientePanel.add(limpiar,c);
 		
+		return mostrarClientePanel;
 	}
 	
 	private JLabel crearJLabel(String texto) {

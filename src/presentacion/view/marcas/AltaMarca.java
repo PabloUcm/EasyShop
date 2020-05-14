@@ -21,9 +21,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class AltaMarca extends JPanel {
+import presentacion.controllers.MarcaController;
+
+public class AltaMarca {
 	
-	public AltaMarca() {
+	private MarcaController controlador;
+	
+	public AltaMarca(MarcaController c) {
+		this.controlador = c;
 		initGUI();
 	}
 	
@@ -34,9 +39,6 @@ public class AltaMarca extends JPanel {
 	private JButton limpiar;
 	
 	private void initGUI() {
-		setLayout(new BorderLayout());
-		setPreferredSize((new Dimension(1090,700)));
-		
 		cifTF = crearTextField();
 		nombreTF = crearTextField();
 		paisTF = crearTextField();
@@ -57,9 +59,12 @@ public class AltaMarca extends JPanel {
 	    		paisTF.setText(" ");
 	    	}
 	    });
+	}
+	
+	public JPanel getDefaultLayout() {
+		JPanel altaMarcaPanel = new JPanel(new BorderLayout());
 		
-		JPanel campos = new JPanel();
-		campos.setLayout(new GridBagLayout());
+		JPanel campos = new JPanel(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		c.gridx = 0;
 		c.gridy = 0;
@@ -82,26 +87,17 @@ public class AltaMarca extends JPanel {
 		c.gridx = 0;
 		c.gridy = 3;
 		
-		JPanel botones = new JPanel();
-		botones.setLayout(new FlowLayout( FlowLayout.CENTER ));
+		JPanel botones = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		botones.setBorder(BorderFactory.createMatteBorder(
                   1, 0, 0, 0, Color.black));
 		
 		botones.add(confirmar);
 		botones.add(limpiar);
 		
-		add(campos,BorderLayout.CENTER);
-		add(botones, BorderLayout.SOUTH);
+		altaMarcaPanel.add(campos,BorderLayout.CENTER);
+		altaMarcaPanel.add(botones, BorderLayout.SOUTH);
 		
-		addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentShown(ComponentEvent evt) {
-	    		cifTF.setText(" ");
-	    		nombreTF.setText(" ");
-	    		paisTF.setText(" ");
-            }
-        });
-		
+		return altaMarcaPanel;
 	}
 	
 	private JLabel crearJLabel(String texto) {

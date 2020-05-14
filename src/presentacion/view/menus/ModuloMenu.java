@@ -15,14 +15,13 @@ import javax.swing.JPanel;
 
 import presentacion.view.CardSwitcher;
 
-public class ModuloMenu extends JPanel {
+public class ModuloMenu {
 	
 	public ModuloMenu(CardSwitcher switcher, int iconSize) {
 		this.switcher = switcher;
 		this.iconSize = iconSize;
 		buttons = new ArrayList<>();
 		botonAct = -1;
-		initGUI();
 	}
 	
 	private CardSwitcher switcher;
@@ -30,14 +29,19 @@ public class ModuloMenu extends JPanel {
 	private int iconSize;
 	private int botonAct;
 	
-	private void initGUI() {
-		setLayout( new FlowLayout( FlowLayout.LEFT ));
-		setBorder( BorderFactory.createBevelBorder(1));
-		setBackground(Color.gray.brighter());
+	
+	public JPanel getDefaultLayout() {
+		JPanel moduloMenuPanel = new JPanel(new FlowLayout( FlowLayout.LEFT ));
+		
+		moduloMenuPanel.setBorder( BorderFactory.createBevelBorder(1));
+		moduloMenuPanel.setBackground(Color.gray.brighter());
+		
+		for (JButton button : buttons) moduloMenuPanel.add(button);
+		
+		return moduloMenuPanel;
 	}
 	
 	public void addButton(JButton button, String direccion, String card) {
-		add(button);
 		buttons.add(button);
 		button.setBorder(BorderFactory.createRaisedBevelBorder());
 		if (buttons.size() == 1) botonActivado(button);
@@ -47,11 +51,11 @@ public class ModuloMenu extends JPanel {
 		button.setPreferredSize(new Dimension(170,45));
 		button.setMaximumSize(button.getPreferredSize());
 		
-		ImageIcon imageIcon = new ImageIcon("icons/"+direccion+".png"); 
-		Image image = imageIcon.getImage(); 
+		ImageIcon icon = new ImageIcon("icons/"+direccion+".png"); 
+		Image image = icon.getImage(); 
 		Image newimg = image.getScaledInstance(iconSize, iconSize, java.awt.Image.SCALE_SMOOTH); 
-		imageIcon = new ImageIcon(newimg);  
-		button.setIcon(imageIcon);
+		icon = new ImageIcon(newimg);  
+		button.setIcon(icon);
 		
 		button.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e ) {
@@ -59,11 +63,6 @@ public class ModuloMenu extends JPanel {
 	    		switcher.switchTo(card);
 	    	}
 	    });
-	}
-	
-	public void reset() {
-		switcher.reset();
-		botonActivado(buttons.get(0));
 	}
 
 	private void botonActivado(JButton buttonActivado) {

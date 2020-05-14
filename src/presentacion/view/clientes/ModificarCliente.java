@@ -23,7 +23,7 @@ import integracion.transfers.TCliente;
 import negocio.ClienteObserver;
 import presentacion.controllers.ClienteController;
 
-public class ModificarCliente extends JPanel implements ClienteObserver {
+public class ModificarCliente implements ClienteObserver {
 	private ClienteController controlador;
 	
 	public ModificarCliente(ClienteController c) {
@@ -39,9 +39,6 @@ public class ModificarCliente extends JPanel implements ClienteObserver {
 	private JButton limpiar;
 	
 	private void initGUI() {
-		setLayout(new BorderLayout());
-		setPreferredSize((new Dimension(1090,700)));
-		
 		idTF = crearTextField();
 		dniTF = crearTextField();
 		nombreTF = crearTextField();
@@ -66,9 +63,12 @@ public class ModificarCliente extends JPanel implements ClienteObserver {
 	    		tfnoTF.setText(" ");
 	    	}
 	    });
+	}
+	
+	public JPanel getDefaultLayout() {
+		JPanel modClientePanel = new JPanel(new BorderLayout());
 		
-		JPanel campos = new JPanel();
-		campos.setLayout(new GridBagLayout());
+		JPanel campos = new JPanel(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		c.gridx = 0;
 		c.gridy = 0;
@@ -103,10 +103,11 @@ public class ModificarCliente extends JPanel implements ClienteObserver {
 		botones.add(modificar);
 		botones.add(limpiar);
 		
-		add(campos,BorderLayout.CENTER);
-		add(botones, BorderLayout.SOUTH);
+		modClientePanel.add(campos,BorderLayout.CENTER);
+		modClientePanel.add(botones, BorderLayout.SOUTH);
+		
+		return modClientePanel;
 	}
-
 	
 	private JLabel crearJLabel(String texto) {
 		JLabel jl = new JLabel(texto);

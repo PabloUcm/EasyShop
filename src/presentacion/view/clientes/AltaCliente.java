@@ -22,7 +22,8 @@ import integracion.transfers.TCliente;
 import negocio.ClienteObserver;
 import presentacion.controllers.ClienteController;
 
-public class AltaCliente extends JPanel implements ClienteObserver {
+public class AltaCliente implements ClienteObserver {
+	
 	private ClienteController controlador;
 	
 	public AltaCliente(ClienteController c) {
@@ -38,10 +39,6 @@ public class AltaCliente extends JPanel implements ClienteObserver {
 	private JButton limpiar;
 	
 	private void initGUI() {
-		setLayout(new BorderLayout());
-		setPreferredSize((new Dimension(1090,700)));
-		
-		
 		dniTF = crearTextField();
 		nombreTF = crearTextField();
 		tfnoTF = crearTextField();
@@ -64,11 +61,13 @@ public class AltaCliente extends JPanel implements ClienteObserver {
 	    		nombreTF.setText(" ");
 	    		tfnoTF.setText(" ");
 	    	}
-	    });
+	    });	
+	}
+	
+	public JPanel getDefaultLayout() {
+		JPanel altaClientePanel = new JPanel(new BorderLayout());
 		
-		
-		JPanel campos = new JPanel();
-		campos.setLayout(new GridBagLayout());
+		JPanel campos = new JPanel(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		c.gridx = 0;
 		c.gridy = 0;
@@ -97,9 +96,10 @@ public class AltaCliente extends JPanel implements ClienteObserver {
 		botones.add(confirmar);
 		botones.add(limpiar);
 		
-		add(campos,BorderLayout.CENTER);
-		add(botones, BorderLayout.SOUTH);
+		altaClientePanel.add(campos,BorderLayout.CENTER);
+		altaClientePanel.add(botones, BorderLayout.SOUTH);
 		
+		return altaClientePanel;
 	}
 	
 	private JLabel crearJLabel(String texto) {

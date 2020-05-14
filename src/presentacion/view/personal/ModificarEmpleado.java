@@ -2,7 +2,6 @@ package presentacion.view.personal;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -11,21 +10,22 @@ import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 
 import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class ModEmpleado extends JPanel {
+import presentacion.controllers.PersonalController;
+
+public class ModificarEmpleado {
 	
-	public ModEmpleado() {
+	private PersonalController controlador;
+	
+	public ModificarEmpleado(PersonalController c) {
+		this.controlador = c;
 		initGUI();
 	}
 	
@@ -38,8 +38,6 @@ public class ModEmpleado extends JPanel {
 	private JButton limpiar;
 	
 	private void initGUI() {
-		setLayout(new BorderLayout());
-		setPreferredSize((new Dimension(1090,700)));
 		
 		idTF = crearTextField();
 		dniTF = crearTextField();
@@ -65,9 +63,12 @@ public class ModEmpleado extends JPanel {
 	    		tfnoTF.setText(" ");
 	    	}
 	    });
+	}
+	
+	public JPanel getDefaultLayout() {
+		JPanel modEmpPanel = new JPanel(new BorderLayout());
 		
-		JPanel campos = new JPanel();
-		campos.setLayout(new GridBagLayout());
+		JPanel campos = new JPanel(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		c.gridx = 0;
 		c.gridy = 0;
@@ -100,28 +101,17 @@ public class ModEmpleado extends JPanel {
 		c.gridy = 4;
 		campos.add(tfnoTF, c);
 		
-		JPanel botones = new JPanel();
-		botones.setLayout(new FlowLayout( FlowLayout.CENTER ));
+		JPanel botones = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		botones.setBorder(BorderFactory.createMatteBorder(
                   1, 0, 0, 0, Color.black));
 		
 		botones.add(modificar);
 		botones.add(limpiar);
 		
-		add(campos,BorderLayout.CENTER);
-		add(botones, BorderLayout.SOUTH);
+		modEmpPanel.add(campos,BorderLayout.CENTER);
+		modEmpPanel.add(botones, BorderLayout.SOUTH);
 		
-		addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentShown(ComponentEvent evt) {
-            	idTF.setText(" ");
-	    		dniTF.setText(" ");
-	    		nombreTF.setText(" ");
-	    		sueldoTF.setText(" ");
-	    		tfnoTF.setText(" ");
-            }
-        });
-		
+		return modEmpPanel;
 	}
 	
 	private JLabel crearJLabel(String texto) {

@@ -12,6 +12,4 @@ public class CardSwitcher {
     }
 
     public void switchTo(String card) { layout.show(container, card); }
-    
-    public void reset() { layout.first(container); }
 }

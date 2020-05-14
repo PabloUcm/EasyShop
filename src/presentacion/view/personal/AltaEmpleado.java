@@ -11,8 +11,6 @@ import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -21,9 +19,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class AltaEmpleado extends JPanel {
+import presentacion.controllers.PersonalController;
+
+public class AltaEmpleado {
 	
-	public AltaEmpleado() {
+	private PersonalController controlador;
+	
+	public AltaEmpleado(PersonalController c) {
+		this.controlador = c;
 		initGUI();
 	}
 	
@@ -35,9 +38,6 @@ public class AltaEmpleado extends JPanel {
 	private JButton limpiar;
 	
 	private void initGUI() {
-		setLayout(new BorderLayout());
-		setPreferredSize((new Dimension(1090,700)));
-		
 		dniTF = crearTextField();
 		nombreTF = crearTextField();
 		sueldoTF = crearTextField();
@@ -60,9 +60,12 @@ public class AltaEmpleado extends JPanel {
 	    		tfnoTF.setText(" ");
 	    	}
 	    });
+	}
+	
+	public JPanel getDefaultLayout() {
+		JPanel altaEmpPanel = new JPanel(new BorderLayout());
 		
-		JPanel campos = new JPanel();
-		campos.setLayout(new GridBagLayout());
+		JPanel campos = new JPanel(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		c.gridx = 0;
 		c.gridy = 0;
@@ -97,19 +100,10 @@ public class AltaEmpleado extends JPanel {
 		botones.add(confirmar);
 		botones.add(limpiar);
 		
-		add(campos,BorderLayout.CENTER);
-		add(botones, BorderLayout.SOUTH);
+		altaEmpPanel.add(campos,BorderLayout.CENTER);
+		altaEmpPanel.add(botones, BorderLayout.SOUTH);
 		
-		addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentShown(ComponentEvent evt) {
-	    		dniTF.setText(" ");
-	    		nombreTF.setText(" ");
-	    		sueldoTF.setText(" ");
-	    		tfnoTF.setText(" ");
-            }
-        });
-		
+		return altaEmpPanel;
 	}
 	
 	private JLabel crearJLabel(String texto) {

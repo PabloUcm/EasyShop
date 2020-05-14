@@ -8,6 +8,8 @@ import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -23,7 +25,7 @@ import integracion.transfers.TCliente;
 import negocio.ClienteObserver;
 import presentacion.controllers.ClienteController;
 
-public class BajaCliente extends JPanel implements ClienteObserver{
+public class BajaCliente implements ClienteObserver{
 	
 	ClienteController controlador;
 	
@@ -36,12 +38,9 @@ public class BajaCliente extends JPanel implements ClienteObserver{
 	private JLabel idJL;
 	private JTextField dniTF;
 	private JButton baja;
-	private ImageIcon imageIcon;
+	private ImageIcon icon;
 	
 	private void initGUI() {
-		setLayout(new GridBagLayout());
-	    GridBagConstraints c = new GridBagConstraints();
-	   
 	    idJL = new JLabel("ID CLIENTE:");
 	    idJL.setFont(new Font(idJL.getFont().toString(), Font.BOLD, 50));
 	    idJL.setPreferredSize(new Dimension(300,50));
@@ -60,66 +59,74 @@ public class BajaCliente extends JPanel implements ClienteObserver{
 	    baja.setPreferredSize(new Dimension(230,65));
 	    baja.setMaximumSize(baja.getPreferredSize());
 	    baja.setBackground(new Color(255,85,85));
-	    baja.setAlignmentX(CENTER_ALIGNMENT);
+	    baja.setAlignmentX(JButton.CENTER_ALIGNMENT);
 	   
-	    imageIcon = new ImageIcon("icons/baja.png"); 
-	    Image image = imageIcon.getImage(); 
+	    icon= new ImageIcon("icons/baja.png"); 
+	    Image image = icon.getImage(); 
 	    Image newimg = image.getScaledInstance(45, 45, java.awt.Image.SCALE_SMOOTH); 
-	    imageIcon = new ImageIcon(newimg);  
-	    baja.setIcon(imageIcon);
+	    icon = new ImageIcon(newimg);  
+	    baja.setIcon(icon);
 	    
-	    baja.addMouseListener(new java.awt.event.MouseAdapter() {
-		    public void mouseEntered(java.awt.event.MouseEvent evt) {
-		    	baja.setBackground(new Color(201,54,54));
-		    }
 
-		    public void mouseExited(java.awt.event.MouseEvent evt) {
-		    	baja.setBackground(new Color(255,85,85));
-		    }
-		    
-		    public void mousePressed(java.awt.event.MouseEvent evt) {
-		    	baja.setBorder(BorderFactory.createBevelBorder(1));
-		    }
-		    
-		    public void mouseReleased(java.awt.event.MouseEvent evt) {
-		    	baja.setBorder(BorderFactory.createRaisedBevelBorder());
-		    }
-		});
-	   
 	    baja.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) { 
 	    		//Transfer Cliente = controlador.getCliente(dniTF.getText());
 	    		//pasar datos al string
 	    		String msg = "ID:\nDNI:\nNOMBRE:\nTELEFONO:\n\n ¿Quieres dar de baja a este cliente?";
 	            int input = JOptionPane.showConfirmDialog(null, msg,"Confirmar baja de cliente", 
-	            		    JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, imageIcon);
+	            		    JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, icon);
 	            //Ejecutar baja cliente
 	            if(input == JOptionPane.OK_OPTION) controlador.bajaCliente(dniTF.getText());
 	            
 	    	}
 	    });
-	   
+	    
+	    baja.addMouseListener(new MouseAdapter() {
+		    public void mouseEntered(MouseEvent evt) {
+		    	baja.setBackground(new Color(201,54,54));
+		    }
+
+		    public void mouseExited(MouseEvent evt) {
+		    	baja.setBackground(new Color(255,85,85));
+		    }
+		    
+		    public void mousePressed(MouseEvent evt) {
+		    	baja.setBorder(BorderFactory.createBevelBorder(1));
+		    }
+		    
+		    public void mouseReleased(MouseEvent evt) {
+		    	baja.setBorder(BorderFactory.createRaisedBevelBorder());
+		    }
+		});
+	}
+	
+	public JPanel getDefaultLayout() {
+		JPanel bajaClientePanel = new JPanel(new GridBagLayout());
+	    GridBagConstraints c = new GridBagConstraints();
+	    
 	    c.gridx = 0;
 	    c.gridy = 0;
 	    c.gridwidth = 1;
 	    c.gridheight = 1;
-	    add(idJL, c);
+	    bajaClientePanel.add(idJL, c);
 	    c.gridx = 1;
 	    c.gridy = 0;
 	    c.gridwidth = 1;
 	    c.gridheight = 1;
-	    add(dniTF, c);
+	    bajaClientePanel.add(dniTF, c);
 	    c.gridx = 0;
 	    c.gridy = 1;
 	    c.gridwidth = 1;
 	    c.gridheight = 1;
-	    add(Box.createRigidArea(new Dimension(0, 15)), c);
+	    bajaClientePanel.add(Box.createRigidArea(new Dimension(0, 15)), c);
 	    c.gridx = 0;
 	    c.gridy = 2;
 	    c.gridwidth = 2;
 	    c.gridheight = 1;
 	    c.anchor = GridBagConstraints.CENTER;
-	    add(baja, c);
+	    bajaClientePanel.add(baja, c);
+	    
+	    return bajaClientePanel;
 	}
 
 	@Override

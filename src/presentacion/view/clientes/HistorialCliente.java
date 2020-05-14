@@ -25,7 +25,8 @@ import integracion.transfers.TCliente;
 import negocio.ClienteObserver;
 import presentacion.controllers.ClienteController;
 
-public class HistorialCliente extends JPanel implements ClienteObserver {
+public class HistorialCliente implements ClienteObserver {
+	
 	private ClienteController controlador;
 	
 	public HistorialCliente(ClienteController c) {
@@ -39,9 +40,6 @@ public class HistorialCliente extends JPanel implements ClienteObserver {
 	private JButton limpiar;
 	
 	private void initGUI() {
-		setLayout(new GridBagLayout());
-		GridBagConstraints c = new GridBagConstraints();
-		
 		idTF = crearTextField();
 		buscar = crearBoton("BUSCAR HISTORIAL", new Color(8,213,249), new Color(6,160,190), 
 							"lupa", 150, 30);
@@ -65,9 +63,17 @@ public class HistorialCliente extends JPanel implements ClienteObserver {
 	    		historialTA.setText("");
 	    	}
 	    });
+	}
+	
+	public JPanel getDefaultLayout() {
+		JPanel histClientePanel = new JPanel(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
 		
-		JPanel barraBusqueda = new JPanel();
-		barraBusqueda.setLayout(new FlowLayout( FlowLayout.CENTER ));
+		JScrollPane historialSP = new JScrollPane(historialTA);
+		historialSP.setPreferredSize(new Dimension(550,600));
+		historialSP.setMaximumSize(historialSP.getPreferredSize());
+		
+		JPanel barraBusqueda = new JPanel(new FlowLayout( FlowLayout.CENTER));
 		barraBusqueda.add((crearJLabel(" ID CLIENTE:")));
 		barraBusqueda.add(idTF);
 		barraBusqueda.add(Box.createRigidArea(new Dimension(10, 0)));
@@ -75,27 +81,28 @@ public class HistorialCliente extends JPanel implements ClienteObserver {
 		
 		c.gridx = 0;
 		c.gridy = 0;
-		add(barraBusqueda, c);
+		histClientePanel.add(barraBusqueda, c);
 	    c.weightx = 0.5;
 		c.gridx = 0;
 	    c.gridy = 1;
 	    c.gridwidth = 1;
 	    c.gridheight = 1;
 	    c.anchor = GridBagConstraints.CENTER;
-	    add(historialSP, c);
+	    histClientePanel.add(historialSP, c);
 	    c.weightx = 0.0;
 		c.gridx = 0;
 	    c.gridy = 2;
 	    c.gridwidth = 1;
 	    c.gridheight = 1;
-	    add(Box.createRigidArea(new Dimension(0,15)),c);
+	    histClientePanel.add(Box.createRigidArea(new Dimension(0,15)),c);
 	    c.weightx = 0.5;
 		c.gridx = 0;
 	    c.gridy = 3;
 	    c.gridwidth = 1;
 	    c.gridheight = 1;
-	    add(limpiar,c);
+	    histClientePanel.add(limpiar,c);
 		
+		return histClientePanel;
 	}
 	
 	private JLabel crearJLabel(String texto) {

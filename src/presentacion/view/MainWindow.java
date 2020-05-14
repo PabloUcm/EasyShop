@@ -1,44 +1,43 @@
 package presentacion.view;
+
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Dimension;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.swing.ImageIcon;
+
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import presentacion.view.clientes.ClientesPanel;
-import presentacion.view.marcas.MarcasPanel;
+import presentacion.view.clientes.ClienteModulo;
+import presentacion.view.marcas.MarcaModulo;
 import presentacion.view.menus.MainMenu;
-import presentacion.view.personal.PersonalPanel;
-import presentacion.view.productos.ProductosPanel;
-import presentacion.view.ventas.VentasPanel;
+import presentacion.view.personal.PersonalModulo;
+import presentacion.view.productos.ProductoModulo;
+import presentacion.view.ventas.VentaModulo;
 
 
-public class MainWindow extends JFrame {
-	private JPanel centerPanel;
-	private MainMenu menuPanel;
+public class MainWindow {
 	
-	private Toolkit toolkit;
-	private List<Image> logo;
+	private ClienteModulo clienteModulo;
+	private PersonalModulo personalModulo;
+	private VentaModulo ventaModulo;
+	private ProductoModulo productoModulo;
+	private MarcaModulo marcaModulo;
 	
 	public MainWindow() {
-		super("EasyShop");
-		toolkit = Toolkit.getDefaultToolkit();
-		logo = new ArrayList<Image>();
+		clienteModulo =  new ClienteModulo();
+		personalModulo = new PersonalModulo();
+		ventaModulo = new VentaModulo();
+		productoModulo = new ProductoModulo();
+		marcaModulo = new MarcaModulo();
+		
 		initGUI();
 	}
 	
+	private JPanel centerPanel;
+	private MainMenu menuPanel;
+	
 	private void initGUI() {
-		JPanel mainPanel = new JPanel(new BorderLayout());
-		setContentPane(mainPanel);
-		mainPanel.setPreferredSize((new Dimension(1350,800)));
-		
 		CardLayout cardLayout = new CardLayout();
 		
 		centerPanel = new JPanel(cardLayout);
@@ -48,25 +47,26 @@ public class MainWindow extends JFrame {
 		
 		menuPanel = new MainMenu(switcher);
 		
-		addModulo(new ClientesPanel(),new JButton("    Gestion de clientes"), "cliente", 50, "Clientes");
-		addModulo(new PersonalPanel(),new JButton("    Gestion de personal"), "empleado", 60, "Personal");
-		addModulo(new VentasPanel(),new JButton("          Gestion de ventas"), "venta", 45, "Ventas");
-		addModulo(new ProductosPanel(),new JButton("   Gestion de productos"), "producto", 45, "Productos");
-		addModulo(new MarcasPanel(),new JButton("       Gestion de marcas"), "marca", 45, "Marcas");
+		addModulo(clienteModulo.getDefaultLayout(), new JButton("    Gestion de clientes"), 
+				  "cliente", 50, "Clientes");
+		addModulo(personalModulo.getDefaultLayout(), new JButton("    Gestion de personal"), 
+				  "empleado", 60, "Personal");
+		addModulo(ventaModulo.getDefaultLayout(), new JButton("          Gestion de ventas"), 
+				  "venta", 45, "Ventas");
+		addModulo(productoModulo.getDefaultLayout(), new JButton("   Gestion de productos"), 
+				  "producto", 45, "Productos");
+		addModulo(marcaModulo.getDefaultLayout(), new JButton("       Gestion de marcas"), 
+				  "marca", 45, "Marcas");
+	}
+	
+	public JPanel getDefaultLayout() {
+		JPanel mainPanel = new JPanel(new BorderLayout());
+		mainPanel.setPreferredSize((new Dimension(1350,800)));
 		
 		mainPanel.add(centerPanel, BorderLayout.CENTER);
-		mainPanel.add(menuPanel, BorderLayout.LINE_START);
+		mainPanel.add(menuPanel.getDefaultLayout(), BorderLayout.LINE_START);
 		
-		logo.add(toolkit.getImage("icons/logo/16x16.png"));
-        logo.add(toolkit.getImage("icons/logo/32x32.png"));
-        logo.add(toolkit.getImage("icons/logo/64x64.png"));
-        logo.add(toolkit.getImage("icons/logo/128x128.png"));
-		setIconImages(logo);
-		
-		pack();
-		setLocationRelativeTo(null);
-		setVisible(true);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		return mainPanel;
 	}
 	
 	private void addModulo(JPanel panel, JButton button, String iconName, int iconSize, String card) {
