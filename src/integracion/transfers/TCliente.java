@@ -7,6 +7,14 @@ public class TCliente {
 	private String nombre;
 	private String telefono;
 	private boolean activo;
+	
+	public TCliente() {};
+	
+	public TCliente(String dni,String nombre, String telefono) {
+		this.dni = dni;
+		this.nombre = nombre;
+		this.telefono = telefono;
+	}
 
 	public TCliente(int id, String dni, String nombre, String telefono, boolean activo) {
 		this.id = id;

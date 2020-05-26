@@ -8,4 +8,5 @@ public interface IClienteDAO {
 	public TCliente getClienteByDNI(String dni);
 	
 	public List<TCliente> getAllClientes();
+	public void altaCliente(TCliente cliente);
 }

@@ -3,6 +3,8 @@ package negocio;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import integracion.daoImpl.SqlClienteDAO;
 import integracion.factorias.DAOServiceFactory;
 import integracion.factorias.IDAOServiceFactory;
@@ -60,10 +62,21 @@ public class Modelo {
 		for(ClienteObserver o: clienteObservers) o.mostrarCliente(clienteList);
 	}
 	
-	public void altaCliente(String dni, String nombre, String telefono) {
-		System.out.println("Cliente dado de alta");
-		//conseguir transfer
+	public void altaCliente(String dni, String nombre, String telefono){
+		SqlClienteDAO clienteDAO = (SqlClienteDAO) factoryDAO.getClienteDAO();
+		
+		try {
+			
+		if(clienteDAO.getClienteByDNI(dni) != null) throw new Exception("Cliente ya existente");
+		else clienteDAO.altaCliente(new TCliente(dni,nombre,telefono));
+		
 		for(ClienteObserver o: clienteObservers) o.altaCliente();
+		
+		JOptionPane.showMessageDialog(null,"Cliente " + nombre + " registrado con éxito","Error icon",JOptionPane.INFORMATION_MESSAGE);
+		
+		}catch(Exception e) {
+			JOptionPane.showMessageDialog(null,e.getMessage(), "Error",JOptionPane.ERROR_MESSAGE);
+		}
 	}
 	
 	public void bajaCliente(String dni) {

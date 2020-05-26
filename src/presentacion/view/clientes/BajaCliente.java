@@ -142,12 +142,6 @@ public class BajaCliente implements ClienteObserver{
 	}
 
 	@Override
-	public void altaCliente() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void bajaCliente() {
 		// TODO Auto-generated method stub
 		
@@ -167,6 +161,12 @@ public class BajaCliente implements ClienteObserver{
 
 	@Override
 	public void mostrarCliente(List<TCliente> clienteList) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void altaCliente() {
 		// TODO Auto-generated method stub
 		
 	}

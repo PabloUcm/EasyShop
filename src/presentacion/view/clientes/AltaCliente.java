@@ -15,6 +15,7 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -51,7 +52,7 @@ public class AltaCliente implements ClienteObserver {
 		
 		confirmar.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e ) {
-	    		controlador.listarClientes();
+	    		controlador.altaCliente(dniTF.getText(), nombreTF.getText(), tfnoTF.getText());
 	    	}
 	    });
 		
@@ -186,8 +187,7 @@ public class AltaCliente implements ClienteObserver {
 
 	@Override
 	public void altaCliente() {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
