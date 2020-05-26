@@ -52,7 +52,14 @@ public class AltaCliente implements ClienteObserver {
 		
 		confirmar.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e ) {
-	    		controlador.altaCliente(dniTF.getText(), nombreTF.getText(), tfnoTF.getText());
+	    		try {
+	    			controlador.altaCliente(dniTF.getText(), nombreTF.getText(), tfnoTF.getText());
+	    			JOptionPane.showMessageDialog(null,"Cliente " + nombreTF.getText() + " registrado con éxito",
+	    										  "Error icon",JOptionPane.INFORMATION_MESSAGE);
+	    		}catch(Exception ex) {
+	    			JOptionPane.showMessageDialog(null,ex.getMessage(), "Error",JOptionPane.ERROR_MESSAGE);
+	    		}
+	    		
 	    	}
 	    });
 		
@@ -197,7 +204,7 @@ public class AltaCliente implements ClienteObserver {
 	}
 
 	@Override
-	public void obtenerCliente() {
+	public void obtenerCliente(TCliente cliente) {
 		// TODO Auto-generated method stub
 		
 	}

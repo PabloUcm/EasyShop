@@ -82,4 +82,21 @@ public class SqlClienteDAO implements IClienteDAO {
 		}	
 	}
 
+	@Override
+	public TCliente getClienteByID(int id) {
+		try {
+			Connection connection = dbAdapter.getConnection();
+			PreparedStatement statement = connection.prepareStatement("SELECT * FROM CLIENTE WHERE ID=?");
+			statement.setInt(1, id);
+			
+			ResultSet results = statement.executeQuery();
+			if(results.next()) return new TCliente(results.getInt(1),results.getString(2),results.getString(3),
+												   results.getString(4), results.getBoolean(5));
+					
+		}catch(Exception e) {
+			e.printStackTrace();
+		}	
+		return null;
+	}
+
 }

@@ -62,30 +62,28 @@ public class Modelo {
 		for(ClienteObserver o: clienteObservers) o.mostrarCliente(clienteList);
 	}
 	
-	public void altaCliente(String dni, String nombre, String telefono){
+	public void altaCliente(String dni, String nombre, String telefono) throws Exception{
 		SqlClienteDAO clienteDAO = (SqlClienteDAO) factoryDAO.getClienteDAO();
-		
-		try {
-			
+				
 		if(clienteDAO.getClienteByDNI(dni) != null) throw new Exception("Cliente ya existente");
 		else clienteDAO.altaCliente(new TCliente(dni,nombre,telefono));
 		
-		for(ClienteObserver o: clienteObservers) o.altaCliente();
-		
-		JOptionPane.showMessageDialog(null,"Cliente " + nombre + " registrado con éxito","Error icon",JOptionPane.INFORMATION_MESSAGE);
-		
-		}catch(Exception e) {
-			JOptionPane.showMessageDialog(null,e.getMessage(), "Error",JOptionPane.ERROR_MESSAGE);
-		}
+		for(ClienteObserver o: clienteObservers) o.altaCliente();		
 	}
 	
 	public void bajaCliente(String dni) {
 		System.out.println("Cliente dado de baja");
 	}
 	
-	public void getCliente(String dni) {
-		//obtengo cliente
-		for(ClienteObserver o: clienteObservers) o.obtenerCliente();
+	public TCliente getCliente(int id) throws Exception {		
+		SqlClienteDAO clienteDAO = (SqlClienteDAO) factoryDAO.getClienteDAO();
+		TCliente cliente = clienteDAO.getClienteByID(id);
+			
+		if(cliente == null) throw new Exception("Cliente inexistente");
+			
+		for(ClienteObserver o: clienteObservers) o.obtenerCliente(cliente);
+		
+		return cliente;
 	}
 	
 	public void altaPersonal(String dni, String nombre, int sueldo, String telefono) {

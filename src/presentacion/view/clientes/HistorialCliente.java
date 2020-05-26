@@ -257,7 +257,7 @@ public class HistorialCliente implements ClienteObserver {
 	}
 
 	@Override
-	public void obtenerCliente() {
+	public void obtenerCliente(TCliente cliente) {
 		// TODO Auto-generated method stub
 		
 	}

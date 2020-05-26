@@ -80,9 +80,7 @@ public class ClienteTableModel extends AbstractTableModel implements ClienteObse
 	}
 
 	@Override
-	public void obtenerCliente() {
-		// TODO Auto-generated method stub
-		
+	public void obtenerCliente(TCliente cliente) {
 	}
 
 	@Override

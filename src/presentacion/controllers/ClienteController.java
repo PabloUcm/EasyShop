@@ -1,5 +1,6 @@
 package presentacion.controllers;
 
+import integracion.transfers.TCliente;
 import negocio.ClienteObserver;
 import negocio.Modelo;
 
@@ -14,7 +15,7 @@ public class ClienteController {
 		this.modelo = m;
 	}
 	
-	public void altaCliente(String dni, String nombre, String telefono) {
+	public void altaCliente(String dni, String nombre, String telefono) throws Exception {
 		modelo.altaCliente(dni, nombre, telefono);
 	}
 	
@@ -22,8 +23,8 @@ public class ClienteController {
 		 modelo.bajaCliente(dni);
 	}
 	
-	public void getCliente(String dni) {
-		modelo.getCliente(dni);
+	public TCliente getCliente(int id) throws Exception {
+		return modelo.getCliente(id);
 	}
 	
 	public void listarClientes() {

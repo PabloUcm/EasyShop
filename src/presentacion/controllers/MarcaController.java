@@ -15,13 +15,11 @@ public class MarcaController {
 		this.modelo = m;
 	}
 	
-	public void altaMarca(String dni, String nombre, String telefono) {
+	public void altaMarca(String dni, String nombre, String telefono) throws Exception {
 		modelo.altaCliente(dni, nombre, telefono);
 	}
 	
 	public void bajaMarca(String dni) {
 		 modelo.bajaCliente(dni);
-	}
-	
-	
+	}	
 }

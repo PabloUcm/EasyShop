@@ -5,8 +5,9 @@ import java.util.List;
 import integracion.transfers.TCliente;
 
 public interface IClienteDAO {
-	public TCliente getClienteByDNI(String dni);
 	
+	public TCliente getClienteByDNI(String dni);
+	public TCliente getClienteByID(int id);
 	public List<TCliente> getAllClientes();
 	public void altaCliente(TCliente cliente);
 }

@@ -16,6 +16,7 @@ import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -49,9 +50,12 @@ public class MostrarCliente implements ClienteObserver {
 		
 		buscar.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e ) {
-	    		TCliente cliente = new TCliente(1,"003","Manolo","125",true);
-	    		datosTA.setText(busquedaToString(cliente));
-	    		datosTA.setCaretPosition(0);
+	    		try {
+	    			TCliente cliente = controlador.getCliente(Integer.parseInt(idTF.getText()));
+	    			datosTA.setText(busquedaToString(cliente));
+	    		}catch(Exception ex) {
+	    			JOptionPane.showMessageDialog(null,ex.getMessage(), "Error",JOptionPane.ERROR_MESSAGE);
+	    		}
 	    	}
 	    });
 		
@@ -187,7 +191,9 @@ public class MostrarCliente implements ClienteObserver {
 		busqstr.append("    ID: "+cliente.getId()+"\n\n");
 		busqstr.append("    DNI: "+cliente.getDni()+"\n\n");
 		busqstr.append("    NOMBRE: "+cliente.getNombre()+"\n\n");
-		busqstr.append("    TELEFONO: "+cliente.getTelefono());
+		if(cliente.getTelefono() != null) busqstr.append("    TELEFONO: "+cliente.getTelefono());
+		else busqstr.append("    TELEFONO: [Vacío]");
+		
 		return busqstr.toString();
 	}
 	
@@ -223,7 +229,7 @@ public class MostrarCliente implements ClienteObserver {
 	}
 
 	@Override
-	public void obtenerCliente() {
+	public void obtenerCliente(TCliente cliente) {
 		// TODO Auto-generated method stub
 		
 	}
