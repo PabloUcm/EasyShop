@@ -64,8 +64,10 @@ public class Modelo {
 	
 	public void altaCliente(String dni, String nombre, String telefono) throws Exception{
 		SqlClienteDAO clienteDAO = (SqlClienteDAO) factoryDAO.getClienteDAO();
+		
+		TCliente cliente = clienteDAO.getClienteByDNI(dni);
 				
-		if(clienteDAO.getClienteByDNI(dni) != null) throw new Exception("Cliente ya existente.");
+		if(cliente != null && cliente.isActivo()) throw new Exception("Cliente ya existente.");
 		
 		clienteDAO.altaCliente(new TCliente(dni,nombre,telefono));
 		
