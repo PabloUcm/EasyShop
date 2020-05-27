@@ -104,7 +104,7 @@ public class Modelo {
 		SqlClienteDAO clienteDAO = (SqlClienteDAO) factoryDAO.getClienteDAO();
 		TCliente cliente = clienteDAO.getClienteByID(id);
 			
-		if(cliente == null) throw new Exception("Cliente inexistente.");
+		if(cliente == null || !cliente.isActivo()) throw new Exception("Cliente inexistente.");
 			
 		for(ClienteObserver o: clienteObservers) o.obtenerCliente(cliente);
 		
