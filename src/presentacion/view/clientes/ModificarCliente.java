@@ -16,6 +16,7 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -37,6 +38,7 @@ public class ModificarCliente implements ClienteObserver {
 	private JTextField tfnoTF;
 	private JButton modificar;
 	private JButton limpiar;
+	private ImageIcon modIcon;
 	
 	private void initGUI() {
 		idTF = crearTextField();
@@ -44,15 +46,18 @@ public class ModificarCliente implements ClienteObserver {
 		nombreTF = crearTextField();
 		tfnoTF = crearTextField();
 		
+		modIcon= new ImageIcon("icons/modificar.png"); 
+		Image image = modIcon.getImage(); 
+		Image newimg = image.getScaledInstance(45, 45, java.awt.Image.SCALE_SMOOTH); 
+		modIcon = new ImageIcon(newimg);
+		
 		modificar = crearBoton("MODIFICAR CLIENTE", new Color(250,243,58), 
 							   new Color(230,215,73), "modificar");
 		limpiar = crearBoton("LIMPIAR CAMPOS DE TEXTO", new Color(205,205,205), 
 							 new Color(166,166,166), "limpiar");
 		
 		modificar.addActionListener(new ActionListener() {
-	    	public void actionPerformed(ActionEvent e ) {
-	    		
-	    	}
+	    	public void actionPerformed(ActionEvent e ) { modificar(); }
 	    });
 		
 		limpiar.addActionListener(new ActionListener() {
@@ -63,6 +68,7 @@ public class ModificarCliente implements ClienteObserver {
 	    		tfnoTF.setText(" ");
 	    	}
 	    });
+		
 	}
 	
 	public JPanel getDefaultLayout() {
@@ -160,6 +166,42 @@ public class ModificarCliente implements ClienteObserver {
 		});
 
 		return button;
+	}
+	
+	private void modificar() {
+		try {
+    		if (idTF.getText().isBlank() || dniTF.getText().isBlank() || nombreTF.getText().isBlank()) {
+    			throw new Exception("Campo(s) sin rellenar.");
+    		}
+			
+			TCliente cliente = controlador.getCliente(Integer.parseInt(idTF.getText()));
+			
+			String tfno;
+			if (cliente.getTelefono() == null) tfno = "[Vacio]";
+			else tfno = cliente.getTelefono();
+			
+			String tfnoNuevo; 
+			if (tfnoTF.getText().isBlank()) tfnoNuevo = "[Vacio]";
+			else tfnoNuevo = tfnoTF.getText();
+    				    		
+    		String msg = "ID: "+cliente.getId()+"\n\nDNI: "+cliente.getDni()+"\nNUEVO DNI: "+dniTF.getText()+"\n\nNOMBRE: "
+    					  + cliente.getNombre() +"\nNUEVO NOMBRE: " + nombreTF.getText() + "\n\nTELEFONO: "+tfno
+    					  +"\nTELEFONO NUEVO: "+ tfnoNuevo +"\n\n ¿Quieres cambiar los datos de este cliente?";
+            int input = JOptionPane.showConfirmDialog(null, msg,"Confirmar cambios en el cliente", 
+            		    JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, modIcon);
+            
+            if(input == JOptionPane.OK_OPTION) {
+            	if (!tfnoTF.getText().isBlank()) controlador.modificarCliente(Integer.parseInt(idTF.getText()), dniTF.getText(), 
+            																 nombreTF.getText(), tfnoTF.getText());
+    			else controlador.modificarCliente(Integer.parseInt(idTF.getText()), dniTF.getText(), 
+						 						  nombreTF.getText(), null);
+            	JOptionPane.showMessageDialog(null,"Cliente con ID " + idTF.getText() + " modificado con éxito.",
+						  					  "INFO",JOptionPane.INFORMATION_MESSAGE);
+            }
+		} 
+		catch(Exception ex) {
+			JOptionPane.showMessageDialog(null,ex.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
+		}
 	}
 	
 	@Override

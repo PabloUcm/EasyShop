@@ -65,21 +65,44 @@ public class Modelo {
 	public void altaCliente(String dni, String nombre, String telefono) throws Exception{
 		SqlClienteDAO clienteDAO = (SqlClienteDAO) factoryDAO.getClienteDAO();
 				
-		if(clienteDAO.getClienteByDNI(dni) != null) throw new Exception("Cliente ya existente");
-		else clienteDAO.altaCliente(new TCliente(dni,nombre,telefono));
+		if(clienteDAO.getClienteByDNI(dni) != null) throw new Exception("Cliente ya existente.");
+		
+		clienteDAO.altaCliente(new TCliente(dni,nombre,telefono));
 		
 		for(ClienteObserver o: clienteObservers) o.altaCliente();		
 	}
 	
-	public void bajaCliente(String dni) {
-		System.out.println("Cliente dado de baja");
+	public void bajaCliente(int id) throws Exception {
+		SqlClienteDAO clienteDAO = (SqlClienteDAO) factoryDAO.getClienteDAO();
+		TCliente cliente = clienteDAO.getClienteByID(id);
+			
+		if(cliente == null) throw new Exception("Cliente inexistente.");
+		if (!cliente.isActivo()) throw new Exception("El cliente ya esta dado de baja.");
+		
+		clienteDAO.bajaCliente(id);
+			
+		for(ClienteObserver o: clienteObservers) o.bajaCliente();
+	}
+	
+	public void modificarCliente(int id, String dni, String nombre, String telefono) throws Exception {
+		SqlClienteDAO clienteDAO = (SqlClienteDAO) factoryDAO.getClienteDAO();
+		TCliente cliente = clienteDAO.getClienteByID(id);
+		TCliente clienteDNI = clienteDAO.getClienteByDNI(dni);
+			
+		if (cliente == null) throw new Exception("Cliente inexistente.");
+		if (!cliente.isActivo()) throw new Exception("El cliente esta inactivo.");
+		if (clienteDNI != null && id != clienteDNI.getId()) throw new Exception("Ya existe otro cliente con ese DNI.");
+		
+		clienteDAO.modificarCliente(id, new TCliente(dni,nombre,telefono));
+			
+		for(ClienteObserver o: clienteObservers) o.bajaCliente();
 	}
 	
 	public TCliente getCliente(int id) throws Exception {		
 		SqlClienteDAO clienteDAO = (SqlClienteDAO) factoryDAO.getClienteDAO();
 		TCliente cliente = clienteDAO.getClienteByID(id);
 			
-		if(cliente == null) throw new Exception("Cliente inexistente");
+		if(cliente == null) throw new Exception("Cliente inexistente.");
 			
 		for(ClienteObserver o: clienteObservers) o.obtenerCliente(cliente);
 		

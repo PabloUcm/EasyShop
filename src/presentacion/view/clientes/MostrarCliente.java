@@ -49,14 +49,7 @@ public class MostrarCliente implements ClienteObserver {
 		datosTA = crearTextArea();
 		
 		buscar.addActionListener(new ActionListener() {
-	    	public void actionPerformed(ActionEvent e ) {
-	    		try {
-	    			TCliente cliente = controlador.getCliente(Integer.parseInt(idTF.getText()));
-	    			datosTA.setText(busquedaToString(cliente));
-	    		}catch(Exception ex) {
-	    			JOptionPane.showMessageDialog(null,ex.getMessage(), "Error",JOptionPane.ERROR_MESSAGE);
-	    		}
-	    	}
+	    	public void actionPerformed(ActionEvent e ) { mostrar(); }
 	    });
 		
 		limpiar.addActionListener(new ActionListener() {
@@ -195,6 +188,19 @@ public class MostrarCliente implements ClienteObserver {
 		else busqstr.append("    TELEFONO: [Vacío]");
 		
 		return busqstr.toString();
+	}
+	
+	private void mostrar() {
+		try {
+			if (idTF.getText().isBlank()) throw new Exception("Campo sin rellenar.");
+			
+			TCliente cliente = controlador.getCliente(Integer.parseInt(idTF.getText()));
+			
+			datosTA.setText(busquedaToString(cliente));
+		}
+		catch(Exception ex) {
+			JOptionPane.showMessageDialog(null,ex.getMessage(), "Error",JOptionPane.ERROR_MESSAGE);
+		}
 	}
 	
 	@Override

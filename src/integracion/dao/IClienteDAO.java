@@ -10,4 +10,6 @@ public interface IClienteDAO {
 	public TCliente getClienteByID(int id);
 	public List<TCliente> getAllClientes();
 	public void altaCliente(TCliente cliente);
+	public void bajaCliente(int id);
+	public void modificarCliente(int id, TCliente cliente);
 }

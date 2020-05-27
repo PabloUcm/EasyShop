@@ -19,8 +19,12 @@ public class ClienteController {
 		modelo.altaCliente(dni, nombre, telefono);
 	}
 	
-	public void bajaCliente(String dni) {
-		 modelo.bajaCliente(dni);
+	public void bajaCliente(int id) throws Exception {
+		 modelo.bajaCliente(id);
+	}
+	
+	public void modificarCliente(int id, String dni, String nombre, String telefono) throws Exception {
+		modelo.modificarCliente(id, dni, nombre, telefono);
 	}
 	
 	public TCliente getCliente(int id) throws Exception {

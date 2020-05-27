@@ -36,9 +36,9 @@ public class BajaCliente implements ClienteObserver{
 	}
 	
 	private JLabel idJL;
-	private JTextField dniTF;
+	private JTextField idTF;
 	private JButton baja;
-	private ImageIcon icon;
+	private ImageIcon bajaIcon;
 	
 	private void initGUI() {
 	    idJL = new JLabel("ID CLIENTE:");
@@ -46,10 +46,10 @@ public class BajaCliente implements ClienteObserver{
 	    idJL.setPreferredSize(new Dimension(300,50));
 	    idJL.setMaximumSize(idJL.getPreferredSize());
 	   
-	    dniTF = new JTextField();
-	    dniTF.setFont(new Font(dniTF.getFont().toString(), Font.PLAIN, 45));
-	    dniTF.setPreferredSize(new Dimension(300,50));
-	    dniTF.setMaximumSize(dniTF.getPreferredSize());
+	    idTF = new JTextField();
+	    idTF.setFont(new Font(idTF.getFont().toString(), Font.PLAIN, 45));
+	    idTF.setPreferredSize(new Dimension(300,50));
+	    idTF.setMaximumSize(idTF.getPreferredSize());
 	   
 	    baja = new JButton("DAR DE BAJA AL CLIENTE");
 	    baja.setContentAreaFilled(false);
@@ -61,24 +61,15 @@ public class BajaCliente implements ClienteObserver{
 	    baja.setBackground(new Color(255,85,85));
 	    baja.setAlignmentX(JButton.CENTER_ALIGNMENT);
 	   
-	    icon= new ImageIcon("icons/baja.png"); 
-	    Image image = icon.getImage(); 
+	    bajaIcon= new ImageIcon("icons/baja.png"); 
+	    Image image = bajaIcon.getImage(); 
 	    Image newimg = image.getScaledInstance(45, 45, java.awt.Image.SCALE_SMOOTH); 
-	    icon = new ImageIcon(newimg);  
-	    baja.setIcon(icon);
+	    bajaIcon = new ImageIcon(newimg);  
+	    baja.setIcon(bajaIcon);
 	    
 
 	    baja.addActionListener(new ActionListener() {
-	    	public void actionPerformed(ActionEvent e) { 
-	    		//Transfer Cliente = controlador.getCliente(dniTF.getText());
-	    		//pasar datos al string
-	    		String msg = "ID:\nDNI:\nNOMBRE:\nTELEFONO:\n\n ¿Quieres dar de baja a este cliente?";
-	            int input = JOptionPane.showConfirmDialog(null, msg,"Confirmar baja de cliente", 
-	            		    JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, icon);
-	            //Ejecutar baja cliente
-	            if(input == JOptionPane.OK_OPTION) controlador.bajaCliente(dniTF.getText());
-	            
-	    	}
+	    	public void actionPerformed(ActionEvent e) { baja(); }
 	    });
 	    
 	    baja.addMouseListener(new MouseAdapter() {
@@ -113,7 +104,7 @@ public class BajaCliente implements ClienteObserver{
 	    c.gridy = 0;
 	    c.gridwidth = 1;
 	    c.gridheight = 1;
-	    bajaClientePanel.add(dniTF, c);
+	    bajaClientePanel.add(idTF, c);
 	    c.gridx = 0;
 	    c.gridy = 1;
 	    c.gridwidth = 1;
@@ -127,6 +118,29 @@ public class BajaCliente implements ClienteObserver{
 	    bajaClientePanel.add(baja, c);
 	    
 	    return bajaClientePanel;
+	}
+	
+	private void baja() {
+		try {
+    		if (idTF.getText().isBlank()) throw new Exception("Campo sin rellenar.");
+			
+			TCliente cliente = controlador.getCliente(Integer.parseInt(idTF.getText()));
+    				    		
+    		String msg = "ID: "+cliente.getId()+"\nDNI: "+cliente.getDni()+"\nNOMBRE: "+ cliente.getNombre() +
+    				      "\nTELEFONO: "+cliente.getTelefono()+"\n\n ¿Quieres dar de baja a este cliente?";
+            int input = JOptionPane.showConfirmDialog(null, msg,"Confirmar baja de cliente", 
+            		    JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, bajaIcon);
+            
+            if(input == JOptionPane.OK_OPTION) {
+            	controlador.bajaCliente(Integer.parseInt(idTF.getText()));
+            	
+            	JOptionPane.showMessageDialog(null,"Cliente con ID " + idTF.getText() + " dado de baja con éxito.",
+						  					  "INFO",JOptionPane.INFORMATION_MESSAGE);
+            }
+		} 
+		catch(Exception ex) {
+			JOptionPane.showMessageDialog(null,ex.getMessage(), "ERROR",JOptionPane.ERROR_MESSAGE);
+		}
 	}
 
 	@Override

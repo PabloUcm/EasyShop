@@ -51,16 +51,7 @@ public class AltaCliente implements ClienteObserver {
 		
 		
 		confirmar.addActionListener(new ActionListener() {
-	    	public void actionPerformed(ActionEvent e ) {
-	    		try {
-	    			controlador.altaCliente(dniTF.getText(), nombreTF.getText(), tfnoTF.getText());
-	    			JOptionPane.showMessageDialog(null,"Cliente " + nombreTF.getText() + " registrado con éxito",
-	    										  "Error icon",JOptionPane.INFORMATION_MESSAGE);
-	    		}catch(Exception ex) {
-	    			JOptionPane.showMessageDialog(null,ex.getMessage(), "Error",JOptionPane.ERROR_MESSAGE);
-	    		}
-	    		
-	    	}
+	    	public void actionPerformed(ActionEvent e ) { alta(); }
 	    });
 		
 		limpiar.addActionListener(new ActionListener() {
@@ -165,7 +156,17 @@ public class AltaCliente implements ClienteObserver {
 		
 		return button;
 	}
-
+	
+	private void alta() {
+		try {
+			controlador.altaCliente(dniTF.getText(), nombreTF.getText(), tfnoTF.getText());
+			JOptionPane.showMessageDialog(null,"Cliente " + nombreTF.getText() + " registrado con éxito",
+										  "Error icon",JOptionPane.INFORMATION_MESSAGE);
+		}catch(Exception ex) {
+			JOptionPane.showMessageDialog(null,ex.getMessage(), "ERROR",JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	
 	@Override
 	public void mostrarClienteId() {
 		// TODO Auto-generated method stub

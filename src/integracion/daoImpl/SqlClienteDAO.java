@@ -43,7 +43,7 @@ public class SqlClienteDAO implements IClienteDAO {
 		
 
 		try {
-			PreparedStatement statement = connection.prepareStatement("SELECT * FROM Cliente");
+			PreparedStatement statement = connection.prepareStatement("SELECT * FROM Cliente WHERE activo = true");
 			ResultSet results = statement.executeQuery();
 			
 			while(results.next()) {
@@ -86,7 +86,7 @@ public class SqlClienteDAO implements IClienteDAO {
 	public TCliente getClienteByID(int id) {
 		try {
 			Connection connection = dbAdapter.getConnection();
-			PreparedStatement statement = connection.prepareStatement("SELECT * FROM CLIENTE WHERE ID=?");
+			PreparedStatement statement = connection.prepareStatement("SELECT * FROM Cliente WHERE id=?");
 			statement.setInt(1, id);
 			
 			ResultSet results = statement.executeQuery();
@@ -97,6 +97,37 @@ public class SqlClienteDAO implements IClienteDAO {
 			e.printStackTrace();
 		}	
 		return null;
+	}
+
+	@Override
+	public void bajaCliente(int id) {
+		try {
+			Connection connection = dbAdapter.getConnection();
+			PreparedStatement statement = connection.prepareStatement("UPDATE Cliente SET ACTIVO = FALSE WHERE id=?");
+			statement.setInt(1, id);
+			
+			statement.executeUpdate();
+					
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void modificarCliente(int id, TCliente cliente) {
+		try {
+			Connection connection = dbAdapter.getConnection();
+			PreparedStatement statement = connection.prepareStatement("UPDATE Cliente SET dni=?, nombre=?, telefono=?  WHERE id=?");
+			statement.setString(1, cliente.getDni());
+			statement.setString(2, cliente.getNombre());
+			statement.setString(3, cliente.getTelefono());
+			statement.setInt(4, id);
+			
+			statement.executeUpdate();
+					
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

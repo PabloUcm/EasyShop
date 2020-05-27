@@ -20,6 +20,6 @@ public class MarcaController {
 	}
 	
 	public void bajaMarca(String dni) {
-		 modelo.bajaCliente(dni);
+		 //modelo.bajaCliente(dni);
 	}	
 }
