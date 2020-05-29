@@ -122,7 +122,7 @@ public class BajaCliente implements ClienteObserver{
 	
 	private void baja() {
 		try {
-    		if (idTF.getText().isBlank()) throw new Exception("Campo sin rellenar.");
+    		if (idTF.getText().isEmpty()) throw new Exception("Campo sin rellenar.");
 			
 			TCliente cliente = controlador.getCliente(Integer.parseInt(idTF.getText()));
     				    		

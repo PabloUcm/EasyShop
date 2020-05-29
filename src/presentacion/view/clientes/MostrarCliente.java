@@ -192,7 +192,7 @@ public class MostrarCliente implements ClienteObserver {
 	
 	private void mostrar() {
 		try {
-			if (idTF.getText().isBlank()) throw new Exception("Campo sin rellenar.");
+			if (idTF.getText().isEmpty()) throw new Exception("Campo sin rellenar.");
 			
 			TCliente cliente = controlador.getCliente(Integer.parseInt(idTF.getText()));
 			

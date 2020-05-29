@@ -170,7 +170,7 @@ public class ModificarCliente implements ClienteObserver {
 	
 	private void modificar() {
 		try {
-    		if (idTF.getText().isBlank() || dniTF.getText().isBlank() || nombreTF.getText().isBlank()) {
+    		if (idTF.getText().isEmpty() || dniTF.getText().isEmpty() || nombreTF.getText().isEmpty()) {
     			throw new Exception("Campo(s) sin rellenar.");
     		}
 			
@@ -181,7 +181,7 @@ public class ModificarCliente implements ClienteObserver {
 			else tfno = cliente.getTelefono();
 			
 			String tfnoNuevo; 
-			if (tfnoTF.getText().isBlank()) tfnoNuevo = "[Vacio]";
+			if (tfnoTF.getText().isEmpty()) tfnoNuevo = "[Vacio]";
 			else tfnoNuevo = tfnoTF.getText();
     				    		
     		String msg = "ID: "+cliente.getId()+"\n\nDNI: "+cliente.getDni()+"\nNUEVO DNI: "+dniTF.getText()+"\n\nNOMBRE: "
@@ -191,7 +191,7 @@ public class ModificarCliente implements ClienteObserver {
             		    JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, modIcon);
             
             if(input == JOptionPane.OK_OPTION) {
-            	if (!tfnoTF.getText().isBlank()) controlador.modificarCliente(Integer.parseInt(idTF.getText()), dniTF.getText(), 
+            	if (!tfnoTF.getText().isEmpty()) controlador.modificarCliente(Integer.parseInt(idTF.getText()), dniTF.getText(), 
             																 nombreTF.getText(), tfnoTF.getText());
     			else controlador.modificarCliente(Integer.parseInt(idTF.getText()), dniTF.getText(), 
 						 						  nombreTF.getText(), null);
