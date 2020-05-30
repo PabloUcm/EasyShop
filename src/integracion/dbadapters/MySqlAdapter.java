@@ -22,7 +22,9 @@ private static final String DB_PROPERTIES = "metaInf/MySql.properties";
 	@Override
 	public Connection getConnection() {
 		try {
+		
 			String connectionString = createConnectionString();
+			
 			Connection connection = DriverManager.getConnection(connectionString);
 			System.out.println("Connection class ==> " + connection.getClass().getName());
 			return connection;
@@ -40,7 +42,7 @@ private static final String DB_PROPERTIES = "metaInf/MySql.properties";
 		String user = prop.getProperty(DB_USER_PROP);
 		String password = prop.getProperty(DB_PASSWORD_PROP);
 		
-		String connectionString ="jdbc:mysql://" + host +":" + port +"/" + db +"?user=" + user +"&password=" + password+"&useSSL=false";
+		String connectionString ="jdbc:mysql://" + host +":" + port +"/" + db +"?user=" + user +"&password=" + password+"&useSSL=false"+" &serverTimezone=UTC";
 		System.out.println("ConnectionString ==> " + connectionString);
 		return connectionString;
 	}

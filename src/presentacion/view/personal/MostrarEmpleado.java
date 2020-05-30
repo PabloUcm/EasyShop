@@ -1,4 +1,4 @@
-package presentacion.view.clientes;
+package presentacion.view.personal;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -22,14 +22,15 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import integracion.transfers.TCliente;
-import negocio.ClienteObserver;
-import presentacion.controllers.ClienteController;
+import integracion.transfers.TPersonal;
+import negocio.PersonalObserver;
+import presentacion.controllers.PersonalController;
 
-public class MostrarCliente implements ClienteObserver {
-	private ClienteController controlador;
+
+public class MostrarEmpleado implements PersonalObserver{
+	private PersonalController controlador;
 	
-	public MostrarCliente(ClienteController c) {
+	public MostrarEmpleado(PersonalController c) {
 		this.controlador = c;
 		controlador.addObserver(this);
 		initGUI();
@@ -42,7 +43,7 @@ public class MostrarCliente implements ClienteObserver {
 	
 	private void initGUI() {
 		idTF = crearTextField();
-		buscar = crearBoton("BUSCAR CLIENTE", new Color(8,213,249), new Color(6,160,190), 
+		buscar = crearBoton("BUSCAR EMPLEADO", new Color(8,213,249), new Color(6,160,190), 
 							"lupa", 140, 30);
 		limpiar = crearBoton("LIMPIAR BUSQUEDA", new Color(205,205,205), new Color(166,166,166), 
 							 "limpiar", 170, 45);
@@ -61,7 +62,7 @@ public class MostrarCliente implements ClienteObserver {
 	}
 	
 	public JPanel getDefaultLayout() {
-		JPanel mostrarClientePanel = new JPanel(new GridBagLayout());
+		JPanel mostrarPersonalPanel = new JPanel(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		
 		JScrollPane datosSP = new JScrollPane(datosTA);
@@ -69,35 +70,35 @@ public class MostrarCliente implements ClienteObserver {
 		datosSP.setMaximumSize(datosSP.getPreferredSize());
 		
 		JPanel barraBusqueda = new JPanel(new FlowLayout( FlowLayout.CENTER));
-		barraBusqueda.add((crearJLabel(" ID CLIENTE:")));
+		barraBusqueda.add((crearJLabel("ID EMPLEADO:")));
 		barraBusqueda.add(idTF);
 		barraBusqueda.add(Box.createRigidArea(new Dimension(10, 0)));
 		barraBusqueda.add(buscar);
 		
 		c.gridx = 0;
 		c.gridy = 0;
-		mostrarClientePanel.add(barraBusqueda, c);
+		mostrarPersonalPanel.add(barraBusqueda, c);
 	    c.weightx = 0.5;
 		c.gridx = 0;
 	    c.gridy = 1;
 	    c.gridwidth = 1;
 	    c.gridheight = 1;
 	    c.anchor = GridBagConstraints.CENTER;
-	    mostrarClientePanel.add(datosSP, c);
+	    mostrarPersonalPanel.add(datosSP, c);
 	    c.weightx = 0.0;
 		c.gridx = 0;
 	    c.gridy = 2;
 	    c.gridwidth = 1;
 	    c.gridheight = 1;
-	    mostrarClientePanel.add(Box.createRigidArea(new Dimension(0,15)),c);
+	    mostrarPersonalPanel.add(Box.createRigidArea(new Dimension(0,15)),c);
 	    c.weightx = 0.5;
 		c.gridx = 0;
 	    c.gridy = 3;
 	    c.gridwidth = 1;
 	    c.gridheight = 1;
-	    mostrarClientePanel.add(limpiar,c);
+	    mostrarPersonalPanel.add(limpiar,c);
 		
-		return mostrarClientePanel;
+		return mostrarPersonalPanel;
 	}
 	
 	private JLabel crearJLabel(String texto) {
@@ -173,19 +174,32 @@ public class MostrarCliente implements ClienteObserver {
 		return button;
 	}
 	
-	private String busquedaToString(TCliente cliente) {
+	private String busquedaToString(TPersonal empleado) {
 		StringBuilder busqstr = new StringBuilder();
 		for (int i = 0; i < 45; i++) busqstr.append(" ");
 		busqstr.append("=====================\n");
 		for (int i = 0; i < 45; i++) busqstr.append(" ");
-		busqstr.append("      DATOS DEL CLIENTE   \n");
+		busqstr.append("      DATOS DEL EMPLEADO   \n");
 		for (int i = 0; i < 45; i++) busqstr.append(" ");
 		busqstr.append("=====================\n\n");
-		busqstr.append("    ID: "+cliente.getId()+"\n\n");
-		busqstr.append("    DNI: "+cliente.getDni()+"\n\n");
-		busqstr.append("    NOMBRE: "+cliente.getNombre()+"\n\n");
-		if(cliente.getTelefono() != null) busqstr.append("    TELEFONO: "+cliente.getTelefono());
-		else busqstr.append("    TELEFONO: [Vac�o]");
+		busqstr.append("   ID: "+empleado.getId()+"\n\n");
+		busqstr.append("   DNI: "+empleado.getDni()+"\n\n");
+		busqstr.append("   NOMBRE: "+empleado.getNombre()+"\n\n");
+		if(!empleado.getTelefono().equals("0")) busqstr.append("   TELEFONO: "+empleado.getTelefono()+"\n\n");
+		else busqstr.append("  TELEFONO: [Vacio]"+"\n\n");
+		if(!empleado.getSueldo().equals("0.0")){
+			busqstr.append("   SUELDO: "+empleado.getSueldo()+"\n\n");
+			
+		}
+		else  busqstr.append("  SUELDO: [Vacio]"+"\n\n");
+		
+		if(!empleado.getHorario().equals("0")){
+			
+			busqstr.append("  HORARIO: "+empleado.getHorario()+"\n\n");
+			
+		}
+		else  busqstr.append("  HORARIO: [Vacio]"+"\n\n");
+		
 		
 		return busqstr.toString();
 	}
@@ -194,56 +208,54 @@ public class MostrarCliente implements ClienteObserver {
 		try {
 			if (idTF.getText().isEmpty()) throw new Exception("Campo sin rellenar.");
 			
-			TCliente cliente = controlador.getCliente(Integer.parseInt(idTF.getText()));
+			TPersonal empleado = controlador.getEmpleado(Integer.parseInt(idTF.getText()));
 			
-			datosTA.setText(busquedaToString(cliente));
+			datosTA.setText(busquedaToString(empleado));
 		}
 		catch(Exception ex) {
 			JOptionPane.showMessageDialog(null,ex.getMessage(), "Error",JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
+
 	@Override
-	public void altaCliente() {
+	public void altaEmpleado() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void bajaCliente() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void mostrarClienteId() {
+	public void bajaEmpleado() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void modificarCliente() {
+	public void mostrarEmpleadoId() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void listarClientes() {
+	public void modificarEmpleado() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void obtenerCliente(TCliente cliente) {
+	public void listarEmpleados() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void mostrarCliente(List<TCliente> clienteList) {
+	public void obtenerEmpleado(TPersonal empleado) {
 		// TODO Auto-generated method stub
 		
 	}
-	
+
+	@Override
+	public void mostrarEmpleado(List<TPersonal> empleadoList) {
+		// TODO Auto-generated method stub
+		
+	}
 }

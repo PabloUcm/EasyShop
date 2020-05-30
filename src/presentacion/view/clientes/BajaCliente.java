@@ -127,14 +127,14 @@ public class BajaCliente implements ClienteObserver{
 			TCliente cliente = controlador.getCliente(Integer.parseInt(idTF.getText()));
     				    		
     		String msg = "ID: "+cliente.getId()+"\nDNI: "+cliente.getDni()+"\nNOMBRE: "+ cliente.getNombre() +
-    				      "\nTELEFONO: "+cliente.getTelefono()+"\n\n ¿Quieres dar de baja a este cliente?";
+    				      "\nTELEFONO: "+cliente.getTelefono()+"\n\n ï¿½Quieres dar de baja a este cliente?";
             int input = JOptionPane.showConfirmDialog(null, msg,"Confirmar baja de cliente", 
             		    JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, bajaIcon);
             
             if(input == JOptionPane.OK_OPTION) {
             	controlador.bajaCliente(Integer.parseInt(idTF.getText()));
             	
-            	JOptionPane.showMessageDialog(null,"Cliente con ID " + idTF.getText() + " dado de baja con éxito.",
+            	JOptionPane.showMessageDialog(null,"Cliente con ID " + idTF.getText() + " dado de baja con ï¿½xito.",
 						  					  "INFO",JOptionPane.INFORMATION_MESSAGE);
             }
 		} 

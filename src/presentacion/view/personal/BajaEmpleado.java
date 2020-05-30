@@ -8,6 +8,7 @@ import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -18,14 +19,18 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import integracion.transfers.TCliente;
+import integracion.transfers.TPersonal;
+import negocio.PersonalObserver;
 import presentacion.controllers.PersonalController;
 
-public class BajaEmpleado {
+public class BajaEmpleado implements PersonalObserver{
 	
 	private PersonalController controlador;
 	
 	public BajaEmpleado(PersonalController c) {
 		this.controlador = c;
+		controlador.addObserver(this);
 		initGUI();
 	}
 	
@@ -33,6 +38,7 @@ public class BajaEmpleado {
 	private JTextField idTF;
 	private JButton baja;
 	private ImageIcon imageIcon;
+	//private ImageIcon bajaIcon;
 	
 	private void initGUI() {
 	    idJL = new JLabel("ID EMPLEADO:");
@@ -63,9 +69,7 @@ public class BajaEmpleado {
 	   
 	    baja.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) { 
-	    		String msg = "ID:\nDNI:\nNOMBRE:\nSUELDO:\nTELEFONO:\n\n¿Quieres dar de baja a este empleado?";
-	            int input = JOptionPane.showConfirmDialog(null, msg,"Confirmar baja de marca", 
-	            		    JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, imageIcon);
+	    		baja();
 	    	}
 	    });
 	}
@@ -97,5 +101,70 @@ public class BajaEmpleado {
 	    bajaEmpPanel.add(baja, c);
 	    
 	    return bajaEmpPanel;
+	}
+	public void baja(){
+		
+		try {
+    		if (idTF.getText().isEmpty()) throw new Exception("Campo sin rellenar.");
+			
+			TPersonal empleado = controlador.getEmpleado(Integer.parseInt(idTF.getText()));
+    				    		
+    		String msg = "ID: "+empleado.getId()+"\nDNI: "+empleado.getDni()+"\nNOMBRE: "+ empleado.getNombre() +
+    				      "\nTELEFONO: "+empleado.getTelefono()+"\nSUELDO: "+empleado.getSueldo()+"\nHORARIO: "+empleado.getHorario()+"\n\n ï¿½Quieres dar de baja a este cliente?";
+            int input = JOptionPane.showConfirmDialog(null, msg,"Confirmar baja de cliente", 
+            		    JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, imageIcon);
+            
+            if(input == JOptionPane.OK_OPTION) {
+            	controlador.bajaPersonal(Integer.parseInt(idTF.getText()));
+            	
+            	JOptionPane.showMessageDialog(null,"Cliente con ID " + idTF.getText() + " dado de baja con ï¿½xito.",
+						  					  "INFO",JOptionPane.INFORMATION_MESSAGE);
+            }
+		} 
+		catch(Exception ex) {
+			JOptionPane.showMessageDialog(null,ex.getMessage(), "ERROR",JOptionPane.ERROR_MESSAGE);
+		}
+	}
+
+	@Override
+	public void altaEmpleado() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void bajaEmpleado() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mostrarEmpleadoId() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void modificarEmpleado() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void listarEmpleados() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void obtenerEmpleado(TPersonal empleado) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mostrarEmpleado(List<TPersonal> empleadoList) {
+		// TODO Auto-generated method stub
+		
 	}
 }

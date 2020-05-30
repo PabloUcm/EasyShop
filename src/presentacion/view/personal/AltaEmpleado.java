@@ -11,22 +11,27 @@ import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import integracion.transfers.TPersonal;
+import negocio.PersonalObserver;
 import presentacion.controllers.PersonalController;
 
-public class AltaEmpleado {
+public class AltaEmpleado implements PersonalObserver{
 	
 	private PersonalController controlador;
 	
 	public AltaEmpleado(PersonalController c) {
 		this.controlador = c;
+		controlador.addObserver(this);
 		initGUI();
 	}
 	
@@ -34,6 +39,7 @@ public class AltaEmpleado {
 	private JTextField nombreTF;
 	private JTextField sueldoTF;
 	private JTextField tfnoTF;
+	private JTextField horarioTF;
 	private JButton confirmar;
 	private JButton limpiar;
 	
@@ -42,13 +48,14 @@ public class AltaEmpleado {
 		nombreTF = crearTextField();
 		sueldoTF = crearTextField();
 		tfnoTF = crearTextField();
+		horarioTF = crearTextField();
 		
 		confirmar = crearBoton("CONFIRMAR ALTA DE EMPLEADO", Color.GREEN, "confirmar");
 		limpiar = crearBoton("LIMPIAR CAMPOS DE TEXTO", Color.GRAY.brighter(), "limpiar");
 		
 		confirmar.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e ) {
-	    		
+	    		alta();
 	    	}
 	    });
 		
@@ -69,19 +76,19 @@ public class AltaEmpleado {
 		GridBagConstraints c = new GridBagConstraints();
 		c.gridx = 0;
 		c.gridy = 0;
-		campos.add(crearJLabel("                   DNI:"), c);
+		campos.add(crearJLabel("           DNI:"), c);
 		c.gridx = 1;
 		c.gridy = 0;
 		campos.add(dniTF, c);
 		c.gridx = 0;
 		c.gridy = 1;
-		campos.add(crearJLabel("         NOMBRE:"), c);
+		campos.add(crearJLabel("        NOMBRE:"), c);
 		c.gridx = 1;
 		c.gridy = 1;
 		campos.add(nombreTF, c);
 		c.gridx = 0;
 		c.gridy = 2;
-		campos.add(crearJLabel("          SUELDO:"), c);
+		campos.add(crearJLabel("        SUELDO:"), c);
 		c.gridx = 1;
 		c.gridy = 2;
 		campos.add(sueldoTF, c);
@@ -91,6 +98,12 @@ public class AltaEmpleado {
 		c.gridx = 1;
 		c.gridy = 3;
 		campos.add(tfnoTF, c);
+		c.gridx = 0;
+		c.gridy = 4;
+		campos.add(crearJLabel("    HORARIO:"), c);
+		c.gridx = 1;
+		c.gridy = 4;
+		campos.add(horarioTF, c);
 		
 		JPanel botones = new JPanel();
 		botones.setLayout(new FlowLayout( FlowLayout.CENTER ));
@@ -141,5 +154,55 @@ public class AltaEmpleado {
 		button.setIcon(imageIcon);
 
 		return button;
+	}
+	private void alta() {
+		try {
+			controlador.altaPersonal(dniTF.getText(), nombreTF.getText(), sueldoTF.getText(),tfnoTF.getText(),horarioTF.getText());
+			JOptionPane.showMessageDialog(null,"Empleado " + nombreTF.getText() + " registrado con exito",
+										  "Error icon",JOptionPane.INFORMATION_MESSAGE);
+		}catch(Exception ex) {
+			JOptionPane.showMessageDialog(null,ex.getMessage(), "ERROR",JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	@Override
+	public void altaEmpleado() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void bajaEmpleado() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mostrarEmpleadoId() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void modificarEmpleado() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void listarEmpleados() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void obtenerEmpleado(TPersonal empleado) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mostrarEmpleado(List<TPersonal> empleadoList) {
+		// TODO Auto-generated method stub
+		
 	}
 }

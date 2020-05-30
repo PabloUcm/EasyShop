@@ -186,7 +186,7 @@ public class ModificarCliente implements ClienteObserver {
     				    		
     		String msg = "ID: "+cliente.getId()+"\n\nDNI: "+cliente.getDni()+"\nNUEVO DNI: "+dniTF.getText()+"\n\nNOMBRE: "
     					  + cliente.getNombre() +"\nNUEVO NOMBRE: " + nombreTF.getText() + "\n\nTELEFONO: "+tfno
-    					  +"\nTELEFONO NUEVO: "+ tfnoNuevo +"\n\n ¿Quieres cambiar los datos de este cliente?";
+    					  +"\nTELEFONO NUEVO: "+ tfnoNuevo +"\n\n ï¿½Quieres cambiar los datos de este cliente?";
             int input = JOptionPane.showConfirmDialog(null, msg,"Confirmar cambios en el cliente", 
             		    JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, modIcon);
             
@@ -195,7 +195,7 @@ public class ModificarCliente implements ClienteObserver {
             																 nombreTF.getText(), tfnoTF.getText());
     			else controlador.modificarCliente(Integer.parseInt(idTF.getText()), dniTF.getText(), 
 						 						  nombreTF.getText(), null);
-            	JOptionPane.showMessageDialog(null,"Cliente con ID " + idTF.getText() + " modificado con éxito.",
+            	JOptionPane.showMessageDialog(null,"Cliente con ID " + idTF.getText() + " modificado con ï¿½xito.",
 						  					  "INFO",JOptionPane.INFORMATION_MESSAGE);
             }
 		} 

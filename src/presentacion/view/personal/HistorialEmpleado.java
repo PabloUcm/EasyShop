@@ -1,4 +1,4 @@
-package presentacion.view.clientes;
+package presentacion.view.personal;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -16,88 +16,93 @@ import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import integracion.transfers.TCliente;
-import negocio.ClienteObserver;
-import presentacion.controllers.ClienteController;
+import integracion.transfers.TPersonal;
+import negocio.PersonalObserver;
+import presentacion.controllers.PersonalController;
 
-public class MostrarCliente implements ClienteObserver {
-	private ClienteController controlador;
-	
-	public MostrarCliente(ClienteController c) {
-		this.controlador = c;
+public class HistorialEmpleado implements PersonalObserver{
+	private PersonalController controlador;
+	public HistorialEmpleado(PersonalController c){
+		controlador = c;
 		controlador.addObserver(this);
 		initGUI();
+		
 	}
-	
 	private JTextField idTF;
-	private JTextArea datosTA;
+	private JTextArea historialTA;
 	private JButton buscar;
 	private JButton limpiar;
 	
-	private void initGUI() {
+	private void initGUI(){
 		idTF = crearTextField();
-		buscar = crearBoton("BUSCAR CLIENTE", new Color(8,213,249), new Color(6,160,190), 
-							"lupa", 140, 30);
+		buscar = crearBoton("BUSCAR HISTORIAL", new Color(8,213,249), new Color(6,160,190), 
+							"lupa", 150, 30);
 		limpiar = crearBoton("LIMPIAR BUSQUEDA", new Color(205,205,205), new Color(166,166,166), 
 							 "limpiar", 170, 45);
-		datosTA = crearTextArea();
+		historialTA = crearTextArea();
+		JScrollPane historialSP = new JScrollPane(historialTA);
+		historialSP.setPreferredSize(new Dimension(550,600));
+		historialSP.setMaximumSize(historialSP.getPreferredSize());
 		
 		buscar.addActionListener(new ActionListener() {
-	    	public void actionPerformed(ActionEvent e ) { mostrar(); }
+	    	public void actionPerformed(ActionEvent e ) {
+	    		//historialTA.setText(historialToString());
+	    		historialTA.setCaretPosition(0);
+	    	}
 	    });
 		
 		limpiar.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e ) {
 	    		idTF.setText("");
-	    		datosTA.setText("");
+	    		historialTA.setText("");
 	    	}
-	    });	
+	    });
+		
 	}
 	
 	public JPanel getDefaultLayout() {
-		JPanel mostrarClientePanel = new JPanel(new GridBagLayout());
+		JPanel histClientePanel = new JPanel(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		
-		JScrollPane datosSP = new JScrollPane(datosTA);
-		datosSP.setPreferredSize(new Dimension(550,250));
-		datosSP.setMaximumSize(datosSP.getPreferredSize());
+		JScrollPane historialSP = new JScrollPane(historialTA);
+		historialSP.setPreferredSize(new Dimension(550,600));
+		historialSP.setMaximumSize(historialSP.getPreferredSize());
 		
 		JPanel barraBusqueda = new JPanel(new FlowLayout( FlowLayout.CENTER));
-		barraBusqueda.add((crearJLabel(" ID CLIENTE:")));
+		barraBusqueda.add((crearJLabel(" ID EMPLEADO:")));
 		barraBusqueda.add(idTF);
 		barraBusqueda.add(Box.createRigidArea(new Dimension(10, 0)));
 		barraBusqueda.add(buscar);
 		
 		c.gridx = 0;
 		c.gridy = 0;
-		mostrarClientePanel.add(barraBusqueda, c);
+		histClientePanel.add(barraBusqueda, c);
 	    c.weightx = 0.5;
 		c.gridx = 0;
 	    c.gridy = 1;
 	    c.gridwidth = 1;
 	    c.gridheight = 1;
 	    c.anchor = GridBagConstraints.CENTER;
-	    mostrarClientePanel.add(datosSP, c);
+	    histClientePanel.add(historialSP, c);
 	    c.weightx = 0.0;
 		c.gridx = 0;
 	    c.gridy = 2;
 	    c.gridwidth = 1;
 	    c.gridheight = 1;
-	    mostrarClientePanel.add(Box.createRigidArea(new Dimension(0,15)),c);
+	    histClientePanel.add(Box.createRigidArea(new Dimension(0,15)),c);
 	    c.weightx = 0.5;
 		c.gridx = 0;
 	    c.gridy = 3;
 	    c.gridwidth = 1;
 	    c.gridheight = 1;
-	    mostrarClientePanel.add(limpiar,c);
+	    histClientePanel.add(limpiar,c);
 		
-		return mostrarClientePanel;
+		return histClientePanel;
 	}
 	
 	private JLabel crearJLabel(String texto) {
@@ -125,7 +130,7 @@ public class MostrarCliente implements ClienteObserver {
 	private JTextArea crearTextArea() {
 		JTextArea ta = new JTextArea();
 		
-		ta.setFont(new Font(ta.getFont().toString(), Font.PLAIN, 15));
+		ta.setFont(new Font(ta.getFont().toString(), Font.PLAIN, 13));
 		
 		ta.setEditable(false);
 		
@@ -172,78 +177,63 @@ public class MostrarCliente implements ClienteObserver {
 
 		return button;
 	}
-	
-	private String busquedaToString(TCliente cliente) {
-		StringBuilder busqstr = new StringBuilder();
-		for (int i = 0; i < 45; i++) busqstr.append(" ");
-		busqstr.append("=====================\n");
-		for (int i = 0; i < 45; i++) busqstr.append(" ");
-		busqstr.append("      DATOS DEL CLIENTE   \n");
-		for (int i = 0; i < 45; i++) busqstr.append(" ");
-		busqstr.append("=====================\n\n");
-		busqstr.append("    ID: "+cliente.getId()+"\n\n");
-		busqstr.append("    DNI: "+cliente.getDni()+"\n\n");
-		busqstr.append("    NOMBRE: "+cliente.getNombre()+"\n\n");
-		if(cliente.getTelefono() != null) busqstr.append("    TELEFONO: "+cliente.getTelefono());
-		else busqstr.append("    TELEFONO: [Vac�o]");
+	/*
+	private String historialToString() {
+		StringBuilder histstr = new StringBuilder();
 		
-		return busqstr.toString();
+		for (int i = 0; i < 33; i++) histstr.append(" ");
+		histstr.append("====================================\n");
+		for (int i = 0; i < 38; i++) histstr.append(" ");
+		histstr.append("Historial de compras del cliente con ID: "+idTF.getText()+"\n");
+		for (int i = 0; i < 33; i++) histstr.append(" ");
+		histstr.append("====================================\n\n");
+		
+		
+		return histstr.toString();
 	}
-	
-	private void mostrar() {
-		try {
-			if (idTF.getText().isEmpty()) throw new Exception("Campo sin rellenar.");
-			
-			TCliente cliente = controlador.getCliente(Integer.parseInt(idTF.getText()));
-			
-			datosTA.setText(busquedaToString(cliente));
-		}
-		catch(Exception ex) {
-			JOptionPane.showMessageDialog(null,ex.getMessage(), "Error",JOptionPane.ERROR_MESSAGE);
-		}
-	}
+	*/
 	
 	@Override
-	public void altaCliente() {
+	public void altaEmpleado() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void bajaCliente() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void mostrarClienteId() {
+	public void bajaEmpleado() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void modificarCliente() {
+	public void mostrarEmpleadoId() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void listarClientes() {
+	public void modificarEmpleado() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void obtenerCliente(TCliente cliente) {
+	public void listarEmpleados() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void mostrarCliente(List<TCliente> clienteList) {
+	public void obtenerEmpleado(TPersonal empleado) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mostrarEmpleado(List<TPersonal> empleadoList) {
 		// TODO Auto-generated method stub
 		
 	}
 	
+
 }

@@ -6,6 +6,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
@@ -16,10 +17,13 @@ public class Main {
 		startGUIMode();
 	}
 	
+	
 	private static void startGUIMode() throws InvocationTargetException, InterruptedException {
+		
 		SwingUtilities.invokeAndWait(new Runnable() {
 			@Override
 			public void run() {
+				
 				List<Image> logo = new ArrayList<>();
 				Toolkit toolkit = Toolkit.getDefaultToolkit();
 				

@@ -1,8 +1,10 @@
 package integracion.factorias;
 
 import integracion.dao.IClienteDAO;
+import integracion.dao.IPersonalDao;
 import integracion.dao.IProductoDAO;
 import integracion.daoImpl.SqlClienteDAO;
+import integracion.daoImpl.SqlPersonalDao;
 
 public class SqlDAOFactory implements IDAOServiceFactory{
 
@@ -15,6 +17,12 @@ public class SqlDAOFactory implements IDAOServiceFactory{
 	public IProductoDAO getProductoDAO() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public IPersonalDao getEmpleadoDAO() {
+		// TODO Auto-generated method stub
+		return new SqlPersonalDao();
 	}
 
 

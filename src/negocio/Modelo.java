@@ -6,9 +6,11 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import integracion.daoImpl.SqlClienteDAO;
+import integracion.daoImpl.SqlPersonalDao;
 import integracion.factorias.DAOServiceFactory;
 import integracion.factorias.IDAOServiceFactory;
 import integracion.transfers.TCliente;
+import integracion.transfers.TPersonal;
 
 public class Modelo {
     private static Modelo modelo;
@@ -21,6 +23,7 @@ public class Modelo {
 
     private Modelo() {
     	clienteObservers = new ArrayList<>();
+    	personalObservers = new ArrayList<>();
     	factoryDAO = DAOServiceFactory.getDefaultFactory();
     }
 
@@ -37,6 +40,7 @@ public class Modelo {
 	
 	public void addObserver(PersonalObserver o) {
 		// TODO Auto-generated method stub
+		personalObservers.add(o);
 		
 	}
 	
@@ -111,14 +115,70 @@ public class Modelo {
 		return cliente;
 	}
 	
-	public void altaPersonal(String dni, String nombre, int sueldo, String telefono) {
+	public void altaPersonal(String dni, String nombre, String sueldo, String telefono,String horario) throws Exception {
+	
+		SqlPersonalDao EmpleadoDAO = (SqlPersonalDao) factoryDAO.getEmpleadoDAO();
 		
-		//for(PersonalObserver o: personalObservers)
+		TPersonal empleado = EmpleadoDAO.getEmpleadoByDNI(dni);
+				
+		if(empleado != null && empleado.isActivo()) throw new Exception("Empleado ya existente.");
+		
+		EmpleadoDAO.altaEmpleado(new TPersonal(dni,nombre,sueldo,telefono,horario));
+	
+		
+		for(PersonalObserver o: personalObservers) o.altaEmpleado();
 	}
 	
-	public void bajaPersonal(String dni) {
+	public void bajaPersonal(int id) throws Exception {
 		
-		//for(PersonalObserver o: personalObservers) 
+		SqlPersonalDao empleadoDAO = (SqlPersonalDao) factoryDAO.getEmpleadoDAO();
+		
+		TPersonal empleado = empleadoDAO.getEmpleadoByID(id);
+			
+		if(empleado == null) throw new Exception("Empleado inexistente.");
+		
+		if (!empleado.isActivo()) throw new Exception("El empleado ya esta dado de baja.");
+		
+		empleadoDAO.bajaEmpleado(id);
+	
+		
+		for(PersonalObserver o: personalObservers) o.bajaEmpleado();
+	}
+	
+	public void modificarPersonal(int id, String dni, String nombre, String sueldo,String telefono,String horario) throws Exception{
+		
+		SqlPersonalDao empleadoDAO = (SqlPersonalDao) factoryDAO.getEmpleadoDAO();
+		TPersonal empleadoId = empleadoDAO.getEmpleadoByID(id);
+		TPersonal empleadoDNI = empleadoDAO.getEmpleadoByDNI(dni);
+			
+		if (empleadoId == null) throw new Exception("Empleado inexistente.");
+		if (!empleadoId.isActivo()) throw new Exception("El empleado esta inactivo.");
+		if (empleadoDNI != null && id != empleadoDNI.getId()) throw new Exception("Ya existe otro empleado con ese DNI.");
+		
+		empleadoDAO.modificarEmpleado(id, new TPersonal(dni,nombre,telefono,sueldo,horario));
+			
+		for(PersonalObserver o: personalObservers) o.bajaEmpleado();
+		
+	}
+	public void listarEmpleados(){
+		SqlPersonalDao empleadoDAO = (SqlPersonalDao) factoryDAO.getEmpleadoDAO();
+		List<TPersonal> empleadoList = empleadoDAO.getAllEmpleados();
+		
+		for(PersonalObserver o: personalObservers) o.mostrarEmpleado(empleadoList);
+		
+		
+	}
+	public TPersonal getEmpleado(int id) throws Exception {		
+		
+		SqlPersonalDao empleadoDAO = (SqlPersonalDao) factoryDAO.getEmpleadoDAO();
+		
+		TPersonal empleado = empleadoDAO.getEmpleadoByID(id);
+			
+		if(empleado == null || !empleado.isActivo()) throw new Exception("Empleado inexistente.");
+			
+		for(PersonalObserver o: personalObservers) o.obtenerEmpleado(empleado);
+		
+		return empleado;
 	}
 	
 	public void altaProducto(String dni, String nombre, String telefono) {
