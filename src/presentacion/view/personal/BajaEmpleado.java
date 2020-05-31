@@ -110,14 +110,14 @@ public class BajaEmpleado implements PersonalObserver{
 			TPersonal empleado = controlador.getEmpleado(Integer.parseInt(idTF.getText()));
     				    		
     		String msg = "ID: "+empleado.getId()+"\nDNI: "+empleado.getDni()+"\nNOMBRE: "+ empleado.getNombre() +
-    				      "\nTELEFONO: "+empleado.getTelefono()+"\nSUELDO: "+empleado.getSueldo()+"\nHORARIO: "+empleado.getHorario()+"\n\n �Quieres dar de baja a este cliente?";
-            int input = JOptionPane.showConfirmDialog(null, msg,"Confirmar baja de cliente", 
+    				      "\nTELEFONO: "+empleado.getTelefono()+"\nSUELDO: "+empleado.getSueldo()+"\nHORARIO: "+empleado.getHorario()+"\n\n¿Quieres dar de baja a este empleado?";
+            int input = JOptionPane.showConfirmDialog(null, msg,"Confirmar baja de empleado", 
             		    JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, imageIcon);
             
             if(input == JOptionPane.OK_OPTION) {
             	controlador.bajaPersonal(Integer.parseInt(idTF.getText()));
             	
-            	JOptionPane.showMessageDialog(null,"Cliente con ID " + idTF.getText() + " dado de baja con �xito.",
+            	JOptionPane.showMessageDialog(null,"Empleado con ID " + idTF.getText() + " dado de baja con exito.",
 						  					  "INFO",JOptionPane.INFORMATION_MESSAGE);
             }
 		} 

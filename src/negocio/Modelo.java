@@ -6,7 +6,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import integracion.daoImpl.SqlClienteDAO;
-import integracion.daoImpl.SqlPersonalDao;
+import integracion.daoImpl.SqlPersonalDAO;
 import integracion.factorias.DAOServiceFactory;
 import integracion.factorias.IDAOServiceFactory;
 import integracion.transfers.TCliente;
@@ -117,7 +117,7 @@ public class Modelo {
 	
 	public void altaPersonal(String dni, String nombre, String sueldo, String telefono,String horario) throws Exception {
 	
-		SqlPersonalDao EmpleadoDAO = (SqlPersonalDao) factoryDAO.getEmpleadoDAO();
+		SqlPersonalDAO EmpleadoDAO = (SqlPersonalDAO) factoryDAO.getEmpleadoDAO();
 		
 		TPersonal empleado = EmpleadoDAO.getEmpleadoByDNI(dni);
 				
@@ -131,7 +131,7 @@ public class Modelo {
 	
 	public void bajaPersonal(int id) throws Exception {
 		
-		SqlPersonalDao empleadoDAO = (SqlPersonalDao) factoryDAO.getEmpleadoDAO();
+		SqlPersonalDAO empleadoDAO = (SqlPersonalDAO) factoryDAO.getEmpleadoDAO();
 		
 		TPersonal empleado = empleadoDAO.getEmpleadoByID(id);
 			
@@ -147,7 +147,7 @@ public class Modelo {
 	
 	public void modificarPersonal(int id, String dni, String nombre, String sueldo,String telefono,String horario) throws Exception{
 		
-		SqlPersonalDao empleadoDAO = (SqlPersonalDao) factoryDAO.getEmpleadoDAO();
+		SqlPersonalDAO empleadoDAO = (SqlPersonalDAO) factoryDAO.getEmpleadoDAO();
 		TPersonal empleadoId = empleadoDAO.getEmpleadoByID(id);
 		TPersonal empleadoDNI = empleadoDAO.getEmpleadoByDNI(dni);
 			
@@ -161,7 +161,7 @@ public class Modelo {
 		
 	}
 	public void listarEmpleados(){
-		SqlPersonalDao empleadoDAO = (SqlPersonalDao) factoryDAO.getEmpleadoDAO();
+		SqlPersonalDAO empleadoDAO = (SqlPersonalDAO) factoryDAO.getEmpleadoDAO();
 		List<TPersonal> empleadoList = empleadoDAO.getAllEmpleados();
 		
 		for(PersonalObserver o: personalObservers) o.mostrarEmpleado(empleadoList);
@@ -170,7 +170,7 @@ public class Modelo {
 	}
 	public TPersonal getEmpleado(int id) throws Exception {		
 		
-		SqlPersonalDao empleadoDAO = (SqlPersonalDao) factoryDAO.getEmpleadoDAO();
+		SqlPersonalDAO empleadoDAO = (SqlPersonalDAO) factoryDAO.getEmpleadoDAO();
 		
 		TPersonal empleado = empleadoDAO.getEmpleadoByID(id);
 			

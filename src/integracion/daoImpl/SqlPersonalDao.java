@@ -12,11 +12,11 @@ import integracion.dbadapters.IDBAdapter;
 import integracion.factorias.DBFactory;
 import integracion.transfers.TPersonal;
 
-public class SqlPersonalDao implements IPersonalDao{
+public class SqlPersonalDAO implements IPersonalDao{
 	
 	private IDBAdapter dbAdapter;
 	
-	public SqlPersonalDao(){
+	public SqlPersonalDAO(){
 		
 	dbAdapter = DBFactory.getDefaultAdapter();
 

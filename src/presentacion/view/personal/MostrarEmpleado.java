@@ -179,26 +179,26 @@ public class MostrarEmpleado implements PersonalObserver{
 		for (int i = 0; i < 45; i++) busqstr.append(" ");
 		busqstr.append("=====================\n");
 		for (int i = 0; i < 45; i++) busqstr.append(" ");
-		busqstr.append("      DATOS DEL EMPLEADO   \n");
+		busqstr.append("       DATOS DEL EMPLEADO   \n");
 		for (int i = 0; i < 45; i++) busqstr.append(" ");
 		busqstr.append("=====================\n\n");
-		busqstr.append("   ID: "+empleado.getId()+"\n\n");
-		busqstr.append("   DNI: "+empleado.getDni()+"\n\n");
-		busqstr.append("   NOMBRE: "+empleado.getNombre()+"\n\n");
+		busqstr.append("    ID: "+empleado.getId()+"\n\n");
+		busqstr.append("    DNI: "+empleado.getDni()+"\n\n");
+		busqstr.append("    NOMBRE: "+empleado.getNombre()+"\n\n");
 		if(!empleado.getTelefono().equals("0")) busqstr.append("   TELEFONO: "+empleado.getTelefono()+"\n\n");
 		else busqstr.append("  TELEFONO: [Vacio]"+"\n\n");
 		if(!empleado.getSueldo().equals("0.0")){
-			busqstr.append("   SUELDO: "+empleado.getSueldo()+"\n\n");
+			busqstr.append("    SUELDO: "+empleado.getSueldo()+"\n\n");
 			
 		}
-		else  busqstr.append("  SUELDO: [Vacio]"+"\n\n");
+		else  busqstr.append("   SUELDO: [Vacio]"+"\n\n");
 		
 		if(!empleado.getHorario().equals("0")){
 			
-			busqstr.append("  HORARIO: "+empleado.getHorario()+"\n\n");
+			busqstr.append("   HORARIO: "+empleado.getHorario()+"\n\n");
 			
 		}
-		else  busqstr.append("  HORARIO: [Vacio]"+"\n\n");
+		else  busqstr.append("   HORARIO: [Vacio]"+"\n\n");
 		
 		
 		return busqstr.toString();

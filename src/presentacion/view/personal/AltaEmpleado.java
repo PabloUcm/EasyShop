@@ -100,7 +100,7 @@ public class AltaEmpleado implements PersonalObserver{
 		campos.add(tfnoTF, c);
 		c.gridx = 0;
 		c.gridy = 4;
-		campos.add(crearJLabel("    HORARIO:"), c);
+		campos.add(crearJLabel("      HORARIO:"), c);
 		c.gridx = 1;
 		c.gridy = 4;
 		campos.add(horarioTF, c);
@@ -157,9 +157,9 @@ public class AltaEmpleado implements PersonalObserver{
 	}
 	private void alta() {
 		try {
-			controlador.altaPersonal(dniTF.getText(), nombreTF.getText(), sueldoTF.getText(),tfnoTF.getText(),horarioTF.getText());
+			controlador.altaPersonal(dniTF.getText(), nombreTF.getText(),tfnoTF.getText(),sueldoTF.getText(),horarioTF.getText());
 			JOptionPane.showMessageDialog(null,"Empleado " + nombreTF.getText() + " registrado con exito",
-										  "Error icon",JOptionPane.INFORMATION_MESSAGE);
+										  "Info icon",JOptionPane.INFORMATION_MESSAGE);
 		}catch(Exception ex) {
 			JOptionPane.showMessageDialog(null,ex.getMessage(), "ERROR",JOptionPane.ERROR_MESSAGE);
 		}

@@ -4,7 +4,7 @@ import integracion.dao.IClienteDAO;
 import integracion.dao.IPersonalDao;
 import integracion.dao.IProductoDAO;
 import integracion.daoImpl.SqlClienteDAO;
-import integracion.daoImpl.SqlPersonalDao;
+import integracion.daoImpl.SqlPersonalDAO;
 
 public class SqlDAOFactory implements IDAOServiceFactory{
 
@@ -22,7 +22,7 @@ public class SqlDAOFactory implements IDAOServiceFactory{
 	@Override
 	public IPersonalDao getEmpleadoDAO() {
 		// TODO Auto-generated method stub
-		return new SqlPersonalDao();
+		return new SqlPersonalDAO();
 	}
 
 

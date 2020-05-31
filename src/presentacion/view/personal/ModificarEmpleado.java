@@ -110,7 +110,7 @@ public class ModificarEmpleado implements PersonalObserver{
 		campos.add(tfnoTF, c);
 		c.gridx = 0;
 		c.gridy = 5;
-		campos.add(crearJLabel("     HORARIO:"),c);
+		campos.add(crearJLabel("      HORARIO:"),c);
 		c.gridx=1;
 		c.gridy=5;
 		campos.add(horarioTF,c);
@@ -201,8 +201,8 @@ public class ModificarEmpleado implements PersonalObserver{
     					  + empleado.getNombre() +"\nNUEVO NOMBRE: " + nombreTF.getText() + "\n\nTELEFONO: "+tfno
     					  +"\nTELEFONO NUEVO: "+ tfnoNuevo +"\n\nSUELDO: "+sueldo
     					  +"\nSUELDO NUEVO: "+ sueldoNuevo +"\n\nHORARIO: "+horario
-    					  +"\nHORARIO NUEVO: "+ horarioNuevo +"\n\n �Quieres cambiar los datos de este cliente?";
-            int input = JOptionPane.showConfirmDialog(null, msg,"Confirmar cambios en el cliente", 
+    					  +"\nHORARIO NUEVO: "+ horarioNuevo +"\n\n ¿Quieres cambiar los datos de este empleado?";
+            int input = JOptionPane.showConfirmDialog(null, msg,"Confirmar cambios en el empleado", 
             		    JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, modIcon);
             
             if(input == JOptionPane.OK_OPTION) {
@@ -248,7 +248,7 @@ public class ModificarEmpleado implements PersonalObserver{
     			
 						 						  nombreTF.getText(),numCadena,numCadena,numCadena);
     			}
-            	JOptionPane.showMessageDialog(null,"Cliente con ID " + idTF.getText() + " modificado con �xito.",
+            	JOptionPane.showMessageDialog(null,"Empleado con ID " + idTF.getText() + " modificado con exito.",
 						  					  "INFO",JOptionPane.INFORMATION_MESSAGE);
             	
             }
