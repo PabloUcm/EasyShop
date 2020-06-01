@@ -17,8 +17,8 @@ public class MarcaModulo {
 	
 	private AltaMarca altaMarca;
 	private BajaMarca bajaMarca;
-	//private ModificarMarca modMarca;
-	//private MostrarMarca mostrarMarca;
+	private ModificarMarca modMarca;
+	private MostrarMarca mostrarMarca;
 	//private ListarMarca listarMarca;
 	
 	public MarcaModulo() {
@@ -26,8 +26,8 @@ public class MarcaModulo {
 		
 		altaMarca = new AltaMarca(controlador);
 		bajaMarca = new BajaMarca(controlador);
-		//modMarca = new ModificarMarca(controlador);
-		//mostrarMarca = new MostrarMarca(controlador);
+		modMarca = new ModificarMarca(controlador);
+		mostrarMarca = new MostrarMarca(controlador);
 		//listarMarca = new ListarMarca(controlador);
 		
 		initGUI();
@@ -45,8 +45,8 @@ public class MarcaModulo {
 				   "altamarca", "AltaMarca");
 		addFuncion(bajaMarca.getDefaultLayout(), new JButton("   Baja marca"), 
 				   "bajamarca", "BajaMarca");
-		//addFuncion(modMarca.getDefaultLayout(), new JButton("Modificar marca"), "modmarca", "ModificarMarca");
-		//addFuncion(mostrarMarca.getDefaultLayout(), new JButton("  Mostrar marca"), "mostrarmarca", "MostrarMarca");
+		addFuncion(modMarca.getDefaultLayout(), new JButton("Modificar marca"), "modmarca", "ModificarMarca");
+		addFuncion(mostrarMarca.getDefaultLayout(), new JButton("  Mostrar marca"), "mostrarmarca", "MostrarMarca");
 		//addFuncion(listarMarca.getDefaultLayout(), new JButton("   Listar marca"), "listarmarca", "ListarMarcas");
 	}
 	

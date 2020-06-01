@@ -211,6 +211,18 @@ public class Modelo {
 	}
 	
 	public void modificarMarca(int id, String cif, String nombre, String pais) throws Exception {
+		SqlMarcaDAO marcaDAO = (SqlMarcaDAO) factoryDAO.getMarcaDAO();
+		
+		TMarca marca = marcaDAO.getMarcaByID(id);
+		TMarca marcaCIF = marcaDAO.getMarcaByCIF(cif);
+		
+		if(marca == null) throw new Exception("Marca inexistente.");
+		if(!marca.isActivo()) throw new Exception("La marca esta inactiva.");
+		if(marcaCIF != null && id != marcaCIF.getId()) throw new Exception("Ya existe otra marca con ese CIF.");
+		
+		marcaDAO.modificarMarca(id, new TMarca(cif, nombre, pais));
+		
+		for(MarcaObserver o : marcaObservers) o.bajaMarca();
 		
 	}
 	
