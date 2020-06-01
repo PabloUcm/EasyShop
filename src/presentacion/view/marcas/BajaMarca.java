@@ -8,6 +8,9 @@ import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -18,21 +21,25 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import integracion.transfers.TCliente;
+import integracion.transfers.TMarca;
+import negocio.MarcaObserver;
 import presentacion.controllers.MarcaController;
 
-public class BajaMarca {
+public class BajaMarca implements MarcaObserver {
 	
 	private MarcaController controlador;
 	
 	public BajaMarca(MarcaController c) {
 		this.controlador = c;
+		controlador.addObserver(this);
 		initGUI();
 	}
 	
 	private JLabel idJL;
 	private JTextField idTF;
 	private JButton baja;
-	private ImageIcon imageIcon;
+	private ImageIcon bajaIcon;
 	
 	private void initGUI() {
 	   
@@ -51,24 +58,42 @@ public class BajaMarca {
 	    baja.setFocusPainted(false);
 	    baja.setBorder(BorderFactory.createRaisedBevelBorder());
 	    baja.setOpaque(true);
-	    baja.setPreferredSize(new Dimension(230,80));
+	    baja.setPreferredSize(new Dimension(230,65));
 	    baja.setMaximumSize(baja.getPreferredSize());
-	    baja.setBackground(Color.RED);
+	    baja.setBackground(new Color(255,85,85));
 	    baja.setAlignmentX(JButton.CENTER_ALIGNMENT);
 	   
-	    imageIcon = new ImageIcon("icons/baja.png"); 
-	    Image image = imageIcon.getImage(); 
-	    Image newimg = image.getScaledInstance(65, 65, java.awt.Image.SCALE_SMOOTH); 
-	    imageIcon = new ImageIcon(newimg);  
-	    baja.setIcon(imageIcon);
+	    bajaIcon = new ImageIcon("icons/baja.png"); 
+	    Image image = bajaIcon.getImage(); 
+	    Image newimg = image.getScaledInstance(45, 45, java.awt.Image.SCALE_SMOOTH); 
+	    bajaIcon = new ImageIcon(newimg);  
+	    baja.setIcon(bajaIcon);
 	   
 	    baja.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) { 
-	    		String msg = "ID:\nCIF:\nNOMBRE:\nPAIS:\n\n ¿Quieres dar de baja esta marca?";
-	            int input = JOptionPane.showConfirmDialog(null, msg,"Confirmar baja de marca", 
-	            		    JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, imageIcon);
+	    		baja();
 	    	}
 	    });
+	    
+	    baja.addMouseListener(new MouseAdapter() {
+	    	public void mouseEntered(MouseEvent evt) {
+		    	baja.setBackground(new Color(201,54,54));
+		    }
+
+		    public void mouseExited(MouseEvent evt) {
+		    	baja.setBackground(new Color(255,85,85));
+		    }
+		    
+		    public void mousePressed(MouseEvent evt) {
+		    	baja.setBorder(BorderFactory.createBevelBorder(1));
+		    }
+		    
+		    public void mouseReleased(MouseEvent evt) {
+		    	baja.setBorder(BorderFactory.createRaisedBevelBorder());
+		    }
+	    	
+	    });
+	    
 	}
 	
 	public JPanel getDefaultLayout() {
@@ -98,5 +123,71 @@ public class BajaMarca {
 	    bajaMarca.add(baja, c);
 	    
 	    return bajaMarca;
+	}
+	
+	private void baja() {
+		try {
+    		if (idTF.getText().isEmpty()) throw new Exception("Campo sin rellenar.");
+			
+			TMarca marca = controlador.getMarca(Integer.parseInt(idTF.getText()));
+    				    		
+    		String msg = "ID: "+marca.getId()+"\nCIF: "+marca.getCIF()+"\nNOMBRE: "+ marca.getNombre() +
+    				      "\nPAIS: "+marca.getPais()+"\n\n ¿Quieres dar de baja esta marca?";
+            int input = JOptionPane.showConfirmDialog(null, msg,"Confirmar baja de marca", 
+            		    JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, bajaIcon);
+            
+            if(input == JOptionPane.OK_OPTION) {
+            	controlador.bajaMarca(Integer.parseInt(idTF.getText()));
+            	
+            	JOptionPane.showMessageDialog(null,"Marca con ID " + idTF.getText() + " dado de baja con exito.",
+						  					  "INFO",JOptionPane.INFORMATION_MESSAGE);
+            }
+		} 
+		catch(Exception ex) {
+			JOptionPane.showMessageDialog(null,ex.getMessage(), "ERROR",JOptionPane.ERROR_MESSAGE);
+		}
+		
+	}
+	
+	@Override
+	public void altaMarca() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void bajaMarca() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mostrarMarcaId() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void modificarMarca() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void listarMarcas() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void obtenerMarca(TMarca marca) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mostrarMarca(List<TMarca> marcaList) {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -185,11 +185,29 @@ public class Modelo {
 	}
 	
 	public void altaMarca(String cif, String nombre, String pais) throws Exception {
+		SqlMarcaDAO marcaDAO = (SqlMarcaDAO) factoryDAO.getMarcaDAO();
 		
+		TMarca marca = marcaDAO.getMarcaByCIF(cif);
+		
+		if(marca != null && marca.isActivo()) throw new Exception("Marca ya existente.");
+		
+		marcaDAO.altaMarca(new TMarca(cif, nombre, pais));
+		
+		for(MarcaObserver o : marcaObservers) o.altaMarca();
 	}
 	
 	public void bajaMarca(int id) throws Exception {
+		SqlMarcaDAO marcaDAO = (SqlMarcaDAO) factoryDAO.getMarcaDAO();
 		
+		TMarca marca = marcaDAO.getMarcaByID(id);
+		
+		if(marca == null) throw new Exception("Marca inexistente.");
+		
+		if(!marca.isActivo()) throw new Exception("La marca ya esta dada de baja.");
+		
+		marcaDAO.bajaMarca(id);
+		
+		for(MarcaObserver o : marcaObservers) o.bajaMarca();
 	}
 	
 	public void modificarMarca(int id, String cif, String nombre, String pais) throws Exception {

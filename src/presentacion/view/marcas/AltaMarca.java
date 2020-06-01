@@ -13,22 +13,27 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import integracion.transfers.TMarca;
+import negocio.MarcaObserver;
 import presentacion.controllers.MarcaController;
 
-public class AltaMarca {
+public class AltaMarca implements MarcaObserver {
 	
 	private MarcaController controlador;
 	
 	public AltaMarca(MarcaController c) {
 		this.controlador = c;
+		controlador.addObserver(this);
 		initGUI();
 	}
 	
@@ -48,7 +53,7 @@ public class AltaMarca {
 		
 		confirmar.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e ) {
-	    		
+	    		alta();
 	    	}
 	    });
 		
@@ -135,5 +140,60 @@ public class AltaMarca {
 		button.setIcon(imageIcon);
 
 		return button;
+	}
+	
+	private void alta() {
+		try {
+			controlador.altaMarca(cifTF.getText(), nombreTF.getText(), paisTF.getText());
+			JOptionPane.showMessageDialog(null, "Marca " + nombreTF.getText() + " registrada con exito",
+										  "Error icon", JOptionPane.INFORMATION_MESSAGE);
+			
+		}catch(Exception ex) {
+			JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+		}
+		
+	}
+	
+	@Override
+	public void altaMarca() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void bajaMarca() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mostrarMarcaId() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void modificarMarca() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void listarMarcas() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void obtenerMarca(TMarca marca) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mostrarMarca(List<TMarca> marcaList) {
+		for(TMarca m: marcaList) {
+			System.out.println("Id:" + m.getId() + "CIF:" + m.getCIF() + "Nombre:" + m.getNombre());
+		}
 	}
 }
