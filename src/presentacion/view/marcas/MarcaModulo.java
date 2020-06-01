@@ -19,7 +19,7 @@ public class MarcaModulo {
 	private BajaMarca bajaMarca;
 	private ModificarMarca modMarca;
 	private MostrarMarca mostrarMarca;
-	//private ListarMarca listarMarca;
+	private ListarMarcas listarMarca;
 	
 	public MarcaModulo() {
 		controlador = new MarcaController(Modelo.getModelo());
@@ -28,7 +28,7 @@ public class MarcaModulo {
 		bajaMarca = new BajaMarca(controlador);
 		modMarca = new ModificarMarca(controlador);
 		mostrarMarca = new MostrarMarca(controlador);
-		//listarMarca = new ListarMarca(controlador);
+		listarMarca = new ListarMarcas(controlador);
 		
 		initGUI();
 	}
@@ -47,7 +47,7 @@ public class MarcaModulo {
 				   "bajamarca", "BajaMarca");
 		addFuncion(modMarca.getDefaultLayout(), new JButton("Modificar marca"), "modmarca", "ModificarMarca");
 		addFuncion(mostrarMarca.getDefaultLayout(), new JButton("  Mostrar marca"), "mostrarmarca", "MostrarMarca");
-		//addFuncion(listarMarca.getDefaultLayout(), new JButton("   Listar marca"), "listarmarca", "ListarMarcas");
+		addFuncion(listarMarca.getDefaultLayout(), new JButton("   Listar marca"), "listarmarca", "ListarMarcas");
 	}
 	
 	public JPanel getDefaultLayout() {

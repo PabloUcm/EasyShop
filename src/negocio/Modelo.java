@@ -227,7 +227,10 @@ public class Modelo {
 	}
 	
 	public void listarMarcas() {
+		SqlMarcaDAO marcaDAO = (SqlMarcaDAO) factoryDAO.getMarcaDAO();
+		List<TMarca> marcaList = marcaDAO.getAllMarcas();
 		
+		for(MarcaObserver o: marcaObservers) o.mostrarMarca(marcaList);
 	}
 	
 	public TMarca getMarca(int id) throws Exception{
