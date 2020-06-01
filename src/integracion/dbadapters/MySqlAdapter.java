@@ -42,7 +42,7 @@ private static final String DB_PROPERTIES = "metaInf/MySql.properties";
 		String user = prop.getProperty(DB_USER_PROP);
 		String password = prop.getProperty(DB_PASSWORD_PROP);
 		
-		String connectionString ="jdbc:mysql://" + host +":" + port +"/" + db +"?user=" + user +"&password=" + password+"&useSSL=false"+" &serverTimezone=UTC";
+		String connectionString ="jdbc:mysql://" + host +":" + port +"/" + db +"?user=" + user +"&password=" + password+"&useSSL=false"+"&serverTimezone=UTC";
 		System.out.println("ConnectionString ==> " + connectionString);
 		return connectionString;
 	}

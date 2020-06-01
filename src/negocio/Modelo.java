@@ -6,10 +6,12 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import integracion.daoImpl.SqlClienteDAO;
+import integracion.daoImpl.SqlMarcaDAO;
 import integracion.daoImpl.SqlPersonalDAO;
 import integracion.factorias.DAOServiceFactory;
 import integracion.factorias.IDAOServiceFactory;
 import integracion.transfers.TCliente;
+import integracion.transfers.TMarca;
 import integracion.transfers.TPersonal;
 
 public class Modelo {
@@ -24,6 +26,7 @@ public class Modelo {
     private Modelo() {
     	clienteObservers = new ArrayList<>();
     	personalObservers = new ArrayList<>();
+    	marcaObservers = new ArrayList<>();
     	factoryDAO = DAOServiceFactory.getDefaultFactory();
     }
 
@@ -55,7 +58,7 @@ public class Modelo {
 	}
 	
 	public void addObserver(MarcaObserver o) {
-		// TODO Auto-generated method stub
+		marcaObservers.add(o);
 		
 	}
 	
@@ -179,6 +182,34 @@ public class Modelo {
 		for(PersonalObserver o: personalObservers) o.obtenerEmpleado(empleado);
 		
 		return empleado;
+	}
+	
+	public void altaMarca(String cif, String nombre, String pais) throws Exception {
+		
+	}
+	
+	public void bajaMarca(int id) throws Exception {
+		
+	}
+	
+	public void modificarMarca(int id, String cif, String nombre, String pais) throws Exception {
+		
+	}
+	
+	public void listarMarcas() {
+		
+	}
+	
+	public TMarca getMarca(int id) throws Exception{
+		SqlMarcaDAO marcaDAO = (SqlMarcaDAO) factoryDAO.getMarcaDAO();
+		
+		TMarca marca = marcaDAO.getMarcaByID(id);
+		
+		if(marca == null || !marca.isActivo()) throw new Exception("Marca inexistente.");
+		
+		for(MarcaObserver o: marcaObservers) o.obtenerMarca(marca);
+		
+		return marca;
 	}
 	
 	public void altaProducto(String dni, String nombre, String telefono) {

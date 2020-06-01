@@ -1,6 +1,6 @@
 package presentacion.controllers;
 
-import negocio.ClienteObserver;
+import integracion.transfers.TMarca;
 import negocio.MarcaObserver;
 import negocio.Modelo;
 
@@ -15,11 +15,23 @@ public class MarcaController {
 		this.modelo = m;
 	}
 	
-	public void altaMarca(String dni, String nombre, String telefono) throws Exception {
-		modelo.altaCliente(dni, nombre, telefono);
+	public void altaMarca(String cif, String nombre, String pais) throws Exception {
+		modelo.altaMarca(cif, nombre, pais);
 	}
 	
-	public void bajaMarca(String dni) {
-		 //modelo.bajaCliente(dni);
-	}	
+	public void bajaMarca(int id) throws Exception {
+		 modelo.bajaMarca(id);
+	}
+	
+	public void modificarMarca(int id, String cif, String nombre, String pais) throws Exception{
+		modelo.modificarMarca(id, cif, nombre, pais);
+	}
+	
+	public TMarca getMarca(int id) throws Exception{
+		return modelo.getMarca(id);
+	}
+	
+	public void listarMarcas() {
+		modelo.listarMarcas();
+	}
 }
