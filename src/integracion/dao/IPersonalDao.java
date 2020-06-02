@@ -10,7 +10,7 @@ public interface IPersonalDao{
 	public TPersonal getEmpleadoByDNI(String dni);
 	public TPersonal getEmpleadoByID(int id);
 	public List<TPersonal> getAllEmpleados();
-	public void altaEmpleado(TPersonal empleado);
+	public int altaEmpleado(TPersonal empleado);
 	public void bajaEmpleado(int id);
 	public void modificarEmpleado(int id, TPersonal empleado);
 }

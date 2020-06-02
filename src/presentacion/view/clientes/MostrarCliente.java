@@ -26,12 +26,11 @@ import integracion.transfers.TCliente;
 import negocio.ClienteObserver;
 import presentacion.controllers.ClienteController;
 
-public class MostrarCliente implements ClienteObserver {
+public class MostrarCliente{
 	private ClienteController controlador;
 	
 	public MostrarCliente(ClienteController c) {
 		this.controlador = c;
-		controlador.addObserver(this);
 		initGUI();
 	}
 	
@@ -201,49 +200,6 @@ public class MostrarCliente implements ClienteObserver {
 		catch(Exception ex) {
 			JOptionPane.showMessageDialog(null,ex.getMessage(), "Error",JOptionPane.ERROR_MESSAGE);
 		}
-	}
-	
-	@Override
-	public void altaCliente() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void bajaCliente() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void mostrarClienteId() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void modificarCliente() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void listarClientes() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void obtenerCliente(TCliente cliente) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mostrarCliente(List<TCliente> clienteList) {
-		// TODO Auto-generated method stub
-		
 	}
 	
 }

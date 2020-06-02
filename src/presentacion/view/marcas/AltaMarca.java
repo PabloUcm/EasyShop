@@ -27,13 +27,12 @@ import integracion.transfers.TMarca;
 import negocio.MarcaObserver;
 import presentacion.controllers.MarcaController;
 
-public class AltaMarca implements MarcaObserver {
+public class AltaMarca{
 	
 	private MarcaController controlador;
 	
 	public AltaMarca(MarcaController c) {
 		this.controlador = c;
-		controlador.addObserver(this);
 		initGUI();
 	}
 	
@@ -152,48 +151,5 @@ public class AltaMarca implements MarcaObserver {
 			JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
 		}
 		
-	}
-	
-	@Override
-	public void altaMarca() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void bajaMarca() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mostrarMarcaId() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void modificarMarca() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void listarMarcas() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void obtenerMarca(TMarca marca) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mostrarMarca(List<TMarca> marcaList) {
-		for(TMarca m: marcaList) {
-			System.out.println("Id:" + m.getId() + "CIF:" + m.getCIF() + "Nombre:" + m.getNombre());
-		}
 	}
 }

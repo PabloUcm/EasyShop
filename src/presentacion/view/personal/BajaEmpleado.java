@@ -24,13 +24,12 @@ import integracion.transfers.TPersonal;
 import negocio.PersonalObserver;
 import presentacion.controllers.PersonalController;
 
-public class BajaEmpleado implements PersonalObserver{
+public class BajaEmpleado{
 	
 	private PersonalController controlador;
 	
 	public BajaEmpleado(PersonalController c) {
 		this.controlador = c;
-		controlador.addObserver(this);
 		initGUI();
 	}
 	
@@ -124,47 +123,5 @@ public class BajaEmpleado implements PersonalObserver{
 		catch(Exception ex) {
 			JOptionPane.showMessageDialog(null,ex.getMessage(), "ERROR",JOptionPane.ERROR_MESSAGE);
 		}
-	}
-
-	@Override
-	public void altaEmpleado() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void bajaEmpleado() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mostrarEmpleadoId() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void modificarEmpleado() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void listarEmpleados() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void obtenerEmpleado(TPersonal empleado) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mostrarEmpleado(List<TPersonal> empleadoList) {
-		// TODO Auto-generated method stub
-		
 	}
 }

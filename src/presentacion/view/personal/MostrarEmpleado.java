@@ -27,12 +27,11 @@ import negocio.PersonalObserver;
 import presentacion.controllers.PersonalController;
 
 
-public class MostrarEmpleado implements PersonalObserver{
+public class MostrarEmpleado{
 	private PersonalController controlador;
 	
 	public MostrarEmpleado(PersonalController c) {
 		this.controlador = c;
-		controlador.addObserver(this);
 		initGUI();
 	}
 	
@@ -215,47 +214,5 @@ public class MostrarEmpleado implements PersonalObserver{
 		catch(Exception ex) {
 			JOptionPane.showMessageDialog(null,ex.getMessage(), "Error",JOptionPane.ERROR_MESSAGE);
 		}
-	}
-
-	@Override
-	public void altaEmpleado() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void bajaEmpleado() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mostrarEmpleadoId() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void modificarEmpleado() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void listarEmpleados() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void obtenerEmpleado(TPersonal empleado) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mostrarEmpleado(List<TPersonal> empleadoList) {
-		// TODO Auto-generated method stub
-		
 	}
 }

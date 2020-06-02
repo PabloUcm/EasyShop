@@ -66,10 +66,12 @@ public class SqlClienteDAO implements IClienteDAO {
 	}
 
 	@Override
-	public void altaCliente(TCliente cliente) {
+	public int altaCliente(TCliente cliente) {
+		int id = -1;
 		try {
 			Connection connection = dbAdapter.getConnection();
-			PreparedStatement statement = connection.prepareStatement("INSERT INTO cliente (dni,nombre,telefono) VALUES(?,?,?)");
+			PreparedStatement statement = connection.prepareStatement("INSERT INTO cliente (dni,nombre,telefono) VALUES(?,?,?)",
+																	   PreparedStatement.RETURN_GENERATED_KEYS);
 			
 			statement.setString(1, cliente.getDni());
 			statement.setString(2, cliente.getNombre());
@@ -77,9 +79,14 @@ public class SqlClienteDAO implements IClienteDAO {
 			
 			statement.executeUpdate();
 			
+			ResultSet result = statement.getGeneratedKeys();
+			if(result.next()) id = result.getInt(1);
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}	
+		
+		return id;
 	}
 
 	@Override

@@ -64,15 +64,15 @@ public class PersonalTableModel extends AbstractTableModel implements PersonalOb
 	}
 
 	@Override
-	public void altaEmpleado() {
-		// TODO Auto-generated method stub
-		
+	public void altaEmpleado(TPersonal empleado) {
+		empleados.add(empleado);
+		fireTableStructureChanged();	
 	}
 
 	@Override
-	public void bajaEmpleado() {
-		// TODO Auto-generated method stub
-		
+	public void bajaEmpleado(TPersonal empleado) {
+		empleados.remove(empleado);
+		fireTableStructureChanged();		
 	}
 
 	@Override

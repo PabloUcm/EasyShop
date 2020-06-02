@@ -76,9 +76,11 @@ public class Modelo {
 				
 		if(cliente != null && cliente.isActivo()) throw new Exception("Cliente ya existente.");
 		
-		clienteDAO.altaCliente(new TCliente(dni,nombre,telefono));
+		int id = clienteDAO.altaCliente(new TCliente(dni,nombre,telefono));
 		
-		for(ClienteObserver o: clienteObservers) o.altaCliente();		
+		cliente = clienteDAO.getClienteByID(id);
+		
+		for(ClienteObserver o: clienteObservers) o.altaCliente(cliente);		
 	}
 	
 	public void bajaCliente(int id) throws Exception {
@@ -90,7 +92,7 @@ public class Modelo {
 		
 		clienteDAO.bajaCliente(id);
 			
-		for(ClienteObserver o: clienteObservers) o.bajaCliente();
+		for(ClienteObserver o: clienteObservers) o.bajaCliente(cliente);
 	}
 	
 	public void modificarCliente(int id, String dni, String nombre, String telefono) throws Exception {
@@ -104,7 +106,7 @@ public class Modelo {
 		
 		clienteDAO.modificarCliente(id, new TCliente(dni,nombre,telefono));
 			
-		for(ClienteObserver o: clienteObservers) o.bajaCliente();
+		for(ClienteObserver o: clienteObservers) o.modificarCliente();
 	}
 	
 	public TCliente getCliente(int id) throws Exception {		
@@ -120,16 +122,17 @@ public class Modelo {
 	
 	public void altaPersonal(String dni, String nombre, String sueldo, String telefono,String horario) throws Exception {
 	
-		SqlPersonalDAO EmpleadoDAO = (SqlPersonalDAO) factoryDAO.getEmpleadoDAO();
+		SqlPersonalDAO empleadoDAO = (SqlPersonalDAO) factoryDAO.getEmpleadoDAO();
 		
-		TPersonal empleado = EmpleadoDAO.getEmpleadoByDNI(dni);
+		TPersonal empleado = empleadoDAO.getEmpleadoByDNI(dni);
 				
 		if(empleado != null && empleado.isActivo()) throw new Exception("Empleado ya existente.");
 		
-		EmpleadoDAO.altaEmpleado(new TPersonal(dni,nombre,sueldo,telefono,horario));
-	
+		int id = empleadoDAO.altaEmpleado(new TPersonal(dni,nombre,sueldo,telefono,horario));
 		
-		for(PersonalObserver o: personalObservers) o.altaEmpleado();
+		empleado = empleadoDAO.getEmpleadoByID(id);
+		
+		for(PersonalObserver o: personalObservers) o.altaEmpleado(empleado);
 	}
 	
 	public void bajaPersonal(int id) throws Exception {
@@ -145,7 +148,7 @@ public class Modelo {
 		empleadoDAO.bajaEmpleado(id);
 	
 		
-		for(PersonalObserver o: personalObservers) o.bajaEmpleado();
+		for(PersonalObserver o: personalObservers) o.bajaEmpleado(empleado);
 	}
 	
 	public void modificarPersonal(int id, String dni, String nombre, String sueldo,String telefono,String horario) throws Exception{
@@ -160,7 +163,7 @@ public class Modelo {
 		
 		empleadoDAO.modificarEmpleado(id, new TPersonal(dni,nombre,telefono,sueldo,horario));
 			
-		for(PersonalObserver o: personalObservers) o.bajaEmpleado();
+		for(PersonalObserver o: personalObservers) o.bajaEmpleado(null);
 		
 	}
 	public void listarEmpleados(){
@@ -191,9 +194,10 @@ public class Modelo {
 		
 		if(marca != null && marca.isActivo()) throw new Exception("Marca ya existente.");
 		
-		marcaDAO.altaMarca(new TMarca(cif, nombre, pais));
+		int id = marcaDAO.altaMarca(new TMarca(cif, nombre, pais));
+		marca = marcaDAO.getMarcaByID(id);
 		
-		for(MarcaObserver o : marcaObservers) o.altaMarca();
+		for(MarcaObserver o : marcaObservers) o.altaMarca(marca);
 	}
 	
 	public void bajaMarca(int id) throws Exception {
@@ -207,7 +211,7 @@ public class Modelo {
 		
 		marcaDAO.bajaMarca(id);
 		
-		for(MarcaObserver o : marcaObservers) o.bajaMarca();
+		for(MarcaObserver o : marcaObservers) o.bajaMarca(marca);
 	}
 	
 	public void modificarMarca(int id, String cif, String nombre, String pais) throws Exception {
@@ -222,7 +226,7 @@ public class Modelo {
 		
 		marcaDAO.modificarMarca(id, new TMarca(cif, nombre, pais));
 		
-		for(MarcaObserver o : marcaObservers) o.bajaMarca();
+		for(MarcaObserver o : marcaObservers) o.bajaMarca(null);
 		
 	}
 	

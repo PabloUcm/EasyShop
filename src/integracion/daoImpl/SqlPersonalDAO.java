@@ -90,11 +90,13 @@ public class SqlPersonalDAO implements IPersonalDao{
 	}
 
 	@Override
-	public void altaEmpleado(TPersonal empleado) {
-		// TODO Auto-generated method stub
+	public int altaEmpleado(TPersonal empleado) {
+		int id = -1;
+		
 		try {
 			Connection connection = dbAdapter.getConnection();
-			PreparedStatement statement = connection.prepareStatement("INSERT INTO Personal (dni,nombre,sueldo,telefono,horario) VALUES(?,?,?,?,?)");
+			PreparedStatement statement = connection.prepareStatement("INSERT INTO Personal (dni,nombre,sueldo,telefono,horario) VALUES(?,?,?,?,?)",
+																	   PreparedStatement.RETURN_GENERATED_KEYS);
 			
 			statement.setString(1, empleado.getDni());
 			statement.setString(2, empleado.getNombre());
@@ -104,9 +106,14 @@ public class SqlPersonalDAO implements IPersonalDao{
 			
 			statement.executeUpdate();
 			
+			ResultSet result = statement.getGeneratedKeys();
+			if(result.next()) id = result.getInt(1);
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}	
+		
+		return id;
 	}
 
 	@Override

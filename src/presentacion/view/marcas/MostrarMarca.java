@@ -28,12 +28,11 @@ import negocio.MarcaObserver;
 import presentacion.controllers.MarcaController;
 
 
-public class MostrarMarca implements MarcaObserver {
+public class MostrarMarca{
 	private MarcaController controlador;
 	
 	public MostrarMarca(MarcaController c) {
 		this.controlador = c;
-		controlador.addObserver(this);
 		initGUI();
 	}
 	
@@ -203,47 +202,5 @@ public class MostrarMarca implements MarcaObserver {
 		catch(Exception ex) {
 			JOptionPane.showMessageDialog(null,ex.getMessage(), "Error",JOptionPane.ERROR_MESSAGE);
 		}
-	}
-
-	@Override
-	public void altaMarca() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void bajaMarca() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mostrarMarcaId() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void modificarMarca() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void listarMarcas() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void obtenerMarca(TMarca marca) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mostrarMarca(List<TMarca> marcaList) {
-		// TODO Auto-generated method stub
-		
 	}
 }

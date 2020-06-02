@@ -23,13 +23,12 @@ import integracion.transfers.TCliente;
 import negocio.ClienteObserver;
 import presentacion.controllers.ClienteController;
 
-public class AltaCliente implements ClienteObserver {
+public class AltaCliente{
 	
 	private ClienteController controlador;
 	
 	public AltaCliente(ClienteController c) {
 		this.controlador = c;
-		controlador.addObserver(this);
 		initGUI();
 	}
 	
@@ -166,47 +165,5 @@ public class AltaCliente implements ClienteObserver {
 			JOptionPane.showMessageDialog(null,ex.getMessage(), "ERROR",JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
-	@Override
-	public void mostrarClienteId() {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public void modificarCliente() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mostrarCliente(List<TCliente> clienteList) {
-		for(TCliente c: clienteList) {
-			System.out.println("Id:" +c.getId() + ", Dni:" + c.getDni() +", Nombre" + c.getNombre());
-		}
-		
-	}
-
-	@Override
-	public void listarClientes() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void altaCliente() {
-
-	}
-
-	@Override
-	public void bajaCliente() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void obtenerCliente(TCliente cliente) {
-		// TODO Auto-generated method stub
-		
-	}
 }

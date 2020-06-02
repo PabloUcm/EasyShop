@@ -25,11 +25,12 @@ import integracion.transfers.TPersonal;
 import negocio.PersonalObserver;
 import presentacion.controllers.PersonalController;
 
-public class HistorialEmpleado implements PersonalObserver{
+public class HistorialEmpleado {
+	
 	private PersonalController controlador;
+	
 	public HistorialEmpleado(PersonalController c){
 		controlador = c;
-		controlador.addObserver(this);
 		initGUI();
 		
 	}
@@ -192,48 +193,5 @@ public class HistorialEmpleado implements PersonalObserver{
 		return histstr.toString();
 	}
 	*/
-	
-	@Override
-	public void altaEmpleado() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void bajaEmpleado() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mostrarEmpleadoId() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void modificarEmpleado() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void listarEmpleados() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void obtenerEmpleado(TPersonal empleado) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mostrarEmpleado(List<TPersonal> empleadoList) {
-		// TODO Auto-generated method stub
-		
-	}
-	
 
 }

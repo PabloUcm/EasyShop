@@ -58,4 +58,20 @@ public class TMarca {
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TMarca other = (TMarca) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
+	
+	
 }

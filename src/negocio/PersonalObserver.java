@@ -6,8 +6,8 @@ import integracion.transfers.TPersonal;
 
 public interface PersonalObserver {
 
-	public void altaEmpleado();
-	public void bajaEmpleado();
+	public void altaEmpleado(TPersonal personal);
+	public void bajaEmpleado(TPersonal personal);
 	public void mostrarEmpleadoId();
 	public void modificarEmpleado();
 	public void listarEmpleados();

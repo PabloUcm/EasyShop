@@ -85,10 +85,12 @@ public class SqlMarcaDAO implements IMarcaDAO {
 	}
 
 	@Override
-	public void altaMarca(TMarca marca) {
+	public int altaMarca(TMarca marca) {
+		int id = -1;
 		try {
 			Connection connection = dbAdapter.getConnection();
-			PreparedStatement statement = connection.prepareStatement("INSERT INTO Marca (cif,nombre,pais) VALUES(?,?,?)");
+			PreparedStatement statement = connection.prepareStatement("INSERT INTO Marca (cif,nombre,pais) VALUES(?,?,?)",
+																	   PreparedStatement.RETURN_GENERATED_KEYS);
 			
 			statement.setString(1, marca.getCIF());
 			statement.setString(2, marca.getNombre());
@@ -96,10 +98,14 @@ public class SqlMarcaDAO implements IMarcaDAO {
 			
 			statement.executeUpdate();
 			
+			ResultSet result = statement.getGeneratedKeys();
+			if(result.next()) id = result.getInt(1);
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		
+		return id;
 	}
 
 	@Override

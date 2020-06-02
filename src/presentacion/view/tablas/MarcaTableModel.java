@@ -52,15 +52,15 @@ public class MarcaTableModel extends AbstractTableModel implements MarcaObserver
 	}
 
 	@Override
-	public void altaMarca() {
-		// TODO Auto-generated method stub
-		
+	public void altaMarca(TMarca marca) {
+		marcas.add(marca);
+		fireTableStructureChanged();		
 	}
 
 	@Override
-	public void bajaMarca() {
-		// TODO Auto-generated method stub
-		
+	public void bajaMarca(TMarca marca) {
+		marcas.remove(marca);
+		fireTableStructureChanged();
 	}
 
 	@Override

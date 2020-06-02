@@ -50,15 +50,15 @@ public class ClienteTableModel extends AbstractTableModel implements ClienteObse
 	}
 
 	@Override
-	public void altaCliente() {
-		// TODO Auto-generated method stub
-		
+	public void altaCliente(TCliente cliente) {
+		clientes.add(cliente);
+		fireTableStructureChanged();		
 	}
 
 	@Override
-	public void bajaCliente() {
-		// TODO Auto-generated method stub
-		
+	public void bajaCliente(TCliente cliente) {
+		clientes.remove(cliente);
+		fireTableStructureChanged();	
 	}
 
 	@Override
