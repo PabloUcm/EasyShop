@@ -54,11 +54,7 @@ public class AltaCliente{
 	    });
 		
 		limpiar.addActionListener(new ActionListener() {
-	    	public void actionPerformed(ActionEvent e ) {
-	    		dniTF.setText(" ");
-	    		nombreTF.setText(" ");
-	    		tfnoTF.setText(" ");
-	    	}
+	    	public void actionPerformed(ActionEvent e ) { limpiar(); }
 	    });	
 	}
 	
@@ -158,12 +154,41 @@ public class AltaCliente{
 	
 	private void alta() {
 		try {
-			controlador.altaCliente(dniTF.getText(), nombreTF.getText(), tfnoTF.getText());
-			JOptionPane.showMessageDialog(null,"Cliente " + nombreTF.getText() + " registrado con éxito",
-										  "Error icon",JOptionPane.INFORMATION_MESSAGE);
+			TCliente cliente = controlador.altaCliente(dniTF.getText(), nombreTF.getText(), tfnoTF.getText());
+			if (cliente == null) {
+				JOptionPane.showMessageDialog(null,"Cliente " + nombreTF.getText() + " registrado con exito",
+										  "INFO",JOptionPane.INFORMATION_MESSAGE);
+				limpiar();
+			}
+			else {
+				Object[] options = {"Modificar","No modificar","No registrar"};
+				int n = JOptionPane.showOptionDialog(null,
+						 "Este cliente ya estaba registrado, ¿Quieres modificar sus valores?:", "Advertencia",
+						 JOptionPane.YES_NO_CANCEL_OPTION,
+						 JOptionPane.WARNING_MESSAGE,
+						 null,
+						 options,
+						 options[1]); 
+				
+				if(n == JOptionPane.YES_OPTION || n == JOptionPane.NO_OPTION ){
+					if (n == JOptionPane.YES_OPTION) {
+						cliente.setDni(dniTF.getText());
+						cliente.setNombre(nombreTF.getText());
+						cliente.setTelefono(tfnoTF.getText());
+					}
+					controlador.reactivarCliente(cliente);
+					JOptionPane.showMessageDialog(null,"Cliente " + cliente.getNombre() + " reactivado con exito",
+																	   "INFO",JOptionPane.INFORMATION_MESSAGE);
+				}
+				limpiar();
+			}
 		}catch(Exception ex) {
 			JOptionPane.showMessageDialog(null,ex.getMessage(), "ERROR",JOptionPane.ERROR_MESSAGE);
 		}
+	}
+	
+	private void limpiar() {
+		
 	}
 
 }

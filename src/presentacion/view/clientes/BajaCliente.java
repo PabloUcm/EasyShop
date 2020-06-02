@@ -133,7 +133,7 @@ public class BajaCliente{
             if(input == JOptionPane.OK_OPTION) {
             	controlador.bajaCliente(Integer.parseInt(idTF.getText()));
             	
-            	JOptionPane.showMessageDialog(null,"Cliente con ID " + idTF.getText() + " dado de baja con �xito.",
+            	JOptionPane.showMessageDialog(null,"Cliente con ID " + idTF.getText() + " dado de baja con exito.",
 						  					  "INFO",JOptionPane.INFORMATION_MESSAGE);
             }
 		} 

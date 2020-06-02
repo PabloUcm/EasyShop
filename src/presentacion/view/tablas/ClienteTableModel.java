@@ -1,15 +1,21 @@
 package presentacion.view.tablas;
 
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 import javax.swing.table.AbstractTableModel;
 
 import integracion.transfers.TCliente;
 import negocio.ClienteObserver;
 import presentacion.controllers.ClienteController;
+import presentacion.view.MainWindow;
 
-public class ClienteTableModel extends AbstractTableModel implements ClienteObserver {
+public class ClienteTableModel extends AbstractTableModel{
 	private  String[] columnNames = {"ID", "DNI", "Nombre", "Telefono"};
 
 	private ClienteController controlador;
@@ -17,9 +23,17 @@ public class ClienteTableModel extends AbstractTableModel implements ClienteObse
 	
 	public ClienteTableModel(ClienteController c) {
 		this.controlador = c;
-		controlador.addObserver(this);
 		clientes = new ArrayList<>();
-		controlador.listarClientes();
+	}
+	
+	public void setClientes(List<TCliente> lc) { 
+		SwingUtilities.invokeLater( new Runnable() {
+			@Override
+			public void run() {
+				clientes = lc; 
+				fireTableStructureChanged();
+			}
+		});
 	}
 	
 	@Override
@@ -49,43 +63,4 @@ public class ClienteTableModel extends AbstractTableModel implements ClienteObse
 		}
 	}
 
-	@Override
-	public void altaCliente(TCliente cliente) {
-		clientes.add(cliente);
-		fireTableStructureChanged();		
-	}
-
-	@Override
-	public void bajaCliente(TCliente cliente) {
-		clientes.remove(cliente);
-		fireTableStructureChanged();	
-	}
-
-	@Override
-	public void mostrarClienteId() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void modificarCliente() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void listarClientes() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void obtenerCliente(TCliente cliente) {
-	}
-
-	@Override
-	public void mostrarCliente(List<TCliente> clienteList) {
-		clientes = clienteList;
-		fireTableStructureChanged();
-	}
 }

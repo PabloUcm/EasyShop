@@ -62,25 +62,33 @@ public class Modelo {
 		
 	}
 	
-	public void listarClientes() {
+	public List<TCliente> listarClientes() {
 		SqlClienteDAO clienteDAO = (SqlClienteDAO) factoryDAO.getClienteDAO();
 		List<TCliente> clienteList = clienteDAO.getAllClientes();
-		
-		for(ClienteObserver o: clienteObservers) o.mostrarCliente(clienteList);
+		return clienteList;
 	}
 	
-	public void altaCliente(String dni, String nombre, String telefono) throws Exception{
+	public TCliente altaCliente(String dni, String nombre, String telefono) throws Exception{
 		SqlClienteDAO clienteDAO = (SqlClienteDAO) factoryDAO.getClienteDAO();
 		
 		TCliente cliente = clienteDAO.getClienteByDNI(dni);
 				
 		if(cliente != null && cliente.isActivo()) throw new Exception("Cliente ya existente.");
+		if(cliente != null && !cliente.isActivo()) return cliente;
 		
 		int id = clienteDAO.altaCliente(new TCliente(dni,nombre,telefono));
 		
 		cliente = clienteDAO.getClienteByID(id);
 		
-		for(ClienteObserver o: clienteObservers) o.altaCliente(cliente);		
+		for(ClienteObserver o: clienteObservers) o.altaCliente(cliente);	
+		
+		return null;	
+	}
+	
+	public void reactivarCliente(TCliente cliente) {
+		SqlClienteDAO clienteDAO = (SqlClienteDAO) factoryDAO.getClienteDAO();
+		
+		clienteDAO.reactivarCliente(cliente);
 	}
 	
 	public void bajaCliente(int id) throws Exception {

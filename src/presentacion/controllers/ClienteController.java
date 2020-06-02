@@ -1,5 +1,7 @@
 package presentacion.controllers;
 
+import java.util.List;
+
 import integracion.transfers.TCliente;
 import negocio.ClienteObserver;
 import negocio.Modelo;
@@ -15,8 +17,12 @@ public class ClienteController {
 		this.modelo = m;
 	}
 	
-	public void altaCliente(String dni, String nombre, String telefono) throws Exception {
-		modelo.altaCliente(dni, nombre, telefono);
+	public TCliente altaCliente(String dni, String nombre, String telefono) throws Exception {
+		return modelo.altaCliente(dni, nombre, telefono);
+	}
+	
+	public void reactivarCliente(TCliente cliente) {
+		modelo.reactivarCliente(cliente);
 	}
 	
 	public void bajaCliente(int id) throws Exception {
@@ -31,7 +37,7 @@ public class ClienteController {
 		return modelo.getCliente(id);
 	}
 	
-	public void listarClientes() {
-		modelo.listarClientes();
+	public List<TCliente> listarClientes() {
+		return modelo.listarClientes();
 	}
 }
