@@ -4,15 +4,19 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+import java.util.List;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import integracion.transfers.TCliente;
 import presentacion.controllers.ClienteController;
 import presentacion.view.tablas.ClienteTableModel;
 
-public class ListarClientes{
+public class ListarClientes {
 	
 	private ClienteController controlador;
 	
@@ -22,10 +26,12 @@ public class ListarClientes{
 	}
 	
 	private JTable clientesTable;
+	private ClienteTableModel tableModel;
 	
 	private void initGUI() {
-		ClienteTableModel tableModel = new ClienteTableModel(controlador);
+		tableModel = new ClienteTableModel(controlador);
 		clientesTable = new JTable(tableModel);
+
 	}
 	
 	public JPanel getDefaultLayout() {
@@ -41,6 +47,15 @@ public class ListarClientes{
 		c.gridy = 0;
 		listarClientesPanel.add(tablaSP, c);
 		
+		listarClientesPanel.addComponentListener(new java.awt.event.ComponentAdapter() {
+	        public void componentShown(java.awt.event.ComponentEvent evt) {
+	            List<TCliente> listaClientes = controlador.listarClientes();
+	            tableModel.setClientes(listaClientes);
+	        }
+	    });
+		
 		return listarClientesPanel;
 	}
+	
+	
 }

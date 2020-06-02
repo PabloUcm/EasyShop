@@ -137,4 +137,24 @@ public class SqlClienteDAO implements IClienteDAO {
 		}
 	}
 
+	@Override
+	public void reactivarCliente(TCliente cliente) {
+		try {
+				Connection connection = dbAdapter.getConnection();
+			
+				PreparedStatement statement = connection.prepareStatement("UPDATE Cliente SET dni=?, nombre=?, "
+																		  + "telefono=?, activo=true  WHERE id=?");
+
+				statement.setString(1, cliente.getDni());
+				statement.setString(2, cliente.getNombre());
+				statement.setString(3, cliente.getTelefono());
+				statement.setInt(4, cliente.getId());
+				
+				statement.executeUpdate();	
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 }
