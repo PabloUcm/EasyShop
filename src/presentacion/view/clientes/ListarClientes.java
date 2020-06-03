@@ -31,7 +31,6 @@ public class ListarClientes {
 	private void initGUI() {
 		tableModel = new ClienteTableModel(controlador);
 		clientesTable = new JTable(tableModel);
-
 	}
 	
 	public JPanel getDefaultLayout() {

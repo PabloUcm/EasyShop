@@ -12,7 +12,7 @@ import presentacion.controllers.ClienteController;
 import presentacion.view.CardSwitcher;
 import presentacion.view.menus.ModuloMenu;
 
-public class ClienteModulo {
+public class VistaCliente {
 	
 	private ClienteController controlador;
 	
@@ -22,8 +22,11 @@ public class ClienteModulo {
 	private MostrarCliente mostrarCliente;
 	private ListarClientes listarClientes;
 	private HistorialCliente histCliente;
+
+	private ModuloMenu clientesMenu;
+	private JPanel clientesFuncion;
 	
-	public ClienteModulo() {
+	public VistaCliente() {
 		this.controlador = new ClienteController(Modelo.getModelo());
 		
 		altaCliente = new AltaCliente(controlador);
@@ -36,26 +39,23 @@ public class ClienteModulo {
 		initGUI();
 	}
 	
-	private ModuloMenu clientesMenu;
-	private JPanel clientesFuncion;
-	
 	private void initGUI() {
 		CardLayout cardLayout = new CardLayout();
 		clientesFuncion = new JPanel(cardLayout);
 		CardSwitcher switcher = new CardSwitcher(clientesFuncion, cardLayout);
 		clientesMenu = new ModuloMenu(switcher, 35);
 		
-		addFuncion(altaCliente.getDefaultLayout(), new JButton("     Alta cliente"), 
+		addFunction(altaCliente.getDefaultLayout(), new JButton("     Alta cliente"), 
 				   "altacliente", "AltaCliente");
-		addFuncion(bajaCliente.getDefaultLayout(), new JButton("     Baja cliente"), 
+		addFunction(bajaCliente.getDefaultLayout(), new JButton("     Baja cliente"), 
 				   "bajacliente", "BajaCliente");
-		addFuncion(modCliente.getDefaultLayout(), new JButton("Modificar cliente"), 
+		addFunction(modCliente.getDefaultLayout(), new JButton("Modificar cliente"), 
 				   "modcliente", "ModificarCliente");
-		addFuncion(mostrarCliente.getDefaultLayout(), new JButton("     Mostrar cliente"), 
+		addFunction(mostrarCliente.getDefaultLayout(), new JButton("     Mostrar cliente"), 
 				   "mostrarcliente", "MostrarCliente");
-		addFuncion(listarClientes.getDefaultLayout(), new JButton("     Listar clientes"), 
+		addFunction(listarClientes.getDefaultLayout(), new JButton("     Listar clientes"), 
 				   "listarcliente", "ListarClientes");
-		addFuncion(histCliente.getDefaultLayout(), new JButton("Historial cliente"), 
+		addFunction(histCliente.getDefaultLayout(), new JButton("Historial cliente"), 
 				   "historialcliente", "HistorialCliente");
 	}
 	
@@ -68,7 +68,7 @@ public class ClienteModulo {
 		return clientePanel;
 	}
 	
-	private void addFuncion(JPanel panel, JButton button, String iconName, String card) {
+	private void addFunction(JPanel panel, JButton button, String iconName, String card) {
 		clientesFuncion.add(panel, card);
 		clientesMenu.addButton(button, "Clientes/"+iconName, card);
 	}

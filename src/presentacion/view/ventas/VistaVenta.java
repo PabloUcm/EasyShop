@@ -12,7 +12,7 @@ import presentacion.view.menus.ModuloMenu;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 
-public class VentaModulo {
+public class VistaVenta {
 	
 	private VentaController controlador;
 	
@@ -20,7 +20,10 @@ public class VentaModulo {
 	//private MostrarVenta mostrarVenta;
 	//private ListarVenta listarVenta;
 	
-	public VentaModulo() {
+	private ModuloMenu ventasMenu;
+	private JPanel ventasPanel;
+	
+	public VistaVenta() {
 		this.controlador = new VentaController(Modelo.getModelo());
 		
 		//abrirVenta = new AbrirVenta(controlador);
@@ -30,18 +33,15 @@ public class VentaModulo {
 		initGUI();
 	}
 	
-	private ModuloMenu ventasMenu;
-	private JPanel ventasPanel;
-	
 	private void initGUI() {
 		CardLayout cardLayout = new CardLayout();
 		ventasPanel = new JPanel(cardLayout);
 		CardSwitcher switcher = new CardSwitcher(ventasPanel, cardLayout);
 		ventasMenu = new ModuloMenu(switcher, 30);
 		
-		//addFuncion(abrirVenta.getDefaultLayout(), new JButton("   Abrir venta"), "abrirventa", "AbrirVenta");
-		//addFuncion(mostrarVenta.getDefaultLayout(), new JButton("   Mostrar venta"), "mostrarventa", "MostrarVenta");
-		//addFuncion(listarVenta.getDefaultLayout(), new JButton("   Listar venta"), "listarventa", "ListarVentas");
+		//addFunction(abrirVenta.getDefaultLayout(), new JButton("   Abrir venta"), "abrirventa", "AbrirVenta");
+		//addFunction(mostrarVenta.getDefaultLayout(), new JButton("   Mostrar venta"), "mostrarventa", "MostrarVenta");
+		//addFunction(listarVenta.getDefaultLayout(), new JButton("   Listar venta"), "listarventa", "ListarVentas");
 	}
 	
 	public JPanel getDefaultLayout() {
@@ -53,7 +53,7 @@ public class VentaModulo {
 		return ventaPanel;
 	}
 	
-	private void addFuncion(JPanel panel, JButton button, String iconName, String card) {
+	private void addFunction(JPanel panel, JButton button, String iconName, String card) {
 		ventasPanel.add(panel, card);
 		ventasMenu.addButton(button, "Ventas/"+iconName, card);
 	}

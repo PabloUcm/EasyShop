@@ -11,7 +11,7 @@ import presentacion.controllers.MarcaController;
 import presentacion.view.CardSwitcher;
 import presentacion.view.menus.ModuloMenu;
 
-public class MarcaModulo {
+public class VistaMarca {
 	
 	private MarcaController controlador;
 	
@@ -21,7 +21,10 @@ public class MarcaModulo {
 	private MostrarMarca mostrarMarca;
 	private ListarMarcas listarMarca;
 	
-	public MarcaModulo() {
+	private ModuloMenu marcasMenu;
+	private JPanel marcasFuncion;
+	
+	public VistaMarca() {
 		controlador = new MarcaController(Modelo.getModelo());
 		
 		altaMarca = new AltaMarca(controlador);
@@ -32,8 +35,6 @@ public class MarcaModulo {
 		
 		initGUI();
 	}
-	private ModuloMenu marcasMenu;
-	private JPanel marcasFuncion;
 	
 	private void initGUI() {
 		CardLayout cardLayout = new CardLayout();
@@ -41,13 +42,13 @@ public class MarcaModulo {
 		CardSwitcher switcher = new CardSwitcher(marcasFuncion, cardLayout);
 		marcasMenu = new ModuloMenu(switcher, 45);
 		
-		addFuncion(altaMarca.getDefaultLayout(), new JButton("   Alta marca"), 
+		addFunction(altaMarca.getDefaultLayout(), new JButton("   Alta marca"), 
 				   "altamarca", "AltaMarca");
-		addFuncion(bajaMarca.getDefaultLayout(), new JButton("   Baja marca"), 
+		addFunction(bajaMarca.getDefaultLayout(), new JButton("   Baja marca"), 
 				   "bajamarca", "BajaMarca");
-		addFuncion(modMarca.getDefaultLayout(), new JButton("Modificar marca"), "modmarca", "ModificarMarca");
-		addFuncion(mostrarMarca.getDefaultLayout(), new JButton("  Mostrar marca"), "mostrarmarca", "MostrarMarca");
-		addFuncion(listarMarca.getDefaultLayout(), new JButton("   Listar marca"), "listarmarca", "ListarMarcas");
+		addFunction(modMarca.getDefaultLayout(), new JButton("Modificar marca"), "modmarca", "ModificarMarca");
+		addFunction(mostrarMarca.getDefaultLayout(), new JButton("  Mostrar marca"), "mostrarmarca", "MostrarMarca");
+		addFunction(listarMarca.getDefaultLayout(), new JButton("   Listar marca"), "listarmarca", "ListarMarcas");
 	}
 	
 	public JPanel getDefaultLayout() {
@@ -59,7 +60,7 @@ public class MarcaModulo {
 		return marcaPanel;
 	}
 	
-	private void addFuncion(JPanel panel, JButton button, String iconName, String card) {
+	private void addFunction(JPanel panel, JButton button, String iconName, String card) {
 		marcasFuncion.add(panel, card);
 		marcasMenu.addButton(button, "Marcas/"+iconName, card);
 	}

@@ -16,7 +16,7 @@ import presentacion.view.clientes.BajaCliente;
 import presentacion.view.marcas.AltaMarca;
 import presentacion.view.menus.ModuloMenu;
 
-public class PersonalModulo {
+public class VistaPersonal {
 	
 	private PersonalController controlador;
 	
@@ -27,7 +27,10 @@ public class PersonalModulo {
 	private ListarEmpleados listarEmp;
 	//private HistorialEmpleado histEmp;
 	
-	public PersonalModulo() {
+	private ModuloMenu personalMenu;
+	private JPanel personalFuncion;
+	
+	public VistaPersonal() {
 		controlador = new PersonalController(Modelo.getModelo());
 		
 		altaEmp = new AltaEmpleado(controlador);
@@ -40,24 +43,21 @@ public class PersonalModulo {
 		initGUI();
 	}
 	
-	private ModuloMenu personalMenu;
-	private JPanel personalFuncion;
-	
 	private void initGUI() {
 		CardLayout cardLayout = new CardLayout();
 		personalFuncion = new JPanel(cardLayout);
 		CardSwitcher switcher = new CardSwitcher(personalFuncion, cardLayout);
 		personalMenu = new ModuloMenu(switcher, 45);
 		
-		addFuncion(altaEmp.getDefaultLayout(), new JButton("   Alta empleado"), 
+		addFunction(altaEmp.getDefaultLayout(), new JButton("   Alta empleado"), 
 				   "altaempleado", "AltaEmpleado");
-		addFuncion(bajaEmp.getDefaultLayout(), new JButton("   Baja empleado"), 
+		addFunction(bajaEmp.getDefaultLayout(), new JButton("   Baja empleado"), 
 				   "bajaempleado", "BajaEmpleado");
-		addFuncion(modEmp.getDefaultLayout(), new JButton("Modificar empleado"), 
+		addFunction(modEmp.getDefaultLayout(), new JButton("Modificar empleado"), 
 				   "modempleado", "ModificarEmpleado");
-		addFuncion(mostrarEmp.getDefaultLayout(), new JButton("  Mostrar empleado"), "mostrarempleado", "MostrarEmpleado");
-		addFuncion(listarEmp.getDefaultLayout(), new JButton("   Listar empleado"), "listarempleado", "ListarEmpleados");
-		//addFuncion(histEmp.getDefaultLayout(), new JButton("Historial empleado"), "historialempleado", "HistorialCliente");
+		addFunction(mostrarEmp.getDefaultLayout(), new JButton("  Mostrar empleado"), "mostrarempleado", "MostrarEmpleado");
+		addFunction(listarEmp.getDefaultLayout(), new JButton("   Listar empleado"), "listarempleado", "ListarEmpleados");
+		//addFunction(histEmp.getDefaultLayout(), new JButton("Historial empleado"), "historialempleado", "HistorialCliente");
 	}
 	
 	public JPanel getDefaultLayout() {
@@ -69,7 +69,7 @@ public class PersonalModulo {
 		return personalPanel;
 	}
 	
-	private void addFuncion(JPanel panel, JButton button, String iconName, String card) {
+	private void addFunction(JPanel panel, JButton button, String iconName, String card) {
 		personalFuncion.add(panel, card);
 		personalMenu.addButton(button, "Personal/"+iconName, card);
 	}

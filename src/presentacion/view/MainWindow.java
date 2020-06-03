@@ -8,28 +8,28 @@ import java.awt.Dimension;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import presentacion.view.clientes.ClienteModulo;
-import presentacion.view.marcas.MarcaModulo;
+import presentacion.view.clientes.VistaCliente;
+import presentacion.view.marcas.VistaMarca;
 import presentacion.view.menus.MainMenu;
-import presentacion.view.personal.PersonalModulo;
-import presentacion.view.productos.ProductoModulo;
-import presentacion.view.ventas.VentaModulo;
+import presentacion.view.personal.VistaPersonal;
+import presentacion.view.productos.VistaProducto;
+import presentacion.view.ventas.VistaVenta;
 
 
 public class MainWindow {
 	
-	private ClienteModulo clienteModulo;
-	private PersonalModulo personalModulo;
-	private VentaModulo ventaModulo;
-	private ProductoModulo productoModulo;
-	private MarcaModulo marcaModulo;
+	private VistaCliente clienteModulo;
+	private VistaPersonal personalModulo;
+	private VistaVenta ventaModulo;
+	private VistaProducto productoModulo;
+	private VistaMarca marcaModulo;
 	
 	public MainWindow() {
-		clienteModulo =  new ClienteModulo();
-		personalModulo = new PersonalModulo();
-		ventaModulo = new VentaModulo();
-		productoModulo = new ProductoModulo();
-		marcaModulo = new MarcaModulo();
+		clienteModulo =  new VistaCliente();
+		personalModulo = new VistaPersonal();
+		ventaModulo = new VistaVenta();
+		productoModulo = new VistaProducto();
+		marcaModulo = new VistaMarca();
 		
 		initGUI();
 	}
