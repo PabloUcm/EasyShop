@@ -4,11 +4,11 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Dimension;
 
-
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import presentacion.view.clientes.VistaCliente;
+import presentacion.view.log.VistaLogs;
 import presentacion.view.marcas.VistaMarca;
 import presentacion.view.menus.MainMenu;
 import presentacion.view.personal.VistaPersonal;
@@ -23,6 +23,7 @@ public class MainWindow {
 	private VistaVenta ventaModulo;
 	private VistaProducto productoModulo;
 	private VistaMarca marcaModulo;
+	private VistaLogs logModulo;
 	
 	public MainWindow() {
 		clienteModulo =  new VistaCliente();
@@ -30,6 +31,7 @@ public class MainWindow {
 		ventaModulo = new VistaVenta();
 		productoModulo = new VistaProducto();
 		marcaModulo = new VistaMarca();
+		logModulo = new VistaLogs();
 		
 		initGUI();
 	}
@@ -57,6 +59,8 @@ public class MainWindow {
 				  "producto", 45, "Productos");
 		addModulo(marcaModulo.getDefaultLayout(), new JButton("       Gestion de marcas"), 
 				  "marca", 45, "Marcas");
+		addModulo(logModulo.getDefaultLayout(), new JButton("      Gestion de logs"),
+				  "log", 45, "Logs");
 	}
 	
 	public JPanel getDefaultLayout() {

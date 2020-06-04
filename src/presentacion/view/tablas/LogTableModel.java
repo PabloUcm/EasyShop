@@ -9,15 +9,19 @@ import javax.swing.table.AbstractTableModel;
 import negocio.Entity;
 import negocio.Log;
 import negocio.LogObserver;
+import presentacion.controllers.LogController;
 
 @SuppressWarnings("serial")
 public class LogTableModel extends AbstractTableModel implements LogObserver {
 	
+	private LogController controller;
 	private String[] columnNames = {"Numero", "Tipo", "Entidad", "Hora"};
 	private List<Log> logs;
 	
 	
-	public LogTableModel() {
+	public LogTableModel(LogController controller) {
+		this.controller = controller;
+		controller.addObserver(this);
 		logs = new ArrayList<>();
 	}
 	
@@ -29,6 +33,11 @@ public class LogTableModel extends AbstractTableModel implements LogObserver {
 	@Override
 	public int getColumnCount() {
 		return columnNames.length;
+	}
+	
+	@Override
+	public String getColumnName(int column) {
+		return columnNames[column];
 	}
 
 	@Override
