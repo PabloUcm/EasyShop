@@ -22,15 +22,11 @@ import javax.swing.JTextField;
 import integracion.transfers.TCliente;
 import negocio.ClienteObserver;
 import presentacion.controllers.ClienteController;
+import presentacion.view.SwingFactory;
 
 public class AltaCliente{
 	
 	private ClienteController controlador;
-	
-	public AltaCliente(ClienteController c) {
-		this.controlador = c;
-		initGUI();
-	}
 	
 	private JTextField dniTF;
 	private JTextField nombreTF;
@@ -38,16 +34,20 @@ public class AltaCliente{
 	private JButton confirmar;
 	private JButton limpiar;
 	
+	public AltaCliente(ClienteController c) {
+		this.controlador = c;
+		initGUI();
+	}
+	
 	private void initGUI() {
-		dniTF = crearTextField();
-		nombreTF = crearTextField();
-		tfnoTF = crearTextField();
+		dniTF = SwingFactory.getJTextField(new Dimension(550,35), 25);
+		nombreTF = SwingFactory.getJTextField(new Dimension(550,35), 25);
+		tfnoTF = SwingFactory.getJTextField(new Dimension(550,35), 25);
 		
-		confirmar = crearBoton("CONFIRMAR ALTA DE CLIENTE", Color.GREEN, 
-							   new Color(130,200,21), "confirmar");
-		limpiar = crearBoton("LIMPIAR CAMPOS DE TEXTO", new Color(205,205,205), 
-				 			 new Color(166,166,166), "limpiar");
-		
+		confirmar = SwingFactory.getJButton(new Dimension(230,60), "CONFIRMAR ALTA DE CLIENTE", 
+											"icons/confirmar", 50, Color.GREEN, new Color(130,200,21));
+		limpiar = SwingFactory.getJButton(new Dimension(230,60), "LIMPIAR CAMPOS DE TEXTO", 
+										  "icons/limpiar", 50, new Color(205,205,205), new Color(166,166,166));
 		
 		confirmar.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e ) { alta(); }
@@ -65,19 +65,19 @@ public class AltaCliente{
 		GridBagConstraints c = new GridBagConstraints();
 		c.gridx = 0;
 		c.gridy = 0;
-		campos.add(crearJLabel("                DNI:"), c);
+		campos.add(SwingFactory.getJLabel(new Dimension(200,50), "                DNI:" ,30), c);
 		c.gridx = 1;
 		c.gridy = 0;
 		campos.add(dniTF, c);
 		c.gridx = 0;
 		c.gridy = 1;
-		campos.add(crearJLabel("      NOMBRE:"), c);
+		campos.add(SwingFactory.getJLabel(new Dimension(200,50), "      NOMBRE:" ,30), c);
 		c.gridx = 1;
 		c.gridy = 1;
 		campos.add(nombreTF, c);
 		c.gridx = 0;
 		c.gridy = 2;
-		campos.add(crearJLabel("  TELEFONO:"), c);
+		campos.add(SwingFactory.getJLabel(new Dimension(200,50), "  TELEFONO:" ,30), c);
 		c.gridx = 1;
 		c.gridy = 2;
 		campos.add(tfnoTF, c);
@@ -94,62 +94,6 @@ public class AltaCliente{
 		altaClientePanel.add(botones, BorderLayout.SOUTH);
 		
 		return altaClientePanel;
-	}
-	
-	private JLabel crearJLabel(String texto) {
-		JLabel jl = new JLabel(texto);
-		jl.setFont(new Font(jl.getFont().toString(), Font.BOLD, 30));
-		jl.setPreferredSize(new Dimension(200,50));
-		jl.setMaximumSize(jl.getPreferredSize());
-		return jl;
-	}
-	
-	private JTextField crearTextField() {
-		JTextField tf = new JTextField();
-		tf.setFont(new Font(tf.getFont().toString(), Font.PLAIN, 25));
-		tf.setPreferredSize(new Dimension(550,35));
-		tf.setMaximumSize(tf.getPreferredSize());
-		return tf;
-	}
-	
-	private JButton crearBoton(String texto, Color colorNormal, Color colorMouse, String icono) {
-		JButton button = new JButton(texto);
-		
-		button.setContentAreaFilled(false);
-		button.setFocusPainted(false);
-		button.setBorder(BorderFactory.createRaisedBevelBorder());
-		button.setOpaque(true);
-		
-		button.setPreferredSize(new Dimension(230,60));
-		button.setMaximumSize(button.getPreferredSize());
-		
-		button.setBackground(colorNormal);
-		
-		ImageIcon imageIcon = new ImageIcon("icons/"+icono+".png"); 
-		Image image = imageIcon.getImage(); 
-		Image newimg = image.getScaledInstance(50,50,  java.awt.Image.SCALE_SMOOTH); 
-		imageIcon = new ImageIcon(newimg);  
-		button.setIcon(imageIcon);
-
-		button.addMouseListener(new java.awt.event.MouseAdapter() {
-		    public void mouseEntered(java.awt.event.MouseEvent evt) {
-		    	button.setBackground(colorMouse);
-		    }
-
-		    public void mouseExited(java.awt.event.MouseEvent evt) {
-		    	button.setBackground(colorNormal);
-		    }
-		    
-		    public void mousePressed(java.awt.event.MouseEvent evt) {
-		    	button.setBorder(BorderFactory.createBevelBorder(1));
-		    }
-		    
-		    public void mouseReleased(java.awt.event.MouseEvent evt) {
-		    	button.setBorder(BorderFactory.createRaisedBevelBorder());
-		    }
-		});
-		
-		return button;
 	}
 	
 	private void alta() {
@@ -188,7 +132,9 @@ public class AltaCliente{
 	}
 	
 	private void limpiar() {
-		
+		dniTF.setText("");
+		nombreTF.setText("");
+		tfnoTF.setText("");
 	}
 
 }

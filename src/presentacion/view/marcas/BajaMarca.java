@@ -25,74 +25,35 @@ import integracion.transfers.TCliente;
 import integracion.transfers.TMarca;
 import negocio.MarcaObserver;
 import presentacion.controllers.MarcaController;
+import presentacion.view.SwingFactory;
 
 public class BajaMarca {
 	
 	private MarcaController controlador;
+	
+	private JTextField idTF;
+	private JButton baja;
+	private ImageIcon bajaIcon;
 	
 	public BajaMarca(MarcaController c) {
 		this.controlador = c;
 		initGUI();
 	}
 	
-	private JLabel idJL;
-	private JTextField idTF;
-	private JButton baja;
-	private ImageIcon bajaIcon;
-	
 	private void initGUI() {
 	   
-	    idJL = new JLabel("ID MARCA:");
-	    idJL.setFont(new Font(idJL.getFont().toString(), Font.BOLD, 50));
-	    idJL.setPreferredSize(new Dimension(300,50));
-	    idJL.setMaximumSize(idJL.getPreferredSize());
+	    idTF = SwingFactory.getJTextField(new Dimension(300,50), 45);
 	   
-	    idTF = new JTextField();
-	    idTF.setFont(new Font(idTF.getFont().toString(), Font.PLAIN, 45));
-	    idTF.setPreferredSize(new Dimension(300,50));
-	    idTF.setMaximumSize(idTF.getPreferredSize());
-	   
-	    baja = new JButton("DAR DE BAJA A LA MARCA");
-	    baja.setContentAreaFilled(false);
-	    baja.setFocusPainted(false);
-	    baja.setBorder(BorderFactory.createRaisedBevelBorder());
-	    baja.setOpaque(true);
-	    baja.setPreferredSize(new Dimension(230,65));
-	    baja.setMaximumSize(baja.getPreferredSize());
-	    baja.setBackground(new Color(255,85,85));
+	    baja = SwingFactory.getJButton(new Dimension(230,60), "DAR DE BAJA A LA MARCA", 
+									   "icons/baja", 50, new Color(255,85,85), new Color(201,54,54));
 	    baja.setAlignmentX(JButton.CENTER_ALIGNMENT);
 	   
-	    bajaIcon = new ImageIcon("icons/baja.png"); 
-	    Image image = bajaIcon.getImage(); 
-	    Image newimg = image.getScaledInstance(45, 45, java.awt.Image.SCALE_SMOOTH); 
-	    bajaIcon = new ImageIcon(newimg);  
-	    baja.setIcon(bajaIcon);
-	   
 	    baja.addActionListener(new ActionListener() {
-	    	public void actionPerformed(ActionEvent e) { 
-	    		baja();
-	    	}
+	    	public void actionPerformed(ActionEvent e) { baja(); }
 	    });
 	    
-	    baja.addMouseListener(new MouseAdapter() {
-	    	public void mouseEntered(MouseEvent evt) {
-		    	baja.setBackground(new Color(201,54,54));
-		    }
-
-		    public void mouseExited(MouseEvent evt) {
-		    	baja.setBackground(new Color(255,85,85));
-		    }
-		    
-		    public void mousePressed(MouseEvent evt) {
-		    	baja.setBorder(BorderFactory.createBevelBorder(1));
-		    }
-		    
-		    public void mouseReleased(MouseEvent evt) {
-		    	baja.setBorder(BorderFactory.createRaisedBevelBorder());
-		    }
-	    	
-	    });
-	    
+	    bajaIcon = SwingFactory.getScaledIcon("icons/baja", 45);
+	
 	}
 	
 	public JPanel getDefaultLayout() {
@@ -103,7 +64,7 @@ public class BajaMarca {
 	    c.gridy = 0;
 	    c.gridwidth = 1;
 	    c.gridheight = 1;
-	    bajaMarca.add(idJL, c);
+	    bajaMarca.add(SwingFactory.getJLabel(new Dimension(300,50),"  ID MARCA:",50), c);
 	    c.gridx = 1;
 	    c.gridy = 0;
 	    c.gridwidth = 1;

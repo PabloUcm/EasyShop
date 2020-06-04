@@ -23,54 +23,35 @@ import integracion.transfers.TCliente;
 import integracion.transfers.TPersonal;
 import negocio.PersonalObserver;
 import presentacion.controllers.PersonalController;
+import presentacion.view.SwingFactory;
 
 public class BajaEmpleado{
 	
 	private PersonalController controlador;
+
+	private JTextField idTF;
+	private JButton baja;
+	private ImageIcon bajaIcon;
 	
 	public BajaEmpleado(PersonalController c) {
 		this.controlador = c;
 		initGUI();
 	}
 	
-	private JLabel idJL;
-	private JTextField idTF;
-	private JButton baja;
-	private ImageIcon imageIcon;
-	//private ImageIcon bajaIcon;
-	
 	private void initGUI() {
-	    idJL = new JLabel("ID EMPLEADO:");
-	    idJL.setFont(new Font(idJL.getFont().toString(), Font.BOLD, 50));
-	    idJL.setPreferredSize(new Dimension(365,50));
-	    idJL.setMaximumSize(idJL.getPreferredSize());
+	 
+	    idTF = SwingFactory.getJTextField(new Dimension(300,50), 45);
 	   
-	    idTF = new JTextField();
-	    idTF.setFont(new Font(idTF.getFont().toString(), Font.PLAIN, 45));
-	    idTF.setPreferredSize(new Dimension(300,50));
-	    idTF.setMaximumSize(idTF.getPreferredSize());
-	   
-	    baja = new JButton("DAR DE BAJA AL EMPLEADO");
-	    baja.setContentAreaFilled(false);
-	    baja.setFocusPainted(false);
-	    baja.setBorder(BorderFactory.createRaisedBevelBorder());
-	    baja.setOpaque(true);
-	    baja.setPreferredSize(new Dimension(230,80));
-	    baja.setMaximumSize(baja.getPreferredSize());
-	    baja.setBackground(Color.RED);
+	    baja = SwingFactory.getJButton(new Dimension(230,60), "DAR DE BAJA AL EMPLEADO", 
+									   "icons/baja", 50, new Color(255,85,85), new Color(201,54,54));
 	    baja.setAlignmentX(JButton.CENTER_ALIGNMENT);
 	   
-	    imageIcon = new ImageIcon("icons/baja.png"); 
-	    Image image = imageIcon.getImage(); 
-	    Image newimg = image.getScaledInstance(65, 65, java.awt.Image.SCALE_SMOOTH); 
-	    imageIcon = new ImageIcon(newimg);  
-	    baja.setIcon(imageIcon);
-	   
 	    baja.addActionListener(new ActionListener() {
-	    	public void actionPerformed(ActionEvent e) { 
-	    		baja();
-	    	}
+	    	public void actionPerformed(ActionEvent e) { baja();}
 	    });
+	    
+	    bajaIcon = SwingFactory.getScaledIcon("icons/baja", 45);
+	   
 	}
 	
 	public JPanel getDefaultLayout() {
@@ -81,7 +62,7 @@ public class BajaEmpleado{
 	    c.gridy = 0;
 	    c.gridwidth = 1;
 	    c.gridheight = 1;
-	    bajaEmpPanel.add(idJL, c);
+	    bajaEmpPanel.add(SwingFactory.getJLabel(new Dimension(350,50),"ID EMPLEADO:",45), c);
 	    c.gridx = 1;
 	    c.gridy = 0;
 	    c.gridwidth = 1;
@@ -109,9 +90,10 @@ public class BajaEmpleado{
 			TPersonal empleado = controlador.getEmpleado(Integer.parseInt(idTF.getText()));
     				    		
     		String msg = "ID: "+empleado.getId()+"\nDNI: "+empleado.getDni()+"\nNOMBRE: "+ empleado.getNombre() +
-    				      "\nTELEFONO: "+empleado.getTelefono()+"\nSUELDO: "+empleado.getSueldo()+"\nHORARIO: "+empleado.getHorario()+"\n\nÂ¿Quieres dar de baja a este empleado?";
+    				     "\nTELEFONO: "+empleado.getTelefono()+"\nSUELDO: "+empleado.getSueldo()+"\nHORARIO: "+empleado.getHorario()+
+    				     "\n\n¿Quieres dar de baja a este empleado?";
             int input = JOptionPane.showConfirmDialog(null, msg,"Confirmar baja de empleado", 
-            		    JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, imageIcon);
+            		    JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, bajaIcon);
             
             if(input == JOptionPane.OK_OPTION) {
             	controlador.bajaPersonal(Integer.parseInt(idTF.getText()));

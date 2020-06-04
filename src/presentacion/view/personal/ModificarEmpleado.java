@@ -24,15 +24,11 @@ import integracion.transfers.TCliente;
 import integracion.transfers.TPersonal;
 import negocio.PersonalObserver;
 import presentacion.controllers.PersonalController;
+import presentacion.view.SwingFactory;
 
 public class ModificarEmpleado{
 	
 	private PersonalController controlador;
-	
-	public ModificarEmpleado(PersonalController c) {
-		this.controlador = c;
-		initGUI();
-	}
 	
 	private JTextField idTF;
 	private JTextField dniTF;
@@ -44,33 +40,34 @@ public class ModificarEmpleado{
 	private JButton limpiar;
 	private ImageIcon modIcon;
 	
+	public ModificarEmpleado(PersonalController c) {
+		this.controlador = c;
+		initGUI();
+	}
+	
 	private void initGUI() {
 		
-		idTF = crearTextField();
-		dniTF = crearTextField();
-		nombreTF = crearTextField();
-		sueldoTF = crearTextField();
-		tfnoTF = crearTextField();
-		horarioTF = crearTextField();
+		idTF = SwingFactory.getJTextField(new Dimension(550,35), 25);
+		dniTF = SwingFactory.getJTextField(new Dimension(550,35), 25);
+		nombreTF = SwingFactory.getJTextField(new Dimension(550,35), 25);
+		sueldoTF = SwingFactory.getJTextField(new Dimension(550,35), 25);
+		tfnoTF = SwingFactory.getJTextField(new Dimension(550,35), 25);
+		horarioTF = SwingFactory.getJTextField(new Dimension(550,35), 25);
 		
-		modificar = crearBoton("MODIFICAR EMPLEADO", Color.ORANGE.darker(), "modificar");
-		limpiar = crearBoton("LIMPIAR CAMPOS DE TEXTO", Color.GRAY.brighter(), "limpiar");
+		modificar = SwingFactory.getJButton(new Dimension(230,60), "MODIFICAR EMPLEADO", 
+                							"icons/modificar", 50, new Color(250,243,58), new Color(230,215,73));
+		limpiar = SwingFactory.getJButton(new Dimension(230,60), "LIMPIAR CAMPOS DE TEXTO", 
+				  						  "icons/limpiar", 50, new Color(205,205,205),new Color(166,166,166));
 		
 		modificar.addActionListener(new ActionListener() {
-	    	public void actionPerformed(ActionEvent e ) {
-	    	modificar();	
-	    	}
+	    	public void actionPerformed(ActionEvent e ) { modificar(); }
 	    });
 		
 		limpiar.addActionListener(new ActionListener() {
-	    	public void actionPerformed(ActionEvent e ) {
-	    		idTF.setText(" ");
-	    		dniTF.setText(" ");
-	    		nombreTF.setText(" ");
-	    		sueldoTF.setText(" ");
-	    		tfnoTF.setText(" ");
-	    	}
+	    	public void actionPerformed(ActionEvent e ) { limpiar(); }
 	    });
+		
+		modIcon = SwingFactory.getScaledIcon("icons/modificar", 45);
 	}
 	
 	public JPanel getDefaultLayout() {
@@ -80,37 +77,37 @@ public class ModificarEmpleado{
 		GridBagConstraints c = new GridBagConstraints();
 		c.gridx = 0;
 		c.gridy = 0;
-		campos.add(crearJLabel("ID EMPLEADO:"), c);
+		campos.add(SwingFactory.getJLabel(new Dimension(230,50), "ID EMPLEADO:" ,30), c);
 		c.gridx = 1;
 		c.gridy = 0;
 		campos.add(idTF, c);
 		c.gridx = 0;
 		c.gridy = 1;
-		campos.add(crearJLabel("          DNI:"), c);
+		campos.add(SwingFactory.getJLabel(new Dimension(230,50), "                   DNI:" ,30), c);
 		c.gridx = 1;
 		c.gridy = 1;
 		campos.add(dniTF, c);
 		c.gridx = 0;
 		c.gridy = 2;
-		campos.add(crearJLabel("        NOMBRE:"), c);
+		campos.add(SwingFactory.getJLabel(new Dimension(230,50), "         NOMBRE:" ,30), c);
 		c.gridx = 1;
 		c.gridy = 2;
 		campos.add(nombreTF, c);
 		c.gridx = 0;
 		c.gridy = 3;
-		campos.add(crearJLabel("         SUELDO:"), c);
+		campos.add(SwingFactory.getJLabel(new Dimension(230,50), "          SUELDO:" ,30), c);
 		c.gridx = 1;
 		c.gridy = 3;
 		campos.add(sueldoTF, c);
 		c.gridx = 0;
 		c.gridy = 4;
-		campos.add(crearJLabel("     TELEFONO:"), c);
+		campos.add(SwingFactory.getJLabel(new Dimension(230,50), "     TELEFONO:" ,30), c);
 		c.gridx = 1;
 		c.gridy = 4;
 		campos.add(tfnoTF, c);
 		c.gridx = 0;
 		c.gridy = 5;
-		campos.add(crearJLabel("      HORARIO:"),c);
+		campos.add(SwingFactory.getJLabel(new Dimension(230,50), "        HORARIO:" ,30),c);
 		c.gridx=1;
 		c.gridy=5;
 		campos.add(horarioTF,c);
@@ -129,40 +126,6 @@ public class ModificarEmpleado{
 		return modEmpPanel;
 	}
 	
-	private JLabel crearJLabel(String texto) {
-		JLabel jl = new JLabel(texto);
-		jl.setFont(new Font(jl.getFont().toString(), Font.BOLD, 30));
-		jl.setPreferredSize(new Dimension(230,50));
-		jl.setMaximumSize(jl.getPreferredSize());
-		return jl;
-	}
-	
-	private JTextField crearTextField() {
-		JTextField tf = new JTextField();
-		tf.setFont(new Font(tf.getFont().toString(), Font.PLAIN, 25));
-		tf.setPreferredSize(new Dimension(550,35));
-		tf.setMaximumSize(tf.getPreferredSize());
-		return tf;
-	}
-	
-	private JButton crearBoton(String texto, Color color, String icono) {
-		JButton button = new JButton(texto);
-		button.setContentAreaFilled(false);
-		button.setFocusPainted(false);
-		button.setBorder(BorderFactory.createRaisedBevelBorder());
-		button.setOpaque(true);
-		button.setPreferredSize(new Dimension(230,60));
-		button.setMaximumSize(button.getPreferredSize());
-		button.setBackground(color);
-		
-		ImageIcon imageIcon = new ImageIcon("icons/"+icono+".png"); 
-		Image image = imageIcon.getImage(); 
-		Image newimg = image.getScaledInstance(50,50,  java.awt.Image.SCALE_SMOOTH); 
-		imageIcon = new ImageIcon(newimg);  
-		button.setIcon(imageIcon);
-
-		return button;
-	}
 	private void modificar(){
 		try {
     		if (idTF.getText().isEmpty() || dniTF.getText().isEmpty() || nombreTF.getText().isEmpty()) {
@@ -256,5 +219,13 @@ public class ModificarEmpleado{
 		catch(Exception ex) {
 			JOptionPane.showMessageDialog(null,ex.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
 		}
+	}
+	
+	private void limpiar() {
+		idTF.setText(" ");
+		dniTF.setText(" ");
+		nombreTF.setText(" ");
+		sueldoTF.setText(" ");
+		tfnoTF.setText(" ");
 	}
 }

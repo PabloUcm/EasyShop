@@ -25,39 +25,40 @@ import javax.swing.JTextField;
 import integracion.transfers.TPersonal;
 import negocio.PersonalObserver;
 import presentacion.controllers.PersonalController;
+import presentacion.view.SwingFactory;
 
 
 public class MostrarEmpleado{
-	private PersonalController controlador;
 	
-	public MostrarEmpleado(PersonalController c) {
-		this.controlador = c;
-		initGUI();
-	}
+	private PersonalController controlador;
 	
 	private JTextField idTF;
 	private JTextArea datosTA;
 	private JButton buscar;
 	private JButton limpiar;
 	
+	public MostrarEmpleado(PersonalController c) {
+		this.controlador = c;
+		initGUI();
+	}
+	
 	private void initGUI() {
-		idTF = crearTextField();
-		buscar = crearBoton("BUSCAR EMPLEADO", new Color(8,213,249), new Color(6,160,190), 
-							"lupa", 140, 30);
-		limpiar = crearBoton("LIMPIAR BUSQUEDA", new Color(205,205,205), new Color(166,166,166), 
-							 "limpiar", 170, 45);
-		datosTA = crearTextArea();
+		idTF = SwingFactory.getJTextField(new Dimension(290,30), 25);
+		
+		buscar = SwingFactory.getJButton(new Dimension(160,30), "BUSCAR EMPLEADO", 
+				 						 "icons/lupa", 20, new Color(8,213,249), new Color(6,160,190));
+		limpiar = SwingFactory.getJButton(new Dimension(170,45), "LIMPIAR BUSQUEDA", 
+				  						  "icons/limpiar", 25, new Color(205,205,205), new Color(166,166,166));
 		
 		buscar.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e ) { mostrar(); }
 	    });
 		
 		limpiar.addActionListener(new ActionListener() {
-	    	public void actionPerformed(ActionEvent e ) {
-	    		idTF.setText("");
-	    		datosTA.setText("");
-	    	}
+	    	public void actionPerformed(ActionEvent e ) { limpiar(); }
 	    });	
+		
+		datosTA = SwingFactory.getJTextArea(15);
 	}
 	
 	public JPanel getDefaultLayout() {
@@ -69,7 +70,7 @@ public class MostrarEmpleado{
 		datosSP.setMaximumSize(datosSP.getPreferredSize());
 		
 		JPanel barraBusqueda = new JPanel(new FlowLayout( FlowLayout.CENTER));
-		barraBusqueda.add((crearJLabel("ID EMPLEADO:")));
+		barraBusqueda.add(SwingFactory.getJLabel(new Dimension(190,50), "ID EMPLEADO:" ,25));
 		barraBusqueda.add(idTF);
 		barraBusqueda.add(Box.createRigidArea(new Dimension(10, 0)));
 		barraBusqueda.add(buscar);
@@ -98,79 +99,6 @@ public class MostrarEmpleado{
 	    mostrarPersonalPanel.add(limpiar,c);
 		
 		return mostrarPersonalPanel;
-	}
-	
-	private JLabel crearJLabel(String texto) {
-		JLabel jl = new JLabel(texto);
-		
-		jl.setFont(new Font(jl.getFont().toString(), Font.BOLD, 25));
-		
-		jl.setPreferredSize(new Dimension(160,50));
-		jl.setMaximumSize(jl.getPreferredSize());
-		
-		return jl;
-	}
-	
-	private JTextField crearTextField() {
-		JTextField tf = new JTextField();
-		
-		tf.setFont(new Font(tf.getFont().toString(), Font.PLAIN, 25));
-		
-		tf.setPreferredSize(new Dimension(290,30));
-		tf.setMaximumSize(tf.getPreferredSize());
-		
-		return tf;
-	}
-	
-	private JTextArea crearTextArea() {
-		JTextArea ta = new JTextArea();
-		
-		ta.setFont(new Font(ta.getFont().toString(), Font.PLAIN, 15));
-		
-		ta.setEditable(false);
-		
-		return ta;
-	}
-	
-	private JButton crearBoton(String texto, Color colorNormal, Color colorMouse, String icono, int ancho, int altura) {
-		JButton button = new JButton(texto);
-		
-		button.setContentAreaFilled(false);
-		button.setFocusPainted(false);
-		
-		button.setBorder(BorderFactory.createRaisedBevelBorder());
-		button.setOpaque(true);
-		
-		button.setPreferredSize(new Dimension(ancho,altura));
-		button.setMaximumSize(button.getPreferredSize());
-		
-		button.setBackground(colorNormal);
-		
-		ImageIcon imageIcon = new ImageIcon("icons/"+icono+".png"); 
-		Image image = imageIcon.getImage(); 
-		Image newimg = image.getScaledInstance(25,25,  java.awt.Image.SCALE_SMOOTH); 
-		imageIcon = new ImageIcon(newimg);  
-		button.setIcon(imageIcon);
-		
-		button.addMouseListener(new java.awt.event.MouseAdapter() {
-		    public void mouseEntered(java.awt.event.MouseEvent evt) {
-		    	button.setBackground(colorMouse);
-		    }
-
-		    public void mouseExited(java.awt.event.MouseEvent evt) {
-		    	button.setBackground(colorNormal);
-		    }
-		    
-		    public void mousePressed(java.awt.event.MouseEvent evt) {
-		    	button.setBorder(BorderFactory.createBevelBorder(1));
-		    }
-		    
-		    public void mouseReleased(java.awt.event.MouseEvent evt) {
-		    	button.setBorder(BorderFactory.createRaisedBevelBorder());
-		    }
-		});
-
-		return button;
 	}
 	
 	private String busquedaToString(TPersonal empleado) {
@@ -214,5 +142,10 @@ public class MostrarEmpleado{
 		catch(Exception ex) {
 			JOptionPane.showMessageDialog(null,ex.getMessage(), "Error",JOptionPane.ERROR_MESSAGE);
 		}
+	}
+	
+	private void limpiar() {
+		idTF.setText("");
+		datosTA.setText("");
 	}
 }

@@ -20,14 +20,14 @@ public class ListarClientes {
 	
 	private ClienteController controlador;
 	
+	private JTable clientesTable;
+	private ClienteTableModel tableModel;
+	
 	public ListarClientes(ClienteController c) {
 		this.controlador = c;
 		initGUI();
 	}
-	
-	private JTable clientesTable;
-	private ClienteTableModel tableModel;
-	
+		
 	private void initGUI() {
 		tableModel = new ClienteTableModel(controlador);
 		clientesTable = new JTable(tableModel);

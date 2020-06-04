@@ -24,15 +24,11 @@ import javax.swing.JTextField;
 import integracion.transfers.TPersonal;
 import negocio.PersonalObserver;
 import presentacion.controllers.PersonalController;
+import presentacion.view.SwingFactory;
 
 public class AltaEmpleado{
 	
 	private PersonalController controlador;
-	
-	public AltaEmpleado(PersonalController c) {
-		this.controlador = c;
-		initGUI();
-	}
 	
 	private JTextField dniTF;
 	private JTextField nombreTF;
@@ -42,29 +38,29 @@ public class AltaEmpleado{
 	private JButton confirmar;
 	private JButton limpiar;
 	
+	public AltaEmpleado(PersonalController c) {
+		this.controlador = c;
+		initGUI();
+	}
+	
 	private void initGUI() {
-		dniTF = crearTextField();
-		nombreTF = crearTextField();
-		sueldoTF = crearTextField();
-		tfnoTF = crearTextField();
-		horarioTF = crearTextField();
+		dniTF = SwingFactory.getJTextField(new Dimension(550,35), 25);
+		nombreTF = SwingFactory.getJTextField(new Dimension(550,35), 25);
+		sueldoTF = SwingFactory.getJTextField(new Dimension(550,35), 25);
+		tfnoTF = SwingFactory.getJTextField(new Dimension(550,35), 25);
+		horarioTF = SwingFactory.getJTextField(new Dimension(550,35), 25);
 		
-		confirmar = crearBoton("CONFIRMAR ALTA DE EMPLEADO", Color.GREEN, "confirmar");
-		limpiar = crearBoton("LIMPIAR CAMPOS DE TEXTO", Color.GRAY.brighter(), "limpiar");
+		confirmar = SwingFactory.getJButton(new Dimension(230,60), "CONFIRMAR ALTA DE CLIENTE", 
+											"icons/confirmar", 50, Color.GREEN, new Color(130,200,21));
+		limpiar = SwingFactory.getJButton(new Dimension(230,60), "LIMPIAR CAMPOS DE TEXTO", 
+				  						  "icons/limpiar", 50, new Color(205,205,205), new Color(166,166,166));
 		
 		confirmar.addActionListener(new ActionListener() {
-	    	public void actionPerformed(ActionEvent e ) {
-	    		alta();
-	    	}
+	    	public void actionPerformed(ActionEvent e ) { alta(); }
 	    });
 		
 		limpiar.addActionListener(new ActionListener() {
-	    	public void actionPerformed(ActionEvent e ) {
-	    		dniTF.setText(" ");
-	    		nombreTF.setText(" ");
-	    		sueldoTF.setText(" ");
-	    		tfnoTF.setText(" ");
-	    	}
+	    	public void actionPerformed(ActionEvent e ) { limpiar(); }
 	    });
 	}
 	
@@ -75,31 +71,31 @@ public class AltaEmpleado{
 		GridBagConstraints c = new GridBagConstraints();
 		c.gridx = 0;
 		c.gridy = 0;
-		campos.add(crearJLabel("           DNI:"), c);
+		campos.add(SwingFactory.getJLabel(new Dimension(200,50), "                DNI:" ,30), c);
 		c.gridx = 1;
 		c.gridy = 0;
 		campos.add(dniTF, c);
 		c.gridx = 0;
 		c.gridy = 1;
-		campos.add(crearJLabel("        NOMBRE:"), c);
+		campos.add(SwingFactory.getJLabel(new Dimension(200,50), "      NOMBRE:" ,30), c);
 		c.gridx = 1;
 		c.gridy = 1;
 		campos.add(nombreTF, c);
 		c.gridx = 0;
 		c.gridy = 2;
-		campos.add(crearJLabel("        SUELDO:"), c);
+		campos.add(SwingFactory.getJLabel(new Dimension(200,50), "       SUELDO:" ,30), c);
 		c.gridx = 1;
 		c.gridy = 2;
 		campos.add(sueldoTF, c);
 		c.gridx = 0;
 		c.gridy = 3;
-		campos.add(crearJLabel("     TELEFONO:"), c);
+		campos.add(SwingFactory.getJLabel(new Dimension(200,50), "  TELEFONO:" ,30), c);
 		c.gridx = 1;
 		c.gridy = 3;
 		campos.add(tfnoTF, c);
 		c.gridx = 0;
 		c.gridy = 4;
-		campos.add(crearJLabel("      HORARIO:"), c);
+		campos.add(SwingFactory.getJLabel(new Dimension(200,50), "     HORARIO:" ,30), c);
 		c.gridx = 1;
 		c.gridy = 4;
 		campos.add(horarioTF, c);
@@ -118,42 +114,6 @@ public class AltaEmpleado{
 		return altaEmpPanel;
 	}
 	
-	private JLabel crearJLabel(String texto) {
-		JLabel jl = new JLabel(texto);
-		jl.setFont(new Font(jl.getFont().toString(), Font.BOLD, 30));
-		jl.setAlignmentX(Component.CENTER_ALIGNMENT);
-		jl.setPreferredSize(new Dimension(230,50));
-		jl.setMaximumSize(jl.getPreferredSize());
-		return jl;
-	}
-	
-	private JTextField crearTextField() {
-		JTextField tf = new JTextField();
-		tf.setFont(new Font(tf.getFont().toString(), Font.PLAIN, 25));
-		tf.setAlignmentX(Component.CENTER_ALIGNMENT);
-		tf.setPreferredSize(new Dimension(550,35));
-		tf.setMaximumSize(tf.getPreferredSize());
-		return tf;
-	}
-	
-	private JButton crearBoton(String texto, Color color, String icono) {
-		JButton button = new JButton(texto);
-		button.setContentAreaFilled(false);
-		button.setFocusPainted(false);
-		button.setBorder(BorderFactory.createRaisedBevelBorder());
-		button.setOpaque(true);
-		button.setPreferredSize(new Dimension(250,60));
-		button.setMaximumSize(button.getPreferredSize());
-		button.setBackground(color);
-		
-		ImageIcon imageIcon = new ImageIcon("icons/"+icono+".png"); 
-		Image image = imageIcon.getImage(); 
-		Image newimg = image.getScaledInstance(50,50,  java.awt.Image.SCALE_SMOOTH); 
-		imageIcon = new ImageIcon(newimg);  
-		button.setIcon(imageIcon);
-
-		return button;
-	}
 	private void alta() {
 		try {
 			controlador.altaPersonal(dniTF.getText(), nombreTF.getText(),tfnoTF.getText(),sueldoTF.getText(),horarioTF.getText());
@@ -162,5 +122,12 @@ public class AltaEmpleado{
 		}catch(Exception ex) {
 			JOptionPane.showMessageDialog(null,ex.getMessage(), "ERROR",JOptionPane.ERROR_MESSAGE);
 		}
+	}
+	
+	private void limpiar() {
+		dniTF.setText(" ");
+		nombreTF.setText(" ");
+		sueldoTF.setText(" ");
+		tfnoTF.setText(" ");
 	}
 }
