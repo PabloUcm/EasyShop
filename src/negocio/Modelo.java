@@ -1,9 +1,7 @@
 package negocio;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JOptionPane;
 
 import integracion.daoImpl.SqlClienteDAO;
 import integracion.daoImpl.SqlMarcaDAO;
@@ -16,6 +14,7 @@ import integracion.transfers.TPersonal;
 
 public class Modelo {
     private static Modelo modelo;
+    private LogObserver logObserver;
     private IDAOServiceFactory factoryDAO;
 
     private Modelo() {
@@ -27,12 +26,15 @@ public class Modelo {
 
         return modelo;
     }
-	
-	public List<TCliente> listarClientes() {
-		SqlClienteDAO clienteDAO = (SqlClienteDAO) factoryDAO.getClienteDAO();
-		List<TCliente> clienteList = clienteDAO.getAllClientes();
-		return clienteList;
-	}
+    
+    public void addObserver(LogObserver logObserver) {
+    	this.logObserver = logObserver;
+    }
+    
+    
+    //-------------CLIENTES-----------------//
+
+    
 	
 	public TCliente altaCliente(String dni, String nombre, String telefono) throws Exception{
 		SqlClienteDAO clienteDAO = (SqlClienteDAO) factoryDAO.getClienteDAO();
@@ -45,6 +47,8 @@ public class Modelo {
 		int id = clienteDAO.altaCliente(new TCliente(dni,nombre,telefono));
 		
 		cliente = clienteDAO.getClienteByID(id);
+		
+		logObserver.alta(Entity.CLIENTE);
 		
 		return null;	
 	}
@@ -63,7 +67,8 @@ public class Modelo {
 		if (!cliente.isActivo()) throw new Exception("El cliente ya esta dado de baja.");
 		
 		clienteDAO.bajaCliente(id);
-
+		
+		logObserver.baja(Entity.CLIENTE);
 	}
 	
 	public void modificarCliente(int id, String dni, String nombre, String telefono) throws Exception {
@@ -77,7 +82,9 @@ public class Modelo {
 		
 		clienteDAO.modificarCliente(id, new TCliente(dni,nombre,telefono));
 			
+		logObserver.modificar(Entity.CLIENTE);
 	}
+	
 	
 	public TCliente getCliente(int id) throws Exception {		
 		SqlClienteDAO clienteDAO = (SqlClienteDAO) factoryDAO.getClienteDAO();
@@ -85,9 +92,24 @@ public class Modelo {
 			
 		if(cliente == null || !cliente.isActivo()) throw new Exception("Cliente inexistente.");
 			
+		logObserver.mostrar(Entity.CLIENTE);
 		
 		return cliente;
 	}
+	
+	  
+	public List<TCliente> listarClientes() {
+		SqlClienteDAO clienteDAO = (SqlClienteDAO) factoryDAO.getClienteDAO();
+		List<TCliente> clienteList = clienteDAO.getAllClientes();
+			
+		logObserver.listar(Entity.CLIENTE);
+			
+		return clienteList;
+	}
+	
+	
+	 //-------------PERSONAL-----------------//
+	
 	
 	public void altaPersonal(String dni, String nombre, String sueldo, String telefono,String horario) throws Exception {
 	
@@ -149,6 +171,12 @@ public class Modelo {
 		return empleado;
 	}
 	
+	
+	
+	 //-------------MARCAS-----------------//
+	
+	
+	
 	public void altaMarca(String cif, String nombre, String pais) throws Exception {
 		SqlMarcaDAO marcaDAO = (SqlMarcaDAO) factoryDAO.getMarcaDAO();
 		
@@ -202,18 +230,6 @@ public class Modelo {
 		if(marca == null || !marca.isActivo()) throw new Exception("Marca inexistente.");
 		
 		return marca;
-	}
-	
-	public void altaProducto(String dni, String nombre, String telefono) {
-		
-		//for(ProductoObserver o: productoObservers) 
-	}
-	
-	public void bajaProducto(String dni) {
-		
-		 
-		//for(ProductoObserver o: productoObservers) 
-	}
-	
+	}	
 	
 }
