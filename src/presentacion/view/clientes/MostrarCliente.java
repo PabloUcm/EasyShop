@@ -3,19 +3,13 @@ package presentacion.view.clientes;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 
-import javax.swing.BorderFactory;
 import javax.swing.Box;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -23,7 +17,6 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import integracion.transfers.TCliente;
-import negocio.ClienteObserver;
 import presentacion.controllers.ClienteController;
 import presentacion.view.SwingFactory;
 

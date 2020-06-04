@@ -5,13 +5,11 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
-
 import integracion.transfers.TPersonal;
-import negocio.PersonalObserver;
 
 import presentacion.controllers.PersonalController;
 
-public class PersonalTableModel extends AbstractTableModel implements PersonalObserver{
+public class PersonalTableModel extends AbstractTableModel{
 
 	/**
 	 * 
@@ -25,7 +23,6 @@ public class PersonalTableModel extends AbstractTableModel implements PersonalOb
 	
 	public PersonalTableModel(PersonalController c){
 		controlador = c;
-		controlador.addObserver(this);
 		empleados = new ArrayList<>();
 		controlador.listarEmpleados();
 		
@@ -61,50 +58,6 @@ public class PersonalTableModel extends AbstractTableModel implements PersonalOb
 			default: return null;
 		}
 	
-	}
-
-	@Override
-	public void altaEmpleado(TPersonal empleado) {
-		empleados.add(empleado);
-		fireTableStructureChanged();	
-	}
-
-	@Override
-	public void bajaEmpleado(TPersonal empleado) {
-		empleados.remove(empleado);
-		fireTableStructureChanged();		
-	}
-
-	@Override
-	public void mostrarEmpleadoId() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void modificarEmpleado() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void listarEmpleados() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void obtenerEmpleado(TPersonal empleado) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mostrarEmpleado(List<TPersonal> empleadoList) {
-		// TODO Auto-generated method stub
-		empleados = empleadoList;
-		fireTableStructureChanged();
-		
 	}
 
 }

@@ -3,15 +3,10 @@ package presentacion.controllers;
 import java.util.List;
 
 import integracion.transfers.TCliente;
-import negocio.ClienteObserver;
 import negocio.Modelo;
 
 public class ClienteController {
 	private Modelo modelo;
-	
-	public void addObserver(ClienteObserver o) {
-		modelo.addObserver(o);
-	}
 	
 	public ClienteController(Modelo m) {
 		this.modelo = m;

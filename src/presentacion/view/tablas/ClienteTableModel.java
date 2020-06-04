@@ -1,19 +1,14 @@
 package presentacion.view.tablas;
 
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.table.AbstractTableModel;
 
 import integracion.transfers.TCliente;
-import negocio.ClienteObserver;
 import presentacion.controllers.ClienteController;
-import presentacion.view.MainWindow;
+
 
 public class ClienteTableModel extends AbstractTableModel{
 	private  String[] columnNames = {"ID", "DNI", "Nombre", "Telefono"};

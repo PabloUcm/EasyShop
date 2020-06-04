@@ -6,12 +6,11 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 import integracion.transfers.TMarca;
-import negocio.MarcaObserver;
 import presentacion.controllers.MarcaController;
 
 
 @SuppressWarnings("serial")
-public class MarcaTableModel extends AbstractTableModel implements MarcaObserver {
+public class MarcaTableModel extends AbstractTableModel {
 	private  String[] columnNames = {"ID", "CIF", "Nombre", "Pais"};
 
 	private MarcaController controlador;
@@ -19,7 +18,6 @@ public class MarcaTableModel extends AbstractTableModel implements MarcaObserver
 	
 	public MarcaTableModel(MarcaController c) {
 		this.controlador = c;
-		controlador.addObserver(this);
 		marcas = new ArrayList<>();
 		controlador.listarMarcas();
 	}
@@ -51,46 +49,4 @@ public class MarcaTableModel extends AbstractTableModel implements MarcaObserver
 		}
 	}
 
-	@Override
-	public void altaMarca(TMarca marca) {
-		marcas.add(marca);
-		fireTableStructureChanged();		
-	}
-
-	@Override
-	public void bajaMarca(TMarca marca) {
-		marcas.remove(marca);
-		fireTableStructureChanged();
-	}
-
-	@Override
-	public void mostrarMarcaId() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void modificarMarca() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void listarMarcas() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void obtenerMarca(TMarca marca) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mostrarMarca(List<TMarca> marcaList) {
-		marcas = marcaList;
-		fireTableStructureChanged();
-		
-	}
 }

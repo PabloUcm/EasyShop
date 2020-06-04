@@ -16,17 +16,9 @@ import integracion.transfers.TPersonal;
 
 public class Modelo {
     private static Modelo modelo;
-    private List<ClienteObserver> clienteObservers;
-    private List<PersonalObserver> personalObservers;
-    private List<VentaObserver> ventaObservers;
-    private List<ProductoObserver> productoObservers;
-    private List<MarcaObserver> marcaObservers;    
     private IDAOServiceFactory factoryDAO;
 
     private Modelo() {
-    	clienteObservers = new ArrayList<>();
-    	personalObservers = new ArrayList<>();
-    	marcaObservers = new ArrayList<>();
     	factoryDAO = DAOServiceFactory.getDefaultFactory();
     }
 
@@ -35,32 +27,6 @@ public class Modelo {
 
         return modelo;
     }
-
-	public void addObserver(ClienteObserver o) {
-		clienteObservers.add(o);
-		
-	}
-	
-	public void addObserver(PersonalObserver o) {
-		// TODO Auto-generated method stub
-		personalObservers.add(o);
-		
-	}
-	
-	public void addObserver(VentaObserver o) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	public void addObserver(ProductoObserver o) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	public void addObserver(MarcaObserver o) {
-		marcaObservers.add(o);
-		
-	}
 	
 	public List<TCliente> listarClientes() {
 		SqlClienteDAO clienteDAO = (SqlClienteDAO) factoryDAO.getClienteDAO();
@@ -80,8 +46,6 @@ public class Modelo {
 		
 		cliente = clienteDAO.getClienteByID(id);
 		
-		for(ClienteObserver o: clienteObservers) o.altaCliente(cliente);	
-		
 		return null;	
 	}
 	
@@ -99,8 +63,7 @@ public class Modelo {
 		if (!cliente.isActivo()) throw new Exception("El cliente ya esta dado de baja.");
 		
 		clienteDAO.bajaCliente(id);
-			
-		for(ClienteObserver o: clienteObservers) o.bajaCliente(cliente);
+
 	}
 	
 	public void modificarCliente(int id, String dni, String nombre, String telefono) throws Exception {
@@ -114,7 +77,6 @@ public class Modelo {
 		
 		clienteDAO.modificarCliente(id, new TCliente(dni,nombre,telefono));
 			
-		for(ClienteObserver o: clienteObservers) o.modificarCliente();
 	}
 	
 	public TCliente getCliente(int id) throws Exception {		
@@ -123,7 +85,6 @@ public class Modelo {
 			
 		if(cliente == null || !cliente.isActivo()) throw new Exception("Cliente inexistente.");
 			
-		for(ClienteObserver o: clienteObservers) o.obtenerCliente(cliente);
 		
 		return cliente;
 	}
@@ -140,7 +101,6 @@ public class Modelo {
 		
 		empleado = empleadoDAO.getEmpleadoByID(id);
 		
-		for(PersonalObserver o: personalObservers) o.altaEmpleado(empleado);
 	}
 	
 	public void bajaPersonal(int id) throws Exception {
@@ -156,7 +116,6 @@ public class Modelo {
 		empleadoDAO.bajaEmpleado(id);
 	
 		
-		for(PersonalObserver o: personalObservers) o.bajaEmpleado(empleado);
 	}
 	
 	public void modificarPersonal(int id, String dni, String nombre, String sueldo,String telefono,String horario) throws Exception{
@@ -170,18 +129,15 @@ public class Modelo {
 		if (empleadoDNI != null && id != empleadoDNI.getId()) throw new Exception("Ya existe otro empleado con ese DNI.");
 		
 		empleadoDAO.modificarEmpleado(id, new TPersonal(dni,nombre,telefono,sueldo,horario));
-			
-		for(PersonalObserver o: personalObservers) o.bajaEmpleado(null);
-		
+				
 	}
+	
 	public void listarEmpleados(){
 		SqlPersonalDAO empleadoDAO = (SqlPersonalDAO) factoryDAO.getEmpleadoDAO();
 		List<TPersonal> empleadoList = empleadoDAO.getAllEmpleados();
 		
-		for(PersonalObserver o: personalObservers) o.mostrarEmpleado(empleadoList);
-		
-		
 	}
+	
 	public TPersonal getEmpleado(int id) throws Exception {		
 		
 		SqlPersonalDAO empleadoDAO = (SqlPersonalDAO) factoryDAO.getEmpleadoDAO();
@@ -189,8 +145,6 @@ public class Modelo {
 		TPersonal empleado = empleadoDAO.getEmpleadoByID(id);
 			
 		if(empleado == null || !empleado.isActivo()) throw new Exception("Empleado inexistente.");
-			
-		for(PersonalObserver o: personalObservers) o.obtenerEmpleado(empleado);
 		
 		return empleado;
 	}
@@ -205,7 +159,6 @@ public class Modelo {
 		int id = marcaDAO.altaMarca(new TMarca(cif, nombre, pais));
 		marca = marcaDAO.getMarcaByID(id);
 		
-		for(MarcaObserver o : marcaObservers) o.altaMarca(marca);
 	}
 	
 	public void bajaMarca(int id) throws Exception {
@@ -219,7 +172,6 @@ public class Modelo {
 		
 		marcaDAO.bajaMarca(id);
 		
-		for(MarcaObserver o : marcaObservers) o.bajaMarca(marca);
 	}
 	
 	public void modificarMarca(int id, String cif, String nombre, String pais) throws Exception {
@@ -234,15 +186,12 @@ public class Modelo {
 		
 		marcaDAO.modificarMarca(id, new TMarca(cif, nombre, pais));
 		
-		for(MarcaObserver o : marcaObservers) o.bajaMarca(null);
-		
 	}
 	
 	public void listarMarcas() {
 		SqlMarcaDAO marcaDAO = (SqlMarcaDAO) factoryDAO.getMarcaDAO();
 		List<TMarca> marcaList = marcaDAO.getAllMarcas();
 		
-		for(MarcaObserver o: marcaObservers) o.mostrarMarca(marcaList);
 	}
 	
 	public TMarca getMarca(int id) throws Exception{
@@ -251,8 +200,6 @@ public class Modelo {
 		TMarca marca = marcaDAO.getMarcaByID(id);
 		
 		if(marca == null || !marca.isActivo()) throw new Exception("Marca inexistente.");
-		
-		for(MarcaObserver o: marcaObservers) o.obtenerMarca(marca);
 		
 		return marca;
 	}

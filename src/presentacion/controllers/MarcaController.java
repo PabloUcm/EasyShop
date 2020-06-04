@@ -1,15 +1,10 @@
 package presentacion.controllers;
 
 import integracion.transfers.TMarca;
-import negocio.MarcaObserver;
 import negocio.Modelo;
 
 public class MarcaController {
 	private Modelo modelo;
-	
-	public void addObserver(MarcaObserver o) {
-		modelo.addObserver(o);
-	}
 	
 	public MarcaController(Modelo m) {
 		this.modelo = m;

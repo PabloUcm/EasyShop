@@ -3,14 +3,9 @@ package presentacion.controllers;
 
 import integracion.transfers.TPersonal;
 import negocio.Modelo;
-import negocio.PersonalObserver;
 
 public class PersonalController {
 private Modelo modelo;
-	
-	public void addObserver(PersonalObserver o) {
-		modelo.addObserver(o);
-	}
 	
 	public PersonalController(Modelo m) {
 		this.modelo = m;
