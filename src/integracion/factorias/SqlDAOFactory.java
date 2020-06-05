@@ -7,6 +7,7 @@ import integracion.dao.IProductoDAO;
 import integracion.daoImpl.SqlClienteDAO;
 import integracion.daoImpl.SqlMarcaDAO;
 import integracion.daoImpl.SqlPersonalDAO;
+import integracion.daoImpl.SqlProductoDAO;
 
 public class SqlDAOFactory implements IDAOServiceFactory{
 
@@ -17,13 +18,11 @@ public class SqlDAOFactory implements IDAOServiceFactory{
 
 	@Override
 	public IProductoDAO getProductoDAO() {
-		// TODO Auto-generated method stub
-		return null;
+		return new SqlProductoDAO();
 	}
 
 	@Override
 	public IPersonalDao getEmpleadoDAO() {
-		// TODO Auto-generated method stub
 		return new SqlPersonalDAO();
 	}
 

@@ -5,11 +5,13 @@ import java.util.List;
 import integracion.daoImpl.SqlClienteDAO;
 import integracion.daoImpl.SqlMarcaDAO;
 import integracion.daoImpl.SqlPersonalDAO;
+import integracion.daoImpl.SqlProductoDAO;
 import integracion.factorias.DAOServiceFactory;
 import integracion.factorias.IDAOServiceFactory;
 import integracion.transfers.TCliente;
 import integracion.transfers.TMarca;
 import integracion.transfers.TPersonal;
+import integracion.transfers.TProducto;
 
 public class Modelo {
     private static Modelo modelo;
@@ -241,5 +243,17 @@ public class Modelo {
 		
 		return marca;
 	}	
+	
+	
+	//-------PRODUCTOS-----------//
+	
+	public List<TProducto> listarProductos() {
+		SqlProductoDAO productoDAO = (SqlProductoDAO) factoryDAO.getProductoDAO();
+		List<TProducto> productoList = productoDAO.getAll();
+			
+		logObserver.listar(Entity.PRODUCTO);
+			
+		return productoList;
+	}
 	
 }

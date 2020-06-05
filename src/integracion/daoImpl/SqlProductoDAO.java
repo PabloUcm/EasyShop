@@ -10,6 +10,7 @@ import java.util.List;
 import integracion.dao.IProductoDAO;
 import integracion.dbadapters.IDBAdapter;
 import integracion.factorias.DBFactory;
+import integracion.transfers.TCliente;
 import integracion.transfers.TProducto;
 
 
@@ -20,21 +21,24 @@ public class SqlProductoDAO implements IProductoDAO{
 	public SqlProductoDAO() {
 		dbAdapter = DBFactory.getDefaultAdapter();
 	}
-	
+
 	@Override
 	public List<TProducto> getAll() {
 		Connection connection = dbAdapter.getConnection();
-		List<TProducto> productList = new ArrayList<>();
+		List<TProducto> productoList = new ArrayList<>();
 		
+
 		try {
-			PreparedStatement statement =
-					connection.prepareStatement("SELECT idProductos,productName" + ",productPrice FROM Productos");
+			PreparedStatement statement = connection.prepareStatement("SELECT * FROM Producto WHERE activo = true");
 			ResultSet results = statement.executeQuery();
 			
 			while(results.next()) {
-				productList.add(new TProducto(results.getInt(1),results.getString(2),results.getDouble(3)));
+				productoList.add(new TProducto(results.getInt(1),results.getInt(2),results.getString(3),
+						results.getDouble(4),results.getString(5),results.getBoolean(6)));
 			}
-			return productList;
+			
+			
+			return productoList;
 		}catch(Exception e) {
 			e.printStackTrace();
 			return null;
@@ -52,5 +56,6 @@ public class SqlProductoDAO implements IProductoDAO{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 }
