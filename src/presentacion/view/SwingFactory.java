@@ -29,6 +29,7 @@ public class SwingFactory {
 		tf.setFont(new Font(tf.getFont().toString(), Font.PLAIN, fontSize));
 		tf.setPreferredSize(dimension);
 		tf.setMaximumSize(tf.getPreferredSize());
+		tf.setMinimumSize(tf.getPreferredSize());
 		return tf;
 	}
 	
@@ -44,6 +45,7 @@ public class SwingFactory {
 		
 		button.setPreferredSize(dimension);
 		button.setMaximumSize(button.getPreferredSize());
+		button.setMinimumSize(button.getPreferredSize());
 		
 		button.setBackground(colorNormal);
 		

@@ -36,6 +36,7 @@ public class ListarEmpleados {
 		
 		JScrollPane tablaSP = new JScrollPane(personalTable);
 		tablaSP.getViewport().setBackground(Color.WHITE);
+		tablaSP.setMinimumSize(new Dimension(600,700));
 		
 		c.gridx = 0;
 		c.gridy = 0;

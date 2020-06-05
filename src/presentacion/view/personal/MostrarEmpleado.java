@@ -61,12 +61,14 @@ public class MostrarEmpleado{
 		JScrollPane datosSP = new JScrollPane(datosTA);
 		datosSP.setPreferredSize(new Dimension(550,250));
 		datosSP.setMaximumSize(datosSP.getPreferredSize());
+		datosSP.setMinimumSize(new Dimension(550,150));
 		
 		JPanel barraBusqueda = new JPanel(new FlowLayout( FlowLayout.CENTER));
-		barraBusqueda.add(SwingFactory.getJLabel(new Dimension(190,50), "ID EMPLEADO:" ,25));
+		barraBusqueda.add(SwingFactory.getJLabel(new Dimension(190,50), " ID EMPLEADO:" ,25));
 		barraBusqueda.add(idTF);
 		barraBusqueda.add(Box.createRigidArea(new Dimension(10, 0)));
 		barraBusqueda.add(buscar);
+		barraBusqueda.setMinimumSize(new Dimension(300,150));
 		
 		c.gridx = 0;
 		c.gridy = 0;

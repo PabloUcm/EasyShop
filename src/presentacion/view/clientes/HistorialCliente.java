@@ -61,12 +61,14 @@ public class HistorialCliente {
 		JScrollPane historialSP = new JScrollPane(historialTA);
 		historialSP.setPreferredSize(new Dimension(550,600));
 		historialSP.setMaximumSize(historialSP.getPreferredSize());
+		historialSP.setMinimumSize(new Dimension(550,400));
 		
 		JPanel barraBusqueda = new JPanel(new FlowLayout( FlowLayout.CENTER));
 		barraBusqueda.add(SwingFactory.getJLabel(new Dimension(160,50), " ID CLIENTE:" ,25));
 		barraBusqueda.add(idTF);
 		barraBusqueda.add(Box.createRigidArea(new Dimension(10, 0)));
 		barraBusqueda.add(buscar);
+		barraBusqueda.setMinimumSize(new Dimension(300,150));
 		
 		c.gridx = 0;
 		c.gridy = 0;
