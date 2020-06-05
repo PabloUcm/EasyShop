@@ -44,7 +44,7 @@ public class LogTableModel extends AbstractTableModel implements LogObserver {
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		Log l = logs.get(rowIndex);
 		
-		if(columnIndex == 0) return logs.size();
+		if(columnIndex == 0) return l.getNumero();
 		else if(columnIndex == 1) return l.getTipo();
 		else if(columnIndex == 2) return l.getEntidad().toString();
 		else if(columnIndex == 3) return l.getFecha().toString();
@@ -54,31 +54,31 @@ public class LogTableModel extends AbstractTableModel implements LogObserver {
 
 	@Override
 	public void alta(Entity entity) {
-		logs.add(new Log("Alta",entity, new Date()));
+		logs.add(new Log(logs.size()+1,"Alta",entity, new Date()));
 		fireTableStructureChanged();
 	}
 
 	@Override
 	public void baja(Entity entity) {
-		logs.add(new Log("Baja",entity, new Date()));	
+		logs.add(new Log(logs.size()+1,"Baja",entity, new Date()));	
 		fireTableStructureChanged();
 	}
 
 	@Override
 	public void modificar(Entity entity) {
-		logs.add(new Log("Modificar",entity, new Date()));
+		logs.add(new Log(logs.size()+1,"Modificar",entity, new Date()));
 		fireTableStructureChanged();
 	}
 
 	@Override
 	public void mostrar(Entity entity) {
-		logs.add(new Log("Mostrar",entity, new Date()));
+		logs.add(new Log(logs.size()+1,"Mostrar",entity, new Date()));
 		fireTableStructureChanged();
 	}
 
 	@Override
 	public void listar(Entity entity) {
-		logs.add(new Log("Listar",entity, new Date()));	
+		logs.add(new Log(logs.size()+1,"Listar",entity, new Date()));	
 		fireTableStructureChanged();	
 	}
 

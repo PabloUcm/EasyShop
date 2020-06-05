@@ -15,6 +15,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import integracion.transfers.TCliente;
+import integracion.transfers.TPersonal;
 import presentacion.controllers.PersonalController;
 import presentacion.view.SwingFactory;
 
@@ -108,9 +110,35 @@ public class AltaEmpleado{
 	
 	private void alta() {
 		try {
-			controlador.altaPersonal(dniTF.getText(), nombreTF.getText(),tfnoTF.getText(),sueldoTF.getText(),horarioTF.getText());
-			JOptionPane.showMessageDialog(null,"Empleado " + nombreTF.getText() + " registrado con exito",
-										  "Info icon",JOptionPane.INFORMATION_MESSAGE);
+			TPersonal personal = controlador.altaPersonal(dniTF.getText(), nombreTF.getText(),sueldoTF.getText(),
+					                                      tfnoTF.getText(), horarioTF.getText());
+			if (personal == null) {
+				JOptionPane.showMessageDialog(null,"Empleado" + nombreTF.getText() + " registrado con exito",
+										  "INFO",JOptionPane.INFORMATION_MESSAGE);
+				limpiar();
+			}
+			else {
+				Object[] options = {"Modificar","No modificar","No registrar"};
+				int n = JOptionPane.showOptionDialog(null,
+						 "Este empleado ya estaba registrado, ¿Quieres modificar sus valores?:", "Advertencia",
+						 JOptionPane.YES_NO_CANCEL_OPTION,
+						 JOptionPane.WARNING_MESSAGE,
+						 null,
+						 options,
+						 options[1]); 
+				
+				if(n == JOptionPane.YES_OPTION || n == JOptionPane.NO_OPTION ){
+					if (n == JOptionPane.YES_OPTION) {
+						personal.setDni(dniTF.getText());
+					    personal.setNombre(nombreTF.getText());
+						personal.setTelefono(tfnoTF.getText());
+					}
+					controlador.reactivarPersonal(personal);
+					JOptionPane.showMessageDialog(null,"Cliente " + personal.getNombre() + " reactivado con exito",
+																	   "INFO",JOptionPane.INFORMATION_MESSAGE);
+				}
+				limpiar();
+			}
 		}catch(Exception ex) {
 			JOptionPane.showMessageDialog(null,ex.getMessage(), "ERROR",JOptionPane.ERROR_MESSAGE);
 		}

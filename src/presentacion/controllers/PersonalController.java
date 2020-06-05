@@ -1,6 +1,7 @@
 package presentacion.controllers;
 
 
+import integracion.transfers.TCliente;
 import integracion.transfers.TPersonal;
 import negocio.Modelo;
 
@@ -11,8 +12,12 @@ private Modelo modelo;
 		this.modelo = m;
 	}
 	
-	public void altaPersonal(String dni, String nombre, String sueldo, String telefono,String horario) throws Exception {
-		modelo.altaPersonal(dni, nombre, sueldo, telefono,horario);
+	public TPersonal altaPersonal(String dni, String nombre, String sueldo, String telefono,String horario) throws Exception {
+		return modelo.altaPersonal(dni, nombre, sueldo, telefono,horario);
+	}
+	
+	public void reactivarPersonal(TPersonal personal) {
+		modelo.reactivarPersonal(personal);
 	}
 	
 	public void bajaPersonal(int id) throws Exception {

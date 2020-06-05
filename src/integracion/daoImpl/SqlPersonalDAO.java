@@ -10,6 +10,7 @@ import java.util.List;
 import integracion.dao.IPersonalDao;
 import integracion.dbadapters.IDBAdapter;
 import integracion.factorias.DBFactory;
+import integracion.transfers.TCliente;
 import integracion.transfers.TPersonal;
 
 public class SqlPersonalDAO implements IPersonalDao{
@@ -151,7 +152,28 @@ public class SqlPersonalDAO implements IPersonalDao{
 		}
 	}
 		
-	
+	@Override
+	public void reactivarPersonal(TPersonal personal) {
+		try {
+				Connection connection = dbAdapter.getConnection();
+			
+				PreparedStatement statement = connection.prepareStatement("UPDATE Personal SET dni=?, nombre=?, "
+																		  + "sueldo=?,telefono=?,horario=?,"
+						                                                  + "activo=true  WHERE id=?");
+
+				statement.setString(1, personal.getDni());
+				statement.setString(2, personal.getNombre());
+				statement.setDouble(3,Double.parseDouble(personal.getSueldo()));
+				statement.setString(4,personal.getTelefono());
+				statement.setString(5, personal.getHorario());
+				statement.setInt(6, personal.getId());
+				
+				statement.executeUpdate();	
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	
 }

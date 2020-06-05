@@ -2,7 +2,6 @@ package negocio;
 
 import java.util.List;
 
-
 import integracion.daoImpl.SqlClienteDAO;
 import integracion.daoImpl.SqlMarcaDAO;
 import integracion.daoImpl.SqlPersonalDAO;
@@ -111,18 +110,29 @@ public class Modelo {
 	 //-------------PERSONAL-----------------//
 	
 	
-	public void altaPersonal(String dni, String nombre, String sueldo, String telefono,String horario) throws Exception {
+	public TPersonal altaPersonal(String dni, String nombre, String sueldo, String telefono,String horario) throws Exception {
 	
-		SqlPersonalDAO empleadoDAO = (SqlPersonalDAO) factoryDAO.getEmpleadoDAO();
+		SqlPersonalDAO personalDAO = (SqlPersonalDAO) factoryDAO.getEmpleadoDAO();
 		
-		TPersonal empleado = empleadoDAO.getEmpleadoByDNI(dni);
+		TPersonal personal = personalDAO.getEmpleadoByDNI(dni);
 				
-		if(empleado != null && empleado.isActivo()) throw new Exception("Empleado ya existente.");
+		if(personal != null && personal.isActivo()) throw new Exception("Cliente ya existente.");
+		if(personal != null && !personal.isActivo()) return personal;
 		
-		int id = empleadoDAO.altaEmpleado(new TPersonal(dni,nombre,sueldo,telefono,horario));
+		int id = personalDAO.altaEmpleado(new TPersonal(dni,nombre,telefono,sueldo,horario));
 		
-		empleado = empleadoDAO.getEmpleadoByID(id);
+		personal = personalDAO.getEmpleadoByID(id);
 		
+		logObserver.alta(Entity.PERSONAL);
+		
+		return personal;	
+		
+	}
+	
+	public void reactivarPersonal(TPersonal personal) {
+		SqlPersonalDAO personalDAO = (SqlPersonalDAO) factoryDAO.getEmpleadoDAO();
+		
+		personalDAO.reactivarPersonal(personal);
 	}
 	
 	public void bajaPersonal(int id) throws Exception {

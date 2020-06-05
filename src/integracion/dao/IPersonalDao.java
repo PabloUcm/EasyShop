@@ -13,4 +13,5 @@ public interface IPersonalDao{
 	public int altaEmpleado(TPersonal empleado);
 	public void bajaEmpleado(int id);
 	public void modificarEmpleado(int id, TPersonal empleado);
+	public void reactivarPersonal(TPersonal personal) ;
 }
