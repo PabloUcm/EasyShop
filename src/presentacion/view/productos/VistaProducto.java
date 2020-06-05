@@ -18,7 +18,7 @@ public class VistaProducto {
 	private ProductoController controlador;
 	
 	
-	//private AltaProducto altaProducto;
+	private AltaProducto altaProducto;
 	//private BajaProducto bajaProducto;
 	//private ModificarProducto modProducto;
 	//private MostrarProducto mostrarProducto;
@@ -31,7 +31,7 @@ public class VistaProducto {
 	public VistaProducto() {
 		this.controlador = new ProductoController(Modelo.getModelo());
 		
-		//altaProducto = new AltaProducto(controlador);
+		altaProducto = new AltaProducto(controlador);
 		//bajaProducto = new BajaProducto(controlador);
 		//modProducto = new ModificarProducto(controlador);
 		//mostrarProducto = new MostrarProducto(controlador);
@@ -47,7 +47,7 @@ public class VistaProducto {
 		CardSwitcher switcher = new CardSwitcher(productosFuncion, cardLayout);
 		productosMenu = new ModuloMenu(switcher, 45);
 		
-		//addFunction(altaProducto.getDefaultLayout(), new JButton("   Alta producto"), "altaproducto", "AltaProducto");
+		addFunction(altaProducto.getPCLayout(), new JButton("   Alta producto"), "altaproducto", "AltaProducto");
 		//addFunction(bajaProducto.getDefaultLayout(), new JButton("   Baja producto"), "bajaproducto", "BajaProducto");
 		//addFunction(modProducto.getDefaultLayout(), new JButton("Modificar producto"), "modproducto", "ModificarProducto");
 		//addFunction(mostrarProducto.getDefaultLayout(), new JButton("Mostrar producto"), "mostrarproducto", "MostrarProducto");
