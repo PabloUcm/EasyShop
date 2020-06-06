@@ -256,4 +256,11 @@ public class Modelo {
 		return productoList;
 	}
 	
+	public List<String> getNombreMarcas() {
+		SqlMarcaDAO marcaDAO = (SqlMarcaDAO) factoryDAO.getMarcaDAO();
+		List<String> nombres = marcaDAO.getNombreMarcas();
+		
+		return nombres;
+	}
+	
 }

@@ -51,7 +51,7 @@ public class HistorialCliente {
 	    	public void actionPerformed(ActionEvent e ) { limpiar(); }
 	    });
 		
-		historialTA = SwingFactory.getJTextArea(13);
+		historialTA = SwingFactory.getJTextArea(13, false);
 	}
 	
 	public JPanel getDefaultLayout() {

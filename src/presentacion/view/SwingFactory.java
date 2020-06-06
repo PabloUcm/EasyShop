@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
 
 public class SwingFactory {
 
@@ -77,12 +78,17 @@ public class SwingFactory {
 	}
 	
 	
-	public static JTextArea getJTextArea(int fontSize) {
+	public static JTextArea getJTextArea(int fontSize, boolean editable) {
 		JTextArea ta = new JTextArea();
 		
-		ta.setFont(new Font(ta.getFont().toString(), Font.PLAIN, 15));
+		ta.setFont(new Font(ta.getFont().toString(), Font.PLAIN, fontSize));
 		
-		ta.setEditable(false);
+		ta.setEditable(editable);
+		
+		if (editable) {
+			ta.setLineWrap(true);
+			ta.setWrapStyleWord(true);
+		}
 		
 		return ta;
 	}

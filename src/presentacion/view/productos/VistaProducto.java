@@ -61,6 +61,12 @@ public class VistaProducto {
 		productoPanel.add(productosFuncion, BorderLayout.CENTER);
 		productoPanel.add(productosMenu.getDefaultLayout(), BorderLayout.NORTH);
 		
+		productoPanel.addComponentListener(new java.awt.event.ComponentAdapter() {
+	        public void componentShown(java.awt.event.ComponentEvent evt) {
+	            productosMenu.currentCard();
+	        }
+	    });
+		
 		return productoPanel;
 	}
 	

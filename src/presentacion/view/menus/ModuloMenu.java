@@ -21,6 +21,7 @@ public class ModuloMenu {
 	private ArrayList<JButton> buttons;
 	private int iconSize;
 	private int botonAct;
+	private String currentCard;
 	
 	public ModuloMenu(CardSwitcher switcher, int iconSize) {
 		this.switcher = switcher;
@@ -43,7 +44,13 @@ public class ModuloMenu {
 	public void addButton(JButton button, String iconDir, String card) {
 		buttons.add(button);
 		button.setBorder(BorderFactory.createRaisedBevelBorder());
-		if (buttons.size() == 1) activarBoton(button);
+		
+		if (buttons.size() == 1) {
+			activarBoton(button);
+			switcher.switchTo(card);
+			currentCard = card;
+		}
+		
 		button.setContentAreaFilled(false);
 		button.setFocusPainted(false);
 		button.setOpaque(true);
@@ -60,6 +67,7 @@ public class ModuloMenu {
 	    	public void actionPerformed(ActionEvent e ) {
 	    		activarBoton(button);
 	    		switcher.switchTo(card);
+	    		currentCard = card;
 	    	}
 	    });
 	}
@@ -73,5 +81,10 @@ public class ModuloMenu {
 		button.setBorder(BorderFactory.createBevelBorder(1));
 		
 		botonAct = buttons.indexOf(button);
+	}
+	
+	public void currentCard() {
+		switcher.reset();
+		switcher.switchTo(currentCard);
 	}
 }

@@ -15,4 +15,8 @@ private Modelo modelo;
 	public List<TProducto> listarProductos(){
 		return modelo.listarProductos();
 	}
+	
+	public List<String> getNombreMarcas() {
+		return modelo.getNombreMarcas();
+	}
 }

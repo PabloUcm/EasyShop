@@ -52,7 +52,7 @@ public class MostrarMarca{
 	    	public void actionPerformed(ActionEvent e ) { limpiar(); }
 	    });	
 		
-		datosTA = SwingFactory.getJTextArea(15);
+		datosTA = SwingFactory.getJTextArea(15, false);
 	}
 	
 	public JPanel getDefaultLayout() {

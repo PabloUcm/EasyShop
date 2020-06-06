@@ -70,7 +70,6 @@ public class SqlMarcaDAO implements IMarcaDAO {
 						results.getString(4),results.getBoolean(5)));
 			}
 			
-			
 			return marcaList;
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -83,7 +82,28 @@ public class SqlMarcaDAO implements IMarcaDAO {
 			}
 		}
 	}
-
+	
+	@Override
+	public List<String> getNombreMarcas() {
+		List<String> nombres = new ArrayList<>();
+		
+		try {
+			Connection connection = dbAdapter.getConnection();
+			PreparedStatement statement = connection.prepareStatement("SELECT Nombre FROM Marca WHERE activo = true");
+			
+			ResultSet results = statement.executeQuery();
+			
+			while(results.next()) {
+				nombres.add(results.getString(1));
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return nombres;
+	}
+	
 	@Override
 	public int altaMarca(TMarca marca) {
 		int id = -1;
@@ -140,5 +160,4 @@ public class SqlMarcaDAO implements IMarcaDAO {
 		}
 		
 	}
-
 }

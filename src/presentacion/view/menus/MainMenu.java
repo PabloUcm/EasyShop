@@ -102,7 +102,10 @@ public class MainMenu {
 	    	}
 	    });
 		
-		if (buttons.size() == 1) botonActivado(button);
+		if (buttons.size() == 1) {
+			botonActivado(button);
+			switcher.switchTo(card);
+		}
 	}
 	
 	private void crearMLNoActivo(JButton button) {
