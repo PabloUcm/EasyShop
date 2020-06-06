@@ -21,17 +21,15 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import integracion.transfers.TCliente;
 import presentacion.controllers.ProductoController;
 import presentacion.view.SwingFactory;
 
-public class AltaProducto {
+public class ModificarProducto {
+private ProductoController controlador;
 	
-	private ProductoController controlador;
-	
+	private JTextField idTF;
 	private JTextField nombreTF;
 	private JComboBox<String> marcasBox;
-	//private String marcas[] = {"Msi","Asus","Acer","Apple"};
 	private List<String> marcas;
 	private JTextField precioTF;
 	private JTextArea descripcion;
@@ -55,13 +53,14 @@ public class AltaProducto {
 	private JButton confirmar;
 	private JButton limpiar;
 	
-	public AltaProducto(ProductoController controlador) {
+	public ModificarProducto(ProductoController controlador) {
 		this.controlador = controlador;
 		initGUI();
 	}
 	
 	private void initGUI() {
 		
+		idTF = SwingFactory.getJTextField(new Dimension(550,35), 25);
 		nombreTF = SwingFactory.getJTextField(new Dimension(550,35), 25);
 		precioTF = SwingFactory.getJTextField(new Dimension(550,35), 25);
 		procesadorTF = SwingFactory.getJTextField(new Dimension(550,35), 25);
@@ -111,33 +110,39 @@ public class AltaProducto {
 	}
 	
 	public JPanel getDefaultLayout() {
-		JPanel altaProductoPanel = new JPanel(new BorderLayout());
+		JPanel modProductoPanel = new JPanel(new BorderLayout());
 		
 		JPanel campos = new JPanel(new GridBagLayout());
 		GridBagConstraints constraintsCampos = new GridBagConstraints();
 		constraintsCampos.gridx = 0;
 		constraintsCampos.gridy = 0;
-		campos.add(SwingFactory.getJLabel(new Dimension(300,50), "PRODUCTO:" ,30), constraintsCampos);
+		campos.add(SwingFactory.getJLabel(new Dimension(300,50), "ID:" ,30), constraintsCampos);
 		constraintsCampos.gridx = 1;
 		constraintsCampos.gridy = 0;
+		campos.add(idTF, constraintsCampos);
+		constraintsCampos.gridx = 0;
+		constraintsCampos.gridy = 2;
+		campos.add(SwingFactory.getJLabel(new Dimension(300,50), "PRODUCTO:" ,30), constraintsCampos);
+		constraintsCampos.gridx = 1;
+		constraintsCampos.gridy = 2;
 		campos.add(productosBox, constraintsCampos);
 		constraintsCampos.gridx = 0;
-		constraintsCampos.gridy = 2;
+		constraintsCampos.gridy = 3;
 		campos.add(SwingFactory.getJLabel(new Dimension(300,50), "MARCA:" ,30), constraintsCampos);
 		constraintsCampos.gridx = 1;
-		constraintsCampos.gridy = 2;
+		constraintsCampos.gridy = 3;
 		campos.add(marcasBox, constraintsCampos);
 		constraintsCampos.gridx = 0;
-		constraintsCampos.gridy = 3;
+		constraintsCampos.gridy = 4;
 		campos.add(SwingFactory.getJLabel(new Dimension(300,50), "NOMBRE:" ,30), constraintsCampos);
 		constraintsCampos.gridx = 1;
-		constraintsCampos.gridy = 3;
+		constraintsCampos.gridy = 4;
 		campos.add(nombreTF, constraintsCampos);
 		constraintsCampos.gridx = 0;
-		constraintsCampos.gridy = 4;
+		constraintsCampos.gridy = 5;
 		campos.add(SwingFactory.getJLabel(new Dimension(300,50), "PRECIO:" ,30), constraintsCampos);
 		constraintsCampos.gridx = 1;
-		constraintsCampos.gridy = 4;
+		constraintsCampos.gridy = 5;
 		campos.add(precioTF, constraintsCampos);
 		
 		CardLayout clProducto = new CardLayout();
@@ -204,7 +209,7 @@ public class AltaProducto {
 	        });
 		
 		constraintsCampos.gridx = 0;
-		constraintsCampos.gridy = 5;
+		constraintsCampos.gridy = 6;
 		constraintsCampos.gridheight = 1;
 		constraintsCampos.gridwidth = 2;
 		campos.add(camposProducto, constraintsCampos);
@@ -225,16 +230,16 @@ public class AltaProducto {
 		botones.add(confirmar);
 		botones.add(limpiar);
 		
-		altaProductoPanel.add(campos,BorderLayout.CENTER);
-		altaProductoPanel.add(botones, BorderLayout.SOUTH);
+		modProductoPanel.add(campos,BorderLayout.CENTER);
+		modProductoPanel.add(botones, BorderLayout.SOUTH);
 		
-		altaProductoPanel.addComponentListener(new java.awt.event.ComponentAdapter() {
+		modProductoPanel.addComponentListener(new java.awt.event.ComponentAdapter() {
 	        public void componentShown(java.awt.event.ComponentEvent evt) {
 	            setNombreMarcas();
 	        }
 	    });
 		
-		return altaProductoPanel;
+		return modProductoPanel;
 	}
 	
 	private void limpiar() {

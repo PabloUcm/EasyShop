@@ -19,9 +19,9 @@ public class VistaProducto {
 	
 	
 	private AltaProducto altaProducto;
-	//private BajaProducto bajaProducto;
-	//private ModificarProducto modProducto;
-	//private MostrarProducto mostrarProducto;
+	private BajaProducto bajaProducto;
+	private ModificarProducto modProducto;
+	private MostrarProducto mostrarProducto;
 	private ListarProducto listarProducto;
 	//private BuscarProducto buscarProducto;
 	
@@ -32,9 +32,9 @@ public class VistaProducto {
 		this.controlador = new ProductoController(Modelo.getModelo());
 		
 		altaProducto = new AltaProducto(controlador);
-		//bajaProducto = new BajaProducto(controlador);
-		//modProducto = new ModificarProducto(controlador);
-		//mostrarProducto = new MostrarProducto(controlador);
+		bajaProducto = new BajaProducto(controlador);
+		modProducto = new ModificarProducto(controlador);
+		mostrarProducto = new MostrarProducto(controlador);
 		listarProducto = new ListarProducto(controlador);
 		//buscarProducto = new BuscarProducto(controlador);
 		
@@ -47,10 +47,10 @@ public class VistaProducto {
 		CardSwitcher switcher = new CardSwitcher(productosFuncion, cardLayout);
 		productosMenu = new ModuloMenu(switcher, 45);
 		
-		addFunction(altaProducto.getPCLayout(), new JButton("   Alta producto"), "altaproducto", "AltaProducto");
-		//addFunction(bajaProducto.getDefaultLayout(), new JButton("   Baja producto"), "bajaproducto", "BajaProducto");
-		//addFunction(modProducto.getDefaultLayout(), new JButton("Modificar producto"), "modproducto", "ModificarProducto");
-		//addFunction(mostrarProducto.getDefaultLayout(), new JButton("Mostrar producto"), "mostrarproducto", "MostrarProducto");
+		addFunction(altaProducto.getDefaultLayout(), new JButton("   Alta producto"), "altaproducto", "AltaProducto");
+		addFunction(bajaProducto.getDefaultLayout(), new JButton("   Baja producto"), "bajaproducto", "BajaProducto");
+		addFunction(modProducto.getDefaultLayout(), new JButton("Modificar producto"), "modproducto", "ModificarProducto");
+		addFunction(mostrarProducto.getDefaultLayout(), new JButton("Mostrar producto"), "mostrarproducto", "MostrarProducto");
 		addFunction(listarProducto.getDefaultLayout(), new JButton("Listar productos"), "listarproducto", "ListarProductos");
 		//addFunction(buscarProducto.getDefaultLayout(), new JButton("Buscar productos"), "buscarproducto", "BuscarProductos");
 	}
