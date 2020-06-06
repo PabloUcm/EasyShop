@@ -1,7 +1,8 @@
 package presentacion.controllers;
 
 
-import integracion.transfers.TCliente;
+import java.util.List;
+
 import integracion.transfers.TPersonal;
 import negocio.Modelo;
 
@@ -26,8 +27,8 @@ private Modelo modelo;
 	public void modificarPersonal(int id, String dni, String nombre, String sueldo,String telefono,String horario) throws Exception{
 		modelo.modificarPersonal( id,dni,nombre,telefono,sueldo,horario);
 	}
-	public void listarEmpleados(){
-		modelo.listarEmpleados();
+	public List<TPersonal> listarEmpleados(){
+		return modelo.listarEmpleados();
 	}
 	public TPersonal getEmpleado(int id) throws Exception {
 		return modelo.getEmpleado(id);

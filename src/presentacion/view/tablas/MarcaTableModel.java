@@ -3,8 +3,10 @@ package presentacion.view.tablas;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.SwingUtilities;
 import javax.swing.table.AbstractTableModel;
 
+import integracion.transfers.TCliente;
 import integracion.transfers.TMarca;
 import presentacion.controllers.MarcaController;
 
@@ -19,7 +21,16 @@ public class MarcaTableModel extends AbstractTableModel {
 	public MarcaTableModel(MarcaController c) {
 		this.controlador = c;
 		marcas = new ArrayList<>();
-		controlador.listarMarcas();
+	}
+	
+	public void setMarcas(List<TMarca> lm) { 
+		SwingUtilities.invokeLater( new Runnable() {
+			@Override
+			public void run() {
+				marcas = lm; 
+				fireTableStructureChanged();
+			}
+		});
 	}
 	
 	@Override
