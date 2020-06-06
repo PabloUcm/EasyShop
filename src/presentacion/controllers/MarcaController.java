@@ -1,5 +1,7 @@
 package presentacion.controllers;
 
+import java.util.List;
+
 import integracion.transfers.TMarca;
 import negocio.Modelo;
 
@@ -26,7 +28,7 @@ public class MarcaController {
 		return modelo.getMarca(id);
 	}
 	
-	public void listarMarcas() {
-		modelo.listarMarcas();
+	public List<TMarca> listarMarcas() {
+		return modelo.listarMarcas();
 	}
 }

@@ -166,10 +166,13 @@ public class Modelo {
 				
 	}
 	
-	public void listarEmpleados(){
+	public List<TPersonal> listarEmpleados(){
 		SqlPersonalDAO empleadoDAO = (SqlPersonalDAO) factoryDAO.getEmpleadoDAO();
 		List<TPersonal> empleadoList = empleadoDAO.getAllEmpleados();
 		
+		logObserver.listar(Entity.PERSONAL);
+		
+		return empleadoList;	
 	}
 	
 	public TPersonal getEmpleado(int id) throws Exception {		
@@ -228,10 +231,13 @@ public class Modelo {
 		
 	}
 	
-	public void listarMarcas() {
+	public List<TMarca> listarMarcas() {
 		SqlMarcaDAO marcaDAO = (SqlMarcaDAO) factoryDAO.getMarcaDAO();
 		List<TMarca> marcaList = marcaDAO.getAllMarcas();
 		
+		logObserver.listar(Entity.MARCA);
+		
+		return marcaList;		
 	}
 	
 	public TMarca getMarca(int id) throws Exception{

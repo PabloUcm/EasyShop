@@ -3,8 +3,10 @@ package presentacion.view.tablas;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.SwingUtilities;
 import javax.swing.table.AbstractTableModel;
 
+import integracion.transfers.TCliente;
 import integracion.transfers.TPersonal;
 
 import presentacion.controllers.PersonalController;
@@ -23,9 +25,17 @@ public class PersonalTableModel extends AbstractTableModel{
 	
 	public PersonalTableModel(PersonalController c){
 		controlador = c;
-		empleados = new ArrayList<>();
-		controlador.listarEmpleados();
-		
+		empleados = new ArrayList<>();		
+	}
+	
+	public void setPersonal(List<TPersonal> lp) { 
+		SwingUtilities.invokeLater( new Runnable() {
+			@Override
+			public void run() {
+				empleados = lp; 
+				fireTableStructureChanged();
+			}
+		});
 	}
 
 	@Override
