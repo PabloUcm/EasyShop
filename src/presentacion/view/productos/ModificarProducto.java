@@ -28,10 +28,12 @@ public class ModificarProducto {
 private ProductoController controlador;
 	
 	private JTextField idTF;
+	private JTextField upcTF;
 	private JTextField nombreTF;
 	private JComboBox<String> marcasBox;
 	private List<String> marcas;
 	private JTextField precioTF;
+	private JTextField cantidadTF;
 	private JTextArea descripcion;
 	private JScrollPane descripcionSP;
 	
@@ -60,43 +62,45 @@ private ProductoController controlador;
 	
 	private void initGUI() {
 		
-		idTF = SwingFactory.getJTextField(new Dimension(550,35), 25);
-		nombreTF = SwingFactory.getJTextField(new Dimension(550,35), 25);
-		precioTF = SwingFactory.getJTextField(new Dimension(550,35), 25);
-		procesadorTF = SwingFactory.getJTextField(new Dimension(550,35), 25);
-		discoDuroTF = SwingFactory.getJTextField(new Dimension(550,35), 25);
-		ramTF = SwingFactory.getJTextField(new Dimension(550,35), 25);
-		tarjetaGraficaTF = SwingFactory.getJTextField(new Dimension(550,35), 25);
-		placaBaseTF = SwingFactory.getJTextField(new Dimension(550,35), 25);
-		conexionTF = SwingFactory.getJTextField(new Dimension(550,35), 25);
+		idTF = SwingFactory.getJTextField(new Dimension(550,25), 20);
+		upcTF = SwingFactory.getJTextField(new Dimension(550,25), 20);
+		nombreTF = SwingFactory.getJTextField(new Dimension(550,25), 20);
+		precioTF = SwingFactory.getJTextField(new Dimension(550,25), 20);
+		cantidadTF = SwingFactory.getJTextField(new Dimension(550,25), 20);
+		procesadorTF = SwingFactory.getJTextField(new Dimension(550,25), 20);
+		discoDuroTF = SwingFactory.getJTextField(new Dimension(550,25), 20);
+		ramTF = SwingFactory.getJTextField(new Dimension(550,25), 20);
+		tarjetaGraficaTF = SwingFactory.getJTextField(new Dimension(550,25), 20);
+		placaBaseTF = SwingFactory.getJTextField(new Dimension(550,25), 20);
+		conexionTF = SwingFactory.getJTextField(new Dimension(550,25), 20);
 		
 		marcasBox = new JComboBox<String>();
 		setNombreMarcas();
-		marcasBox.setSelectedIndex(0); 
 		marcasBox.setEditable(false); 
-		marcasBox.setPreferredSize(new Dimension(550, 35));
-		marcasBox.setFont(new Font(marcasBox.getFont().toString(), Font.PLAIN, 25));
+		marcasBox.setPreferredSize(new Dimension(550, 30));
+		marcasBox.setFont(new Font(marcasBox.getFont().toString(), Font.PLAIN, 20));
 		
 		productosBox = new JComboBox<String>(productos);
 		productosBox.setSelectedIndex(0); 
 		productosBox.setEditable(false);
-		productosBox.setPreferredSize(new Dimension(550, 35));
-		productosBox.setFont(new Font(productosBox.getFont().toString(), Font.PLAIN, 25));
+		productosBox.setPreferredSize(new Dimension(550, 30));
+		productosBox.setFont(new Font(productosBox.getFont().toString(), Font.PLAIN, 20));
 		
 		tPerifericoBox = new JComboBox<String>(categorias);
 		tPerifericoBox.setSelectedIndex(0); 
 		tPerifericoBox.setEditable(false);
-		tPerifericoBox.setPreferredSize(new Dimension(550, 35));
-		tPerifericoBox.setFont(new Font(productosBox.getFont().toString(), Font.PLAIN, 25));
+		tPerifericoBox.setPreferredSize(new Dimension(550, 30));
+		tPerifericoBox.setFont(new Font(productosBox.getFont().toString(), Font.PLAIN, 20));
 		
-		descripcion = SwingFactory.getJTextArea(25, true);
+		
+		descripcion = SwingFactory.getJTextArea(20, true);
 		descripcionSP = new JScrollPane(descripcion);
 		descripcionSP.setPreferredSize(new Dimension(550,100));
 		descripcionSP.setMaximumSize(descripcionSP.getPreferredSize());
 		descripcionSP.setMinimumSize(new Dimension(550,150));
 		
-		confirmar = SwingFactory.getJButton(new Dimension(230,60), "CONFIRMAR ALTA DE CLIENTE", 
-				"icons/confirmar", 50, Color.GREEN, new Color(130,200,21));
+		confirmar = SwingFactory.getJButton(new Dimension(230,60), "MODIFICAR PRODUCTO", 
+				"icons/modificar", 50, new Color(250,243,58), new Color(230,215,73));
 		limpiar = SwingFactory.getJButton(new Dimension(230,60), "LIMPIAR CAMPOS DE TEXTO", 
 			  "icons/limpiar", 50, new Color(205,205,205), new Color(166,166,166));
 		
@@ -116,34 +120,46 @@ private ProductoController controlador;
 		GridBagConstraints constraintsCampos = new GridBagConstraints();
 		constraintsCampos.gridx = 0;
 		constraintsCampos.gridy = 0;
-		campos.add(SwingFactory.getJLabel(new Dimension(300,50), "ID:" ,30), constraintsCampos);
+		campos.add(SwingFactory.getJLabel(new Dimension(300,45), "ID:" ,25), constraintsCampos);
 		constraintsCampos.gridx = 1;
 		constraintsCampos.gridy = 0;
 		campos.add(idTF, constraintsCampos);
 		constraintsCampos.gridx = 0;
 		constraintsCampos.gridy = 2;
-		campos.add(SwingFactory.getJLabel(new Dimension(300,50), "PRODUCTO:" ,30), constraintsCampos);
+		campos.add(SwingFactory.getJLabel(new Dimension(300,45), "PRODUCTO:" ,25), constraintsCampos);
 		constraintsCampos.gridx = 1;
 		constraintsCampos.gridy = 2;
 		campos.add(productosBox, constraintsCampos);
 		constraintsCampos.gridx = 0;
 		constraintsCampos.gridy = 3;
-		campos.add(SwingFactory.getJLabel(new Dimension(300,50), "MARCA:" ,30), constraintsCampos);
+		campos.add(SwingFactory.getJLabel(new Dimension(300,45), "MARCA:" ,25), constraintsCampos);
 		constraintsCampos.gridx = 1;
 		constraintsCampos.gridy = 3;
 		campos.add(marcasBox, constraintsCampos);
 		constraintsCampos.gridx = 0;
 		constraintsCampos.gridy = 4;
-		campos.add(SwingFactory.getJLabel(new Dimension(300,50), "NOMBRE:" ,30), constraintsCampos);
+		campos.add(SwingFactory.getJLabel(new Dimension(300,45), "UPC:" ,25), constraintsCampos);
 		constraintsCampos.gridx = 1;
 		constraintsCampos.gridy = 4;
-		campos.add(nombreTF, constraintsCampos);
+		campos.add(upcTF, constraintsCampos);
 		constraintsCampos.gridx = 0;
 		constraintsCampos.gridy = 5;
-		campos.add(SwingFactory.getJLabel(new Dimension(300,50), "PRECIO:" ,30), constraintsCampos);
+		campos.add(SwingFactory.getJLabel(new Dimension(300,45), "NOMBRE:" ,25), constraintsCampos);
 		constraintsCampos.gridx = 1;
 		constraintsCampos.gridy = 5;
+		campos.add(nombreTF, constraintsCampos);
+		constraintsCampos.gridx = 0;
+		constraintsCampos.gridy = 6;
+		campos.add(SwingFactory.getJLabel(new Dimension(300,45), "PRECIO:" ,25), constraintsCampos);
+		constraintsCampos.gridx = 1;
+		constraintsCampos.gridy = 6;
 		campos.add(precioTF, constraintsCampos);
+		constraintsCampos.gridx = 0;
+		constraintsCampos.gridy = 7;
+		campos.add(SwingFactory.getJLabel(new Dimension(300,45), "CANTIDAD:" ,25), constraintsCampos);
+		constraintsCampos.gridx = 1;
+		constraintsCampos.gridy = 7;
+		campos.add(cantidadTF, constraintsCampos);
 		
 		CardLayout clProducto = new CardLayout();
 		JPanel camposProducto = new JPanel(clProducto); 
@@ -153,31 +169,31 @@ private ProductoController controlador;
 		
 		constraintsPC.gridx= 0;
 		constraintsPC.gridy = 0;
-		camposPC.add(SwingFactory.getJLabel(new Dimension(300,50), "PROCESADOR:" ,30), constraintsPC);
+		camposPC.add(SwingFactory.getJLabel(new Dimension(300,45), "PROCESADOR:" ,25), constraintsPC);
 		constraintsPC.gridx= 1;
 		constraintsPC.gridy = 0;
 		camposPC.add(procesadorTF, constraintsPC);
 		constraintsPC.gridx= 0;
 		constraintsPC.gridy = 1;
-		camposPC.add(SwingFactory.getJLabel(new Dimension(300,50), "RAM:" ,30), constraintsPC);
+		camposPC.add(SwingFactory.getJLabel(new Dimension(300,45), "RAM:" ,25), constraintsPC);
 		constraintsPC.gridx= 1;
 		constraintsPC.gridy = 1;
 		camposPC.add(ramTF, constraintsPC);
 		constraintsPC.gridx= 0;
 		constraintsPC.gridy = 2;
-		camposPC.add(SwingFactory.getJLabel(new Dimension(300,50), "DISCO DURO:" ,30), constraintsPC);
+		camposPC.add(SwingFactory.getJLabel(new Dimension(300,45), "DISCO DURO:" ,25), constraintsPC);
 		constraintsPC.gridx= 1;
 		constraintsPC.gridy = 2;
 		camposPC.add(discoDuroTF, constraintsPC);
 		constraintsPC.gridx= 0;
 		constraintsPC.gridy = 3;
-		camposPC.add(SwingFactory.getJLabel(new Dimension(300,50), "TARJETA GRAFICA:" ,30), constraintsPC);
+		camposPC.add(SwingFactory.getJLabel(new Dimension(300,45), "TARJETA GRAFICA:" ,25), constraintsPC);
 		constraintsPC.gridx= 1;
 		constraintsPC.gridy = 3;
 		camposPC.add(tarjetaGraficaTF, constraintsPC);
 		constraintsPC.gridx= 0;
 		constraintsPC.gridy = 4;
-		camposPC.add(SwingFactory.getJLabel(new Dimension(300,50), "PLACA BASE:" ,30), constraintsPC);
+		camposPC.add(SwingFactory.getJLabel(new Dimension(300,45), "PLACA BASE:" ,25), constraintsPC);
 		constraintsPC.gridx= 1;
 		constraintsPC.gridy = 4;
 		camposPC.add(placaBaseTF, constraintsPC);
@@ -187,13 +203,13 @@ private ProductoController controlador;
 		
 		constraintsPrfco.gridx= 0;
 		constraintsPrfco.gridy = 0;
-		camposPeriferico.add(SwingFactory.getJLabel(new Dimension(300,50), "CATEGORIA:" ,30), constraintsPrfco);
+		camposPeriferico.add(SwingFactory.getJLabel(new Dimension(300,45), "CATEGORIA:" ,25), constraintsPrfco);
 		constraintsPrfco.gridx= 1;
 		constraintsPrfco.gridy = 0;
 		camposPeriferico.add(tPerifericoBox, constraintsPrfco);
 		constraintsPrfco.gridx= 0;
 		constraintsPrfco.gridy = 1;
-		camposPeriferico.add(SwingFactory.getJLabel(new Dimension(300,50), "CONEXION:" ,30), constraintsPrfco);
+		camposPeriferico.add(SwingFactory.getJLabel(new Dimension(300,45), "CONEXION:" ,25), constraintsPrfco);
 		constraintsPrfco.gridx= 1;
 		constraintsPrfco.gridy = 1;
 		camposPeriferico.add(conexionTF, constraintsPrfco);
@@ -209,17 +225,17 @@ private ProductoController controlador;
 	        });
 		
 		constraintsCampos.gridx = 0;
-		constraintsCampos.gridy = 6;
+		constraintsCampos.gridy = 8;
 		constraintsCampos.gridheight = 1;
 		constraintsCampos.gridwidth = 2;
 		campos.add(camposProducto, constraintsCampos);
 		constraintsCampos.gridx = 0;
-		constraintsCampos.gridy = 8;
+		constraintsCampos.gridy = 9;
 		constraintsCampos.gridheight = 1;
 		constraintsCampos.gridwidth = 2;
-		campos.add(SwingFactory.getJLabel(new Dimension(265,50), "   DESCRIPCION:" ,30), constraintsCampos);
+		campos.add(SwingFactory.getJLabel(new Dimension(265,50), "   DESCRIPCION:" ,25), constraintsCampos);
 		constraintsCampos.gridx = 0;
-		constraintsCampos.gridy = 9;
+		constraintsCampos.gridy = 10;
 		campos.add(descripcionSP, constraintsCampos);
 		
 		JPanel botones = new JPanel();

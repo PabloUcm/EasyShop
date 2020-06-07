@@ -16,12 +16,18 @@ import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
 
 import integracion.transfers.TCliente;
+import integracion.transfers.TPc;
+import integracion.transfers.TPeriferico;
+import integracion.transfers.TProducto;
 import presentacion.controllers.ProductoController;
 import presentacion.view.SwingFactory;
 
@@ -29,11 +35,12 @@ public class AltaProducto {
 	
 	private ProductoController controlador;
 	
+	private JTextField upcTF;
 	private JTextField nombreTF;
 	private JComboBox<String> marcasBox;
-	//private String marcas[] = {"Msi","Asus","Acer","Apple"};
 	private List<String> marcas;
 	private JTextField precioTF;
+	private JTextField cantidadTF;
 	private JTextArea descripcion;
 	private JScrollPane descripcionSP;
 	
@@ -62,47 +69,49 @@ public class AltaProducto {
 	
 	private void initGUI() {
 		
-		nombreTF = SwingFactory.getJTextField(new Dimension(550,35), 25);
-		precioTF = SwingFactory.getJTextField(new Dimension(550,35), 25);
-		procesadorTF = SwingFactory.getJTextField(new Dimension(550,35), 25);
-		discoDuroTF = SwingFactory.getJTextField(new Dimension(550,35), 25);
-		ramTF = SwingFactory.getJTextField(new Dimension(550,35), 25);
-		tarjetaGraficaTF = SwingFactory.getJTextField(new Dimension(550,35), 25);
-		placaBaseTF = SwingFactory.getJTextField(new Dimension(550,35), 25);
-		conexionTF = SwingFactory.getJTextField(new Dimension(550,35), 25);
+		upcTF = SwingFactory.getJTextField(new Dimension(550,25), 20);
+		nombreTF = SwingFactory.getJTextField(new Dimension(550,25), 20);
+		precioTF = SwingFactory.getJTextField(new Dimension(550,25), 20);
+		cantidadTF = SwingFactory.getJTextField(new Dimension(550,25), 20);
+		procesadorTF = SwingFactory.getJTextField(new Dimension(550,25), 20);
+		discoDuroTF = SwingFactory.getJTextField(new Dimension(550,25), 20);
+		ramTF = SwingFactory.getJTextField(new Dimension(550,25), 20);
+		tarjetaGraficaTF = SwingFactory.getJTextField(new Dimension(550,25), 20);
+		placaBaseTF = SwingFactory.getJTextField(new Dimension(550,25), 20);
+		conexionTF = SwingFactory.getJTextField(new Dimension(550,25), 20);
 		
 		marcasBox = new JComboBox<String>();
 		setNombreMarcas();
-		marcasBox.setSelectedIndex(0); 
 		marcasBox.setEditable(false); 
-		marcasBox.setPreferredSize(new Dimension(550, 35));
-		marcasBox.setFont(new Font(marcasBox.getFont().toString(), Font.PLAIN, 25));
+		marcasBox.setPreferredSize(new Dimension(550, 30));
+		marcasBox.setFont(new Font(marcasBox.getFont().toString(), Font.PLAIN, 20));
 		
 		productosBox = new JComboBox<String>(productos);
 		productosBox.setSelectedIndex(0); 
 		productosBox.setEditable(false);
-		productosBox.setPreferredSize(new Dimension(550, 35));
-		productosBox.setFont(new Font(productosBox.getFont().toString(), Font.PLAIN, 25));
+		productosBox.setPreferredSize(new Dimension(550, 30));
+		productosBox.setFont(new Font(productosBox.getFont().toString(), Font.PLAIN, 20));
 		
 		tPerifericoBox = new JComboBox<String>(categorias);
 		tPerifericoBox.setSelectedIndex(0); 
 		tPerifericoBox.setEditable(false);
-		tPerifericoBox.setPreferredSize(new Dimension(550, 35));
-		tPerifericoBox.setFont(new Font(productosBox.getFont().toString(), Font.PLAIN, 25));
+		tPerifericoBox.setPreferredSize(new Dimension(550, 30));
+		tPerifericoBox.setFont(new Font(productosBox.getFont().toString(), Font.PLAIN, 20));
 		
-		descripcion = SwingFactory.getJTextArea(25, true);
+		
+		descripcion = SwingFactory.getJTextArea(20, true);
 		descripcionSP = new JScrollPane(descripcion);
 		descripcionSP.setPreferredSize(new Dimension(550,100));
 		descripcionSP.setMaximumSize(descripcionSP.getPreferredSize());
 		descripcionSP.setMinimumSize(new Dimension(550,150));
 		
-		confirmar = SwingFactory.getJButton(new Dimension(230,60), "CONFIRMAR ALTA DE CLIENTE", 
+		confirmar = SwingFactory.getJButton(new Dimension(250,60), "CONFIRMAR ALTA DE PRODUCTO", 
 				"icons/confirmar", 50, Color.GREEN, new Color(130,200,21));
-		limpiar = SwingFactory.getJButton(new Dimension(230,60), "LIMPIAR CAMPOS DE TEXTO", 
+		limpiar = SwingFactory.getJButton(new Dimension(250,60), "LIMPIAR CAMPOS DE TEXTO", 
 			  "icons/limpiar", 50, new Color(205,205,205), new Color(166,166,166));
 		
 		confirmar.addActionListener(new ActionListener() {
-	    	public void actionPerformed(ActionEvent e ) { }
+	    	public void actionPerformed(ActionEvent e ) { alta(); }
 	    });
 		
 		limpiar.addActionListener(new ActionListener() {
@@ -117,28 +126,40 @@ public class AltaProducto {
 		GridBagConstraints constraintsCampos = new GridBagConstraints();
 		constraintsCampos.gridx = 0;
 		constraintsCampos.gridy = 0;
-		campos.add(SwingFactory.getJLabel(new Dimension(300,50), "PRODUCTO:" ,30), constraintsCampos);
+		campos.add(SwingFactory.getJLabel(new Dimension(300,45), "PRODUCTO:" ,25), constraintsCampos);
 		constraintsCampos.gridx = 1;
 		constraintsCampos.gridy = 0;
 		campos.add(productosBox, constraintsCampos);
 		constraintsCampos.gridx = 0;
 		constraintsCampos.gridy = 2;
-		campos.add(SwingFactory.getJLabel(new Dimension(300,50), "MARCA:" ,30), constraintsCampos);
+		campos.add(SwingFactory.getJLabel(new Dimension(300,45), "MARCA:" ,25), constraintsCampos);
 		constraintsCampos.gridx = 1;
 		constraintsCampos.gridy = 2;
 		campos.add(marcasBox, constraintsCampos);
 		constraintsCampos.gridx = 0;
 		constraintsCampos.gridy = 3;
-		campos.add(SwingFactory.getJLabel(new Dimension(300,50), "NOMBRE:" ,30), constraintsCampos);
+		campos.add(SwingFactory.getJLabel(new Dimension(300,45), "UPC:" ,25), constraintsCampos);
 		constraintsCampos.gridx = 1;
 		constraintsCampos.gridy = 3;
-		campos.add(nombreTF, constraintsCampos);
+		campos.add(upcTF, constraintsCampos);
 		constraintsCampos.gridx = 0;
 		constraintsCampos.gridy = 4;
-		campos.add(SwingFactory.getJLabel(new Dimension(300,50), "PRECIO:" ,30), constraintsCampos);
+		campos.add(SwingFactory.getJLabel(new Dimension(300,45), "NOMBRE:" ,25), constraintsCampos);
 		constraintsCampos.gridx = 1;
 		constraintsCampos.gridy = 4;
+		campos.add(nombreTF, constraintsCampos);
+		constraintsCampos.gridx = 0;
+		constraintsCampos.gridy = 5;
+		campos.add(SwingFactory.getJLabel(new Dimension(300,45), "PRECIO:" ,25), constraintsCampos);
+		constraintsCampos.gridx = 1;
+		constraintsCampos.gridy = 5;
 		campos.add(precioTF, constraintsCampos);
+		constraintsCampos.gridx = 0;
+		constraintsCampos.gridy = 6;
+		campos.add(SwingFactory.getJLabel(new Dimension(300,45), "CANTIDAD:" ,25), constraintsCampos);
+		constraintsCampos.gridx = 1;
+		constraintsCampos.gridy = 6;
+		campos.add(cantidadTF, constraintsCampos);
 		
 		CardLayout clProducto = new CardLayout();
 		JPanel camposProducto = new JPanel(clProducto); 
@@ -148,52 +169,53 @@ public class AltaProducto {
 		
 		constraintsPC.gridx= 0;
 		constraintsPC.gridy = 0;
-		camposPC.add(SwingFactory.getJLabel(new Dimension(300,50), "PROCESADOR:" ,30), constraintsPC);
+		camposPC.add(SwingFactory.getJLabel(new Dimension(300,45), "PROCESADOR:" ,25), constraintsPC);
 		constraintsPC.gridx= 1;
 		constraintsPC.gridy = 0;
 		camposPC.add(procesadorTF, constraintsPC);
 		constraintsPC.gridx= 0;
 		constraintsPC.gridy = 1;
-		camposPC.add(SwingFactory.getJLabel(new Dimension(300,50), "RAM:" ,30), constraintsPC);
+		camposPC.add(SwingFactory.getJLabel(new Dimension(300,45), "RAM:" ,25), constraintsPC);
 		constraintsPC.gridx= 1;
 		constraintsPC.gridy = 1;
 		camposPC.add(ramTF, constraintsPC);
 		constraintsPC.gridx= 0;
 		constraintsPC.gridy = 2;
-		camposPC.add(SwingFactory.getJLabel(new Dimension(300,50), "DISCO DURO:" ,30), constraintsPC);
+		camposPC.add(SwingFactory.getJLabel(new Dimension(300,45), "DISCO DURO:" ,25), constraintsPC);
 		constraintsPC.gridx= 1;
 		constraintsPC.gridy = 2;
 		camposPC.add(discoDuroTF, constraintsPC);
 		constraintsPC.gridx= 0;
 		constraintsPC.gridy = 3;
-		camposPC.add(SwingFactory.getJLabel(new Dimension(300,50), "TARJETA GRAFICA:" ,30), constraintsPC);
+		camposPC.add(SwingFactory.getJLabel(new Dimension(300,45), "TARJETA GRAFICA:" ,25), constraintsPC);
 		constraintsPC.gridx= 1;
 		constraintsPC.gridy = 3;
 		camposPC.add(tarjetaGraficaTF, constraintsPC);
 		constraintsPC.gridx= 0;
 		constraintsPC.gridy = 4;
-		camposPC.add(SwingFactory.getJLabel(new Dimension(300,50), "PLACA BASE:" ,30), constraintsPC);
+		camposPC.add(SwingFactory.getJLabel(new Dimension(300,45), "PLACA BASE:" ,25), constraintsPC);
 		constraintsPC.gridx= 1;
 		constraintsPC.gridy = 4;
 		camposPC.add(placaBaseTF, constraintsPC);
+		
+		camposProducto.add(camposPC, productos[0]);
 		
 		JPanel camposPeriferico = new JPanel(new GridBagLayout());
 		GridBagConstraints constraintsPrfco = new GridBagConstraints();
 		
 		constraintsPrfco.gridx= 0;
 		constraintsPrfco.gridy = 0;
-		camposPeriferico.add(SwingFactory.getJLabel(new Dimension(300,50), "CATEGORIA:" ,30), constraintsPrfco);
+		camposPeriferico.add(SwingFactory.getJLabel(new Dimension(300,45), "CATEGORIA:" ,25), constraintsPrfco);
 		constraintsPrfco.gridx= 1;
 		constraintsPrfco.gridy = 0;
 		camposPeriferico.add(tPerifericoBox, constraintsPrfco);
 		constraintsPrfco.gridx= 0;
 		constraintsPrfco.gridy = 1;
-		camposPeriferico.add(SwingFactory.getJLabel(new Dimension(300,50), "CONEXION:" ,30), constraintsPrfco);
+		camposPeriferico.add(SwingFactory.getJLabel(new Dimension(300,45), "CONEXION:" ,25), constraintsPrfco);
 		constraintsPrfco.gridx= 1;
 		constraintsPrfco.gridy = 1;
 		camposPeriferico.add(conexionTF, constraintsPrfco);
 		
-		camposProducto.add(camposPC, productos[0]);
 		camposProducto.add(camposPeriferico, productos[1]);
 		
 		productosBox.addActionListener(new ActionListener() {
@@ -204,7 +226,7 @@ public class AltaProducto {
 	        });
 		
 		constraintsCampos.gridx = 0;
-		constraintsCampos.gridy = 5;
+		constraintsCampos.gridy = 7;
 		constraintsCampos.gridheight = 1;
 		constraintsCampos.gridwidth = 2;
 		campos.add(camposProducto, constraintsCampos);
@@ -212,7 +234,7 @@ public class AltaProducto {
 		constraintsCampos.gridy = 8;
 		constraintsCampos.gridheight = 1;
 		constraintsCampos.gridwidth = 2;
-		campos.add(SwingFactory.getJLabel(new Dimension(265,50), "   DESCRIPCION:" ,30), constraintsCampos);
+		campos.add(SwingFactory.getJLabel(new Dimension(265,50), "      DESCRIPCION:" ,25), constraintsCampos);
 		constraintsCampos.gridx = 0;
 		constraintsCampos.gridy = 9;
 		campos.add(descripcionSP, constraintsCampos);
@@ -237,6 +259,127 @@ public class AltaProducto {
 		return altaProductoPanel;
 	}
 	
+	private void alta()  {
+		String tipo = productosBox.getSelectedItem().toString();
+		String nombreMarca = null;
+		if (marcas.size() > 0) nombreMarca = marcasBox.getSelectedItem().toString();
+		
+		try {
+			if (upcTF.getText().trim().equals("") || nombreTF.getText().trim().equals("") || 
+				precioTF.getText().trim().equals("") || cantidadTF.getText().trim().equals(""))
+			{ 
+				throw new Exception("Campos sin rellenar."); 
+			}
+			
+			if (nombreMarca == null) throw new Exception("El producto debe estar asociado a una marca.");
+			
+			String desc = descripcion.getText().trim(); 
+			if (desc.equals("")) desc = null;
+			else desc = descripcion.getText();
+			
+			if (tipo == "PC") {
+				if (tarjetaGraficaTF.getText().trim().equals("") || ramTF.getText().trim().equals("") || 
+					procesadorTF.getText().trim().equals("") || placaBaseTF.getText().trim().equals("") || 
+					discoDuroTF.getText().trim().equals(""))
+				{ 
+					throw new Exception("Campos sin rellenar."); 
+				}
+				
+				TPc pc = new TPc();
+				
+				pc.setUPC(upcTF.getText());
+				pc.setNombre(nombreTF.getText());
+				pc.setTipo(tipo);
+				pc.setPrecio(Double.parseDouble(precioTF.getText()));
+				pc.setCantidad(Integer.parseInt(cantidadTF.getText()));
+				pc.setDescripcion(desc);
+				pc.setTarjetagrafica(tarjetaGraficaTF.getText());
+				pc.setRam(ramTF.getText());
+				pc.setProcesador(procesadorTF.getText());
+				pc.setPlacabase(placaBaseTF.getText());
+				pc.setDiscoduro(discoDuroTF.getText());
+				
+				TPc pcYaRegistrado = controlador.altaPC(pc, nombreMarca);
+				
+				if (pcYaRegistrado == null) {
+					JOptionPane.showMessageDialog(null,"PC " + nombreTF.getText() + " dado de alta con exito.",
+							   "INFO",JOptionPane.INFORMATION_MESSAGE);
+				}
+				else {
+					Object[] options = {"Modificar","No modificar","No reactivar"};
+					int n = JOptionPane.showOptionDialog(null,
+							 "Este PC ya estaba registrado, ¿Quieres reactivarlo y modificar sus valores?:", "Advertencia",
+							 JOptionPane.YES_NO_CANCEL_OPTION,
+							 JOptionPane.WARNING_MESSAGE,
+							 null,
+							 options,
+							 options[1]); 
+					
+					
+					if (n == JOptionPane.YES_OPTION) {
+						controlador.reactivarPC(pc);
+						JOptionPane.showMessageDialog(null,"PC " + pc.getNombre() + " reactivado con exito",
+								   "INFO",JOptionPane.INFORMATION_MESSAGE);
+					}
+					else if (n == JOptionPane.NO_OPTION) {
+						controlador.reactivarPC(pcYaRegistrado);
+						JOptionPane.showMessageDialog(null,"PC " + pcYaRegistrado.getNombre() + " reactivado con exito",
+								   "INFO",JOptionPane.INFORMATION_MESSAGE);
+					}
+					limpiar();
+				}
+			}
+			else if (tipo == "Periferico") {
+				if (conexionTF.getText().trim().equals("")) throw new Exception("Campos sin rellenar."); 
+				
+				TPeriferico periferico = new TPeriferico();
+				
+				periferico.setUPC(upcTF.getText());
+				periferico.setNombre(nombreTF.getText());
+				periferico.setTipo(tipo);
+				periferico.setPrecio(Double.parseDouble(precioTF.getText()));
+				periferico.setCantidad(Integer.parseInt(cantidadTF.getText()));
+				periferico.setDescripcion(desc);
+				periferico.setTipoPeriferico(tPerifericoBox.getSelectedItem().toString());
+				periferico.setConexion(conexionTF.getText());
+				
+				TPeriferico prfcoYaRegistrado = controlador.altaPeriferico(periferico, nombreMarca);
+				if (prfcoYaRegistrado == null) {
+					JOptionPane.showMessageDialog(null,"Periferico " + nombreTF.getText() + " dado de alta con exito.",
+							   "INFO",JOptionPane.INFORMATION_MESSAGE);
+				}
+				else {
+					Object[] options = {"Modificar","No modificar","No reactivar"};
+					int n = JOptionPane.showOptionDialog(null,
+							 "Este periferico ya estaba registrado, ¿Quieres reactivarlo y modificar sus valores?:", "Advertencia",
+							 JOptionPane.YES_NO_CANCEL_OPTION,
+							 JOptionPane.WARNING_MESSAGE,
+							 null,
+							 options,
+							 options[1]); 
+					
+					
+					if (n == JOptionPane.YES_OPTION) {
+						periferico.setId(prfcoYaRegistrado.getId());
+						controlador.reactivarPeriferico(periferico);
+						JOptionPane.showMessageDialog(null,"Periferico " + periferico.getNombre() + " reactivado con exito",
+								   "INFO",JOptionPane.INFORMATION_MESSAGE);
+					}
+					else if (n == JOptionPane.NO_OPTION) {
+						controlador.reactivarPeriferico(prfcoYaRegistrado);
+						JOptionPane.showMessageDialog(null,"Periferico " + prfcoYaRegistrado.getNombre() + " reactivado con exito",
+								   "INFO",JOptionPane.INFORMATION_MESSAGE);
+					}
+					limpiar();
+				}
+			}
+			
+		}
+		catch(Exception ex) {
+			JOptionPane.showMessageDialog(null,ex.getMessage(), "ERROR",JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	
 	private void limpiar() {
 		nombreTF.setText("");
 		precioTF.setText("");
@@ -251,10 +394,8 @@ public class AltaProducto {
 	private void setNombreMarcas() {
 		marcas = controlador.getNombreMarcas();
 		
-		if (marcas.size() == 0) {
-			String[] nombreMarcas = {"[Vacio]"};
-			marcasBox.setModel(new DefaultComboBoxModel<String>(nombreMarcas));
-		}
-		else marcasBox.setModel(new DefaultComboBoxModel<String>(marcas.toArray(new String[0])));
+		marcasBox.setModel(new DefaultComboBoxModel<String>(marcas.toArray(new String[0])));
+		
+		if (marcas.size() > 0) marcasBox.setSelectedIndex(0); 
 	}
 }

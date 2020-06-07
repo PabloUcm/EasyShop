@@ -54,6 +54,24 @@ public class SqlMarcaDAO implements IMarcaDAO {
 		
 		return null;
 	}
+	
+	@Override
+	public TMarca getMarcaByName(String name) {
+		try {
+			Connection connection = dbAdapter.getConnection();
+			PreparedStatement statement = connection.prepareStatement("SELECT * FROM Marca WHERE nombre=?");
+			statement.setString(1, name);
+			
+			ResultSet results = statement.executeQuery();
+			
+			if(results.next()) return new TMarca(results.getInt(1), results.getString(2), results.getString(3),
+												 results.getString(4), results.getBoolean(5));
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
 
 	@Override
 	public List<TMarca> getAllMarcas() {

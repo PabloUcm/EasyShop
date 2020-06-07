@@ -106,7 +106,7 @@ public class MostrarCliente{
 		busqstr.append("    DNI: "+cliente.getDni()+"\n\n");
 		busqstr.append("    NOMBRE: "+cliente.getNombre()+"\n\n");
 		if(cliente.getTelefono() != null) busqstr.append("    TELEFONO: "+cliente.getTelefono());
-		else busqstr.append("    TELEFONO: [Vac�o]");
+		else busqstr.append("    TELEFONO: [Vacio]");
 		
 		return busqstr.toString();
 	}

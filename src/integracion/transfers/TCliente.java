@@ -45,7 +45,8 @@ public class TCliente {
 	}
 
 	public String getTelefono() {
-		return telefono;
+		if (telefono != null) return telefono;
+		else return "[Vacio]";
 	}
 
 	public void setTelefono(String telefono) {

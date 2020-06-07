@@ -12,7 +12,7 @@ import presentacion.controllers.ProductoController;
 
 public class ProductoTableModel extends AbstractTableModel{
 
-	private  String[] columnNames = {"ID", "Nombre", "Precio", "Descripcion"};
+	private  String[] columnNames = {"ID", "UPC", "Nombre", "Tipo", "Precio", "Cantidad"};
 	
 	private ProductoController controlador;
 	private List<TProducto> productos;
@@ -37,9 +37,11 @@ public class ProductoTableModel extends AbstractTableModel{
 		TProducto p = productos.get(rowIndex);
 		
 		if(columnIndex == 0) return String.valueOf(p.getId());
-		if(columnIndex == 1) return p.getNombre();
-		if(columnIndex == 2) return String.valueOf(p.getPrecio());
-		if(columnIndex == 3) return p.getDescripcion();
+		if(columnIndex == 1) return p.getUPC();
+		if(columnIndex == 2) return p.getNombre();
+		if (columnIndex == 3) return p.getTipo();
+		if(columnIndex == 4) return String.valueOf(p.getPrecio());
+		if(columnIndex == 5) return String.valueOf(p.getCantidad());
 		
 		return null;
 	}

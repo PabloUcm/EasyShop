@@ -44,9 +44,9 @@ public class AltaEmpleado{
 		tfnoTF = SwingFactory.getJTextField(new Dimension(550,35), 25);
 		horarioTF = SwingFactory.getJTextField(new Dimension(550,35), 25);
 		
-		confirmar = SwingFactory.getJButton(new Dimension(230,60), "CONFIRMAR ALTA DE CLIENTE", 
+		confirmar = SwingFactory.getJButton(new Dimension(250,60), "CONFIRMAR ALTA DE EMPLEADO", 
 											"icons/confirmar", 50, Color.GREEN, new Color(130,200,21));
-		limpiar = SwingFactory.getJButton(new Dimension(230,60), "LIMPIAR CAMPOS DE TEXTO", 
+		limpiar = SwingFactory.getJButton(new Dimension(250,60), "LIMPIAR CAMPOS DE TEXTO", 
 				  						  "icons/limpiar", 50, new Color(205,205,205), new Color(166,166,166));
 		
 		confirmar.addActionListener(new ActionListener() {
@@ -120,7 +120,7 @@ public class AltaEmpleado{
 			else {
 				Object[] options = {"Modificar","No modificar","No registrar"};
 				int n = JOptionPane.showOptionDialog(null,
-						 "Este empleado ya estaba registrado, ¿Quieres modificar sus valores?:", "Advertencia",
+						 "Este empleado ya estaba registrado, ¿Quieres reactivarlo y modificar sus valores?:", "Advertencia",
 						 JOptionPane.YES_NO_CANCEL_OPTION,
 						 JOptionPane.WARNING_MESSAGE,
 						 null,
@@ -134,8 +134,8 @@ public class AltaEmpleado{
 						personal.setTelefono(tfnoTF.getText());
 					}
 					controlador.reactivarPersonal(personal);
-					JOptionPane.showMessageDialog(null,"Cliente " + personal.getNombre() + " reactivado con exito",
-																	   "INFO",JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null,"Empleado " + personal.getNombre() + " reactivado con exito",
+								                  "INFO",JOptionPane.INFORMATION_MESSAGE);
 				}
 				limpiar();
 			}

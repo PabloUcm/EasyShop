@@ -52,7 +52,7 @@ public class BajaProducto {
 	    c.gridy = 0;
 	    c.gridwidth = 1;
 	    c.gridheight = 1;
-	    bajaProductoPanel.add(SwingFactory.getJLabel(new Dimension(300,50),"ID PRODUCTO:",50), c);
+	    bajaProductoPanel.add(SwingFactory.getJLabel(new Dimension(380,50),"ID PRODUCTO:",50), c);
 	    c.gridx = 1;
 	    c.gridy = 0;
 	    c.gridwidth = 1;

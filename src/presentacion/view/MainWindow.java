@@ -65,7 +65,7 @@ public class MainWindow {
 	
 	public JPanel getDefaultLayout() {
 		JPanel mainPanel = new JPanel(new BorderLayout());
-		mainPanel.setPreferredSize((new Dimension(1350,800)));
+		mainPanel.setPreferredSize((new Dimension(1400,850)));
 		
 		mainPanel.add(centerPanel, BorderLayout.CENTER);
 		mainPanel.add(menuPanel.getDefaultLayout(), BorderLayout.LINE_START);

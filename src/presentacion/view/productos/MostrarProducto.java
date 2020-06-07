@@ -38,7 +38,7 @@ public class MostrarProducto {
 	private void initGUI() {
 		idTF = SwingFactory.getJTextField(new Dimension(290,30), 25);
 		
-		buscar = SwingFactory.getJButton(new Dimension(140,30), "BUSCAR PRODUCTO", 
+		buscar = SwingFactory.getJButton(new Dimension(180,30), "BUSCAR PRODUCTO", 
 										 "icons/lupa", 20, new Color(8,213,249), new Color(6,160,190));
 		limpiar = SwingFactory.getJButton(new Dimension(170,45), "LIMPIAR BUSQUEDA", 
 										  "icons/limpiar", 25, new Color(205,205,205), new Color(166,166,166));
@@ -59,12 +59,12 @@ public class MostrarProducto {
 		GridBagConstraints c = new GridBagConstraints();
 		
 		JScrollPane datosSP = new JScrollPane(datosTA);
-		datosSP.setPreferredSize(new Dimension(550,250));
+		datosSP.setPreferredSize(new Dimension(550,450));
 		datosSP.setMaximumSize(datosSP.getPreferredSize());
-		datosSP.setMinimumSize(new Dimension(550,150));
+		datosSP.setMinimumSize(new Dimension(550,250));
 		
 		JPanel barraBusqueda = new JPanel(new FlowLayout( FlowLayout.CENTER));
-		barraBusqueda.add(SwingFactory.getJLabel(new Dimension(160,50), " ID PRODUCTO:" ,25));
+		barraBusqueda.add(SwingFactory.getJLabel(new Dimension(200,50), " ID PRODUCTO:" ,25));
 		barraBusqueda.add(idTF);
 		barraBusqueda.add(Box.createRigidArea(new Dimension(10, 0)));
 		barraBusqueda.add(buscar);

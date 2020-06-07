@@ -92,16 +92,20 @@ public class AltaCliente{
 	
 	private void alta() {
 		try {
-			TCliente cliente = controlador.altaCliente(dniTF.getText(), nombreTF.getText(), tfnoTF.getText());
+			String telefono = tfnoTF.getText().trim();
+			if (telefono.equals("")) telefono = null;
+			else telefono = tfnoTF.getText();
+			
+			TCliente cliente = controlador.altaCliente(dniTF.getText(), nombreTF.getText(), telefono);
 			if (cliente == null) {
 				JOptionPane.showMessageDialog(null,"Cliente " + nombreTF.getText() + " registrado con exito",
 										  "INFO",JOptionPane.INFORMATION_MESSAGE);
 				limpiar();
 			}
 			else {
-				Object[] options = {"Modificar","No modificar","No registrar"};
+				Object[] options = {"Modificar","No modificar","No reactivar"};
 				int n = JOptionPane.showOptionDialog(null,
-						 "Este cliente ya estaba registrado, ¿Quieres modificar sus valores?:", "Advertencia",
+						 "Este cliente ya estaba registrado, ¿Quieres reactivarlo y modificar sus valores?:", "Advertencia",
 						 JOptionPane.YES_NO_CANCEL_OPTION,
 						 JOptionPane.WARNING_MESSAGE,
 						 null,
@@ -112,11 +116,11 @@ public class AltaCliente{
 					if (n == JOptionPane.YES_OPTION) {
 						cliente.setDni(dniTF.getText());
 						cliente.setNombre(nombreTF.getText());
-						cliente.setTelefono(tfnoTF.getText());
+						cliente.setTelefono(telefono);
 					}
 					controlador.reactivarCliente(cliente);
 					JOptionPane.showMessageDialog(null,"Cliente " + cliente.getNombre() + " reactivado con exito",
-																	   "INFO",JOptionPane.INFORMATION_MESSAGE);
+												  "INFO",JOptionPane.INFORMATION_MESSAGE);
 				}
 				limpiar();
 			}
