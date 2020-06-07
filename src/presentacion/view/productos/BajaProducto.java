@@ -77,7 +77,7 @@ public class BajaProducto {
 	
 	private void baja() {
 		try{
-			TProducto producto = controlador.getProductoById(Integer.parseInt(idTF.getText()));
+			TProducto producto = controlador.getProductoById(Integer.parseInt(idTF.getText()),"NONE");
 			
 			String msg = "ID: "+ producto.getId()+"\nMarcaId: "+producto.getMarcaId()+"\nNOMBRE: "+ producto.getNombre() +
 				      "\nPRECIO: "+producto.getPrecio()+"\n\n �Quieres dar de baja a este cliente?";

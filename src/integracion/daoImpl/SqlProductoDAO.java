@@ -100,8 +100,8 @@ public class SqlProductoDAO implements IProductoDAO{
 			
 			if (results.next() && results2.next()) return new TPc(results.getInt(1),results.getInt(2),results.getString(3),results.getString(4),
 															       results.getString(5),results.getDouble(6),results.getInt(7),results.getString(8),
-															       results.getBoolean(9), results.getString(10), results.getString(11),
-															       results.getString(12),results.getString(13),results.getString(14));	
+															       results.getBoolean(9), results2.getString(1), results2.getString(2),
+															       results2.getString(3),results2.getString(4),results2.getString(5));	
 					  								
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -318,5 +318,62 @@ public class SqlProductoDAO implements IProductoDAO{
 			e.printStackTrace();
 		}
 	}
-	
+
+	@Override
+	public void modificarProducto(TProducto producto) {
+		try {
+			Connection connection = dbAdapter.getConnection();
+			PreparedStatement statement = connection.prepareStatement("UPDATE Producto SET UPC = ?, NOMBRE = ?, PRECIO = ?,"+
+																	  "CANTIDAD = ? WHERE ID = ?");
+			
+			statement.setString(1, producto.getUPC());
+			statement.setString(2, producto.getNombre());
+			statement.setDouble(3, producto.getPrecio());
+			statement.setInt(4, producto.getCantidad());
+			statement.setInt(5, producto.getId());
+				
+			statement.executeUpdate();
+					
+		}catch(Exception e) {
+			e.printStackTrace();
+		}		
+	}
+
+	@Override
+	public void modificarPc(TPc pc) {
+		try {
+			Connection connection = dbAdapter.getConnection();
+			PreparedStatement statement = connection.prepareStatement("UPDATE PC SET PROCESADOR = ?, RAM = ?,DISCO_DURO = ?,"+
+																	  "TARJETA_GRAFICA = ?,PLACA_BASE = ? WHERE ID = ?");
+			
+			statement.setString(1, pc.getProcesador());
+			statement.setString(2, pc.getDiscoduro());
+			statement.setString(3, pc.getTarjetagrafica());
+			statement.setString(4, pc.getPlacabase());
+			statement.setInt(5, pc.getId());
+				
+			statement.executeUpdate();
+					
+		}catch(Exception e) {
+			e.printStackTrace();
+		}		
+		
+	}
+
+	@Override
+	public void modificarPeriferico(TPeriferico periferico) {
+		try {
+			Connection connection = dbAdapter.getConnection();
+			PreparedStatement statement = connection.prepareStatement("UPDATE Periferico SET E_S = ?, TIPO_CONEXION = ?"
+																   + " WHERE ID = ?");
+			
+			statement.setString(1, periferico.getUPC());
+			statement.setString(2, periferico.getNombre());
+				
+			statement.executeUpdate();
+					
+		}catch(Exception e) {
+			e.printStackTrace();
+		}			
+	}	
 }

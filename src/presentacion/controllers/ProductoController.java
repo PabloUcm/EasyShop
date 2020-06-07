@@ -42,7 +42,11 @@ private Modelo modelo;
 		return modelo.getNombreMarcas();
 	}
 	
-	public TProducto getProductoById(int id) throws Exception {
-		return modelo.getProductoById(id);
+	public TProducto getProductoById(int id,String tipo) throws Exception {
+		return modelo.getProductoById(id, tipo);
+	}
+	
+	public void modificarProducto(TProducto producto) {
+		modelo.modificarProducto(producto);
 	}
 }

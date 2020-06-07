@@ -18,4 +18,7 @@ public interface IProductoDAO {
 	public void bajaProducto(int id);
 	public List<TProducto> getAll();
 	public TProducto getById(int id);
+	public void modificarProducto(TProducto producto);
+	public void modificarPc(TPc pc);
+	public void modificarPeriferico(TPeriferico periferico);
 }

@@ -14,13 +14,18 @@ import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import integracion.transfers.TPc;
+import integracion.transfers.TPeriferico;
+import integracion.transfers.TProducto;
 import presentacion.controllers.ProductoController;
 import presentacion.view.SwingFactory;
 
@@ -54,6 +59,7 @@ private ProductoController controlador;
 		
 	private JButton confirmar;
 	private JButton limpiar;
+	private ImageIcon modIcon;
 	
 	public ModificarProducto(ProductoController controlador) {
 		this.controlador = controlador;
@@ -105,12 +111,14 @@ private ProductoController controlador;
 			  "icons/limpiar", 50, new Color(205,205,205), new Color(166,166,166));
 		
 		confirmar.addActionListener(new ActionListener() {
-	    	public void actionPerformed(ActionEvent e ) { }
+	    	public void actionPerformed(ActionEvent e ) {modificar(); }
 	    });
 		
 		limpiar.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e ) { limpiar(); }
 	    });	
+		
+		modIcon = SwingFactory.getScaledIcon("icons/modificar", 45);
 	}
 	
 	public JPanel getDefaultLayout() {
@@ -277,5 +285,55 @@ private ProductoController controlador;
 			marcasBox.setModel(new DefaultComboBoxModel<String>(nombreMarcas));
 		}
 		else marcasBox.setModel(new DefaultComboBoxModel<String>(marcas.toArray(new String[0])));
+	}
+	
+	
+	private void modificar() {
+		TPc pc = null;
+		TPeriferico periferico = null;
+		
+		try {
+			
+			if(productosBox.getSelectedItem() == "PC") pc = (TPc) controlador.getProductoById(Integer.parseInt(idTF.getText()), "PC");
+			else periferico = (TPeriferico) controlador.getProductoById(Integer.parseInt(idTF.getText()),"PERIFERICO");
+			
+    		
+			String msg = "¿Quieres cambiar los datos de este producto?";
+			
+			int input = JOptionPane.showConfirmDialog(null, msg,"Confirmar cambios en el producto", 
+    		    JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, modIcon);	
+			
+			if(input == JOptionPane.YES_OPTION) {
+				if(pc != null) {
+					pc.setUPC(upcTF.getText());
+					pc.setNombre(nombreTF.getText());	
+					pc.setPrecio(Double.parseDouble(precioTF.getText()));
+					pc.setCantidad(Integer.parseInt(cantidadTF.getText()));
+					pc.setProcesador(procesadorTF.getText());
+					pc.setRam(ramTF.getText());
+					pc.setDiscoduro(discoDuroTF.getText());
+					pc.setPlacabase(placaBaseTF.getText());
+					pc.setDescripcion(descripcion.getText());
+					controlador.modificarProducto(pc);
+					
+				}else {
+					periferico.setUPC(upcTF.getText());
+					periferico.setNombre(nombreTF.getText());
+					periferico.setPrecio(Double.parseDouble(precioTF.getText()));
+					periferico.setCantidad(Integer.parseInt(cantidadTF.getText()));
+					periferico.setTipoPeriferico(tPerifericoBox.getSelectedItem().toString());
+					periferico.setConexion(conexionTF.getText());
+					periferico.setDescripcion(descripcion.getText());
+					controlador.modificarProducto(pc);
+				}
+			}
+			
+			JOptionPane.showMessageDialog(null,"Producto con ID " + idTF.getText() + " modificado con exito.",
+					  "INFO",JOptionPane.INFORMATION_MESSAGE);
+	
+		} 
+		catch(Exception ex) {
+			JOptionPane.showMessageDialog(null,ex.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
+		}
 	}
 }

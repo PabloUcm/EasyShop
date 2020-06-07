@@ -344,14 +344,27 @@ public class Modelo {
 		return nombres;
 	}
 	
-	public TProducto getProductoById(int id) throws Exception {
+	public TProducto getProductoById(int id,String tipo) throws Exception {
 		SqlProductoDAO productoDAO = (SqlProductoDAO) factoryDAO.getProductoDAO();
 		
 		TProducto producto = productoDAO.getById(id);
 		
 		if(producto == null || !producto.isActivo()) throw new Exception("Producto inexistente");
+		if(producto != null && tipo != "NONE" && !producto.getTipo().contentEquals(tipo)) throw new Exception("Tipo de producto erroneo");
+		
+		if(tipo == "PC") producto = productoDAO.getPCByID(id);
+		else producto = productoDAO.getPerifericoByID(id);
 		
 		return producto;
+	}
+	
+	public void modificarProducto(TProducto producto) {
+		SqlProductoDAO productoDAO = (SqlProductoDAO) factoryDAO.getProductoDAO();
+		
+		productoDAO.modificarProducto(producto);
+		if(producto.getTipo() == "PC") 	productoDAO.modificarPc((TPc) producto);
+		else if(producto.getTipo() == "PERIFERICO") productoDAO.modificarPeriferico((TPeriferico) producto);
+		
 	}
 	
 }
