@@ -55,8 +55,32 @@ public class SqlProductoDAO implements IProductoDAO{
 	}
 	
 	@Override
-	public TProducto getById(long id) {
-		// TODO Auto-generated method stub
+	public TProducto getById(int id) {
+		Connection connection = dbAdapter.getConnection();
+		
+		try {
+			PreparedStatement statement = connection.prepareStatement("SELECT * FROM Producto WHERE id = ?");
+			statement.setInt(1, id);
+			
+			ResultSet results = statement.executeQuery();
+			
+			if(results.next()) {
+				return new TProducto(results.getInt(1),results.getInt(2),results.getString(3),results.getString(4),
+							         results.getString(5),results.getDouble(6),results.getInt(7),results.getString(8),
+							         results.getBoolean(9));
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
 		return null;
 	}
 	
@@ -75,10 +99,9 @@ public class SqlProductoDAO implements IProductoDAO{
 			ResultSet results2 = statement2.executeQuery();
 			
 			if (results.next() && results2.next()) return new TPc(results.getInt(1),results.getInt(2),results.getString(3),results.getString(4),
-								  								  results.getString(5),results.getDouble(6),results.getInt(7),results.getString(8),
-								  								  results.getBoolean(9), results2.getString(2), results2.getString(3),
-								  								  results2.getString(4), results2.getString(5), results2.getString(6),
-								  								  results2.getString(7));	
+															       results.getString(5),results.getDouble(6),results.getInt(7),results.getString(8),
+															       results.getBoolean(9), results.getString(10), results.getString(11),
+															       results.getString(12),results.getString(13),results.getString(14));	
 					  								
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -230,16 +253,15 @@ public class SqlProductoDAO implements IProductoDAO{
 			
 			statement.executeUpdate();	
 			
-			PreparedStatement statement2 = connection.prepareStatement("UPDATE PC SET so=?, procesador=?, ram=?, disco_duro=?, tarjeta_grafica=?, "
+			PreparedStatement statement2 = connection.prepareStatement("UPDATE PC SET  procesador=?, ram=?, disco_duro=?, tarjeta_grafica=?, "
 																		+ "placa_base=? WHERE producto=?");
 			
-			statement2.setString(1, pc.getSo());
-			statement2.setString(2, pc.getProcesador());
-			statement2.setString(3, pc.getRam());
-			statement2.setString(4, pc.getDiscoduro());
-			statement2.setString(5, pc.getTarjetagrafica());
-			statement2.setString(6, pc.getPlacabase());
-			statement2.setInt(7, pc.getId());
+			statement2.setString(1, pc.getProcesador());
+			statement2.setString(2, pc.getRam());
+			statement2.setString(3, pc.getDiscoduro());
+			statement2.setString(4, pc.getTarjetagrafica());
+			statement2.setString(5, pc.getPlacabase());
+			statement2.setInt(6, pc.getId());
 			
 			statement2.executeUpdate();
 		
@@ -282,4 +304,19 @@ public class SqlProductoDAO implements IProductoDAO{
 			e.printStackTrace();
 		}
 	}
+
+	@Override
+	public void bajaProducto(int id) {
+		try {
+			Connection connection = dbAdapter.getConnection();
+			PreparedStatement statement = connection.prepareStatement("UPDATE Producto SET ACTIVO = FALSE,CANTIDAD = 0 WHERE id=?");
+			statement.setInt(1, id);
+			
+			statement.executeUpdate();
+					
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 }

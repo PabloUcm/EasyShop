@@ -30,11 +30,19 @@ private Modelo modelo;
 		modelo.reactivarPeriferico(periferico);
 	}
 	
+	public void bajaProducto(int id) throws Exception {
+		modelo.bajaProducto(id);
+	}
+	
 	public List<TProducto> listarProductos(){
 		return modelo.listarProductos();
 	}
 	
 	public List<String> getNombreMarcas() {
 		return modelo.getNombreMarcas();
+	}
+	
+	public TProducto getProductoById(int id) throws Exception {
+		return modelo.getProductoById(id);
 	}
 }

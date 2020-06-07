@@ -15,6 +15,7 @@ public interface IProductoDAO {
 	public int altaPeriferico(TPeriferico periferico);
 	public void reactivarPC(TPc pc);
 	public void reactivarPeriferico(TPeriferico periferico);
+	public void bajaProducto(int id);
 	public List<TProducto> getAll();
-	public TProducto getById(long id);
+	public TProducto getById(int id);
 }

@@ -322,6 +322,12 @@ public class Modelo {
 		productoDAO.reactivarPeriferico(periferico);
 	}
 	
+	public void bajaProducto(int id) throws Exception {
+		SqlProductoDAO productoDAO = (SqlProductoDAO) factoryDAO.getProductoDAO();
+
+		productoDAO.bajaProducto(id);
+	}
+	
 	public List<TProducto> listarProductos() {
 		SqlProductoDAO productoDAO = (SqlProductoDAO) factoryDAO.getProductoDAO();
 		List<TProducto> productoList = productoDAO.getAll();
@@ -336,6 +342,16 @@ public class Modelo {
 		List<String> nombres = marcaDAO.getNombreMarcas();
 		
 		return nombres;
+	}
+	
+	public TProducto getProductoById(int id) throws Exception {
+		SqlProductoDAO productoDAO = (SqlProductoDAO) factoryDAO.getProductoDAO();
+		
+		TProducto producto = productoDAO.getById(id);
+		
+		if(producto == null || !producto.isActivo()) throw new Exception("Producto inexistente");
+		
+		return producto;
 	}
 	
 }

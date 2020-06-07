@@ -10,9 +10,11 @@ import java.awt.event.ActionListener;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import integracion.transfers.TProducto;
 import presentacion.controllers.ProductoController;
 import presentacion.view.SwingFactory;
 
@@ -74,6 +76,24 @@ public class BajaProducto {
 	}
 	
 	private void baja() {
-		
+		try{
+			TProducto producto = controlador.getProductoById(Integer.parseInt(idTF.getText()));
+			
+			String msg = "ID: "+ producto.getId()+"\nMarcaId: "+producto.getMarcaId()+"\nNOMBRE: "+ producto.getNombre() +
+				      "\nPRECIO: "+producto.getPrecio()+"\n\n �Quieres dar de baja a este cliente?";
+			
+			int input = JOptionPane.showConfirmDialog(null, msg,"Confirmar baja de cliente", 
+      		    JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, bajaIcon);
+			
+			
+			  if(input == JOptionPane.OK_OPTION) {
+	            	controlador.bajaProducto(Integer.parseInt(idTF.getText()));
+	            	
+	            	JOptionPane.showMessageDialog(null,"Producto con ID " + idTF.getText() + " dado de baja con exito.",
+							  					  "INFO",JOptionPane.INFORMATION_MESSAGE);
+	            }
+		}catch(Exception ex) {
+			JOptionPane.showMessageDialog(null,ex.getMessage(), "ERROR",JOptionPane.ERROR_MESSAGE);
+		}
 	}
 }
