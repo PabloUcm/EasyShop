@@ -47,13 +47,15 @@ public class ListarClientes {
 		
 		listarClientesPanel.addComponentListener(new java.awt.event.ComponentAdapter() {
 	        public void componentShown(java.awt.event.ComponentEvent evt) {
-	            List<TCliente> listaClientes = controlador.listarClientes();
-	            tableModel.setClientes(listaClientes);
+	        	listar();
 	        }
 	    });
 		
 		return listarClientesPanel;
 	}
 	
-	
+	private void listar() {
+		 List<TCliente> listaClientes = controlador.listarClientes();
+         tableModel.setClientes(listaClientes);
+	}
 }

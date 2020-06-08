@@ -89,19 +89,21 @@ public class SqlProductoDAO implements IProductoDAO{
 		try {
 			Connection connection = dbAdapter.getConnection();
 			PreparedStatement statement = connection.prepareStatement("SELECT * FROM Producto WHERE id=?");
+			
 			statement.setInt(1, id);
 			
 			ResultSet results = statement.executeQuery();
 			
 			PreparedStatement statement2 = connection.prepareStatement("SELECT * FROM PC WHERE producto=?");
+			
 			statement2.setInt(1, id);
 			
 			ResultSet results2 = statement2.executeQuery();
 			
 			if (results.next() && results2.next()) return new TPc(results.getInt(1),results.getInt(2),results.getString(3),results.getString(4),
 															       results.getString(5),results.getDouble(6),results.getInt(7),results.getString(8),
-															       results.getBoolean(9), results2.getString(1), results2.getString(2),
-															       results2.getString(3),results2.getString(4),results2.getString(5));	
+															       results.getBoolean(9), results2.getString(2), results2.getString(3),
+															       results2.getString(4),results2.getString(5),results2.getString(6));	
 					  								
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -155,86 +157,75 @@ public class SqlProductoDAO implements IProductoDAO{
 		return null;
 	}
 	
+	public int altaProducto(TProducto producto) {
+		int id = -1;
+		try {
+			Connection connection = dbAdapter.getConnection();
+			PreparedStatement statement = connection.prepareStatement("INSERT INTO Producto (marca,upc,nombre,tipo,precio,cantidad,descripcion) "
+																	  + "VALUES(?,?,?,?,?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
+			
+			statement.setInt(1, producto.getMarcaId());
+			statement.setString(2, producto.getUPC());
+			statement.setString(3, producto.getNombre());
+			statement.setString(4, producto.getTipo());
+			statement.setDouble(5, producto.getPrecio());
+			statement.setInt(6, producto.getCantidad());
+			statement.setString(7, producto.getDescripcion());
+			
+			statement.executeUpdate();
+			
+			ResultSet result = statement.getGeneratedKeys();
+			if(result.next()) id = result.getInt(1);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}	
+		
+		return id;
+	}
 	
 	@Override
-	public int altaPC(TPc pc) {
-		int id = -1;
+	public void altaPC(TPc pc, int id) {
+		
 		try {
 			Connection connection = dbAdapter.getConnection();
-			PreparedStatement statement = connection.prepareStatement("INSERT INTO Producto (marca,upc,nombre,tipo,precio,cantidad,descripcion) "
-																	  + "VALUES(?,?,?,?,?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
-			
-			statement.setInt(1, pc.getMarcaId());
-			statement.setString(2, pc.getUPC());
-			statement.setString(3, pc.getNombre());
-			statement.setString(4, pc.getTipo());
-			statement.setDouble(5, pc.getPrecio());
-			statement.setInt(6, pc.getCantidad());
-			statement.setString(7, pc.getDescripcion());
-			
-			statement.executeUpdate();
-			
-			ResultSet result = statement.getGeneratedKeys();
-			if(result.next()) id = result.getInt(1);
-			
-			PreparedStatement statement2 = connection.prepareStatement("INSERT INTO PC (producto,procesador,ram,disco_duro,tarjeta_grafica,placa_base) "
+			PreparedStatement statement = connection.prepareStatement("INSERT INTO PC (producto,procesador,ram,disco_duro,tarjeta_grafica,placa_base) "
 																	    + "	VALUES(?,?,?,?,?,?)");
 			
-			statement2.setInt(1, id);
-			statement2.setString(2, pc.getProcesador());
-			statement2.setString(3, pc.getRam());
-			statement2.setString(4, pc.getDiscoduro());
-			statement2.setString(5, pc.getTarjetagrafica());
-			statement2.setString(6, pc.getPlacabase());
-			
-			statement2.executeUpdate();
-			
-		}catch(Exception e) {
-			e.printStackTrace();
-		}	
-		
-		return id;
-		
-	}
-
-	@Override
-	public int altaPeriferico(TPeriferico periferico) {
-		int id = -1;
-		try {
-			Connection connection = dbAdapter.getConnection();
-			PreparedStatement statement = connection.prepareStatement("INSERT INTO Producto (marca,upc,nombre,tipo,precio,cantidad,descripcion) "
-																	  + "VALUES(?,?,?,?,?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
-			
-			statement.setInt(1, periferico.getMarcaId());
-			statement.setString(2, periferico.getUPC());
-			statement.setString(3, periferico.getNombre());
-			statement.setString(4, periferico.getTipo());
-			statement.setDouble(5, periferico.getPrecio());
-			statement.setInt(6, periferico.getCantidad());
-			statement.setString(7, periferico.getDescripcion());
+			statement.setInt(1, id);
+			statement.setString(2, pc.getProcesador());
+			statement.setString(3, pc.getRam());
+			statement.setString(4, pc.getDiscoduro());
+			statement.setString(5, pc.getTarjetagrafica());
+			statement.setString(6, pc.getPlacabase());
 			
 			statement.executeUpdate();
 			
-			ResultSet result = statement.getGeneratedKeys();
-			if(result.next()) id = result.getInt(1);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}	
+	}
+
+	@Override
+	public void altaPeriferico(TPeriferico periferico, int id) {
+		
+		try {
+			Connection connection = dbAdapter.getConnection();
+			PreparedStatement statement = connection.prepareStatement("INSERT INTO Periferico (producto,tipo_periferico,tipo_conexion) VALUES(?,?,?)");
 			
-			PreparedStatement statement2 = connection.prepareStatement("INSERT INTO Periferico (producto,tipo_periferico,tipo_conexion) VALUES(?,?,?)");
+			statement.setInt(1, id);
+			statement.setString(2, periferico.getTipoPeriferico());
+			statement.setString(3, periferico.getConexion());
 			
-			statement2.setInt(1, id);
-			statement2.setString(2, periferico.getTipoPeriferico());
-			statement2.setString(3, periferico.getConexion());
-			
-			statement2.executeUpdate();
+			statement.executeUpdate();
 			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}	
-		
-		return id;
 	}
-
+	
 	@Override
-	public void reactivarPC(TPc pc) {
+	public void reactivarProducto(TProducto producto) {
 		try {
 			Connection connection = dbAdapter.getConnection();
 		
@@ -242,63 +233,16 @@ public class SqlProductoDAO implements IProductoDAO{
 																	  + "nombre=?, tipo=?, precio=?, cantidad=?, descripcion=?, activo=true  "
 																	  + "WHERE id=?");
 
-			statement.setInt(1, pc.getMarcaId());
-			statement.setString(2, pc.getUPC());
-			statement.setString(3, pc.getNombre());
-			statement.setString(4, pc.getTipo());
-			statement.setDouble(5, pc.getPrecio());
-			statement.setInt(6, pc.getCantidad());
-			statement.setString(7, pc.getDescripcion());
-			statement.setInt(8, pc.getId());
+			statement.setInt(1, producto.getMarcaId());
+			statement.setString(2, producto.getUPC());
+			statement.setString(3, producto.getNombre());
+			statement.setString(4, producto.getTipo());
+			statement.setDouble(5, producto.getPrecio());
+			statement.setInt(6, producto.getCantidad());
+			statement.setString(7, producto.getDescripcion());
+			statement.setInt(8, producto.getId());
 			
 			statement.executeUpdate();	
-			
-			PreparedStatement statement2 = connection.prepareStatement("UPDATE PC SET  procesador=?, ram=?, disco_duro=?, tarjeta_grafica=?, "
-																		+ "placa_base=? WHERE producto=?");
-			
-			statement2.setString(1, pc.getProcesador());
-			statement2.setString(2, pc.getRam());
-			statement2.setString(3, pc.getDiscoduro());
-			statement2.setString(4, pc.getTarjetagrafica());
-			statement2.setString(5, pc.getPlacabase());
-			statement2.setInt(6, pc.getId());
-			
-			statement2.executeUpdate();
-		
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	@Override
-	public void reactivarPeriferico(TPeriferico periferico) {
-		try {
-			Connection connection = dbAdapter.getConnection();
-		
-			PreparedStatement statement = connection.prepareStatement("UPDATE Producto SET marca=?, upc=?, "
-																	  + "nombre=?, tipo=?, precio=?, cantidad=?, descripcion=?, activo=true  "
-																	  + "WHERE id=?");
-
-			statement.setInt(1, periferico.getMarcaId());
-			statement.setString(2, periferico.getUPC());
-			statement.setString(3, periferico.getNombre());
-			statement.setString(4, periferico.getTipo());
-			statement.setDouble(5, periferico.getPrecio());
-			statement.setInt(6, periferico.getCantidad());
-			statement.setString(7, periferico.getDescripcion());
-			statement.setInt(8, periferico.getId());
-			
-			statement.executeUpdate();	
-			
-			PreparedStatement statement2 = connection.prepareStatement("UPDATE Periferico SET tipo_periferico=?, tipo_conexion=? WHERE producto=?");
-			
-			statement2.setString(1, periferico.getTipoPeriferico());
-			statement2.setString(2, periferico.getConexion());
-			statement2.setInt(3, periferico.getId());
-			
-			statement2.executeUpdate();
-		
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -324,7 +268,7 @@ public class SqlProductoDAO implements IProductoDAO{
 		try {
 			Connection connection = dbAdapter.getConnection();
 			PreparedStatement statement = connection.prepareStatement("UPDATE Producto SET UPC = ?, NOMBRE = ?, PRECIO = ?,"+
-																	  "CANTIDAD = ? WHERE ID = ?");
+																	  "CANTIDAD = ? WHERE PRODUCTO = ?");
 			
 			statement.setString(1, producto.getUPC());
 			statement.setString(2, producto.getNombre());
@@ -344,7 +288,7 @@ public class SqlProductoDAO implements IProductoDAO{
 		try {
 			Connection connection = dbAdapter.getConnection();
 			PreparedStatement statement = connection.prepareStatement("UPDATE PC SET PROCESADOR = ?, RAM = ?,DISCO_DURO = ?,"+
-																	  "TARJETA_GRAFICA = ?,PLACA_BASE = ? WHERE ID = ?");
+																	  "TARJETA_GRAFICA = ?,PLACA_BASE = ? WHERE PRODUCTO = ?");
 			
 			statement.setString(1, pc.getProcesador());
 			statement.setString(2, pc.getDiscoduro());
@@ -364,11 +308,12 @@ public class SqlProductoDAO implements IProductoDAO{
 	public void modificarPeriferico(TPeriferico periferico) {
 		try {
 			Connection connection = dbAdapter.getConnection();
-			PreparedStatement statement = connection.prepareStatement("UPDATE Periferico SET E_S = ?, TIPO_CONEXION = ?"
-																   + " WHERE ID = ?");
+			PreparedStatement statement = connection.prepareStatement("UPDATE Periferico SET TIPO_PERIFERICO = ?, TIPO_CONEXION = ?"
+																   + " WHERE PRODUCTO = ?");
 			
-			statement.setString(1, periferico.getUPC());
-			statement.setString(2, periferico.getNombre());
+			statement.setString(1, periferico.getTipoPeriferico());
+			statement.setString(2, periferico.getConexion());
+			statement.setInt(3, periferico.getId());
 				
 			statement.executeUpdate();
 					

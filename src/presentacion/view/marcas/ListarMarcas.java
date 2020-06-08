@@ -47,11 +47,15 @@ public class ListarMarcas {
 		
 		listarMarcasPanel.addComponentListener(new java.awt.event.ComponentAdapter() {
 	        public void componentShown(java.awt.event.ComponentEvent evt) {
-	            List<TMarca> listaMarcas = controlador.listarMarcas();
-	            tableModel.setMarcas(listaMarcas);
+	            listar();
 	        }
 	    });
 		
 		return listarMarcasPanel;
+	}
+	
+	private void listar() {
+		List<TMarca> listaMarcas = controlador.listarMarcas();
+        tableModel.setMarcas(listaMarcas);
 	}
 }

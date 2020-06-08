@@ -9,7 +9,8 @@ public class TPersonal {
 	private String sueldo;
 	private String horario;
 	private boolean activo;
-public TPersonal() {};
+	
+	public TPersonal() {};
 	
 	public TPersonal(String dni,String nombre, String telefono,String sueldo,String horario) {
 		this.dni = dni;

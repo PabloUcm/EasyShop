@@ -130,7 +130,7 @@ public class MostrarEmpleado{
 		try {
 			if (idTF.getText().isEmpty()) throw new Exception("Campo sin rellenar.");
 			
-			TPersonal empleado = controlador.getEmpleado(Integer.parseInt(idTF.getText()));
+			TPersonal empleado = controlador.getPersonal(Integer.parseInt(idTF.getText()));
 			
 			datosTA.setText(busquedaToString(empleado));
 		}

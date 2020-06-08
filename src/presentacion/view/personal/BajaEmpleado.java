@@ -80,7 +80,7 @@ public class BajaEmpleado{
 		try {
     		if (idTF.getText().isEmpty()) throw new Exception("Campo sin rellenar.");
 			
-			TPersonal empleado = controlador.getEmpleado(Integer.parseInt(idTF.getText()));
+			TPersonal empleado = controlador.getPersonal(Integer.parseInt(idTF.getText()));
     				    		
     		String msg = "ID: "+empleado.getId()+"\nDNI: "+empleado.getDni()+"\nNOMBRE: "+ empleado.getNombre() +
     				     "\nTELEFONO: "+empleado.getTelefono()+"\nSUELDO: "+empleado.getSueldo()+"\nHORARIO: "+empleado.getHorario()+

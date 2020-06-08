@@ -14,20 +14,13 @@ private Modelo modelo;
 		this.modelo = m;
 	}
 	
-	public TPc altaPC(TPc pc, String nombreMarca) throws Exception {
-		return modelo.altaPC(pc, nombreMarca);
+	public TProducto altaProducto(TProducto producto, String nombreMarca) throws Exception {
+		return modelo.altaProducto(producto, nombreMarca);
 	}
+
 	
-	public TPeriferico altaPeriferico(TPeriferico periferico, String nombreMarca) throws Exception {
-		return modelo.altaPeriferico(periferico, nombreMarca);
-	}
-	
-	public void reactivarPC(TPc pc) {
-		modelo.reactivarPC(pc);
-	}
-	
-	public void reactivarPeriferico(TPeriferico periferico) {
-		modelo.reactivarPeriferico(periferico);
+	public void reactivarProducto(TProducto producto) {
+		modelo.reactivarProducto(producto);
 	}
 	
 	public void bajaProducto(int id) throws Exception {
@@ -38,12 +31,24 @@ private Modelo modelo;
 		return modelo.listarProductos();
 	}
 	
+	public String getNombreMarcaByID(int id) {
+		return modelo.getNombreMarcaByID(id);
+	}
+	
 	public List<String> getNombreMarcas() {
 		return modelo.getNombreMarcas();
 	}
 	
 	public TProducto getProductoById(int id,String tipo) throws Exception {
 		return modelo.getProductoById(id, tipo);
+	}
+	
+	public TPc getPcById(int id) throws Exception {
+		return modelo.getPcById(id);
+	}
+	
+	public TPeriferico getPerifericoById(int id) throws Exception {
+		return modelo.getPerifericoById(id);
 	}
 	
 	public void modificarProducto(TProducto producto) {

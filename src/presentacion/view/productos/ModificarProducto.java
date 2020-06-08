@@ -324,7 +324,7 @@ private ProductoController controlador;
 					periferico.setTipoPeriferico(tPerifericoBox.getSelectedItem().toString());
 					periferico.setConexion(conexionTF.getText());
 					periferico.setDescripcion(descripcion.getText());
-					controlador.modificarProducto(pc);
+					controlador.modificarProducto(periferico);
 				}
 			}
 			

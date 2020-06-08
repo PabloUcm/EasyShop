@@ -277,102 +277,10 @@ public class AltaProducto {
 			if (desc.equals("")) desc = null;
 			else desc = descripcion.getText();
 			
-			if (tipo == "PC") {
-				if (tarjetaGraficaTF.getText().trim().equals("") || ramTF.getText().trim().equals("") || 
-					procesadorTF.getText().trim().equals("") || placaBaseTF.getText().trim().equals("") || 
-					discoDuroTF.getText().trim().equals(""))
-				{ 
-					throw new Exception("Campos sin rellenar."); 
-				}
+			if (tipo.equals("PC")) { altaPC(desc,nombreMarca); }
+			else if (tipo.equals("Periferico")) { altaPeriferico(desc,nombreMarca); }
 				
-				TPc pc = new TPc();
-				
-				pc.setUPC(upcTF.getText());
-				pc.setNombre(nombreTF.getText());
-				pc.setTipo(tipo);
-				pc.setPrecio(Double.parseDouble(precioTF.getText()));
-				pc.setCantidad(Integer.parseInt(cantidadTF.getText()));
-				pc.setDescripcion(desc);
-				pc.setTarjetagrafica(tarjetaGraficaTF.getText());
-				pc.setRam(ramTF.getText());
-				pc.setProcesador(procesadorTF.getText());
-				pc.setPlacabase(placaBaseTF.getText());
-				pc.setDiscoduro(discoDuroTF.getText());
-				
-				TPc pcYaRegistrado = controlador.altaPC(pc, nombreMarca);
-				
-				if (pcYaRegistrado == null) {
-					JOptionPane.showMessageDialog(null,"PC " + nombreTF.getText() + " dado de alta con exito.",
-							   "INFO",JOptionPane.INFORMATION_MESSAGE);
-				}
-				else {
-					Object[] options = {"Modificar","No modificar","No reactivar"};
-					int n = JOptionPane.showOptionDialog(null,
-							 "Este PC ya estaba registrado, ¿Quieres reactivarlo y modificar sus valores?:", "Advertencia",
-							 JOptionPane.YES_NO_CANCEL_OPTION,
-							 JOptionPane.WARNING_MESSAGE,
-							 null,
-							 options,
-							 options[1]); 
-					
-					
-					if (n == JOptionPane.YES_OPTION) {
-						controlador.reactivarPC(pc);
-						JOptionPane.showMessageDialog(null,"PC " + pc.getNombre() + " reactivado con exito",
-								   "INFO",JOptionPane.INFORMATION_MESSAGE);
-					}
-					else if (n == JOptionPane.NO_OPTION) {
-						controlador.reactivarPC(pcYaRegistrado);
-						JOptionPane.showMessageDialog(null,"PC " + pcYaRegistrado.getNombre() + " reactivado con exito",
-								   "INFO",JOptionPane.INFORMATION_MESSAGE);
-					}
-					limpiar();
-				}
-			}
-			else if (tipo == "Periferico") {
-				if (conexionTF.getText().trim().equals("")) throw new Exception("Campos sin rellenar."); 
-				
-				TPeriferico periferico = new TPeriferico();
-				
-				periferico.setUPC(upcTF.getText());
-				periferico.setNombre(nombreTF.getText());
-				periferico.setTipo(tipo);
-				periferico.setPrecio(Double.parseDouble(precioTF.getText()));
-				periferico.setCantidad(Integer.parseInt(cantidadTF.getText()));
-				periferico.setDescripcion(desc);
-				periferico.setTipoPeriferico(tPerifericoBox.getSelectedItem().toString());
-				periferico.setConexion(conexionTF.getText());
-				
-				TPeriferico prfcoYaRegistrado = controlador.altaPeriferico(periferico, nombreMarca);
-				if (prfcoYaRegistrado == null) {
-					JOptionPane.showMessageDialog(null,"Periferico " + nombreTF.getText() + " dado de alta con exito.",
-							   "INFO",JOptionPane.INFORMATION_MESSAGE);
-				}
-				else {
-					Object[] options = {"Modificar","No modificar","No reactivar"};
-					int n = JOptionPane.showOptionDialog(null,
-							 "Este periferico ya estaba registrado, ¿Quieres reactivarlo y modificar sus valores?:", "Advertencia",
-							 JOptionPane.YES_NO_CANCEL_OPTION,
-							 JOptionPane.WARNING_MESSAGE,
-							 null,
-							 options,
-							 options[1]); 
-					
-					
-					if (n == JOptionPane.YES_OPTION) {
-						periferico.setId(prfcoYaRegistrado.getId());
-						controlador.reactivarPeriferico(periferico);
-						JOptionPane.showMessageDialog(null,"Periferico " + periferico.getNombre() + " reactivado con exito",
-								   "INFO",JOptionPane.INFORMATION_MESSAGE);
-					}
-					else if (n == JOptionPane.NO_OPTION) {
-						controlador.reactivarPeriferico(prfcoYaRegistrado);
-						JOptionPane.showMessageDialog(null,"Periferico " + prfcoYaRegistrado.getNombre() + " reactivado con exito",
-								   "INFO",JOptionPane.INFORMATION_MESSAGE);
-					}
-					limpiar();
-				}
-			}
+			limpiar();
 			
 		}
 		catch(Exception ex) {
@@ -390,6 +298,103 @@ public class AltaProducto {
 		placaBaseTF.setText("");
 		conexionTF.setText("");
 	}
+	
+	private void altaPC(String desc, String nombreMarca) throws Exception {
+		if (tarjetaGraficaTF.getText().trim().equals("") || ramTF.getText().trim().equals("") || 
+				procesadorTF.getText().trim().equals("") || placaBaseTF.getText().trim().equals("") || 
+				discoDuroTF.getText().trim().equals(""))
+		{ 
+			throw new Exception("Campos sin rellenar."); 
+		}
+		
+			
+		TPc pc = new TPc();
+		
+		pc.setUPC(upcTF.getText());
+		pc.setNombre(nombreTF.getText());
+		pc.setTipo("PC");
+		pc.setPrecio(Double.parseDouble(precioTF.getText()));
+		pc.setCantidad(Integer.parseInt(cantidadTF.getText()));
+		pc.setDescripcion(desc);
+		pc.setTarjetagrafica(tarjetaGraficaTF.getText());
+		pc.setRam(ramTF.getText());
+		pc.setProcesador(procesadorTF.getText());
+		pc.setPlacabase(placaBaseTF.getText());
+		pc.setDiscoduro(discoDuroTF.getText());
+		
+		TPc pcYaRegistrado = (TPc) controlador.altaProducto(pc, nombreMarca);
+		
+		if (pcYaRegistrado == null) {
+			JOptionPane.showMessageDialog(null,"PC " + nombreTF.getText() + " dado de alta con exito.",
+					   "INFO",JOptionPane.INFORMATION_MESSAGE);
+		}
+		else {
+			Object[] options = {"Modificar","No modificar","No reactivar"};
+			int n = JOptionPane.showOptionDialog(null,
+					 "Este PC ya estaba registrado, ¿Quieres reactivarlo y modificar sus valores?:", "Advertencia",
+					 JOptionPane.YES_NO_CANCEL_OPTION,
+					 JOptionPane.WARNING_MESSAGE,
+					 null,
+					 options,
+					 options[1]); 
+			
+			
+			if (n == JOptionPane.YES_OPTION) {
+				controlador.reactivarProducto(pc);
+				JOptionPane.showMessageDialog(null,"PC " + pc.getNombre() + " reactivado con exito",
+						   "INFO",JOptionPane.INFORMATION_MESSAGE);
+			}
+			else if (n == JOptionPane.NO_OPTION) {
+				controlador.reactivarProducto(pcYaRegistrado);
+				JOptionPane.showMessageDialog(null,"PC " + pcYaRegistrado.getNombre() + " reactivado con exito",
+						   "INFO",JOptionPane.INFORMATION_MESSAGE);
+			}
+		}
+	}
+	
+	private void altaPeriferico(String desc, String nombreMarca) throws Exception {
+		if (conexionTF.getText().trim().equals("")) throw new Exception("Campos sin rellenar."); 
+		
+		TPeriferico periferico = new TPeriferico();
+		
+		periferico.setUPC(upcTF.getText());
+		periferico.setNombre(nombreTF.getText());
+		periferico.setTipo("Periferico");
+		periferico.setPrecio(Double.parseDouble(precioTF.getText()));
+		periferico.setCantidad(Integer.parseInt(cantidadTF.getText()));
+		periferico.setDescripcion(desc);
+		periferico.setTipoPeriferico(tPerifericoBox.getSelectedItem().toString());
+		periferico.setConexion(conexionTF.getText());
+		
+		TPeriferico prfcoYaRegistrado = (TPeriferico) controlador.altaProducto(periferico, nombreMarca);
+		if (prfcoYaRegistrado == null) {
+			JOptionPane.showMessageDialog(null,"Periferico " + nombreTF.getText() + " dado de alta con exito.",
+					   "INFO",JOptionPane.INFORMATION_MESSAGE);
+		}
+		else {
+			Object[] options = {"Modificar","No modificar","No reactivar"};
+			int n = JOptionPane.showOptionDialog(null,
+					 "Este periferico ya estaba registrado, ¿Quieres reactivarlo y modificar sus valores?:", "Advertencia",
+					 JOptionPane.YES_NO_CANCEL_OPTION,
+					 JOptionPane.WARNING_MESSAGE,
+					 null,
+					 options,
+					 options[1]); 
+			
+			
+			if (n == JOptionPane.YES_OPTION) {
+				periferico.setId(prfcoYaRegistrado.getId());
+				controlador.reactivarProducto(periferico);
+				JOptionPane.showMessageDialog(null,"Periferico " + periferico.getNombre() + " reactivado con exito",
+						   "INFO",JOptionPane.INFORMATION_MESSAGE);
+			}
+			else if (n == JOptionPane.NO_OPTION) {
+				controlador.reactivarProducto(prfcoYaRegistrado);
+				JOptionPane.showMessageDialog(null,"Periferico " + prfcoYaRegistrado.getNombre() + " reactivado con exito",
+						   "INFO",JOptionPane.INFORMATION_MESSAGE);
+			}
+		}
+	}	
 	
 	private void setNombreMarcas() {
 		marcas = controlador.getNombreMarcas();

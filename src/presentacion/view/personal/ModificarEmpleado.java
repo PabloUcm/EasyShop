@@ -126,7 +126,7 @@ public class ModificarEmpleado{
     			throw new Exception("Campo(s) sin rellenar.");
     		}
 			
-			TPersonal empleado = controlador.getEmpleado(Integer.parseInt(idTF.getText()));
+			TPersonal empleado = controlador.getPersonal(Integer.parseInt(idTF.getText()));
 			
 			String tfno;
 			if (empleado.getTelefono() == null) tfno = "[Vacio]";

@@ -17,6 +17,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import integracion.transfers.TCliente;
+import integracion.transfers.TPc;
+import integracion.transfers.TPeriferico;
 import integracion.transfers.TProducto;
 import presentacion.controllers.ClienteController;
 import presentacion.controllers.ProductoController;
@@ -96,30 +98,64 @@ public class MostrarProducto {
 		return mostrarProductoPanel;
 	}
 	
-	private String busquedaToString(TProducto producto) {
+	private String busquedaToString(TProducto producto, String nombreMarca) {
 		StringBuilder busqstr = new StringBuilder();
+		
 		for (int i = 0; i < 45; i++) busqstr.append(" ");
 		busqstr.append("=====================\n");
 		for (int i = 0; i < 45; i++) busqstr.append(" ");
 		busqstr.append("      DATOS DEL PRODUCTO   \n");
 		for (int i = 0; i < 45; i++) busqstr.append(" ");
 		busqstr.append("=====================\n\n");
+		
 		busqstr.append("    ID: "+producto.getId()+"\n\n");
+		busqstr.append("    UPC: "+producto.getUPC()+"\n\n");
 		busqstr.append("    NOMBRE: "+producto.getNombre()+"\n\n");
-		//busqstr.append("    TIPO: "+producto.getTipo()+"\n\n");
+		busqstr.append("    MARCA: "+nombreMarca+"\n\n");
+		busqstr.append("    TIPO: "+producto.getTipo()+"\n\n");
 		busqstr.append("    PRECIO: "+producto.getPrecio()+"\n\n");
-		/*if (producto.getTipo() == "PC") {
-			
-		}
-		else if (producto.getTipo() == "Periferico") {
-			
-		}*/
+		busqstr.append("    CANTIDAD: "+producto.getCantidad()+"\n\n");
+		
+		if (producto.getTipo().equals("PC")) PcToString(busqstr, (TPc) producto);
+		else if (producto.getTipo().equals("Periferico")) PerifericoToString(busqstr, (TPeriferico) producto); 
+		
+		busqstr.append("    Descripcion: "+producto.getDescripcion()+"\n\n");
 		
 		return busqstr.toString();
 	}
 	
+	private void PcToString(StringBuilder busqstr, TPc pc) {
+		busqstr.append("    PROCESADOR: "+pc.getProcesador()+"\n\n");
+		busqstr.append("    RAM: "+pc.getRam()+"\n\n");
+		busqstr.append("    DISCO DURO: "+pc.getDiscoduro()+"\n\n");
+		busqstr.append("    TARJETA GRAFICA: "+pc.getTarjetagrafica()+"\n\n");
+		busqstr.append("    PLACA BASE: "+pc.getPlacabase()+"\n\n");
+	}
+	
+	private void PerifericoToString(StringBuilder busqstr, TPeriferico periferico) {
+		busqstr.append("    TIPO PERIFERICO: "+periferico.getTipoPeriferico()+"\n\n");
+		busqstr.append("    RAM: "+periferico.getConexion()+"\n\n");
+	}
+	
 	private void mostrar() {
-		
+		try {
+			if (idTF.getText().trim().equals("")) throw new Exception("Campo sin rellenar.");
+			
+			int id = Integer.parseInt(idTF.getText());
+			
+			TProducto producto = controlador.getProductoById(id, "NONE");
+			
+			String nombreMarca = controlador.getNombreMarcaByID(producto.getMarcaId());
+			
+			if (producto.getTipo().equals("PC")) producto = (TPc) controlador.getPcById(id);
+			else if (producto.getTipo().equals("Periferico")) producto = (TPeriferico) controlador.getPerifericoById(id);
+			
+			datosTA.setText(busquedaToString(producto, nombreMarca));
+			datosTA.setCaretPosition(0);
+		}
+		catch(Exception ex) {
+			JOptionPane.showMessageDialog(null,ex.getMessage(), "Error",JOptionPane.ERROR_MESSAGE);
+		}
 	}
 	
 	private void limpiar() {

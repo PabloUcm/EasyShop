@@ -60,7 +60,7 @@ public class TProducto {
 
 	public String getDescripcion() {
 		if (descripcion != null) return descripcion;
-		else return "Sin descripcion.";
+		else return "[Sin descripcion]";
 	}
 
 	public void setDescripcion(String descripcion) {

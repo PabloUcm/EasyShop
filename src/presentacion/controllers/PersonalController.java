@@ -27,11 +27,11 @@ private Modelo modelo;
 	public void modificarPersonal(int id, String dni, String nombre, String sueldo,String telefono,String horario) throws Exception{
 		modelo.modificarPersonal( id,dni,nombre,telefono,sueldo,horario);
 	}
-	public List<TPersonal> listarEmpleados(){
-		return modelo.listarEmpleados();
+	public List<TPersonal> listarPersonal(){
+		return modelo.listarPersonal();
 	}
-	public TPersonal getEmpleado(int id) throws Exception {
-		return modelo.getEmpleado(id);
+	public TPersonal getPersonal(int id) throws Exception {
+		return modelo.getPersonal(id);
 	}
 
 }

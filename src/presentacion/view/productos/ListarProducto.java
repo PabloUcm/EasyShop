@@ -47,11 +47,15 @@ public class ListarProducto {
 		
 		listarProductosPanel.addComponentListener(new java.awt.event.ComponentAdapter() {
 	        public void componentShown(java.awt.event.ComponentEvent evt) {
-	        	List<TProducto> listaProductos = controlador.listarProductos();
-	        	tableModel.setProductos(listaProductos);
+	        	listar();
 	        }
 	    });
 		
 		return listarProductosPanel;
+	}
+	
+	private void listar() {
+		List<TProducto> listaProductos = controlador.listarProductos();
+    	tableModel.setProductos(listaProductos);
 	}
 }

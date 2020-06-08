@@ -168,7 +168,7 @@ public class Modelo {
 				
 	}
 	
-	public List<TPersonal> listarEmpleados(){
+	public List<TPersonal> listarPersonal(){
 		SqlPersonalDAO empleadoDAO = (SqlPersonalDAO) factoryDAO.getEmpleadoDAO();
 		List<TPersonal> empleadoList = empleadoDAO.getAllEmpleados();
 		
@@ -177,7 +177,7 @@ public class Modelo {
 		return empleadoList;	
 	}
 	
-	public TPersonal getEmpleado(int id) throws Exception {		
+	public TPersonal getPersonal(int id) throws Exception {		
 		
 		SqlPersonalDAO empleadoDAO = (SqlPersonalDAO) factoryDAO.getEmpleadoDAO();
 		
@@ -252,10 +252,9 @@ public class Modelo {
 		return marca;
 	}	
 	
-	
 	//-------PRODUCTOS-----------//
 	
-	public TPc altaPC(TPc pc, String nombreMarca) throws Exception {
+	public TProducto altaProducto(TProducto producto, String nombreMarca) throws Exception {
 		SqlProductoDAO productoDAO = (SqlProductoDAO) factoryDAO.getProductoDAO();
 		SqlMarcaDAO marcaDAO = (SqlMarcaDAO) factoryDAO.getMarcaDAO();
 		
@@ -263,63 +262,43 @@ public class Modelo {
 		
 		if (marca == null ||!marca.isActivo()) throw new Exception("Marca inexistente.");
 		
-		TProducto producto = productoDAO.getProductoByUPC(pc.getUPC());
+		producto.setMarcaId(marca.getId());
 		
-		if (producto != null && producto.isActivo()) throw new Exception("Producto ya existente.");
-		if (producto != null && !producto.isActivo()) {
-			if (!producto.getTipo().equals(pc.getTipo())) {
-				throw new Exception("El producto esta registrado e inactivo, pero no es del tipo "+pc.getTipo());
+		TProducto productoRegistrado = productoDAO.getProductoByUPC(producto.getUPC());
+		
+		if (productoRegistrado != null && productoRegistrado.isActivo()) throw new Exception("Producto ya existente.");
+		if (productoRegistrado != null && !productoRegistrado.isActivo()) {
+			if (!producto.getTipo().equals(productoRegistrado.getTipo())) {
+				throw new Exception("El producto esta registrado e inactivo, pero no es del tipo "+producto.getTipo());
 			}
 			
-			return productoDAO.getPCByID(producto.getId());
+			TMarca marcaProdReg = marcaDAO.getMarcaByID(productoRegistrado.getMarcaId());
 			
+			if (!marcaProdReg.isActivo()) {
+				throw new Exception("El producto esta registrado e inactivo. No se puede reactivar porque su marca "+marca.getNombre()+
+									" (ID: "+marca.getId()+") esta dada de baja.");
+			}
+			
+			if (productoRegistrado.getTipo().equals("PC")) return productoDAO.getPCByID(productoRegistrado.getId());
+			else if (productoRegistrado.getTipo().equals("Periferico")) return productoDAO.getPerifericoByID(productoRegistrado.getId());
+			else return productoRegistrado;
 		}
 		
-		pc.setMarcaId(marca.getId());
+		int id = productoDAO.altaProducto(producto);
 		
-		productoDAO.altaPC(pc);
+		if (producto.getTipo().equals("PC")) productoDAO.altaPC( (TPc) producto, id);
+		else if (producto.getTipo().equals("Periferico")) productoDAO.altaPeriferico( (TPeriferico) producto, id);
 		
 		return null;
 		
 	}
-	
-	public TPeriferico altaPeriferico(TPeriferico periferico, String nombreMarca) throws Exception {
-		SqlProductoDAO productoDAO = (SqlProductoDAO) factoryDAO.getProductoDAO();
-		SqlMarcaDAO marcaDAO = (SqlMarcaDAO) factoryDAO.getMarcaDAO();
-		
-		TMarca marca = marcaDAO.getMarcaByName(nombreMarca);
-		
-		if (marca == null ||!marca.isActivo()) throw new Exception("Marca inexistente.");
-		
-		periferico.setMarcaId(marca.getId());
-		
-		TProducto producto = productoDAO.getProductoByUPC(periferico.getUPC());
-		
-		if (producto != null && producto.isActivo()) throw new Exception("Producto ya existente.");
-		if (producto != null && !producto.isActivo()) {
-			if (!producto.getTipo().equals(periferico.getTipo())) {
-				throw new Exception("El producto esta registrado e inactivo, pero no es del tipo "+periferico.getTipo());
-			}
-			
-			return productoDAO.getPerifericoByID(producto.getId());
-			
-		}
-		
-		productoDAO.altaPeriferico(periferico);
-		
-		return null;
-	}
-	
-	public void reactivarPC(TPc pc) {
+
+	public void reactivarProducto(TProducto producto) {
 		SqlProductoDAO productoDAO = (SqlProductoDAO) factoryDAO.getProductoDAO();
 		
-		productoDAO.reactivarPC(pc);
-	}
-	
-	public void reactivarPeriferico(TPeriferico periferico) {
-		SqlProductoDAO productoDAO = (SqlProductoDAO) factoryDAO.getProductoDAO();
-		
-		productoDAO.reactivarPeriferico(periferico);
+		productoDAO.reactivarProducto(producto);
+		if (producto.getTipo().equals("PC")) productoDAO.modificarPc((TPc) producto);
+		else if (producto.getTipo().equals("Periferico")) productoDAO.modificarPeriferico((TPeriferico) producto);
 	}
 	
 	public void bajaProducto(int id) throws Exception {
@@ -336,12 +315,25 @@ public class Modelo {
 			
 		return productoList;
 	}
-	
-	public List<String> getNombreMarcas() {
-		SqlMarcaDAO marcaDAO = (SqlMarcaDAO) factoryDAO.getMarcaDAO();
-		List<String> nombres = marcaDAO.getNombreMarcas();
+
+	public TPc getPcById(int id) throws Exception {
+		SqlProductoDAO productoDAO = (SqlProductoDAO) factoryDAO.getProductoDAO();
 		
-		return nombres;
+		TPc pc = productoDAO.getPCByID(id);
+		
+		if (pc == null || !pc.isActivo()) throw new Exception("PC inexistente.");
+		
+		return pc;
+	}
+	
+	public TPeriferico getPerifericoById(int id) throws Exception {
+		SqlProductoDAO productoDAO = (SqlProductoDAO) factoryDAO.getProductoDAO();
+		
+		TPeriferico periferico = productoDAO.getPerifericoByID(id);
+		
+		if (periferico == null || !periferico.isActivo()) throw new Exception("Periferico inexistente.");
+		
+		return periferico;
 	}
 	
 	public TProducto getProductoById(int id,String tipo) throws Exception {
@@ -349,11 +341,11 @@ public class Modelo {
 		
 		TProducto producto = productoDAO.getById(id);
 		
-		if(producto == null || !producto.isActivo()) throw new Exception("Producto inexistente");
-		if(producto != null && tipo != "NONE" && !producto.getTipo().contentEquals(tipo)) throw new Exception("Tipo de producto erroneo");
+		if(producto == null || !producto.isActivo()) throw new Exception("Producto inexistente.");
+		if(producto != null && !tipo.equals("NONE") && !producto.getTipo().equals(tipo)) throw new Exception("Tipo de producto erroneo.");
 		
-		if(tipo == "PC") producto = productoDAO.getPCByID(id);
-		else producto = productoDAO.getPerifericoByID(id);
+		if (tipo.equals("PC")) producto = productoDAO.getPCByID(id);
+		else if (tipo.equals("Periferico")) producto = productoDAO.getPerifericoByID(id);
 		
 		return producto;
 	}
@@ -362,9 +354,25 @@ public class Modelo {
 		SqlProductoDAO productoDAO = (SqlProductoDAO) factoryDAO.getProductoDAO();
 		
 		productoDAO.modificarProducto(producto);
-		if(producto.getTipo() == "PC") 	productoDAO.modificarPc((TPc) producto);
-		else if(producto.getTipo() == "PERIFERICO") productoDAO.modificarPeriferico((TPeriferico) producto);
+		if(producto.getTipo().equals("PC")) productoDAO.modificarPc((TPc) producto);
+		else if(producto.getTipo().equals("Periferico")) productoDAO.modificarPeriferico((TPeriferico) producto);
 		
+	}
+	
+	public List<String> getNombreMarcas() {
+		SqlMarcaDAO marcaDAO = (SqlMarcaDAO) factoryDAO.getMarcaDAO();
+		
+		List<String> nombres = marcaDAO.getNombreMarcas();
+		
+		return nombres;
+	}
+	
+	public String getNombreMarcaByID(int id) {
+		SqlMarcaDAO marcaDAO = (SqlMarcaDAO) factoryDAO.getMarcaDAO();
+		
+		TMarca marca = marcaDAO.getMarcaByID(id);
+		
+		return marca.getNombre();
 	}
 	
 }

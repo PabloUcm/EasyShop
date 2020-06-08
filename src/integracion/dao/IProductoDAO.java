@@ -11,10 +11,10 @@ public interface IProductoDAO {
 	public TProducto getProductoByUPC(String upc);
 	public TPc getPCByID(int id);
 	public TPeriferico getPerifericoByID(int id);
-	public int altaPC(TPc pc);
-	public int altaPeriferico(TPeriferico periferico);
-	public void reactivarPC(TPc pc);
-	public void reactivarPeriferico(TPeriferico periferico);
+	public int altaProducto(TProducto producto);
+	public void altaPC(TPc pc, int id);
+	public void altaPeriferico(TPeriferico periferico, int id);
+	public void reactivarProducto(TProducto producto);
 	public void bajaProducto(int id);
 	public List<TProducto> getAll();
 	public TProducto getById(int id);

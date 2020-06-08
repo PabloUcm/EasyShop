@@ -50,11 +50,15 @@ public class ListarEmpleados {
 
 		listarEmpleadosPanel.addComponentListener(new java.awt.event.ComponentAdapter() {
 	        public void componentShown(java.awt.event.ComponentEvent evt) {
-	            List<TPersonal> listaPersonal = controlador.listarEmpleados();
-	            tableModel.setPersonal(listaPersonal);
+	            listar();
 	        }
 	    });
 		
 		return listarEmpleadosPanel;
+	}
+	
+	private void listar() {
+		List<TPersonal> listaPersonal = controlador.listarPersonal();
+        tableModel.setPersonal(listaPersonal);
 	}
 }
