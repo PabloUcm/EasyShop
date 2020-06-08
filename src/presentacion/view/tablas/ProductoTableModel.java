@@ -13,12 +13,9 @@ import presentacion.controllers.ProductoController;
 public class ProductoTableModel extends AbstractTableModel{
 
 	private  String[] columnNames = {"ID", "UPC", "Nombre", "Tipo", "Precio", "Cantidad"};
-	
-	private ProductoController controlador;
 	private List<TProducto> productos;
 	
-	public ProductoTableModel(ProductoController controlador) {
-		this.controlador = controlador;
+	public ProductoTableModel() {
 		productos = new ArrayList<>();
 	}
 	

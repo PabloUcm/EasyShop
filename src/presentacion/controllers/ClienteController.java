@@ -12,20 +12,20 @@ public class ClienteController {
 		this.modelo = m;
 	}
 	
-	public TCliente altaCliente(String dni, String nombre, String telefono) throws Exception {
-		return modelo.altaCliente(dni, nombre, telefono);
+	public TCliente altaCliente(TCliente cliente) throws Exception {
+		return modelo.altaCliente(cliente);
 	}
 	
-	public void reactivarCliente(TCliente cliente) {
-		modelo.reactivarCliente(cliente);
+	public void reactivarCliente(int id) throws Exception {
+		modelo.reactivarCliente(id);
 	}
 	
 	public void bajaCliente(int id) throws Exception {
 		 modelo.bajaCliente(id);
 	}
 	
-	public void modificarCliente(int id, String dni, String nombre, String telefono) throws Exception {
-		modelo.modificarCliente(id, dni, nombre, telefono);
+	public void modificarCliente(TCliente cliente) throws Exception {
+		modelo.modificarCliente(cliente);
 	}
 	
 	public TCliente getCliente(int id) throws Exception {

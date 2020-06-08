@@ -14,12 +14,9 @@ import presentacion.controllers.MarcaController;
 @SuppressWarnings("serial")
 public class MarcaTableModel extends AbstractTableModel {
 	private  String[] columnNames = {"ID", "CIF", "Nombre", "Pais"};
-
-	private MarcaController controlador;
 	private List<TMarca> marcas;
 	
-	public MarcaTableModel(MarcaController c) {
-		this.controlador = c;
+	public MarcaTableModel() {
 		marcas = new ArrayList<>();
 	}
 	

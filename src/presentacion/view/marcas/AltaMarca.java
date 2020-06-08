@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import integracion.transfers.TMarca;
 import presentacion.controllers.MarcaController;
 import presentacion.view.SwingFactory;
 
@@ -93,7 +94,14 @@ public class AltaMarca{
 	
 	private void alta() {
 		try {
-			controlador.altaMarca(cifTF.getText(), nombreTF.getText(), paisTF.getText());
+			
+			TMarca marca = new TMarca();
+			
+			marca.setCIF(cifTF.getText());
+			marca.setNombre(nombreTF.getText());
+			marca.setPais(paisTF.getText());
+			
+			controlador.altaMarca(marca);
 			JOptionPane.showMessageDialog(null, "Marca " + nombreTF.getText() + " registrada con exito",
 										  "Error icon", JOptionPane.INFORMATION_MESSAGE);
 			

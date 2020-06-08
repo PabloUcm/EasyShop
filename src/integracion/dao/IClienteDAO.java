@@ -11,6 +11,6 @@ public interface IClienteDAO {
 	public List<TCliente> getAllClientes();
 	public int altaCliente(TCliente cliente);
 	public void bajaCliente(int id);
-	public void modificarCliente(int id, TCliente cliente);
-	public void reactivarCliente(TCliente cliente);
+	public void modificarCliente(TCliente cliente);
+	public void reactivarCliente(int id);
 }

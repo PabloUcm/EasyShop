@@ -121,14 +121,14 @@ public class SqlClienteDAO implements IClienteDAO {
 	}
 
 	@Override
-	public void modificarCliente(int id, TCliente cliente) {
+	public void modificarCliente(TCliente cliente) {
 		try {
 			Connection connection = dbAdapter.getConnection();
 			PreparedStatement statement = connection.prepareStatement("UPDATE Cliente SET dni=?, nombre=?, telefono=?  WHERE id=?");
 			statement.setString(1, cliente.getDni());
 			statement.setString(2, cliente.getNombre());
 			statement.setString(3, cliente.getTelefono());
-			statement.setInt(4, id);
+			statement.setInt(4, cliente.getId());
 			
 			statement.executeUpdate();
 					
@@ -138,17 +138,13 @@ public class SqlClienteDAO implements IClienteDAO {
 	}
 
 	@Override
-	public void reactivarCliente(TCliente cliente) {
+	public void reactivarCliente(int id) {
 		try {
 				Connection connection = dbAdapter.getConnection();
 			
-				PreparedStatement statement = connection.prepareStatement("UPDATE Cliente SET dni=?, nombre=?, "
-																		  + "telefono=?, activo=true  WHERE id=?");
+				PreparedStatement statement = connection.prepareStatement("UPDATE Cliente SET activo=true WHERE id=?");
 
-				statement.setString(1, cliente.getDni());
-				statement.setString(2, cliente.getNombre());
-				statement.setString(3, cliente.getTelefono());
-				statement.setInt(4, cliente.getId());
+				statement.setInt(1, id);
 				
 				statement.executeUpdate();	
 			

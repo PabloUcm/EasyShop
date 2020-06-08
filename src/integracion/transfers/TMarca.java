@@ -9,12 +9,6 @@ public class TMarca {
 	
 	public TMarca() {}
 	
-	public TMarca(String cif, String nombre, String pais) {
-		this.cif = cif;
-		this.nombre = nombre;
-		this.pais = pais;
-	}
-	
 	public TMarca(int id, String cif, String nombre, String pais, boolean activo) {
 		this.id = id;
 		this.cif = cif;

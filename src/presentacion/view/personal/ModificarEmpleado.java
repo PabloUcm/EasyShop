@@ -126,89 +126,30 @@ public class ModificarEmpleado{
     			throw new Exception("Campo(s) sin rellenar.");
     		}
 			
-			TPersonal empleado = controlador.getPersonal(Integer.parseInt(idTF.getText()));
-			
-			String tfno;
-			if (empleado.getTelefono() == null) tfno = "[Vacio]";
-			else tfno = empleado.getTelefono();
-			
-			String tfnoNuevo; 
-			if (tfnoTF.getText().isEmpty()) tfnoNuevo = "[Vacio]";
-			else tfnoNuevo = tfnoTF.getText();
-
-			String sueldo;
-			if (empleado.getSueldo() == null) sueldo = "[Vacio]";
-			else sueldo = empleado.getSueldo();
-			
-			String sueldoNuevo; 
-			if (sueldoTF.getText().isEmpty()) sueldoNuevo = "[Vacio]";
-			else sueldoNuevo = sueldoTF.getText();
-			
-			String horario;
-			
-			if (empleado.getHorario() == null) horario = "[Vacio]";
-			else horario = empleado.getHorario();
-			
-			String horarioNuevo; 
-			String numCadena= String.valueOf(0);
-			if (horarioTF.getText().isEmpty()) horarioNuevo = "[Vacio]";
-			else horarioNuevo = horarioTF.getText();
+			TPersonal personal = controlador.getPersonal(Integer.parseInt(idTF.getText()));
     				    		
-    		String msg = "ID: "+empleado.getId()+"\n\nDNI: "+empleado.getDni()+"\nNUEVO DNI: "+dniTF.getText()+"\n\nNOMBRE: "
-    					  + empleado.getNombre() +"\nNUEVO NOMBRE: " + nombreTF.getText() + "\n\nTELEFONO: "+tfno
-    					  +"\nTELEFONO NUEVO: "+ tfnoNuevo +"\n\nSUELDO: "+sueldo
-    					  +"\nSUELDO NUEVO: "+ sueldoNuevo +"\n\nHORARIO: "+horario
-    					  +"\nHORARIO NUEVO: "+ horarioNuevo +"\n\n ¿Quieres cambiar los datos de este empleado?";
+    		String msg = "ID: "+personal.getId()+"\n\nDNI: "+personal.getDni()+"\nNUEVO DNI: "+dniTF.getText()+"\n\nNOMBRE: "
+    					  + personal.getNombre() +"\nNUEVO NOMBRE: " + nombreTF.getText() + "\n\nTELEFONO: "+personal.getTelefono()
+    					  +"\nTELEFONO NUEVO: "+ tfnoTF.getText() +"\n\nSUELDO: "+personal.getSueldo()
+    					  +"\nSUELDO NUEVO: "+ sueldoTF.getText() +"\n\nHORARIO: "+personal.getHorario()
+    					  +"\nHORARIO NUEVO: "+ horarioTF.getText() +"\n\n ¿Quieres cambiar los datos de este empleado?";
             int input = JOptionPane.showConfirmDialog(null, msg,"Confirmar cambios en el empleado", 
             		    JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, modIcon);
             
             if(input == JOptionPane.OK_OPTION) {
-            	if (!tfnoTF.getText().isEmpty()&&!sueldoTF.getText().isEmpty()&&!horarioTF.getText().isEmpty()) {
-            		controlador.modificarPersonal(Integer.parseInt(idTF.getText()), dniTF.getText(), 
+            	personal.setDni(dniTF.getText());
+            	personal.setNombre(nombreTF.getText());
+            	personal.setTelefono(tfnoTF.getText());
+            	personal.setSueldo(Double.parseDouble(sueldoTF.getText()));
+            	personal.setHorario(horarioTF.getText());
             	
-            		nombreTF.getText(), tfnoTF.getText(),sueldoTF.getText(),horarioTF.getText());
-            		}
-            	else if(!tfnoTF.getText().isEmpty()&&!sueldoTF.getText().isEmpty()){
-            		controlador.modificarPersonal(Integer.parseInt(idTF.getText()), dniTF.getText(), 
-                        	
-                    		nombreTF.getText(), tfnoTF.getText(),sueldoTF.getText(),numCadena);
-            	}
-            	else if(!tfnoTF.getText().isEmpty()&&!horarioTF.getText().isEmpty()){
-            			controlador.modificarPersonal(Integer.parseInt(idTF.getText()), dniTF.getText(), 
-                        	
-                    		nombreTF.getText(),tfnoTF.getText(),numCadena,horarioTF.getText());
-            	}
-            	else if(!sueldoTF.getText().isEmpty()&&!horarioTF.getText().isEmpty()){
-            		controlador.modificarPersonal(Integer.parseInt(idTF.getText()), dniTF.getText(), 
-                        	
-                    		nombreTF.getText(),numCadena,sueldoTF.getText(),horarioTF.getText());
-            	}
-            	else if(!tfnoTF.getText().isEmpty()){
-            			controlador.modificarPersonal(Integer.parseInt(idTF.getText()), dniTF.getText(), 
-                        	
-                    		nombreTF.getText(),tfnoTF.getText(),numCadena,numCadena);
-            	}
-            	else if(!sueldoTF.getText().isEmpty()){
-        			controlador.modificarPersonal(Integer.parseInt(idTF.getText()), dniTF.getText(), 
-                    	
-                		nombreTF.getText(),numCadena,sueldoTF.getText(),numCadena);
-        	}
-            	else if(!horarioTF.getText().isEmpty()){
-        			controlador.modificarPersonal(Integer.parseInt(idTF.getText()), dniTF.getText(), 
-                    	
-                		nombreTF.getText(),numCadena,numCadena,horarioTF.getText());
-        	}
+            	controlador.modificarPersonal(personal);
             	
-    			else {
-    				
-    				controlador.modificarPersonal(Integer.parseInt(idTF.getText()), dniTF.getText(), 
-    			
-						 						  nombreTF.getText(),numCadena,numCadena,numCadena);
-    			}
             	JOptionPane.showMessageDialog(null,"Empleado con ID " + idTF.getText() + " modificado con exito.",
 						  					  "INFO",JOptionPane.INFORMATION_MESSAGE);
             	
             }
+            limpiar();
 		} 
 		catch(Exception ex) {
 			JOptionPane.showMessageDialog(null,ex.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
@@ -216,10 +157,11 @@ public class ModificarEmpleado{
 	}
 	
 	private void limpiar() {
-		idTF.setText(" ");
-		dniTF.setText(" ");
-		nombreTF.setText(" ");
-		sueldoTF.setText(" ");
-		tfnoTF.setText(" ");
+		idTF.setText("");
+		dniTF.setText("");
+		nombreTF.setText("");
+		sueldoTF.setText("");
+		tfnoTF.setText("");
+		horarioTF.setText("");
 	}
 }

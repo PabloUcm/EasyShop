@@ -12,19 +12,10 @@ import integracion.transfers.TPersonal;
 import presentacion.controllers.PersonalController;
 
 public class PersonalTableModel extends AbstractTableModel{
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	
 	private  String[] columnNames = {"ID", "DNI", "Nombre", "Sueldo","Telefono"};
-
-	private PersonalController controlador;
 	private List<TPersonal> empleados;
 	
-	public PersonalTableModel(PersonalController c){
-		controlador = c;
+	public PersonalTableModel(){
 		empleados = new ArrayList<>();		
 	}
 	

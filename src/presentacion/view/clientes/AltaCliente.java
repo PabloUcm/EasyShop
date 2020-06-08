@@ -96,8 +96,15 @@ public class AltaCliente{
 			if (telefono.equals("")) telefono = null;
 			else telefono = tfnoTF.getText();
 			
-			TCliente cliente = controlador.altaCliente(dniTF.getText(), nombreTF.getText(), telefono);
-			if (cliente == null) {
+			TCliente cliente = new TCliente();
+			
+			cliente.setDni(dniTF.getText());
+			cliente.setNombre(nombreTF.getText());
+			cliente.setTelefono(telefono);
+			
+			
+			TCliente clienteYaRegistrado = controlador.altaCliente(cliente);
+			if (clienteYaRegistrado == null) {
 				JOptionPane.showMessageDialog(null,"Cliente " + nombreTF.getText() + " registrado con exito",
 										  "INFO",JOptionPane.INFORMATION_MESSAGE);
 				limpiar();
@@ -113,13 +120,14 @@ public class AltaCliente{
 						 options[1]); 
 				
 				if(n == JOptionPane.YES_OPTION || n == JOptionPane.NO_OPTION ){
+					controlador.reactivarCliente(clienteYaRegistrado.getId());
+					
 					if (n == JOptionPane.YES_OPTION) {
-						cliente.setDni(dniTF.getText());
-						cliente.setNombre(nombreTF.getText());
-						cliente.setTelefono(telefono);
+						cliente.setId(clienteYaRegistrado.getId());
+						controlador.modificarCliente(cliente);
 					}
-					controlador.reactivarCliente(cliente);
-					JOptionPane.showMessageDialog(null,"Cliente " + cliente.getNombre() + " reactivado con exito",
+					
+					JOptionPane.showMessageDialog(null,"Cliente " + clienteYaRegistrado.getNombre() + " reactivado con exito",
 												  "INFO",JOptionPane.INFORMATION_MESSAGE);
 				}
 				limpiar();

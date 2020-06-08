@@ -112,26 +112,20 @@ public class ModificarMarca {
     		}
 			
 			TMarca marca = controlador.getMarca(Integer.parseInt(idTF.getText()));
-			
-			String pais;
-			if (marca.getPais() == null) pais = "[Vacio]";
-			else pais = marca.getPais();
-			
-			String paisNuevo; 
-			if (paisTF.getText().isEmpty()) paisNuevo = "[Vacio]";
-			else paisNuevo = paisTF.getText();
     				    		
     		String msg = "ID: "+marca.getId()+"\n\nCIF: "+marca.getCIF()+"\nNUEVO CIF: "+cifTF.getText()+"\n\nNOMBRE: "
-    					  + marca.getNombre() +"\nNUEVO NOMBRE: " + nombreTF.getText() + "\n\nPAIS: "+pais
-    					  +"\nPAIS NUEVO: "+ paisNuevo +"\n\n ¿Quieres cambiar los datos de esta marca?";
+    					  + marca.getNombre() +"\nNUEVO NOMBRE: " + nombreTF.getText() + "\n\nPAIS: "+marca.getPais()
+    					  +"\nPAIS NUEVO: "+ paisTF.getText() +"\n\n ¿Quieres cambiar los datos de esta marca?";
             int input = JOptionPane.showConfirmDialog(null, msg,"Confirmar cambios en la marca", 
             		    JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, modIcon);
             
             if(input == JOptionPane.OK_OPTION) {
-            	if (!paisTF.getText().isEmpty()) controlador.modificarMarca(Integer.parseInt(idTF.getText()), cifTF.getText(), 
-            																 nombreTF.getText(), paisTF.getText());
-    			else controlador.modificarMarca(Integer.parseInt(idTF.getText()), cifTF.getText(), 
-						 						  nombreTF.getText(), null);
+            	marca.setCIF(cifTF.getText());
+            	marca.setNombre(nombreTF.getText());
+            	marca.setPais(paisTF.getText());
+            	
+            	controlador.modificarMarca(marca);
+            	
             	JOptionPane.showMessageDialog(null,"Marca con ID " + idTF.getText() + " modificada con exito.",
 						  					  "INFO",JOptionPane.INFORMATION_MESSAGE);
             }

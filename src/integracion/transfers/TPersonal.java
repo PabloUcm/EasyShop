@@ -6,21 +6,13 @@ public class TPersonal {
 	private String dni;
 	private String nombre;
 	private String telefono;
-	private String sueldo;
+	private double sueldo;
 	private String horario;
 	private boolean activo;
 	
 	public TPersonal() {};
 	
-	public TPersonal(String dni,String nombre, String telefono,String sueldo,String horario) {
-		this.dni = dni;
-		this.nombre = nombre;
-		this.telefono = telefono;
-		this.sueldo = sueldo;
-		this.horario = horario;
-	}
-
-	public TPersonal(int id, String dni, String nombre, String telefono,String sueldo, String horario,boolean activo) {
+	public TPersonal(int id, String dni, String nombre, String telefono, double sueldo, String horario,boolean activo) {
 		this.id = id;
 		this.dni = dni;
 		this.nombre = nombre;
@@ -32,6 +24,10 @@ public class TPersonal {
 	
 	public int getId() {
 		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getDni() {
@@ -49,10 +45,10 @@ public class TPersonal {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public void setSueldo(String sueldo){
+	public void setSueldo(double sueldo){
 		this.sueldo = sueldo;
 	}
-	public String getSueldo(){
+	public double getSueldo(){
 		return sueldo;
 	}
 
@@ -73,7 +69,6 @@ public class TPersonal {
 	}
 
 	public String getHorario() {
-		// TODO Auto-generated method stub
 		return horario;
 	}
 	public void setHorario(String horario){

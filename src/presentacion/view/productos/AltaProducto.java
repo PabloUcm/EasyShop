@@ -339,14 +339,15 @@ public class AltaProducto {
 					 options[1]); 
 			
 			
-			if (n == JOptionPane.YES_OPTION) {
-				controlador.reactivarProducto(pc);
+			if (n == JOptionPane.YES_OPTION || n == JOptionPane.NO_OPTION) {
+				controlador.reactivarProducto(pcYaRegistrado.getId());
+				
+				if (n == JOptionPane.YES_OPTION) {
+					pc.setId(pcYaRegistrado.getId());
+					controlador.modificarProducto(pc);
+				}
+				
 				JOptionPane.showMessageDialog(null,"PC " + pc.getNombre() + " reactivado con exito",
-						   "INFO",JOptionPane.INFORMATION_MESSAGE);
-			}
-			else if (n == JOptionPane.NO_OPTION) {
-				controlador.reactivarProducto(pcYaRegistrado);
-				JOptionPane.showMessageDialog(null,"PC " + pcYaRegistrado.getNombre() + " reactivado con exito",
 						   "INFO",JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
@@ -382,15 +383,15 @@ public class AltaProducto {
 					 options[1]); 
 			
 			
-			if (n == JOptionPane.YES_OPTION) {
-				periferico.setId(prfcoYaRegistrado.getId());
-				controlador.reactivarProducto(periferico);
+			if (n == JOptionPane.YES_OPTION || n == JOptionPane.NO_OPTION) {
+				controlador.reactivarProducto(prfcoYaRegistrado.getId());
+				
+				if (n == JOptionPane.YES_OPTION) {
+					periferico.setId(prfcoYaRegistrado.getId());
+					controlador.modificarProducto(periferico);
+				}
+				
 				JOptionPane.showMessageDialog(null,"Periferico " + periferico.getNombre() + " reactivado con exito",
-						   "INFO",JOptionPane.INFORMATION_MESSAGE);
-			}
-			else if (n == JOptionPane.NO_OPTION) {
-				controlador.reactivarProducto(prfcoYaRegistrado);
-				JOptionPane.showMessageDialog(null,"Periferico " + prfcoYaRegistrado.getNombre() + " reactivado con exito",
 						   "INFO",JOptionPane.INFORMATION_MESSAGE);
 			}
 		}

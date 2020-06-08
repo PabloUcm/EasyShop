@@ -27,7 +27,7 @@ public class ListarMarcas {
 	}
 	
 	private void initGUI() {
-		tableModel = new MarcaTableModel(controlador);
+		tableModel = new MarcaTableModel();
 		marcasTable = new JTable(tableModel);
 	}
 	

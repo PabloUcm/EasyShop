@@ -225,22 +225,13 @@ public class SqlProductoDAO implements IProductoDAO{
 	}
 	
 	@Override
-	public void reactivarProducto(TProducto producto) {
+	public void reactivarProducto(int id) {
 		try {
 			Connection connection = dbAdapter.getConnection();
 		
-			PreparedStatement statement = connection.prepareStatement("UPDATE Producto SET marca=?, upc=?, "
-																	  + "nombre=?, tipo=?, precio=?, cantidad=?, descripcion=?, activo=true  "
-																	  + "WHERE id=?");
+			PreparedStatement statement = connection.prepareStatement("UPDATE Producto SET activo=true WHERE id=?");
 
-			statement.setInt(1, producto.getMarcaId());
-			statement.setString(2, producto.getUPC());
-			statement.setString(3, producto.getNombre());
-			statement.setString(4, producto.getTipo());
-			statement.setDouble(5, producto.getPrecio());
-			statement.setInt(6, producto.getCantidad());
-			statement.setString(7, producto.getDescripcion());
-			statement.setInt(8, producto.getId());
+			statement.setInt(1, id);
 			
 			statement.executeUpdate();	
 		}

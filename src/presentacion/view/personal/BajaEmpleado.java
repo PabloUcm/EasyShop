@@ -37,7 +37,6 @@ public class BajaEmpleado{
 	   
 	    baja = SwingFactory.getJButton(new Dimension(230,60), "DAR DE BAJA AL EMPLEADO", 
 									   "icons/baja", 50, new Color(255,85,85), new Color(201,54,54));
-	    baja.setAlignmentX(JButton.CENTER_ALIGNMENT);
 	   
 	    baja.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) { baja();}
@@ -50,6 +49,8 @@ public class BajaEmpleado{
 	public JPanel getDefaultLayout() {
 		JPanel bajaEmpPanel = new JPanel(new GridBagLayout());
 	    GridBagConstraints c = new GridBagConstraints();
+	    
+	    baja.setAlignmentX(JButton.CENTER_ALIGNMENT);
 	    
 	    c.gridx = 0;
 	    c.gridy = 0;
@@ -75,7 +76,8 @@ public class BajaEmpleado{
 	    
 	    return bajaEmpPanel;
 	}
-	public void baja(){
+	
+	private void baja(){
 		
 		try {
     		if (idTF.getText().isEmpty()) throw new Exception("Campo sin rellenar.");
@@ -94,9 +96,14 @@ public class BajaEmpleado{
             	JOptionPane.showMessageDialog(null,"Empleado con ID " + idTF.getText() + " dado de baja con exito.",
 						  					  "INFO",JOptionPane.INFORMATION_MESSAGE);
             }
+            limpiar();
 		} 
 		catch(Exception ex) {
 			JOptionPane.showMessageDialog(null,ex.getMessage(), "ERROR",JOptionPane.ERROR_MESSAGE);
 		}
+	}
+	
+	private void limpiar() {
+		idTF.setText("");
 	}
 }

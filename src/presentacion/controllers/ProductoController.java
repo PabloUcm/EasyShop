@@ -19,8 +19,8 @@ private Modelo modelo;
 	}
 
 	
-	public void reactivarProducto(TProducto producto) {
-		modelo.reactivarProducto(producto);
+	public void reactivarProducto(int id) throws Exception {
+		modelo.reactivarProducto(id);
 	}
 	
 	public void bajaProducto(int id) throws Exception {

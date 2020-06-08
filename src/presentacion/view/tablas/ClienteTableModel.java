@@ -12,12 +12,9 @@ import presentacion.controllers.ClienteController;
 
 public class ClienteTableModel extends AbstractTableModel{
 	private  String[] columnNames = {"ID", "DNI", "Nombre", "Telefono"};
-
-	private ClienteController controlador;
 	private List<TCliente> clientes;
 	
-	public ClienteTableModel(ClienteController c) {
-		this.controlador = c;
+	public ClienteTableModel() {
 		clientes = new ArrayList<>();
 	}
 	

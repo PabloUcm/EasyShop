@@ -2,7 +2,7 @@ package integracion.factorias;
 
 import integracion.dao.IClienteDAO;
 import integracion.dao.IMarcaDAO;
-import integracion.dao.IPersonalDao;
+import integracion.dao.IPersonalDAO;
 import integracion.dao.IProductoDAO;
 import integracion.daoImpl.SqlClienteDAO;
 import integracion.daoImpl.SqlMarcaDAO;
@@ -22,7 +22,7 @@ public class SqlDAOFactory implements IDAOServiceFactory{
 	}
 
 	@Override
-	public IPersonalDao getEmpleadoDAO() {
+	public IPersonalDAO getEmpleadoDAO() {
 		return new SqlPersonalDAO();
 	}
 

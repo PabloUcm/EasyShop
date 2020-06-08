@@ -12,16 +12,16 @@ public class MarcaController {
 		this.modelo = m;
 	}
 	
-	public void altaMarca(String cif, String nombre, String pais) throws Exception {
-		modelo.altaMarca(cif, nombre, pais);
+	public void altaMarca(TMarca marca) throws Exception {
+		modelo.altaMarca(marca);
 	}
 	
 	public void bajaMarca(int id) throws Exception {
 		 modelo.bajaMarca(id);
 	}
 	
-	public void modificarMarca(int id, String cif, String nombre, String pais) throws Exception{
-		modelo.modificarMarca(id, cif, nombre, pais);
+	public void modificarMarca(TMarca marca) throws Exception{
+		modelo.modificarMarca(marca);
 	}
 	
 	public TMarca getMarca(int id) throws Exception{

@@ -162,14 +162,14 @@ public class SqlMarcaDAO implements IMarcaDAO {
 	}
 
 	@Override
-	public void modificarMarca(int id, TMarca marca) {
+	public void modificarMarca(TMarca marca) {
 		try {
 			Connection connection = dbAdapter.getConnection();
 			PreparedStatement statement = connection.prepareStatement("UPDATE Marca SET cif=?, nombre=?, pais=?  WHERE id=?");
 			statement.setString(1, marca.getCIF());
 			statement.setString(2, marca.getNombre());
 			statement.setString(3, marca.getPais());
-			statement.setInt(4, id);
+			statement.setInt(4, marca.getId());
 			
 			statement.executeUpdate();
 					

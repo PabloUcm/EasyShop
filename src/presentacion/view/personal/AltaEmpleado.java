@@ -110,11 +110,19 @@ public class AltaEmpleado{
 	
 	private void alta() {
 		try {
-			TPersonal personal = controlador.altaPersonal(dniTF.getText(), nombreTF.getText(),sueldoTF.getText(),
-					                                      tfnoTF.getText(), horarioTF.getText());
-			if (personal == null) {
-				JOptionPane.showMessageDialog(null,"Empleado" + nombreTF.getText() + " registrado con exito",
-										  "INFO",JOptionPane.INFORMATION_MESSAGE);
+			TPersonal personal = new TPersonal();
+			
+			personal.setDni(dniTF.getText());
+			personal.setNombre(nombreTF.getText());
+			personal.setTelefono(tfnoTF.getText());
+			personal.setSueldo(Double.parseDouble(sueldoTF.getText()));
+			personal.setHorario(horarioTF.getText());
+			
+			TPersonal personalYaRegistrado = controlador.altaPersonal(personal);
+			
+			if (personalYaRegistrado == null) {
+				JOptionPane.showMessageDialog(null,"Empleado " + nombreTF.getText() + " registrado con exito",
+										      "INFO",JOptionPane.INFORMATION_MESSAGE);
 				limpiar();
 			}
 			else {
@@ -128,13 +136,14 @@ public class AltaEmpleado{
 						 options[1]); 
 				
 				if(n == JOptionPane.YES_OPTION || n == JOptionPane.NO_OPTION ){
+					controlador.reactivarPersonal(personalYaRegistrado.getId());
+					
 					if (n == JOptionPane.YES_OPTION) {
-						personal.setDni(dniTF.getText());
-					    personal.setNombre(nombreTF.getText());
-						personal.setTelefono(tfnoTF.getText());
+						personal.setId(personalYaRegistrado.getId());
+						controlador.modificarPersonal(personal);
 					}
-					controlador.reactivarPersonal(personal);
-					JOptionPane.showMessageDialog(null,"Empleado " + personal.getNombre() + " reactivado con exito",
+					
+					JOptionPane.showMessageDialog(null,"Empleado " + personalYaRegistrado.getNombre() + " reactivado con exito",
 								                  "INFO",JOptionPane.INFORMATION_MESSAGE);
 				}
 				limpiar();
@@ -145,9 +154,10 @@ public class AltaEmpleado{
 	}
 	
 	private void limpiar() {
-		dniTF.setText(" ");
-		nombreTF.setText(" ");
-		sueldoTF.setText(" ");
-		tfnoTF.setText(" ");
+		dniTF.setText("");
+		nombreTF.setText("");
+		sueldoTF.setText("");
+		tfnoTF.setText("");
+		horarioTF.setText("");
 	}
 }

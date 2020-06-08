@@ -30,7 +30,7 @@ public class ListarEmpleados {
 	
 	
 	private void initGUI() {
-		tableModel = new PersonalTableModel(controlador);
+		tableModel = new PersonalTableModel();
 		personalTable = new JTable(tableModel);
 	}
 	

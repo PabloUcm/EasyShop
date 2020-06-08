@@ -7,13 +7,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import integracion.dao.IPersonalDao;
+import integracion.dao.IPersonalDAO;
 import integracion.dbadapters.IDBAdapter;
 import integracion.factorias.DBFactory;
 import integracion.transfers.TCliente;
 import integracion.transfers.TPersonal;
 
-public class SqlPersonalDAO implements IPersonalDao{
+public class SqlPersonalDAO implements IPersonalDAO{
 	
 	private IDBAdapter dbAdapter;
 	
@@ -25,7 +25,6 @@ public class SqlPersonalDAO implements IPersonalDao{
 
 	@Override
 	public TPersonal getEmpleadoByDNI(String dni) {
-		// TODO Auto-generated method stub
 	
 		try {
 			Connection connection = dbAdapter.getConnection();
@@ -35,7 +34,7 @@ public class SqlPersonalDAO implements IPersonalDao{
 			ResultSet results = statement.executeQuery();
 			
 			if(results.next()) return new TPersonal(results.getInt(1),results.getString(2),results.getString(3),results.getString(4),
-					    					       results.getString(5),results.getString(7),results.getBoolean(8));
+					    					       results.getDouble(5),results.getString(7),results.getBoolean(8));
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -44,7 +43,6 @@ public class SqlPersonalDAO implements IPersonalDao{
 
 	@Override
 	public TPersonal getEmpleadoByID(int id) {
-		// TODO Auto-generated method stub
 		try {
 			Connection connection = dbAdapter.getConnection();
 			PreparedStatement statement = connection.prepareStatement("SELECT * FROM Personal WHERE id=?");
@@ -52,7 +50,7 @@ public class SqlPersonalDAO implements IPersonalDao{
 			
 			ResultSet results = statement.executeQuery();
 			if(results.next()) return new TPersonal(results.getInt(1),results.getString(2),results.getString(3),results.getString(4),
-												   results.getString(5), results.getString(7),results.getBoolean(8));
+												   results.getDouble(5), results.getString(7),results.getBoolean(8));
 					
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -62,7 +60,6 @@ public class SqlPersonalDAO implements IPersonalDao{
 
 	@Override
 	public List<TPersonal> getAllEmpleados() {
-		// TODO Auto-generated method stub
 		Connection connection = dbAdapter.getConnection();
 		List<TPersonal> empleadoList = new ArrayList<>();
 		
@@ -73,7 +70,7 @@ public class SqlPersonalDAO implements IPersonalDao{
 			
 			while(results.next()) {
 				empleadoList.add(new TPersonal(results.getInt(1),results.getString(2),results.getString(3),results.getString(4),
-						results.getString(5),results.getString(7),results.getBoolean(8)));
+						results.getDouble(5),results.getString(7),results.getBoolean(8)));
 			}
 			
 			
@@ -101,7 +98,7 @@ public class SqlPersonalDAO implements IPersonalDao{
 			
 			statement.setString(1, empleado.getDni());
 			statement.setString(2, empleado.getNombre());
-			statement.setString(3, empleado.getSueldo());
+			statement.setDouble(3, empleado.getSueldo());
 			statement.setString(4, empleado.getTelefono());
 			statement.setString(5, empleado.getHorario());
 			
@@ -119,7 +116,6 @@ public class SqlPersonalDAO implements IPersonalDao{
 
 	@Override
 	public void bajaEmpleado(int id) {
-		// TODO Auto-generated method stub
 		try {
 			Connection connection = dbAdapter.getConnection();
 			PreparedStatement statement = connection.prepareStatement("UPDATE Personal SET ACTIVO = FALSE WHERE id=?");
@@ -132,18 +128,17 @@ public class SqlPersonalDAO implements IPersonalDao{
 	}
 
 	@Override
-	public void modificarEmpleado(int id, TPersonal empleado) {
-		// TODO Auto-generated method stub
+	public void modificarEmpleado(TPersonal personal) {
 		try {
 			
 			Connection connection = dbAdapter.getConnection();
 			PreparedStatement statement = connection.prepareStatement("UPDATE Personal SET dni=?, nombre=?, sueldo = ?,telefono=?, horario = ? WHERE id=?");
-			statement.setString(1, empleado.getDni());
-			statement.setString(2, empleado.getNombre());
-			statement.setString(3, empleado.getSueldo());
-			statement.setString(4, empleado.getTelefono());
-			statement.setString(5, empleado.getHorario());
-			statement.setInt(6, id);
+			statement.setString(1, personal.getDni());
+			statement.setString(2, personal.getNombre());
+			statement.setDouble(3, personal.getSueldo());
+			statement.setString(4, personal.getTelefono());
+			statement.setString(5, personal.getHorario());
+			statement.setInt(6, personal.getId());
 			
 			statement.executeUpdate();
 					
@@ -153,20 +148,13 @@ public class SqlPersonalDAO implements IPersonalDao{
 	}
 		
 	@Override
-	public void reactivarPersonal(TPersonal personal) {
+	public void reactivarPersonal(int id) {
 		try {
 				Connection connection = dbAdapter.getConnection();
 			
-				PreparedStatement statement = connection.prepareStatement("UPDATE Personal SET dni=?, nombre=?, "
-																		  + "sueldo=?,telefono=?,horario=?,"
-						                                                  + "activo=true  WHERE id=?");
+				PreparedStatement statement = connection.prepareStatement("UPDATE Personal SET activo=true  WHERE id=?");
 
-				statement.setString(1, personal.getDni());
-				statement.setString(2, personal.getNombre());
-				statement.setDouble(3,Double.parseDouble(personal.getSueldo()));
-				statement.setString(4,personal.getTelefono());
-				statement.setString(5, personal.getHorario());
-				statement.setInt(6, personal.getId());
+				statement.setInt(1, id);
 				
 				statement.executeUpdate();	
 			

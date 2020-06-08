@@ -9,12 +9,6 @@ public class TCliente {
 	private boolean activo;
 	
 	public TCliente() {};
-	
-	public TCliente(String dni,String nombre, String telefono) {
-		this.dni = dni;
-		this.nombre = nombre;
-		this.telefono = telefono;
-	}
 
 	public TCliente(int id, String dni, String nombre, String telefono, boolean activo) {
 		this.id = id;
@@ -27,7 +21,10 @@ public class TCliente {
 	public int getId() {
 		return id;
 	}
-
+	
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getDni() {
 		return dni;
 	}
@@ -45,8 +42,7 @@ public class TCliente {
 	}
 
 	public String getTelefono() {
-		if (telefono != null) return telefono;
-		else return "[Vacio]";
+		return telefono;
 	}
 
 	public void setTelefono(String telefono) {

@@ -39,27 +39,30 @@ public class Modelo {
 
     
 	
-	public TCliente altaCliente(String dni, String nombre, String telefono) throws Exception{
+	public TCliente altaCliente(TCliente cliente) throws Exception{
 		SqlClienteDAO clienteDAO = (SqlClienteDAO) factoryDAO.getClienteDAO();
 		
-		TCliente cliente = clienteDAO.getClienteByDNI(dni);
+		TCliente clienteYaRegistrado = clienteDAO.getClienteByDNI(cliente.getDni());
 				
-		if(cliente != null && cliente.isActivo()) throw new Exception("Cliente ya existente.");
-		if(cliente != null && !cliente.isActivo()) return cliente;
+		if(clienteYaRegistrado != null && clienteYaRegistrado.isActivo()) throw new Exception("Cliente ya existente.");
+		if(clienteYaRegistrado != null && !clienteYaRegistrado.isActivo()) return clienteYaRegistrado;
 		
-		int id = clienteDAO.altaCliente(new TCliente(dni,nombre,telefono));
-		
-		cliente = clienteDAO.getClienteByID(id);
+		clienteDAO.altaCliente(cliente);
 		
 		logObserver.alta(Entity.CLIENTE);
 		
 		return null;	
 	}
 	
-	public void reactivarCliente(TCliente cliente) {
+	public void reactivarCliente(int id) throws Exception {
 		SqlClienteDAO clienteDAO = (SqlClienteDAO) factoryDAO.getClienteDAO();
 		
-		clienteDAO.reactivarCliente(cliente);
+		TCliente cliente = clienteDAO.getClienteByID(id);
+		
+		if (cliente == null) throw new Exception("Cliente inexistente.");
+		if (cliente != null && cliente.isActivo()) throw new Exception("El cliente ya esta activo.");
+		
+		clienteDAO.reactivarCliente(id);
 	}
 	
 	public void bajaCliente(int id) throws Exception {
@@ -74,16 +77,16 @@ public class Modelo {
 		logObserver.baja(Entity.CLIENTE);
 	}
 	
-	public void modificarCliente(int id, String dni, String nombre, String telefono) throws Exception {
+	public void modificarCliente(TCliente cliente) throws Exception {
 		SqlClienteDAO clienteDAO = (SqlClienteDAO) factoryDAO.getClienteDAO();
-		TCliente cliente = clienteDAO.getClienteByID(id);
-		TCliente clienteDNI = clienteDAO.getClienteByDNI(dni);
+		TCliente clienteID = clienteDAO.getClienteByID(cliente.getId());
+		TCliente clienteDNI = clienteDAO.getClienteByDNI(cliente.getDni());
 			
-		if (cliente == null) throw new Exception("Cliente inexistente.");
-		if (!cliente.isActivo()) throw new Exception("El cliente esta inactivo.");
-		if (clienteDNI != null && id != clienteDNI.getId()) throw new Exception("Ya existe otro cliente con ese DNI.");
+		if (clienteID == null) throw new Exception("Cliente inexistente.");
+		if (!clienteID.isActivo()) throw new Exception("El cliente esta inactivo.");
+		if (clienteDNI != null && cliente.getId() != clienteDNI.getId()) throw new Exception("Ya existe otro cliente con ese DNI.");
 		
-		clienteDAO.modificarCliente(id, new TCliente(dni,nombre,telefono));
+		clienteDAO.modificarCliente(cliente);
 			
 		logObserver.modificar(Entity.CLIENTE);
 	}
@@ -114,29 +117,32 @@ public class Modelo {
 	 //-------------PERSONAL-----------------//
 	
 	
-	public TPersonal altaPersonal(String dni, String nombre, String sueldo, String telefono,String horario) throws Exception {
+	public TPersonal altaPersonal(TPersonal personal) throws Exception {
 	
 		SqlPersonalDAO personalDAO = (SqlPersonalDAO) factoryDAO.getEmpleadoDAO();
 		
-		TPersonal personal = personalDAO.getEmpleadoByDNI(dni);
+		TPersonal personalYaRegistrado = personalDAO.getEmpleadoByDNI(personal.getDni());
 				
-		if(personal != null && personal.isActivo()) throw new Exception("Cliente ya existente.");
-		if(personal != null && !personal.isActivo()) return personal;
+		if(personalYaRegistrado != null && personalYaRegistrado.isActivo()) throw new Exception("Cliente ya existente.");
+		if(personalYaRegistrado != null && !personalYaRegistrado.isActivo()) return personalYaRegistrado;
 		
-		int id = personalDAO.altaEmpleado(new TPersonal(dni,nombre,telefono,sueldo,horario));
-		
-		personal = personalDAO.getEmpleadoByID(id);
+		personalDAO.altaEmpleado(personal);
 		
 		logObserver.alta(Entity.PERSONAL);
 		
-		return personal;	
+		return null;	
 		
 	}
 	
-	public void reactivarPersonal(TPersonal personal) {
+	public void reactivarPersonal(int id) throws Exception {
 		SqlPersonalDAO personalDAO = (SqlPersonalDAO) factoryDAO.getEmpleadoDAO();
 		
-		personalDAO.reactivarPersonal(personal);
+		TPersonal personal = personalDAO.getEmpleadoByID(id);
+		
+		if (personal == null) throw new Exception("Empleado inexistente.");
+		if (personal != null && personal.isActivo()) throw new Exception("El empleado ya esta activo.");
+		
+		personalDAO.reactivarPersonal(id);
 	}
 	
 	public void bajaPersonal(int id) throws Exception {
@@ -154,17 +160,17 @@ public class Modelo {
 		
 	}
 	
-	public void modificarPersonal(int id, String dni, String nombre, String sueldo,String telefono,String horario) throws Exception{
+	public void modificarPersonal(TPersonal personal) throws Exception{
 		
 		SqlPersonalDAO empleadoDAO = (SqlPersonalDAO) factoryDAO.getEmpleadoDAO();
-		TPersonal empleadoId = empleadoDAO.getEmpleadoByID(id);
-		TPersonal empleadoDNI = empleadoDAO.getEmpleadoByDNI(dni);
+		TPersonal personalID = empleadoDAO.getEmpleadoByID(personal.getId());
+		TPersonal personalDNI = empleadoDAO.getEmpleadoByDNI(personal.getDni());
 			
-		if (empleadoId == null) throw new Exception("Empleado inexistente.");
-		if (!empleadoId.isActivo()) throw new Exception("El empleado esta inactivo.");
-		if (empleadoDNI != null && id != empleadoDNI.getId()) throw new Exception("Ya existe otro empleado con ese DNI.");
+		if (personalID == null) throw new Exception("Empleado inexistente.");
+		if (!personalID.isActivo()) throw new Exception("El empleado esta inactivo.");
+		if (personalDNI != null && personal.getId() != personalDNI.getId()) throw new Exception("Ya existe otro empleado con ese DNI.");
 		
-		empleadoDAO.modificarEmpleado(id, new TPersonal(dni,nombre,telefono,sueldo,horario));
+		empleadoDAO.modificarEmpleado(personal);
 				
 	}
 	
@@ -194,16 +200,14 @@ public class Modelo {
 	
 	
 	
-	public void altaMarca(String cif, String nombre, String pais) throws Exception {
+	public void altaMarca(TMarca marca) throws Exception {
 		SqlMarcaDAO marcaDAO = (SqlMarcaDAO) factoryDAO.getMarcaDAO();
 		
-		TMarca marca = marcaDAO.getMarcaByCIF(cif);
+		TMarca marcaYaRegistrada = marcaDAO.getMarcaByCIF(marca.getCIF());
 		
-		if(marca != null && marca.isActivo()) throw new Exception("Marca ya existente.");
+		if(marcaYaRegistrada != null && marcaYaRegistrada.isActivo()) throw new Exception("Marca ya existente.");
 		
-		int id = marcaDAO.altaMarca(new TMarca(cif, nombre, pais));
-		marca = marcaDAO.getMarcaByID(id);
-		
+		marcaDAO.altaMarca(marca);
 	}
 	
 	public void bajaMarca(int id) throws Exception {
@@ -219,17 +223,17 @@ public class Modelo {
 		
 	}
 	
-	public void modificarMarca(int id, String cif, String nombre, String pais) throws Exception {
+	public void modificarMarca(TMarca marca) throws Exception {
 		SqlMarcaDAO marcaDAO = (SqlMarcaDAO) factoryDAO.getMarcaDAO();
 		
-		TMarca marca = marcaDAO.getMarcaByID(id);
-		TMarca marcaCIF = marcaDAO.getMarcaByCIF(cif);
+		TMarca marcaID = marcaDAO.getMarcaByID(marca.getId());
+		TMarca marcaCIF = marcaDAO.getMarcaByCIF(marca.getCIF());
 		
-		if(marca == null) throw new Exception("Marca inexistente.");
-		if(!marca.isActivo()) throw new Exception("La marca esta inactiva.");
-		if(marcaCIF != null && id != marcaCIF.getId()) throw new Exception("Ya existe otra marca con ese CIF.");
+		if(marcaID == null) throw new Exception("Marca inexistente.");
+		if(!marcaID.isActivo()) throw new Exception("La marca esta inactiva.");
+		if(marcaCIF != null && marca.getId() != marcaCIF.getId()) throw new Exception("Ya existe otra marca con ese CIF.");
 		
-		marcaDAO.modificarMarca(id, new TMarca(cif, nombre, pais));
+		marcaDAO.modificarMarca(marca);
 		
 	}
 	
@@ -293,12 +297,15 @@ public class Modelo {
 		
 	}
 
-	public void reactivarProducto(TProducto producto) {
+	public void reactivarProducto(int id) throws Exception {
 		SqlProductoDAO productoDAO = (SqlProductoDAO) factoryDAO.getProductoDAO();
 		
-		productoDAO.reactivarProducto(producto);
-		if (producto.getTipo().equals("PC")) productoDAO.modificarPc((TPc) producto);
-		else if (producto.getTipo().equals("Periferico")) productoDAO.modificarPeriferico((TPeriferico) producto);
+		TProducto producto = productoDAO.getById(id);
+		
+		if (producto == null) throw new Exception("Producto inexistente.");
+		if (producto != null && producto.isActivo()) throw new Exception("El producto ya esta activo.");
+		
+		productoDAO.reactivarProducto(id);
 	}
 	
 	public void bajaProducto(int id) throws Exception {

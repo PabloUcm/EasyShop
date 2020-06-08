@@ -36,7 +36,6 @@ public class BajaProducto {
 	    
 	    baja = SwingFactory.getJButton(new Dimension(230,60), "DAR DE BAJA AL PRODUCTO", 
 				"icons/baja", 50, new Color(255,85,85), new Color(201,54,54));
-	    baja.setAlignmentX(JButton.CENTER_ALIGNMENT);
 	    
 	    baja.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) { baja(); }
@@ -49,6 +48,8 @@ public class BajaProducto {
 	public JPanel getDefaultLayout() {
 		JPanel bajaProductoPanel = new JPanel(new GridBagLayout());
 	    GridBagConstraints c = new GridBagConstraints();
+	    
+	    baja.setAlignmentX(JButton.CENTER_ALIGNMENT);
 	    
 	    c.gridx = 0;
 	    c.gridy = 0;

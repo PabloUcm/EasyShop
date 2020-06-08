@@ -27,7 +27,7 @@ public class ListarProducto {
 	}
 		
 	private void initGUI() {
-		tableModel = new ProductoTableModel(controlador);
+		tableModel = new ProductoTableModel();
 		productosTable = new JTable(tableModel);
 	}
 	

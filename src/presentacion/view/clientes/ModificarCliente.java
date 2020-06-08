@@ -127,10 +127,13 @@ public class ModificarCliente{
             		    JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, modIcon);
             
             if(input == JOptionPane.OK_OPTION) {
-            	if (!tfnoTF.getText().isEmpty()) controlador.modificarCliente(Integer.parseInt(idTF.getText()), dniTF.getText(), 
-            																 nombreTF.getText(), tfnoTF.getText());
-    			else controlador.modificarCliente(Integer.parseInt(idTF.getText()), dniTF.getText(), 
-						 						  nombreTF.getText(), null);
+            	cliente.setDni(dniTF.getText());
+            	cliente.setNombre(nombreTF.getText());
+            	if (!tfnoTF.getText().trim().equals("")) cliente.setTelefono(tfnoTF.getText());
+            	else cliente.setTelefono(null);
+            	
+            	controlador.modificarCliente(cliente);
+            	
             	JOptionPane.showMessageDialog(null,"Cliente con ID " + idTF.getText() + " modificado con �xito.",
 						  					  "INFO",JOptionPane.INFORMATION_MESSAGE);
             }

@@ -27,7 +27,7 @@ public class ListarClientes {
 	}
 		
 	private void initGUI() {
-		tableModel = new ClienteTableModel(controlador);
+		tableModel = new ClienteTableModel();
 		clientesTable = new JTable(tableModel);
 	}
 	

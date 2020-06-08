@@ -13,19 +13,19 @@ private Modelo modelo;
 		this.modelo = m;
 	}
 	
-	public TPersonal altaPersonal(String dni, String nombre, String sueldo, String telefono,String horario) throws Exception {
-		return modelo.altaPersonal(dni, nombre, sueldo, telefono,horario);
+	public TPersonal altaPersonal(TPersonal personal) throws Exception {
+		return modelo.altaPersonal(personal);
 	}
 	
-	public void reactivarPersonal(TPersonal personal) {
-		modelo.reactivarPersonal(personal);
+	public void reactivarPersonal(int id) throws Exception {
+		modelo.reactivarPersonal(id);
 	}
 	
 	public void bajaPersonal(int id) throws Exception {
 		 modelo.bajaPersonal(id);
 	}
-	public void modificarPersonal(int id, String dni, String nombre, String sueldo,String telefono,String horario) throws Exception{
-		modelo.modificarPersonal( id,dni,nombre,telefono,sueldo,horario);
+	public void modificarPersonal(TPersonal personal) throws Exception{
+		modelo.modificarPersonal(personal);
 	}
 	public List<TPersonal> listarPersonal(){
 		return modelo.listarPersonal();
