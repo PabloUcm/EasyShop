@@ -16,7 +16,7 @@ public class VistaVenta {
 	
 	private VentaController controlador;
 	
-	//private AbrirVenta abrirVenta;
+	private AbrirVenta abrirVenta;
 	//private MostrarVenta mostrarVenta;
 	//private ListarVenta listarVenta;
 	
@@ -26,7 +26,7 @@ public class VistaVenta {
 	public VistaVenta() {
 		this.controlador = new VentaController(Modelo.getModelo());
 		
-		//abrirVenta = new AbrirVenta(controlador);
+		abrirVenta = new AbrirVenta(controlador);
 		//mostrarVenta = new MostrarVenta(controlador);
 		//listarVenta = new ListarVenta(controlador);
 		
@@ -39,7 +39,7 @@ public class VistaVenta {
 		CardSwitcher switcher = new CardSwitcher(ventasPanel, cardLayout);
 		ventasMenu = new ModuloMenu(switcher, 30);
 		
-		//addFunction(abrirVenta.getDefaultLayout(), new JButton("   Abrir venta"), "abrirventa", "AbrirVenta");
+		addFunction(abrirVenta.getDefaultLayout(), new JButton("   Abrir venta"), "abrirventa", "AbrirVenta");
 		//addFunction(mostrarVenta.getDefaultLayout(), new JButton("   Mostrar venta"), "mostrarventa", "MostrarVenta");
 		//addFunction(listarVenta.getDefaultLayout(), new JButton("   Listar venta"), "listarventa", "ListarVentas");
 	}

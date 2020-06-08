@@ -318,7 +318,7 @@ public class Modelo {
 		SqlProductoDAO productoDAO = (SqlProductoDAO) factoryDAO.getProductoDAO();
 		List<TProducto> productoList = productoDAO.getAll();
 			
-		logObserver.listar(Entity.PRODUCTO);
+		//logObserver.listar(Entity.PRODUCTO);
 			
 		return productoList;
 	}
