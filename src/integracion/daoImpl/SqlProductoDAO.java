@@ -30,7 +30,6 @@ public class SqlProductoDAO implements IProductoDAO{
 		Connection connection = dbAdapter.getConnection();
 		List<TProducto> productoList = new ArrayList<>();
 		
-
 		try {
 			PreparedStatement statement = connection.prepareStatement("SELECT * FROM Producto WHERE activo = true");
 			ResultSet results = statement.executeQuery();
@@ -259,7 +258,7 @@ public class SqlProductoDAO implements IProductoDAO{
 		try {
 			Connection connection = dbAdapter.getConnection();
 			PreparedStatement statement = connection.prepareStatement("UPDATE Producto SET UPC = ?, NOMBRE = ?, PRECIO = ?,"+
-																	  "CANTIDAD = ? WHERE PRODUCTO = ?");
+																	  "CANTIDAD = ? WHERE ID = ?");
 			
 			statement.setString(1, producto.getUPC());
 			statement.setString(2, producto.getNombre());
@@ -282,10 +281,11 @@ public class SqlProductoDAO implements IProductoDAO{
 																	  "TARJETA_GRAFICA = ?,PLACA_BASE = ? WHERE PRODUCTO = ?");
 			
 			statement.setString(1, pc.getProcesador());
-			statement.setString(2, pc.getDiscoduro());
-			statement.setString(3, pc.getTarjetagrafica());
-			statement.setString(4, pc.getPlacabase());
-			statement.setInt(5, pc.getId());
+			statement.setString(2, pc.getRam());
+			statement.setString(3, pc.getDiscoduro());
+			statement.setString(4, pc.getTarjetagrafica());
+			statement.setString(5, pc.getPlacabase());
+			statement.setInt(6, pc.getId());
 				
 			statement.executeUpdate();
 					
@@ -311,5 +311,44 @@ public class SqlProductoDAO implements IProductoDAO{
 		}catch(Exception e) {
 			e.printStackTrace();
 		}			
+	}
+
+	@Override
+	public TProducto getProductByName(String name) {
+		try {
+			Connection connection = dbAdapter.getConnection();
+			PreparedStatement statement = connection.prepareStatement("SELECT * FROM PRODUCTO WHERE NOMBRE = ?");
+			
+			statement.setString(1,name);				
+			ResultSet results = statement.executeQuery();
+			
+			if(results.next()) {
+				return new TProducto(results.getInt(1),results.getInt(2),results.getString(3),results.getString(4),
+							         results.getString(5),results.getDouble(6),results.getInt(7),results.getString(8),
+							         results.getBoolean(9));
+			}
+					
+		}catch(Exception e) {
+			e.printStackTrace();
+		}	
+		
+		return null;
+	}
+
+	@Override
+	public void cambiarUnidades(int id, int unidades) {
+		try {
+			Connection connection = dbAdapter.getConnection();
+			PreparedStatement statement = connection.prepareStatement("UPDATE PRODUCTO SET CANTIDAD = ? WHERE ID = ?");
+			
+			statement.setInt(1, unidades);
+			statement.setInt(2, id);
+			
+			statement.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}	
+		
 	}	
 }

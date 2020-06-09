@@ -1,11 +1,14 @@
 package negocio;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import integracion.daoImpl.SqlClienteDAO;
 import integracion.daoImpl.SqlMarcaDAO;
 import integracion.daoImpl.SqlPersonalDAO;
 import integracion.daoImpl.SqlProductoDAO;
+import integracion.daoImpl.SqlVentaDAO;
 import integracion.factorias.DAOServiceFactory;
 import integracion.factorias.IDAOServiceFactory;
 import integracion.transfers.TCliente;
@@ -14,6 +17,7 @@ import integracion.transfers.TPc;
 import integracion.transfers.TPeriferico;
 import integracion.transfers.TPersonal;
 import integracion.transfers.TProducto;
+import integracion.transfers.TVenta;
 
 public class Modelo {
     private static Modelo modelo;
@@ -380,6 +384,39 @@ public class Modelo {
 		TMarca marca = marcaDAO.getMarcaByID(id);
 		
 		return marca.getNombre();
+	}
+	
+	
+	//--------------VENTAS--------------------------//
+	
+
+	public void comprobarStock(String nombre, int unidades) throws Exception {
+		SqlProductoDAO productoDAO = (SqlProductoDAO) factoryDAO.getProductoDAO();
+		
+		TProducto producto = productoDAO.getProductByName(nombre);
+		
+		if(producto == null || !producto.isActivo()) throw new Exception("Producto " + nombre + " inexistente");
+		if(producto.getCantidad() < unidades) throw new Exception("No hay suficientes unidades del producto '" + nombre +"'");
+	
+	}
+	
+	public void cerrarVenta(TVenta venta, HashMap<String,Integer> mapaProductos) {
+		SqlProductoDAO productoDAO = (SqlProductoDAO) factoryDAO.getProductoDAO();
+		SqlVentaDAO ventaDAO = (SqlVentaDAO) factoryDAO.getVentaDAO();
+		
+		List<String> list = new ArrayList<>(mapaProductos.keySet());
+		for(String nombreProducto: list) {
+			TProducto producto = productoDAO.getProductByName(nombreProducto);
+			
+			venta.addLineaVenta(producto.getId(), nombreProducto,mapaProductos.get(nombreProducto),
+								producto.getPrecio());
+			
+		    productoDAO.cambiarUnidades(producto.getId(),producto.getCantidad() - mapaProductos.get(nombreProducto));
+			
+		}
+		
+		ventaDAO.altaVenta(venta);
+		
 	}
 	
 }

@@ -7,10 +7,11 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -18,12 +19,16 @@ import javax.swing.Box;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
+import integracion.transfers.TCliente;
+import integracion.transfers.TPersonal;
 import integracion.transfers.TProducto;
+import integracion.transfers.TVenta;
 import presentacion.controllers.VentaController;
 import presentacion.view.SwingFactory;
 
@@ -40,6 +45,8 @@ public class AbrirVenta implements ActionListener{
 	private DefaultListModel<String> selectedProductsModel, productsModel;
 	private JButton buttonSelect, buttonUnselect;
 	private List<TProducto> productos;
+	
+	private HashMap<String,Integer> mapaProductos;
 	
 	public AbrirVenta(VentaController controlador) {
 		this.controlador = controlador;
@@ -80,7 +87,7 @@ public class AbrirVenta implements ActionListener{
 		selectedProductsList.setFont(new Font(selectedProductsList.getFont().toString(), Font.PLAIN, 15));
 		
 		confirmar.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e ) {  }
+		public void actionPerformed(ActionEvent e ) { cerrarVenta(); }
 		});
 		
 		limpiar.addActionListener(new ActionListener() {
@@ -89,7 +96,6 @@ public class AbrirVenta implements ActionListener{
 	}
 	
 	public JPanel getDefaultLayout() {
-		listar();
 		JPanel abrirVentaPanel= new JPanel(new BorderLayout());
 		
 		JScrollPane list1 = new JScrollPane(productsList);
@@ -168,6 +174,12 @@ public class AbrirVenta implements ActionListener{
 		abrirVentaPanel.add(campos,BorderLayout.CENTER);
 		abrirVentaPanel.add(botones, BorderLayout.SOUTH);
 		
+		abrirVentaPanel.addComponentListener(new java.awt.event.ComponentAdapter() {
+	        public void componentShown(java.awt.event.ComponentEvent evt) {
+	        	listar();
+	        }
+	    });
+		
 		return abrirVentaPanel;
 		
 	}
@@ -177,7 +189,6 @@ public class AbrirVenta implements ActionListener{
 		int i = 0;
 		if(e.getSource() == buttonSelect)
 		{
-			int[] fromindex = productsList.getSelectedIndices();
 			List<String> from = productsList.getSelectedValuesList();
 			for (String s : from) selectedProductsModel.addElement(s);
 		}else if(e.getSource() == buttonUnselect) {
@@ -195,29 +206,51 @@ public class AbrirVenta implements ActionListener{
 		selectedProductsModel = new DefaultListModel<String>();
 		productsModel = new DefaultListModel<String>();
 		
-		buttonSelect = new JButton("Agregar producto");
-		buttonSelect.addActionListener(this);
-		buttonUnselect = new JButton("Eliminar producto");
-		buttonUnselect.addActionListener(this);
-		
 		for(int i = 0; i < productos.size(); i++) productsModel.addElement(productos.get(i).getNombre());
-		productsList = new JList<String>(productsModel);
-		productsList.setVisibleRowCount(10);
-		productsList.setFixedCellHeight(25);
-		productsList.setFixedCellWidth(140);
-		productsList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		productsList.setFont(new Font(productsList.getFont().toString(), Font.PLAIN, 15));
-
-		selectedProductsList = new JList<String>(selectedProductsModel);
-		selectedProductsList.setVisibleRowCount(10);
-		selectedProductsList.setFixedCellHeight(25);
-		selectedProductsList.setFixedCellWidth(140);
-		selectedProductsList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		selectedProductsList.setFont(new Font(selectedProductsList.getFont().toString(), Font.PLAIN, 15));
+		productsList.setModel(productsModel);
+		
+		selectedProductsList.setModel(selectedProductsModel);
+	}
+	
+	private void cerrarVenta() {
+		try {
+			TCliente cliente = controlador.getCliente(Integer.parseInt(clienteTF.getText()));
+			TPersonal personal = controlador.getPersonal(Integer.parseInt(personalTF.getText()));
+			
+			mapaProductos = new HashMap<>();
+			
+			List<String> from = new ArrayList<>();
+		    for (int i = 0; i < selectedProductsModel.getSize(); i++) {
+		             from.add(String.valueOf(selectedProductsModel.getElementAt(i)));
+		     }
+				
+			for (String s : from) {
+				if(mapaProductos.containsKey(s)) mapaProductos.replace(s, mapaProductos.get(s) + 1);
+				else mapaProductos.put(s, 1);
+			}
+			
+			List<String> list = new ArrayList<>(mapaProductos.keySet());
+			for(String producto: list) controlador.comprobarStock(producto, mapaProductos.get(producto));
+			
+			TVenta venta = new TVenta();
+			venta.setIdCliente(Integer.parseInt(clienteTF.getText()));
+			venta.setIdPersonal(Integer.parseInt(personalTF.getText()));
+			venta.setFecha(new Date());
+			
+			controlador.cerrarVenta(venta,mapaProductos);
+			
+			JOptionPane.showMessageDialog(null,"Venta efectuada con exito",
+					  "INFO",JOptionPane.INFORMATION_MESSAGE);
+		
+		} catch (Exception ex) {
+			JOptionPane.showMessageDialog(null,ex.getMessage(), "ERROR",JOptionPane.ERROR_MESSAGE);
+		}
 	}
 	
 	private void limpiar() {
 		clienteTF.setText("");
 		personalTF.setText("");
+		selectedProductsModel = new DefaultListModel<String>();
+		selectedProductsList.setModel(selectedProductsModel);
 	}
 }

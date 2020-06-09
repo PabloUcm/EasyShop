@@ -50,6 +50,12 @@ public class VistaVenta {
 		ventaPanel.add(ventasPanel, BorderLayout.CENTER);
 		ventaPanel.add(ventasMenu.getDefaultLayout(), BorderLayout.NORTH);
 		
+		ventaPanel.addComponentListener(new java.awt.event.ComponentAdapter() {
+	        public void componentShown(java.awt.event.ComponentEvent evt) {
+	        	ventasMenu.currentCard();
+	        }
+	    });
+		
 		return ventaPanel;
 	}
 	

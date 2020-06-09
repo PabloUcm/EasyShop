@@ -8,6 +8,7 @@ import integracion.transfers.TProducto;
 
 
 public interface IProductoDAO {
+	public TProducto getProductByName(String name);
 	public TProducto getProductoByUPC(String upc);
 	public TPc getPCByID(int id);
 	public TPeriferico getPerifericoByID(int id);
@@ -21,4 +22,5 @@ public interface IProductoDAO {
 	public void modificarProducto(TProducto producto);
 	public void modificarPc(TPc pc);
 	public void modificarPeriferico(TPeriferico periferico);
+	public void cambiarUnidades(int id, int unidades);
 }
