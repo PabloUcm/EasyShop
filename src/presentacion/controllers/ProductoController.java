@@ -58,4 +58,8 @@ private Modelo modelo;
 	public List<TProducto> listarProductosPorMarca(String nombreMarca) throws Exception {
 		return modelo.listarProductosPorMarca(nombreMarca);
 	}
+	
+	public List<TProducto> listarProductosPorPrecio(double precioSuperior, double precioInferior){
+		return modelo.listarProductosPorPrecio(precioSuperior, precioInferior);
+	}
 }

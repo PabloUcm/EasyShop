@@ -23,5 +23,6 @@ public interface IProductoDAO {
 	public void modificarPc(TPc pc);
 	public void modificarPeriferico(TPeriferico periferico);
 	public void cambiarUnidades(int id, int unidades);
-	public List<TProducto>listarPorMarca(int id);
+	public List<TProducto> listarPorMarca(int id);
+	public List<TProducto> listarPorPrecio(double precioSuperior, double precioInferior);
 }

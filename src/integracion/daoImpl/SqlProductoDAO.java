@@ -373,5 +373,29 @@ public class SqlProductoDAO implements IProductoDAO{
 		}		
 		
 		return null;
+	}
+
+	@Override
+	public List<TProducto> listarPorPrecio(double precioSuperior, double precioInferior) {
+		List<TProducto> productoList = new ArrayList<>();
+		try {
+			Connection connection = dbAdapter.getConnection();
+			PreparedStatement statement = connection.prepareStatement("SELECT * FROM PRODUCTO WHERE PRECIO BETWEEN ? AND ?");
+			
+			statement.setDouble(1, precioSuperior);
+			statement.setDouble(2, precioInferior);
+			ResultSet results = statement.executeQuery();
+			
+			while(results.next()) {
+				productoList.add(new TProducto(results.getInt(1),results.getInt(2),results.getString(3),results.getString(4),
+								  results.getString(5),results.getDouble(6),results.getInt(7),results.getString(8),results.getBoolean(9)));
+			}		
+			
+			return productoList;			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}		
+		
+		return null;
 	}	
 }

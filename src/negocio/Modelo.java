@@ -396,6 +396,12 @@ public class Modelo {
 		return productoDAO.listarPorMarca(marca.getId());
 	}
 	
+	public List<TProducto> listarProductosPorPrecio(double precioSuperior, double precioInferior){
+		SqlProductoDAO productoDAO = (SqlProductoDAO) factoryDAO.getProductoDAO();
+		
+		return productoDAO.listarPorPrecio(precioSuperior,precioInferior);
+	}
+	
 	
 	//--------------VENTAS--------------------------//
 	
