@@ -215,12 +215,16 @@ public class Modelo {
 	
 	public void bajaMarca(int id) throws Exception {
 		SqlMarcaDAO marcaDAO = (SqlMarcaDAO) factoryDAO.getMarcaDAO();
+		SqlProductoDAO productoDAO = (SqlProductoDAO) factoryDAO.getProductoDAO();
 		
 		TMarca marca = marcaDAO.getMarcaByID(id);
 		
-		if(marca == null) throw new Exception("Marca inexistente.");
-		
+		if(marca == null) throw new Exception("Marca inexistente.");		
 		if(!marca.isActivo()) throw new Exception("La marca ya esta dada de baja.");
+		
+		List<TProducto> productos = listarProductosPorMarca(marca.getNombre());
+		
+		for(TProducto producto: productos) bajaProducto(producto.getId());
 		
 		logObserver.baja(Entity.MARCA);
 		
