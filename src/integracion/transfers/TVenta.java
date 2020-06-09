@@ -19,15 +19,14 @@ public class TVenta {
 		importe = 0;
 	}
 	
-	public TVenta(int id,int idCliente, int idPersonal,Date fecha, double importe) {
+	public TVenta(int id,int idCliente, int idPersonal,Date fecha, ArrayList<TLineaVenta> lineasVenta, double importe) {
 		this.id = id;
 		this.idCliente=idCliente;
 		this.idPersonal=idPersonal;
 		this.fecha = fecha;
+		this.lineasVenta = lineasVenta;
 		this.importe = importe;
 	}
-
-
 
 	//M�TODOS P�BLICOS
 	public int getId() {

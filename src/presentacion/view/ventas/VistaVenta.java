@@ -17,8 +17,8 @@ public class VistaVenta {
 	private VentaController controlador;
 	
 	private AbrirVenta abrirVenta;
-	//private MostrarVenta mostrarVenta;
-	//private ListarVenta listarVenta;
+	private MostrarVenta mostrarVenta;
+	private ListarVenta listarVenta;
 	
 	private ModuloMenu ventasMenu;
 	private JPanel ventasPanel;
@@ -27,8 +27,8 @@ public class VistaVenta {
 		this.controlador = new VentaController(Modelo.getModelo());
 		
 		abrirVenta = new AbrirVenta(controlador);
-		//mostrarVenta = new MostrarVenta(controlador);
-		//listarVenta = new ListarVenta(controlador);
+		mostrarVenta = new MostrarVenta(controlador);
+		listarVenta = new ListarVenta(controlador);
 		
 		initGUI();
 	}
@@ -40,8 +40,8 @@ public class VistaVenta {
 		ventasMenu = new ModuloMenu(switcher, 30);
 		
 		addFunction(abrirVenta.getDefaultLayout(), new JButton("   Abrir venta"), "abrirventa", "AbrirVenta");
-		//addFunction(mostrarVenta.getDefaultLayout(), new JButton("   Mostrar venta"), "mostrarventa", "MostrarVenta");
-		//addFunction(listarVenta.getDefaultLayout(), new JButton("   Listar venta"), "listarventa", "ListarVentas");
+		addFunction(mostrarVenta.getDefaultLayout(), new JButton("   Mostrar venta"), "mostrarventa", "MostrarVenta");
+		addFunction(listarVenta.getDefaultLayout(), new JButton("   Listar venta"), "listarventa", "ListarVentas");
 	}
 	
 	public JPanel getDefaultLayout() {

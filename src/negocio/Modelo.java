@@ -389,6 +389,16 @@ public class Modelo {
 	
 	//--------------VENTAS--------------------------//
 	
+	public TVenta getVenta(int id) throws Exception {
+		SqlVentaDAO ventaDAO = (SqlVentaDAO) factoryDAO.getVentaDAO();
+		
+		TVenta venta = ventaDAO.getVentaByID(id);
+		
+		if (venta == null) throw new Exception("Venta inexistente.");
+		
+		return venta;
+		
+	}
 
 	public void comprobarStock(String nombre, int unidades) throws Exception {
 		SqlProductoDAO productoDAO = (SqlProductoDAO) factoryDAO.getProductoDAO();
@@ -418,5 +428,12 @@ public class Modelo {
 		ventaDAO.altaVenta(venta);
 		
 	}
-	
+
+	public List<TVenta> listarVentas() {
+		SqlVentaDAO ventaDAO = (SqlVentaDAO) factoryDAO.getVentaDAO();
+		
+		List<TVenta> listaVentas = ventaDAO.getAllVentas();
+		
+		return listaVentas;
+	}
 }

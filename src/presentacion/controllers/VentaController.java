@@ -16,8 +16,9 @@ private Modelo modelo;
 		this.modelo = m;
 	}
 	
-	public List<TProducto> listarProductos(){
-		return modelo.listarProductos();
+	
+	public TVenta getVenta(int id) throws Exception {
+		return modelo.getVenta(id);
 	}
 	
 	public TCliente getCliente(int id) throws Exception {
@@ -28,6 +29,10 @@ private Modelo modelo;
 		return modelo.getPersonal(id);
 	}
 	
+	public TProducto getProducto(int id) throws Exception {
+		return modelo.getProductoById(id, "NONE");
+	}
+	
 	public void comprobarStock(String producto,int unidades) throws Exception {
 		modelo.comprobarStock(producto,unidades);
 	}
@@ -35,4 +40,13 @@ private Modelo modelo;
 	public void cerrarVenta(TVenta venta, HashMap<String,Integer> mapaProductos) {
 		modelo.cerrarVenta(venta,mapaProductos);
 	}
+	
+	public List<TVenta> listarVentas() {
+		return modelo.listarVentas();
+	}
+	
+	public List<TProducto> listarProductos(){
+		return modelo.listarProductos();
+	}
+
 }

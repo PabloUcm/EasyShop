@@ -98,7 +98,7 @@ public class MostrarProducto {
 		return mostrarProductoPanel;
 	}
 	
-	private String busquedaToString(TProducto producto, String nombreMarca) {
+	private String busquedaToString(TProducto producto) {
 		StringBuilder busqstr = new StringBuilder();
 		
 		for (int i = 0; i < 45; i++) busqstr.append(" ");
@@ -111,7 +111,7 @@ public class MostrarProducto {
 		busqstr.append("    ID: "+producto.getId()+"\n\n");
 		busqstr.append("    UPC: "+producto.getUPC()+"\n\n");
 		busqstr.append("    NOMBRE: "+producto.getNombre()+"\n\n");
-		busqstr.append("    MARCA: "+nombreMarca+"\n\n");
+		busqstr.append("    ID MARCA: "+producto.getMarcaId()+"\n\n");
 		busqstr.append("    TIPO: "+producto.getTipo()+"\n\n");
 		busqstr.append("    PRECIO: "+producto.getPrecio()+"\n\n");
 		busqstr.append("    CANTIDAD: "+producto.getCantidad()+"\n\n");
@@ -145,12 +145,10 @@ public class MostrarProducto {
 			
 			TProducto producto = controlador.getProductoById(id, "NONE");
 			
-			String nombreMarca = controlador.getNombreMarcaByID(producto.getMarcaId());
-			
 			if (producto.getTipo().equals("PC")) producto = (TPc) controlador.getPcById(id);
 			else if (producto.getTipo().equals("Periferico")) producto = (TPeriferico) controlador.getPerifericoById(id);
 			
-			datosTA.setText(busquedaToString(producto, nombreMarca));
+			datosTA.setText(busquedaToString(producto));
 			datosTA.setCaretPosition(0);
 		}
 		catch(Exception ex) {
