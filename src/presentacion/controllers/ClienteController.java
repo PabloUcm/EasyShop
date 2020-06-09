@@ -3,6 +3,7 @@ package presentacion.controllers;
 import java.util.List;
 
 import integracion.transfers.TCliente;
+import integracion.transfers.TVenta;
 import negocio.Modelo;
 
 public class ClienteController {
@@ -34,5 +35,9 @@ public class ClienteController {
 	
 	public List<TCliente> listarClientes() {
 		return modelo.listarClientes();
+	}
+	
+	public List<TVenta> getCompras(int id) throws Exception{
+		return modelo.getCompras(id);
 	}
 }

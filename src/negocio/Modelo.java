@@ -113,6 +113,16 @@ public class Modelo {
 		return clienteList;
 	}
 	
+	public List<TVenta> getCompras(int id) throws Exception{
+		SqlClienteDAO clienteDAO = (SqlClienteDAO) factoryDAO.getClienteDAO();
+		SqlVentaDAO ventaDAO = (SqlVentaDAO) factoryDAO.getVentaDAO();
+		
+		TCliente cliente = getCliente(id);
+		List<TVenta> compras = ventaDAO.getComprasCliente(id);
+		
+		return compras;
+	}
+	
 	
 	 //-------------PERSONAL-----------------//
 	

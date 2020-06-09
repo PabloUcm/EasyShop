@@ -7,25 +7,31 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 
+import integracion.transfers.TVenta;
 import presentacion.controllers.ClienteController;
 import presentacion.view.SwingFactory;
+import presentacion.view.tablas.ComprasTableModel;
 
 public class HistorialCliente {
 	
 	private ClienteController controlador;
 	
 	private JTextField idTF;
-	private JTextArea historialTA;
 	private JButton buscar;
 	private JButton limpiar;
+	
+	private JTable comprasTable;
+	private ComprasTableModel tableModel;
 	
 	public HistorialCliente(ClienteController c) {
 		this.controlador = c;
@@ -33,6 +39,9 @@ public class HistorialCliente {
 	}
 	
 	private void initGUI() {
+		tableModel = new ComprasTableModel();
+		comprasTable = new JTable(tableModel);
+		
 		idTF = SwingFactory.getJTextField(new Dimension(290,30), 25);
 		
 		buscar = SwingFactory.getJButton(new Dimension(150,30), "BUSCAR HISTORIAL", 
@@ -42,26 +51,23 @@ public class HistorialCliente {
 		
 		buscar.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e ) {
-	    		historialTA.setText(historialToString());
-	    		historialTA.setCaretPosition(0);
+	    		getCompras(Integer.parseInt(idTF.getText()));
 	    	}
 	    });
 		
 		limpiar.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e ) { limpiar(); }
 	    });
-		
-		historialTA = SwingFactory.getJTextArea(13, false);
 	}
 	
 	public JPanel getDefaultLayout() {
 		JPanel histClientePanel = new JPanel(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		
-		JScrollPane historialSP = new JScrollPane(historialTA);
-		historialSP.setPreferredSize(new Dimension(550,600));
-		historialSP.setMaximumSize(historialSP.getPreferredSize());
-		historialSP.setMinimumSize(new Dimension(550,400));
+		comprasTable.setPreferredScrollableViewportSize(new Dimension(600,500));
+		JScrollPane tablaSP = new JScrollPane(comprasTable);
+		tablaSP.getViewport().setBackground(Color.WHITE);
+		tablaSP.setMinimumSize(new Dimension(600,700));
 		
 		JPanel barraBusqueda = new JPanel(new FlowLayout( FlowLayout.CENTER));
 		barraBusqueda.add(SwingFactory.getJLabel(new Dimension(160,50), " ID CLIENTE:" ,25));
@@ -73,13 +79,6 @@ public class HistorialCliente {
 		c.gridx = 0;
 		c.gridy = 0;
 		histClientePanel.add(barraBusqueda, c);
-	    c.weightx = 0.5;
-		c.gridx = 0;
-	    c.gridy = 1;
-	    c.gridwidth = 1;
-	    c.gridheight = 1;
-	    c.anchor = GridBagConstraints.CENTER;
-	    histClientePanel.add(historialSP, c);
 	    c.weightx = 0.0;
 		c.gridx = 0;
 	    c.gridy = 2;
@@ -88,7 +87,13 @@ public class HistorialCliente {
 	    histClientePanel.add(Box.createRigidArea(new Dimension(0,15)),c);
 	    c.weightx = 0.5;
 		c.gridx = 0;
-	    c.gridy = 3;
+	    c.gridy = 2;
+	    c.gridwidth = 1;
+	    c.gridheight = 1;
+	    histClientePanel.add(tablaSP,c);
+	    c.weightx = 0.5;
+		c.gridx = 0;
+	    c.gridy = 4;
 	    c.gridwidth = 1;
 	    c.gridheight = 1;
 	    histClientePanel.add(limpiar,c);
@@ -96,55 +101,17 @@ public class HistorialCliente {
 		return histClientePanel;
 	}
 	
-	private String historialToString() {
-		StringBuilder histstr = new StringBuilder();
-		
-		for (int i = 0; i < 33; i++) histstr.append(" ");
-		histstr.append("====================================\n");
-		for (int i = 0; i < 38; i++) histstr.append(" ");
-		histstr.append("Historial de compras del cliente con ID: "+idTF.getText()+"\n");
-		for (int i = 0; i < 33; i++) histstr.append(" ");
-		histstr.append("====================================\n\n");
-		
-		//for (TVenta venta: historialVentas) {
-			histstr.append(ventaToString());
-		//};
-		
-		return histstr.toString();
+	private void getCompras(int id) {
+		try {
+			List<TVenta> listaCompras = controlador.getCompras(id);
+			tableModel.setCompras(listaCompras);
+		} catch (Exception ex) {
+			JOptionPane.showMessageDialog(null,ex.getMessage(), "ERROR",JOptionPane.ERROR_MESSAGE);
+		}
 	}
-	
-	
-	private String ventaToString() {
-		StringBuilder ventastr = new StringBuilder();
-		
-		ventastr.append("============================\n");
-		//ventastr.append("ID Venta: "+venta.getId()+"\n");
-		ventastr.append("----------------------------\n");
-		//ventastr.append(venta.getFecha()+" | ID Empleado: "+venta.getEmpleado()+"\n");
-		ventastr.append("----------------------------\n");
-		ventastr.append(productosToString());
-		ventastr.append("----------------------------\n");
-		//ventastr.append("Importe total: "+venta.getImporte());
-		ventastr.append("============================\n");
-		
-		return ventastr.toString();
-	}
-	
-	private String productosToString() {
-		StringBuilder prodstr = new StringBuilder();
-		
-		/*for (int i = 0; i < productosVenta; i++) {
-			TProductoVenta productoVenta = productosVenta.get(i);
-			TProducto producto = productosInfo.get(i);
-			prodstr.append(productoVenta.getUnidades()+" x "+"producto.getNombre()+
-						   "---------------"+producto.getUnidades()*producto.getPrecio()+"€\n");
-		}*/
-		
-		return prodstr.toString();
-	}
-	
+
 	private void limpiar() {
 		idTF.setText("");
-		historialTA.setText("");
+		tableModel.vaciar();
 	}
 }
