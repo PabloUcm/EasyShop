@@ -38,8 +38,7 @@ public class SqlProductoDAO implements IProductoDAO{
 				productoList.add(new TProducto(results.getInt(1),results.getInt(2),results.getString(3),results.getString(4),
 								  results.getString(5),results.getDouble(6),results.getInt(7),results.getString(8),results.getBoolean(9)));
 			}
-			
-			
+						
 			return productoList;
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -85,18 +84,17 @@ public class SqlProductoDAO implements IProductoDAO{
 	
 	@Override
 	public TPc getPCByID(int id) {
+		Connection connection = dbAdapter.getConnection();
+		
 		try {
-			Connection connection = dbAdapter.getConnection();
 			PreparedStatement statement = connection.prepareStatement("SELECT * FROM Producto WHERE id=?");
 			
-			statement.setInt(1, id);
-			
+			statement.setInt(1, id);			
 			ResultSet results = statement.executeQuery();
 			
 			PreparedStatement statement2 = connection.prepareStatement("SELECT * FROM PC WHERE producto=?");
 			
-			statement2.setInt(1, id);
-			
+			statement2.setInt(1, id);			
 			ResultSet results2 = statement2.executeQuery();
 			
 			if (results.next() && results2.next()) return new TPc(results.getInt(1),results.getInt(2),results.getString(3),results.getString(4),
@@ -106,6 +104,12 @@ public class SqlProductoDAO implements IProductoDAO{
 					  								
 		}catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return null;
@@ -113,8 +117,9 @@ public class SqlProductoDAO implements IProductoDAO{
 	
 	@Override
 	public TPeriferico getPerifericoByID(int id) {
+		Connection connection = dbAdapter.getConnection();
+		
 		try {
-			Connection connection = dbAdapter.getConnection();
 			PreparedStatement statement = connection.prepareStatement("SELECT * FROM Producto WHERE id=?");
 			statement.setInt(1, id);
 			
@@ -128,10 +133,15 @@ public class SqlProductoDAO implements IProductoDAO{
 			if (results.next() && results2.next()) return new TPeriferico(results.getInt(1),results.getInt(2),results.getString(3),
 																		  results.getString(4),results.getString(5),results.getDouble(6),
 																		  results.getInt(7),results.getString(8),results.getBoolean(9),
-																		  results2.getString(2), results2.getString(3));	
-					  								
+																		  results2.getString(2), results2.getString(3));					  								
 		}catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return null;
@@ -139,8 +149,9 @@ public class SqlProductoDAO implements IProductoDAO{
 	
 	@Override
 	public TProducto getProductoByUPC(String upc) {
+		Connection connection = dbAdapter.getConnection();
+		
 		try {
-			Connection connection = dbAdapter.getConnection();
 			PreparedStatement statement = connection.prepareStatement("SELECT * FROM Producto WHERE upc=?");
 			statement.setString(1, upc);
 			
@@ -151,15 +162,22 @@ public class SqlProductoDAO implements IProductoDAO{
 					  								results.getBoolean(9));
 		}catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return null;
 	}
 	
 	public int altaProducto(TProducto producto) {
+		Connection connection = dbAdapter.getConnection();
 		int id = -1;
+		
 		try {
-			Connection connection = dbAdapter.getConnection();
 			PreparedStatement statement = connection.prepareStatement("INSERT INTO Producto (marca,upc,nombre,tipo,precio,cantidad,descripcion) "
 																	  + "VALUES(?,?,?,?,?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
 			
@@ -178,16 +196,22 @@ public class SqlProductoDAO implements IProductoDAO{
 			
 		}catch(Exception e) {
 			e.printStackTrace();
-		}	
+		}finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		
 		return id;
 	}
 	
 	@Override
 	public void altaPC(TPc pc, int id) {
+		Connection connection = dbAdapter.getConnection();
 		
 		try {
-			Connection connection = dbAdapter.getConnection();
 			PreparedStatement statement = connection.prepareStatement("INSERT INTO PC (producto,procesador,ram,disco_duro,tarjeta_grafica,placa_base) "
 																	    + "	VALUES(?,?,?,?,?,?)");
 			
@@ -202,14 +226,20 @@ public class SqlProductoDAO implements IProductoDAO{
 			
 		}catch(Exception e) {
 			e.printStackTrace();
-		}	
+		}finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	@Override
 	public void altaPeriferico(TPeriferico periferico, int id) {
+		Connection connection = dbAdapter.getConnection();
 		
 		try {
-			Connection connection = dbAdapter.getConnection();
 			PreparedStatement statement = connection.prepareStatement("INSERT INTO Periferico (producto,tipo_periferico,tipo_conexion) VALUES(?,?,?)");
 			
 			statement.setInt(1, id);
@@ -220,29 +250,41 @@ public class SqlProductoDAO implements IProductoDAO{
 			
 		}catch(Exception e) {
 			e.printStackTrace();
-		}	
+		}finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	@Override
 	public void reactivarProducto(int id) {
+		Connection connection = dbAdapter.getConnection();
 		try {
-			Connection connection = dbAdapter.getConnection();
 		
 			PreparedStatement statement = connection.prepareStatement("UPDATE Producto SET activo=true WHERE id=?");
 
-			statement.setInt(1, id);
-			
+			statement.setInt(1, id);			
 			statement.executeUpdate();	
 		}
 		catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
 	@Override
 	public void bajaProducto(int id) {
+		Connection connection = dbAdapter.getConnection();
+		
 		try {
-			Connection connection = dbAdapter.getConnection();
 			PreparedStatement statement = connection.prepareStatement("UPDATE Producto SET ACTIVO = FALSE,CANTIDAD = 0 WHERE id=?");
 			statement.setInt(1, id);
 			
@@ -250,13 +292,20 @@ public class SqlProductoDAO implements IProductoDAO{
 					
 		}catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
 	@Override
 	public void modificarProducto(TProducto producto) {
+		Connection connection = dbAdapter.getConnection();
+		
 		try {
-			Connection connection = dbAdapter.getConnection();
 			PreparedStatement statement = connection.prepareStatement("UPDATE Producto SET UPC = ?, NOMBRE = ?, PRECIO = ?,"+
 																	  "CANTIDAD = ? WHERE ID = ?");
 			
@@ -270,13 +319,20 @@ public class SqlProductoDAO implements IProductoDAO{
 					
 		}catch(Exception e) {
 			e.printStackTrace();
-		}		
+		}finally{
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	@Override
 	public void modificarPc(TPc pc) {
+		Connection connection = dbAdapter.getConnection();
+		
 		try {
-			Connection connection = dbAdapter.getConnection();
 			PreparedStatement statement = connection.prepareStatement("UPDATE PC SET PROCESADOR = ?, RAM = ?,DISCO_DURO = ?,"+
 																	  "TARJETA_GRAFICA = ?,PLACA_BASE = ? WHERE PRODUCTO = ?");
 			
@@ -291,14 +347,20 @@ public class SqlProductoDAO implements IProductoDAO{
 					
 		}catch(Exception e) {
 			e.printStackTrace();
-		}		
-		
+		}finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}	
 	}
 
 	@Override
 	public void modificarPeriferico(TPeriferico periferico) {
+		Connection connection = dbAdapter.getConnection();
+		
 		try {
-			Connection connection = dbAdapter.getConnection();
 			PreparedStatement statement = connection.prepareStatement("UPDATE Periferico SET TIPO_PERIFERICO = ?, TIPO_CONEXION = ?"
 																   + " WHERE PRODUCTO = ?");
 			
@@ -310,13 +372,20 @@ public class SqlProductoDAO implements IProductoDAO{
 					
 		}catch(Exception e) {
 			e.printStackTrace();
-		}			
+		}finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	@Override
 	public TProducto getProductByName(String name) {
+		Connection connection = dbAdapter.getConnection();
+		
 		try {
-			Connection connection = dbAdapter.getConnection();
 			PreparedStatement statement = connection.prepareStatement("SELECT * FROM PRODUCTO WHERE NOMBRE = ?");
 			
 			statement.setString(1,name);				
@@ -330,15 +399,22 @@ public class SqlProductoDAO implements IProductoDAO{
 					
 		}catch(Exception e) {
 			e.printStackTrace();
-		}	
+		}finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		
 		return null;
 	}
 
 	@Override
 	public void cambiarUnidades(int id, int unidades) {
+		Connection connection = dbAdapter.getConnection();
+		
 		try {
-			Connection connection = dbAdapter.getConnection();
 			PreparedStatement statement = connection.prepareStatement("UPDATE PRODUCTO SET CANTIDAD = ? WHERE ID = ?");
 			
 			statement.setInt(1, unidades);
@@ -348,15 +424,22 @@ public class SqlProductoDAO implements IProductoDAO{
 			
 		}catch(Exception e) {
 			e.printStackTrace();
-		}	
+		}finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		
 	}
 
 	@Override
 	public List<TProducto> listarPorMarca(int id) {
+		Connection connection = dbAdapter.getConnection();
 		List<TProducto> productoList = new ArrayList<>();
+		
 		try {
-			Connection connection = dbAdapter.getConnection();
 			PreparedStatement statement = connection.prepareStatement("SELECT * FROM PRODUCTO WHERE MARCA = ?");
 			
 			statement.setInt(1, id);
@@ -370,16 +453,23 @@ public class SqlProductoDAO implements IProductoDAO{
 			return productoList;			
 		}catch(Exception e) {
 			e.printStackTrace();
-		}		
+		}finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		
 		return null;
 	}
 
 	@Override
 	public List<TProducto> listarPorPrecio(double precioSuperior, double precioInferior) {
+		Connection connection = dbAdapter.getConnection();
 		List<TProducto> productoList = new ArrayList<>();
+		
 		try {
-			Connection connection = dbAdapter.getConnection();
 			PreparedStatement statement = connection.prepareStatement("SELECT * FROM PRODUCTO WHERE PRECIO BETWEEN ? AND ?");
 			
 			statement.setDouble(1, precioSuperior);
@@ -394,7 +484,13 @@ public class SqlProductoDAO implements IProductoDAO{
 			return productoList;			
 		}catch(Exception e) {
 			e.printStackTrace();
-		}		
+		}finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		
 		return null;
 	}	

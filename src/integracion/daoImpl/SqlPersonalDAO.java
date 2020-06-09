@@ -17,17 +17,15 @@ public class SqlPersonalDAO implements IPersonalDAO{
 	
 	private IDBAdapter dbAdapter;
 	
-	public SqlPersonalDAO(){
-		
-	dbAdapter = DBFactory.getDefaultAdapter();
-
+	public SqlPersonalDAO(){	
+		dbAdapter = DBFactory.getDefaultAdapter();
 	}
 
 	@Override
 	public TPersonal getEmpleadoByDNI(String dni) {
+		Connection connection = dbAdapter.getConnection();
 	
 		try {
-			Connection connection = dbAdapter.getConnection();
 			PreparedStatement statement = connection.prepareStatement("SELECT * FROM Personal WHERE dni=?");
 			statement.setString(1, dni);
 			
@@ -37,14 +35,21 @@ public class SqlPersonalDAO implements IPersonalDAO{
 					    					       results.getDouble(5),results.getString(7),results.getBoolean(8));
 		}catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return null;
 	}
 
 	@Override
 	public TPersonal getEmpleadoByID(int id) {
+		Connection connection = dbAdapter.getConnection();
+		
 		try {
-			Connection connection = dbAdapter.getConnection();
 			PreparedStatement statement = connection.prepareStatement("SELECT * FROM Personal WHERE id=?");
 			statement.setInt(1, id);
 			
@@ -54,7 +59,13 @@ public class SqlPersonalDAO implements IPersonalDAO{
 					
 		}catch(Exception e) {
 			e.printStackTrace();
-		}	
+		}finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		return null;
 	}
 
@@ -63,7 +74,6 @@ public class SqlPersonalDAO implements IPersonalDAO{
 		Connection connection = dbAdapter.getConnection();
 		List<TPersonal> empleadoList = new ArrayList<>();
 		
-
 		try {
 			PreparedStatement statement = connection.prepareStatement("SELECT * FROM Personal WHERE activo = true");
 			ResultSet results = statement.executeQuery();
@@ -72,8 +82,7 @@ public class SqlPersonalDAO implements IPersonalDAO{
 				empleadoList.add(new TPersonal(results.getInt(1),results.getString(2),results.getString(3),results.getString(4),
 						results.getDouble(5),results.getString(7),results.getBoolean(8)));
 			}
-			
-			
+						
 			return empleadoList;
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -89,10 +98,10 @@ public class SqlPersonalDAO implements IPersonalDAO{
 
 	@Override
 	public int altaEmpleado(TPersonal empleado) {
+		Connection connection = dbAdapter.getConnection();
 		int id = -1;
 		
 		try {
-			Connection connection = dbAdapter.getConnection();
 			PreparedStatement statement = connection.prepareStatement("INSERT INTO Personal (dni,nombre,sueldo,telefono,horario) VALUES(?,?,?,?,?)",
 																	   PreparedStatement.RETURN_GENERATED_KEYS);
 			
@@ -109,29 +118,42 @@ public class SqlPersonalDAO implements IPersonalDAO{
 			
 		}catch(Exception e) {
 			e.printStackTrace();
-		}	
+		}finally{
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		
 		return id;
 	}
 
 	@Override
 	public void bajaEmpleado(int id) {
+		Connection connection = dbAdapter.getConnection();
+		
 		try {
-			Connection connection = dbAdapter.getConnection();
 			PreparedStatement statement = connection.prepareStatement("UPDATE Personal SET ACTIVO = FALSE WHERE id=?");
 			statement.setInt(1, id);
 			statement.executeUpdate();
 			
 		}catch(Exception e) {
 			e.printStackTrace();
-		}	
+		}finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	@Override
 	public void modificarEmpleado(TPersonal personal) {
+		Connection connection = dbAdapter.getConnection();
+		
 		try {
-			
-			Connection connection = dbAdapter.getConnection();
 			PreparedStatement statement = connection.prepareStatement("UPDATE Personal SET dni=?, nombre=?, sueldo = ?,telefono=?, horario = ? WHERE id=?");
 			statement.setString(1, personal.getDni());
 			statement.setString(2, personal.getNombre());
@@ -144,24 +166,33 @@ public class SqlPersonalDAO implements IPersonalDAO{
 					
 		}catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 		
 	@Override
 	public void reactivarPersonal(int id) {
+		Connection connection = dbAdapter.getConnection();
+		
 		try {
-				Connection connection = dbAdapter.getConnection();
-			
-				PreparedStatement statement = connection.prepareStatement("UPDATE Personal SET activo=true  WHERE id=?");
+			PreparedStatement statement = connection.prepareStatement("UPDATE Personal SET activo=true  WHERE id=?");
 
-				statement.setInt(1, id);
-				
-				statement.executeUpdate();	
+			statement.setInt(1, id);	
+			statement.executeUpdate();	
 			
 		}catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
-
-	
 }

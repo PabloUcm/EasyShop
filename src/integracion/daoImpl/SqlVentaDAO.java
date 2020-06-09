@@ -25,10 +25,9 @@ public class SqlVentaDAO implements IVentaDAO{
 	
 	@Override
 	public TVenta getVentaByID(int id) {
-		Connection connection = null;
+		Connection connection = dbAdapter.getConnection();
 		
 		try {
-			connection = dbAdapter.getConnection();
 			PreparedStatement statement = connection.prepareStatement("SELECT * FROM Venta WHERE id = ?");
 			
 			statement.setInt(1, id);
@@ -113,9 +112,10 @@ public class SqlVentaDAO implements IVentaDAO{
 
 	@Override
 	public int altaVenta(TVenta venta) {
+		Connection connection = dbAdapter.getConnection();
 		int id = -1;
+		
 		try {
-			Connection connection = dbAdapter.getConnection();
 			PreparedStatement statement = connection.prepareStatement("INSERT INTO VENTA "
 			+ "(cliente,personal,fecha,importe) values(?,?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
 			
@@ -143,10 +143,15 @@ public class SqlVentaDAO implements IVentaDAO{
 				
 				statement2.executeUpdate();
 			}
-			
-			
+					
 		}catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return id;

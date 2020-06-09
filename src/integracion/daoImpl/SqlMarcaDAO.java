@@ -22,8 +22,9 @@ public class SqlMarcaDAO implements IMarcaDAO {
 	
 	@Override
 	public TMarca getMarcaByID(int id) {
+		Connection connection = dbAdapter.getConnection();
+		
 		try {
-			Connection connection = dbAdapter.getConnection();
 			PreparedStatement statement = connection.prepareStatement("SELECT * FROM Marca WHERE id=?");
 			statement.setInt(1, id);
 			
@@ -33,14 +34,21 @@ public class SqlMarcaDAO implements IMarcaDAO {
 					
 		}catch(Exception e) {
 			e.printStackTrace();
-		}	
+		}finally{
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		return null;
 	}
 
 	@Override
 	public TMarca getMarcaByCIF(String cif) {
+		Connection connection = dbAdapter.getConnection();
+		
 		try {
-			Connection connection = dbAdapter.getConnection();
 			PreparedStatement statement = connection.prepareStatement("SELECT * FROM Marca WHERE cif=?");
 			statement.setString(1, cif);
 			
@@ -50,6 +58,12 @@ public class SqlMarcaDAO implements IMarcaDAO {
 												 results.getString(4), results.getBoolean(5));
 		}catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return null;
@@ -57,8 +71,9 @@ public class SqlMarcaDAO implements IMarcaDAO {
 	
 	@Override
 	public TMarca getMarcaByName(String name) {
+		Connection connection = dbAdapter.getConnection();
+		
 		try {
-			Connection connection = dbAdapter.getConnection();
 			PreparedStatement statement = connection.prepareStatement("SELECT * FROM Marca WHERE nombre=?");
 			statement.setString(1, name);
 			
@@ -68,6 +83,12 @@ public class SqlMarcaDAO implements IMarcaDAO {
 												 results.getString(4), results.getBoolean(5));
 		}catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return null;
@@ -78,7 +99,6 @@ public class SqlMarcaDAO implements IMarcaDAO {
 		Connection connection = dbAdapter.getConnection();
 		List<TMarca> marcaList = new ArrayList<>();
 		
-
 		try {
 			PreparedStatement statement = connection.prepareStatement("SELECT * FROM Marca WHERE activo = true");
 			ResultSet results = statement.executeQuery();
@@ -103,10 +123,10 @@ public class SqlMarcaDAO implements IMarcaDAO {
 	
 	@Override
 	public List<String> getNombreMarcas() {
+		Connection connection = dbAdapter.getConnection();
 		List<String> nombres = new ArrayList<>();
 		
 		try {
-			Connection connection = dbAdapter.getConnection();
 			PreparedStatement statement = connection.prepareStatement("SELECT Nombre FROM Marca WHERE activo = true");
 			
 			ResultSet results = statement.executeQuery();
@@ -117,6 +137,12 @@ public class SqlMarcaDAO implements IMarcaDAO {
 			
 		}catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return nombres;
@@ -124,9 +150,10 @@ public class SqlMarcaDAO implements IMarcaDAO {
 	
 	@Override
 	public int altaMarca(TMarca marca) {
+		Connection connection = dbAdapter.getConnection();
 		int id = -1;
+		
 		try {
-			Connection connection = dbAdapter.getConnection();
 			PreparedStatement statement = connection.prepareStatement("INSERT INTO Marca (cif,nombre,pais) VALUES(?,?,?)",
 																	   PreparedStatement.RETURN_GENERATED_KEYS);
 			
@@ -141,6 +168,12 @@ public class SqlMarcaDAO implements IMarcaDAO {
 			
 		}catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return id;
@@ -148,8 +181,8 @@ public class SqlMarcaDAO implements IMarcaDAO {
 
 	@Override
 	public void bajaMarca(int id) {
+		Connection connection = dbAdapter.getConnection();
 		try {
-			Connection connection = dbAdapter.getConnection();
 			PreparedStatement statement = connection.prepareStatement("UPDATE Marca SET ACTIVO = FALSE WHERE id=?");
 			statement.setInt(1, id);
 			
@@ -157,14 +190,21 @@ public class SqlMarcaDAO implements IMarcaDAO {
 					
 		}catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 	}
 
 	@Override
 	public void modificarMarca(TMarca marca) {
+		Connection connection = dbAdapter.getConnection();
+		
 		try {
-			Connection connection = dbAdapter.getConnection();
 			PreparedStatement statement = connection.prepareStatement("UPDATE Marca SET cif=?, nombre=?, pais=?  WHERE id=?");
 			statement.setString(1, marca.getCIF());
 			statement.setString(2, marca.getNombre());
@@ -175,6 +215,12 @@ public class SqlMarcaDAO implements IMarcaDAO {
 					
 		}catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 	}
