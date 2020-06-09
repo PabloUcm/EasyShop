@@ -350,5 +350,28 @@ public class SqlProductoDAO implements IProductoDAO{
 			e.printStackTrace();
 		}	
 		
+	}
+
+	@Override
+	public List<TProducto> listarPorMarca(int id) {
+		List<TProducto> productoList = new ArrayList<>();
+		try {
+			Connection connection = dbAdapter.getConnection();
+			PreparedStatement statement = connection.prepareStatement("SELECT * FROM PRODUCTO WHERE MARCA = ?");
+			
+			statement.setInt(1, id);
+			ResultSet results = statement.executeQuery();
+			
+			while(results.next()) {
+				productoList.add(new TProducto(results.getInt(1),results.getInt(2),results.getString(3),results.getString(4),
+								  results.getString(5),results.getDouble(6),results.getInt(7),results.getString(8),results.getBoolean(9)));
+			}		
+			
+			return productoList;			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}		
+		
+		return null;
 	}	
 }

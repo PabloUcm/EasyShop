@@ -386,6 +386,16 @@ public class Modelo {
 		return marca.getNombre();
 	}
 	
+	public List<TProducto> listarProductosPorMarca(String nombreMarca) throws Exception{
+		SqlMarcaDAO marcaDAO = (SqlMarcaDAO) factoryDAO.getMarcaDAO();
+		SqlProductoDAO productoDAO = (SqlProductoDAO) factoryDAO.getProductoDAO();
+		TMarca marca = marcaDAO.getMarcaByName(nombreMarca);
+		
+		if(marca == null) throw new Exception("Marca inexistente");
+		
+		return productoDAO.listarPorMarca(marca.getId());
+	}
+	
 	
 	//--------------VENTAS--------------------------//
 	

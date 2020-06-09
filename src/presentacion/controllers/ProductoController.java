@@ -54,4 +54,8 @@ private Modelo modelo;
 	public void modificarProducto(TProducto producto) {
 		modelo.modificarProducto(producto);
 	}
+	
+	public List<TProducto> listarProductosPorMarca(String nombreMarca) throws Exception {
+		return modelo.listarProductosPorMarca(nombreMarca);
+	}
 }
