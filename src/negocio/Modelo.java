@@ -101,8 +101,6 @@ public class Modelo {
 		TCliente cliente = clienteDAO.getClienteByID(id);
 			
 		if(cliente == null || !cliente.isActivo()) throw new Exception("Cliente inexistente.");
-			
-		logObserver.mostrar(Entity.CLIENTE);
 		
 		return cliente;
 	}
@@ -111,8 +109,6 @@ public class Modelo {
 	public List<TCliente> listarClientes() {
 		SqlClienteDAO clienteDAO = (SqlClienteDAO) factoryDAO.getClienteDAO();
 		List<TCliente> clienteList = clienteDAO.getAllClientes();
-			
-		logObserver.listar(Entity.CLIENTE);
 			
 		return clienteList;
 	}
@@ -159,9 +155,9 @@ public class Modelo {
 		
 		if (!empleado.isActivo()) throw new Exception("El empleado ya esta dado de baja.");
 		
-		empleadoDAO.bajaEmpleado(id);
-	
+		logObserver.baja(Entity.PERSONAL);
 		
+		empleadoDAO.bajaEmpleado(id);	
 	}
 	
 	public void modificarPersonal(TPersonal personal) throws Exception{
@@ -174,8 +170,9 @@ public class Modelo {
 		if (!personalID.isActivo()) throw new Exception("El empleado esta inactivo.");
 		if (personalDNI != null && personal.getId() != personalDNI.getId()) throw new Exception("Ya existe otro empleado con ese DNI.");
 		
-		empleadoDAO.modificarEmpleado(personal);
-				
+		logObserver.modificar(Entity.PERSONAL);
+		
+		empleadoDAO.modificarEmpleado(personal);				
 	}
 	
 	public List<TPersonal> listarPersonal(){
@@ -211,6 +208,8 @@ public class Modelo {
 		
 		if(marcaYaRegistrada != null && marcaYaRegistrada.isActivo()) throw new Exception("Marca ya existente.");
 		
+		logObserver.alta(Entity.MARCA);
+		
 		marcaDAO.altaMarca(marca);
 	}
 	
@@ -223,8 +222,9 @@ public class Modelo {
 		
 		if(!marca.isActivo()) throw new Exception("La marca ya esta dada de baja.");
 		
-		marcaDAO.bajaMarca(id);
+		logObserver.baja(Entity.MARCA);
 		
+		marcaDAO.bajaMarca(id);	
 	}
 	
 	public void modificarMarca(TMarca marca) throws Exception {
@@ -237,8 +237,9 @@ public class Modelo {
 		if(!marcaID.isActivo()) throw new Exception("La marca esta inactiva.");
 		if(marcaCIF != null && marca.getId() != marcaCIF.getId()) throw new Exception("Ya existe otra marca con ese CIF.");
 		
-		marcaDAO.modificarMarca(marca);
+		logObserver.modificar(Entity.MARCA);
 		
+		marcaDAO.modificarMarca(marca);	
 	}
 	
 	public List<TMarca> listarMarcas() {
@@ -297,8 +298,9 @@ public class Modelo {
 		if (producto.getTipo().equals("PC")) productoDAO.altaPC( (TPc) producto, id);
 		else if (producto.getTipo().equals("Periferico")) productoDAO.altaPeriferico( (TPeriferico) producto, id);
 		
-		return null;
+		logObserver.alta(Entity.PRODUCTO);
 		
+		return null;	
 	}
 
 	public void reactivarProducto(int id) throws Exception {
@@ -316,13 +318,13 @@ public class Modelo {
 		SqlProductoDAO productoDAO = (SqlProductoDAO) factoryDAO.getProductoDAO();
 
 		productoDAO.bajaProducto(id);
+		
+		logObserver.baja(Entity.PRODUCTO);
 	}
 	
 	public List<TProducto> listarProductos() {
 		SqlProductoDAO productoDAO = (SqlProductoDAO) factoryDAO.getProductoDAO();
 		List<TProducto> productoList = productoDAO.getAll();
-			
-		//logObserver.listar(Entity.PRODUCTO);
 			
 		return productoList;
 	}
@@ -367,6 +369,8 @@ public class Modelo {
 		productoDAO.modificarProducto(producto);
 		if(producto.getTipo().equals("PC")) productoDAO.modificarPc((TPc) producto);
 		else if(producto.getTipo().equals("Periferico")) productoDAO.modificarPeriferico((TPeriferico) producto);
+		
+		logObserver.modificar(Entity.PRODUCTO);
 		
 	}
 	
@@ -441,8 +445,9 @@ public class Modelo {
 			
 		}
 		
-		ventaDAO.altaVenta(venta);
+		logObserver.alta(Entity.VENTA);
 		
+		ventaDAO.altaVenta(venta);		
 	}
 
 	public List<TVenta> listarVentas() {
