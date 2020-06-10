@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--xtools2_universal_type_manager-->
-<!--Rational Software Architect Designer 9.6-->
 <?com.ibm.xtools.emf.core.signature <signature id="com.ibm.xtools.mmi.ui.signatures.diagram" version="7.0.0"><feature description="" name="Plataforma de modelado de Rational (com.ibm.xtools.rmp)" url="" version="7.0.0"/></signature>?>
 <?com.ibm.xtools.emf.core.signature <signature id="com.ibm.xtools.uml.msl.model" version="7.0.0"><feature description="" name="com.ibm.xtools.ruml.feature" url="" version="7.0.0"/></signature>?>
 <uml:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmlns:umlnotation="http://www.ibm.com/xtools/1.5.3/Umlnotation" xmi:id="_N88HpqNPEeqjKKCFKvChJA" name="VentaIntegración">
@@ -13,11 +12,15 @@
         <children xmi:type="notation:BasicDecorationNode" xmi:id="_N88HrKNPEeqjKKCFKvChJA" type="Stereotype"/>
         <children xmi:type="notation:BasicDecorationNode" xmi:id="_N88HraNPEeqjKKCFKvChJA" type="Name"/>
         <children xmi:type="notation:BasicDecorationNode" xmi:id="_N88HrqNPEeqjKKCFKvChJA" type="Parent"/>
-        <children xmi:type="notation:SemanticListCompartment" xmi:id="_N88Hr6NPEeqjKKCFKvChJA" type="AttributeCompartment"/>
-        <children xmi:type="notation:SemanticListCompartment" xmi:id="_N88HsKNPEeqjKKCFKvChJA" type="OperationCompartment"/>
+        <children xmi:type="notation:SemanticListCompartment" xmi:id="_N88Hr6NPEeqjKKCFKvChJA" type="AttributeCompartment">
+          <layoutConstraint xmi:type="notation:Ratio" xmi:id="_qrW1cKtQEeqa5rr0Wtq9Wg" value="0.19456558201945656"/>
+        </children>
+        <children xmi:type="notation:SemanticListCompartment" xmi:id="_N88HsKNPEeqjKKCFKvChJA" type="OperationCompartment">
+          <layoutConstraint xmi:type="notation:Ratio" xmi:id="_qrW1catQEeqa5rr0Wtq9Wg" value="0.8054344179805435"/>
+        </children>
         <children xmi:type="notation:SemanticListCompartment" xmi:id="_N88HsaNPEeqjKKCFKvChJA" visible="false" type="SignalCompartment"/>
         <children xmi:type="umlnotation:UMLShapeCompartment" xmi:id="_N88HsqNPEeqjKKCFKvChJA" visible="false" type="StructureCompartment"/>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_N88Hs6NPEeqjKKCFKvChJA" x="12144" y="4620" height="1836"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_N88Hs6NPEeqjKKCFKvChJA" x="12144" y="4620" height="3592"/>
       </children>
       <children xmi:type="umlnotation:UMLClassifierShape" xmi:id="_N88HtKNPEeqjKKCFKvChJA" element="_N88urqNPEeqjKKCFKvChJA" fontName="Segoe UI Emoji" fontHeight="8" showListSignature="true" transparency="0" lineColor="14263149" lineWidth="1" showStereotype="Label" useClassifierShape="true">
         <children xmi:type="notation:DecorationNode" xmi:id="_N88HtaNPEeqjKKCFKvChJA" type="ImageCompartment">
@@ -27,8 +30,12 @@
         <children xmi:type="notation:BasicDecorationNode" xmi:id="_N88HuKNPEeqjKKCFKvChJA" type="Kind"/>
         <children xmi:type="notation:BasicDecorationNode" xmi:id="_N88HuaNPEeqjKKCFKvChJA" type="Name"/>
         <children xmi:type="notation:BasicDecorationNode" xmi:id="_N88HuqNPEeqjKKCFKvChJA" type="Parent"/>
-        <children xmi:type="notation:SemanticListCompartment" xmi:id="_N88Hu6NPEeqjKKCFKvChJA" type="AttributeCompartment"/>
-        <children xmi:type="notation:SemanticListCompartment" xmi:id="_N88HvKNPEeqjKKCFKvChJA" type="OperationCompartment"/>
+        <children xmi:type="notation:SemanticListCompartment" xmi:id="_N88Hu6NPEeqjKKCFKvChJA" type="AttributeCompartment">
+          <layoutConstraint xmi:type="notation:Ratio" xmi:id="_Z_anIKtREeqa5rr0Wtq9Wg" value="0.1403553953129024"/>
+        </children>
+        <children xmi:type="notation:SemanticListCompartment" xmi:id="_N88HvKNPEeqjKKCFKvChJA" type="OperationCompartment">
+          <layoutConstraint xmi:type="notation:Ratio" xmi:id="_Z_anIatREeqa5rr0Wtq9Wg" value="0.8596446046870976"/>
+        </children>
         <children xmi:type="notation:SemanticListCompartment" xmi:id="_N88HvaNPEeqjKKCFKvChJA" visible="false" type="SignalCompartment"/>
         <styles xmi:type="notation:BooleanValueStyle" xmi:id="_N88HvqNPEeqjKKCFKvChJA" name="classifier_property_constraints"/>
         <styles xmi:type="notation:BooleanValueStyle" xmi:id="_N88Hv6NPEeqjKKCFKvChJA" name="classifier_property_redefined"/>
@@ -249,12 +256,47 @@
   <packagedElement xmi:type="uml:Class" xmi:id="_N88uq6NPEeqjKKCFKvChJA" name="SqlVentaDAO" clientDependency="_N88uraNPEeqjKKCFKvChJA _N88u6qNPEeqjKKCFKvChJA _N88u8aNPEeqjKKCFKvChJA _N88u9KNPEeqjKKCFKvChJA _N88u9aNPEeqjKKCFKvChJA">
     <ownedAttribute xmi:id="_N88urKNPEeqjKKCFKvChJA" name="dbAdapter" visibility="private" type="_N88u66NPEeqjKKCFKvChJA"/>
     <interfaceRealization xmi:id="_N88uraNPEeqjKKCFKvChJA" supplier="_N88urqNPEeqjKKCFKvChJA" client="_N88uq6NPEeqjKKCFKvChJA" contract="_N88urqNPEeqjKKCFKvChJA"/>
+    <ownedOperation xmi:id="_eJZJsKtQEeqa5rr0Wtq9Wg" name="getVentaByID">
+      <ownedParameter xmi:id="_kE9JMKtQEeqa5rr0Wtq9Wg" name="id" type="_rxELMatOEeqa5rr0Wtq9Wg"/>
+      <ownedParameter xmi:id="_kE9JMatQEeqa5rr0Wtq9Wg" name="Parámetro1" type="_N88uwKNPEeqjKKCFKvChJA" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_q88UsKtQEeqa5rr0Wtq9Wg" name="getAllVentas">
+      <ownedParameter xmi:id="_u1D1wKtQEeqa5rr0Wtq9Wg" name="Parámetro1" type="_RZ1jUKtPEeqa5rr0Wtq9Wg" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_334hIKtQEeqa5rr0Wtq9Wg" name="altaVenta">
+      <ownedParameter xmi:id="_-thjQKtQEeqa5rr0Wtq9Wg" name="venta" type="_N88uwKNPEeqjKKCFKvChJA"/>
+      <ownedParameter xmi:id="_-thjQatQEeqa5rr0Wtq9Wg" name="Parámetro1" type="_rxELMatOEeqa5rr0Wtq9Wg" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_CuVGQKtREeqa5rr0Wtq9Wg" name="getComprasCliente">
+      <ownedParameter xmi:id="_GU0r0KtREeqa5rr0Wtq9Wg" name="id" type="_rxELMatOEeqa5rr0Wtq9Wg"/>
+      <ownedParameter xmi:id="_GU0r0atREeqa5rr0Wtq9Wg" name="Parámetro1" type="_RZ1jUKtPEeqa5rr0Wtq9Wg" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_Jfc0wKtREeqa5rr0Wtq9Wg" name="getHistorialEmpleado">
+      <ownedParameter xmi:id="_N9wzIKtREeqa5rr0Wtq9Wg" name="id" type="_rxELMatOEeqa5rr0Wtq9Wg"/>
+      <ownedParameter xmi:id="_N9wzIatREeqa5rr0Wtq9Wg" name="Parámetro1" type="_RZ1jUKtPEeqa5rr0Wtq9Wg" direction="return"/>
+    </ownedOperation>
   </packagedElement>
   <packagedElement xmi:type="uml:Interface" xmi:id="_N88urqNPEeqjKKCFKvChJA" name="IVentaDAO" clientDependency="_N88u16NPEeqjKKCFKvChJA _9it7EKNPEeqjKKCFKvChJA" isAbstract="true">
     <elementImport xmi:id="_N88ur6NPEeqjKKCFKvChJA" importedElement="_N88u2KNPEeqjKKCFKvChJA"/>
-    <ownedOperation xmi:id="_fZLX0KNTEeqjKKCFKvChJA" name="abrirVenta"/>
-    <ownedOperation xmi:id="_0A97MKNTEeqjKKCFKvChJA" name="mostarVenta"/>
-    <ownedOperation xmi:id="_1C4EIKNTEeqjKKCFKvChJA" name="listarVentas"/>
+    <ownedOperation xmi:id="_fZLX0KNTEeqjKKCFKvChJA" name="altaVenta">
+      <ownedParameter xmi:id="_tFcuwKtPEeqa5rr0Wtq9Wg" name="venta" type="_N88uwKNPEeqjKKCFKvChJA"/>
+      <ownedParameter xmi:id="_rCQkcKtOEeqa5rr0Wtq9Wg" name="Parámetro1" type="_rxELMatOEeqa5rr0Wtq9Wg" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_0A97MKNTEeqjKKCFKvChJA" name="getAllVentas">
+      <ownedParameter xmi:id="_Q9SKMKtPEeqa5rr0Wtq9Wg" name="Parámetro1" type="_RZ1jUKtPEeqa5rr0Wtq9Wg" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_1C4EIKNTEeqjKKCFKvChJA" name="getComprasCliente">
+      <ownedParameter xmi:id="_wi4e8KtPEeqa5rr0Wtq9Wg" name="id" type="_rxELMatOEeqa5rr0Wtq9Wg"/>
+      <ownedParameter xmi:id="_XGN3UKtPEeqa5rr0Wtq9Wg" name="Parámetro1" type="_RZ1jUKtPEeqa5rr0Wtq9Wg" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_9o9Z0KtOEeqa5rr0Wtq9Wg" name="getVentaByID">
+      <ownedParameter xmi:id="_ms0YwKtPEeqa5rr0Wtq9Wg" name="id" type="_rxELMatOEeqa5rr0Wtq9Wg"/>
+      <ownedParameter xmi:id="_DxT4IKtPEeqa5rr0Wtq9Wg" name="Parámetro1" type="_N88uwKNPEeqjKKCFKvChJA" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_Yi-wQKtPEeqa5rr0Wtq9Wg" name="getHistorialEmpleado">
+      <ownedParameter xmi:id="_zLBl4KtPEeqa5rr0Wtq9Wg" name="id" type="_rxELMatOEeqa5rr0Wtq9Wg"/>
+      <ownedParameter xmi:id="_g_Oj0KtPEeqa5rr0Wtq9Wg" name="Parámetro1" type="_RZ1jUKtPEeqa5rr0Wtq9Wg" direction="return"/>
+    </ownedOperation>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_N88uwKNPEeqjKKCFKvChJA" name="TVenta" clientDependency="_AONbgKNREeqjKKCFKvChJA">
     <ownedAttribute xmi:id="_N88uwaNPEeqjKKCFKvChJA" name="id" visibility="private">
@@ -270,9 +312,7 @@
       <type xmi:type="uml:Class" href="pathmap://XSD_LIBRARIES/XSDDataTypes.library.emx#_7yKF8SkGEdmDdasWev0kGA?XSDDataTypes/XSDDataTypes/date?"/>
     </ownedAttribute>
     <ownedAttribute xmi:id="_ILcX0KNREeqjKKCFKvChJA" name="lineasVenta" visibility="private" type="_N88u2KNPEeqjKKCFKvChJA"/>
-    <ownedAttribute xmi:id="_SvKDoKNQEeqjKKCFKvChJA" name="total" visibility="private">
-      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#float"/>
-    </ownedAttribute>
+    <ownedAttribute xmi:id="_SvKDoKNQEeqjKKCFKvChJA" name="importe" visibility="private" type="_oMz58KtREeqa5rr0Wtq9Wg"/>
     <ownedOperation xmi:id="_N88uxqNPEeqjKKCFKvChJA" name="getId">
       <ownedParameter xmi:id="_co1zoKNSEeqjKKCFKvChJA" name="Parameter1" direction="return">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
@@ -298,9 +338,18 @@
         <type xmi:type="uml:Class" href="pathmap://XSD_LIBRARIES/XSDDataTypes.library.emx#_7yKF8SkGEdmDdasWev0kGA?XSDDataTypes/XSDDataTypes/date?"/>
       </ownedParameter>
     </ownedOperation>
-    <ownedOperation xmi:id="_x-cUsKNREeqjKKCFKvChJA" name="addLineaVenta"/>
-    <ownedOperation xmi:id="_0vL-AKNREeqjKKCFKvChJA" name="deleteLineaVenta"/>
-    <ownedOperation xmi:id="_2RCLQKNREeqjKKCFKvChJA" name="getLineaVenta"/>
+    <ownedOperation xmi:id="_x-cUsKNREeqjKKCFKvChJA" name="addLineaVenta">
+      <ownedParameter xmi:id="_Agcc8KtSEeqa5rr0Wtq9Wg" name="idProducto" type="_rxELMatOEeqa5rr0Wtq9Wg"/>
+      <ownedParameter xmi:id="_Agcc8atSEeqa5rr0Wtq9Wg" name="nombreProducto">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_Fjh8UKtSEeqa5rr0Wtq9Wg" name="unidades" type="_rxELMatOEeqa5rr0Wtq9Wg"/>
+      <ownedParameter xmi:id="_Fjh8UatSEeqa5rr0Wtq9Wg" name="precio_unitario" type="_oMz58KtREeqa5rr0Wtq9Wg"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_2RCLQKNREeqjKKCFKvChJA" name="getLineaVenta">
+      <ownedParameter xmi:id="_JcsmQKtSEeqa5rr0Wtq9Wg" name="i" type="_rxELMatOEeqa5rr0Wtq9Wg"/>
+      <ownedParameter xmi:id="_3kbuwKtSEeqa5rr0Wtq9Wg" name="Parámetro1" type="_WV4SsKNQEeqjKKCFKvChJA" direction="return"/>
+    </ownedOperation>
     <ownedOperation xmi:id="_8SSjEKNREeqjKKCFKvChJA" name="changeUnits">
       <ownedParameter xmi:id="_8VoVgKNSEeqjKKCFKvChJA" name="idProducto">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
@@ -309,11 +358,26 @@
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
       </ownedParameter>
     </ownedOperation>
-    <ownedOperation xmi:id="_DVSEsKNSEeqjKKCFKvChJA" name="getTotal"/>
-    <ownedOperation xmi:id="_Ep9YoKNSEeqjKKCFKvChJA" name="setTotal">
-      <ownedParameter xmi:id="_VwJBAKNTEeqjKKCFKvChJA" name="total">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#float"/>
-      </ownedParameter>
+    <ownedOperation xmi:id="_DVSEsKNSEeqjKKCFKvChJA" name="getTotal">
+      <ownedParameter xmi:id="_X_EqkKtSEeqa5rr0Wtq9Wg" name="Parámetro1" type="_oMz58KtREeqa5rr0Wtq9Wg" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_rKCgEKtREeqa5rr0Wtq9Wg" name="setIdCliente"/>
+    <ownedOperation xmi:id="_xFw3oKtREeqa5rr0Wtq9Wg" name="setIdPersonal">
+      <ownedParameter xmi:id="_0AwpIKtREeqa5rr0Wtq9Wg" name="idPersonal" type="_rxELMatOEeqa5rr0Wtq9Wg"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_LckMQKtSEeqa5rr0Wtq9Wg" name="getNumeroLineas">
+      <ownedParameter xmi:id="_NtUt8KtSEeqa5rr0Wtq9Wg" name="Parámetro1" type="_rxELMatOEeqa5rr0Wtq9Wg" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_QqDk0KtSEeqa5rr0Wtq9Wg" name="existeProducto">
+      <ownedParameter xmi:id="_UrVo8KtSEeqa5rr0Wtq9Wg" name="idProducto" type="_rxELMatOEeqa5rr0Wtq9Wg"/>
+      <ownedParameter xmi:id="_UrVo8atSEeqa5rr0Wtq9Wg" name="Parámetro1" type="_U9nEsKtSEeqa5rr0Wtq9Wg" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_dsoqUKtSEeqa5rr0Wtq9Wg" name="changeTotal">
+      <ownedParameter xmi:id="_hU2uMKtSEeqa5rr0Wtq9Wg" name="operacion" type="_hmPZIKtSEeqa5rr0Wtq9Wg"/>
+      <ownedParameter xmi:id="_hmPZIatSEeqa5rr0Wtq9Wg" name="importe" type="_oMz58KtREeqa5rr0Wtq9Wg"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_kLcg0KtSEeqa5rr0Wtq9Wg" name="lineasVentaSize">
+      <ownedParameter xmi:id="_mVJYQKtSEeqa5rr0Wtq9Wg" name="Parámetro1" type="_rxELMatOEeqa5rr0Wtq9Wg" direction="return"/>
     </ownedOperation>
   </packagedElement>
   <packagedElement xmi:type="uml:Dependency" xmi:id="_N88u16NPEeqjKKCFKvChJA" supplier="_N88uwKNPEeqjKKCFKvChJA" client="_N88urqNPEeqjKKCFKvChJA"/>
@@ -367,9 +431,6 @@
   <packagedElement xmi:type="uml:Dependency" xmi:id="_N88u9aNPEeqjKKCFKvChJA" supplier="_N88u86NPEeqjKKCFKvChJA" client="_N88uq6NPEeqjKKCFKvChJA"/>
   <packagedElement xmi:type="uml:Dependency" xmi:id="_9it7EKNPEeqjKKCFKvChJA" supplier="_N88uwKNPEeqjKKCFKvChJA" client="_N88urqNPEeqjKKCFKvChJA"/>
   <packagedElement xmi:type="uml:Class" xmi:id="_WV4SsKNQEeqjKKCFKvChJA" name="TLineaVenta">
-    <ownedAttribute xmi:id="_eqaUsKNQEeqjKKCFKvChJA" name="id" visibility="private">
-      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
-    </ownedAttribute>
     <ownedAttribute xmi:id="_lxDnQKNQEeqjKKCFKvChJA" name="idProducto" visibility="private">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
     </ownedAttribute>
@@ -379,21 +440,53 @@
     <ownedAttribute xmi:id="_ownIoKNQEeqjKKCFKvChJA" name="unidades" visibility="private">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
     </ownedAttribute>
-    <ownedAttribute xmi:id="_vqi04KNQEeqjKKCFKvChJA" name="precioUnitario" visibility="private">
-      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#float"/>
-    </ownedAttribute>
-    <ownedAttribute xmi:id="_0iZUoKNQEeqjKKCFKvChJA" name="total" visibility="private">
-      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#float"/>
-    </ownedAttribute>
+    <ownedAttribute xmi:id="_vqi04KNQEeqjKKCFKvChJA" name="precio_unitario" visibility="private" type="_oMz58KtREeqa5rr0Wtq9Wg"/>
+    <ownedAttribute xmi:id="_0iZUoKNQEeqjKKCFKvChJA" name="total" visibility="private" type="_oMz58KtREeqa5rr0Wtq9Wg"/>
     <ownedOperation xmi:id="_HG5qQKNUEeqjKKCFKvChJA" name="getId"/>
-    <ownedOperation xmi:id="_JbCQEKNUEeqjKKCFKvChJA" name="getIdProducto"/>
-    <ownedOperation xmi:id="_LAkDcKNUEeqjKKCFKvChJA" name="getNombre"/>
-    <ownedOperation xmi:id="_O313AKNUEeqjKKCFKvChJA" name="getUnidades"/>
-    <ownedOperation xmi:id="_RhDU8KNUEeqjKKCFKvChJA" name="setUnidades"/>
-    <ownedOperation xmi:id="_TshuAKNUEeqjKKCFKvChJA" name="getPrecioUnitario"/>
-    <ownedOperation xmi:id="_VY-owKNUEeqjKKCFKvChJA" name="getTotal"/>
+    <ownedOperation xmi:id="_JbCQEKNUEeqjKKCFKvChJA" name="getIdProducto">
+      <ownedParameter xmi:id="_NOZg0KtTEeqa5rr0Wtq9Wg" name="Parámetro1" type="_rxELMatOEeqa5rr0Wtq9Wg" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_LAkDcKNUEeqjKKCFKvChJA" name="getNombre">
+      <ownedParameter xmi:id="_OuL4kKtTEeqa5rr0Wtq9Wg" name="Parámetro1" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_O313AKNUEeqjKKCFKvChJA" name="getUnidades">
+      <ownedParameter xmi:id="_P7KCAKtTEeqa5rr0Wtq9Wg" name="Parámetro1" type="_rxELMatOEeqa5rr0Wtq9Wg" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_RhDU8KNUEeqjKKCFKvChJA" name="setUnidades">
+      <ownedParameter xmi:id="_SnP00KtTEeqa5rr0Wtq9Wg" name="unidades" type="_rxELMatOEeqa5rr0Wtq9Wg"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_TshuAKNUEeqjKKCFKvChJA" name="getPrecio_unitario">
+      <ownedParameter xmi:id="_WjSMkKtTEeqa5rr0Wtq9Wg" name="Parámetro1" type="_oMz58KtREeqa5rr0Wtq9Wg" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_VY-owKNUEeqjKKCFKvChJA" name="getTotal">
+      <ownedParameter xmi:id="_YIFAIKtTEeqa5rr0Wtq9Wg" name="Parámetro1" type="_oMz58KtREeqa5rr0Wtq9Wg" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_ZfWVEKtTEeqa5rr0Wtq9Wg" name="calculateTotal"/>
+    <ownedOperation xmi:id="_bvlSUKtTEeqa5rr0Wtq9Wg" name="setIdProducto">
+      <ownedParameter xmi:id="_e-VGQKtTEeqa5rr0Wtq9Wg" name="idProducto" type="_rxELMatOEeqa5rr0Wtq9Wg"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_fuUYwKtTEeqa5rr0Wtq9Wg" name="setNombre">
+      <ownedParameter xmi:id="_iGBP8KtTEeqa5rr0Wtq9Wg" name="nombre">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_ifVH0KtTEeqa5rr0Wtq9Wg" name="setPrecio_unitario">
+      <ownedParameter xmi:id="_ltOnMKtTEeqa5rr0Wtq9Wg" name="precio_unitario" type="_oMz58KtREeqa5rr0Wtq9Wg"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_mftNAKtTEeqa5rr0Wtq9Wg" name="setTotal">
+      <ownedParameter xmi:id="_oIqu4KtTEeqa5rr0Wtq9Wg" name="total" type="_oMz58KtREeqa5rr0Wtq9Wg"/>
+    </ownedOperation>
   </packagedElement>
   <packagedElement xmi:type="uml:Dependency" xmi:id="_AONbgKNREeqjKKCFKvChJA" supplier="_WV4SsKNQEeqjKKCFKvChJA" client="_N88uwKNPEeqjKKCFKvChJA"/>
+  <packagedElement xmi:type="uml:Package" xmi:id="_rxELMKtOEeqa5rr0Wtq9Wg" name="PrimitiveTypes">
+    <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_rxELMatOEeqa5rr0Wtq9Wg" name="int"/>
+    <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_RZ1jUKtPEeqa5rr0Wtq9Wg" name="List&lt;TVenta>"/>
+    <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_oMz58KtREeqa5rr0Wtq9Wg" name="double"/>
+    <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_U9nEsKtSEeqa5rr0Wtq9Wg" name="boolean"/>
+    <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_hmPZIKtSEeqa5rr0Wtq9Wg" name="char"/>
+  </packagedElement>
   <profileApplication xmi:id="_N88u9qNPEeqjKKCFKvChJA">
     <eAnnotations xmi:id="_N88u96NPEeqjKKCFKvChJA" source="http://www.eclipse.org/uml2/2.0.0/UML">
       <references xmi:type="ecore:EPackage" href="pathmap://UML_PROFILES/Standard.profile.uml#_yzU58YinEdqtvbnfB2L_5w"/>
