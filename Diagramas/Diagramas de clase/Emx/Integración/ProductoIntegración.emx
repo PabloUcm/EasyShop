@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--xtools2_universal_type_manager-->
-<!--Rational Software Architect Designer 9.6-->
+<!--Rational Software Architect Designer 9.7.0-->
 <?com.ibm.xtools.emf.core.signature <signature id="com.ibm.xtools.mmi.ui.signatures.diagram" version="7.0.0"><feature description="" name="Plataforma de modelado de Rational (com.ibm.xtools.rmp)" url="" version="7.0.0"/></signature>?>
 <?com.ibm.xtools.emf.core.signature <signature id="com.ibm.xtools.uml.msl.model" version="7.0.0"><feature description="" name="com.ibm.xtools.ruml.feature" url="" version="7.0.0"/></signature>?>
 <uml:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmlns:umlnotation="http://www.ibm.com/xtools/1.5.3/Umlnotation" xmi:id="_08nZDaMwEeqjKKCFKvChJA" name="ProductoIntegración">
@@ -13,11 +13,15 @@
         <children xmi:type="notation:BasicDecorationNode" xmi:id="_08nZE6MwEeqjKKCFKvChJA" type="Stereotype"/>
         <children xmi:type="notation:BasicDecorationNode" xmi:id="_08nZFKMwEeqjKKCFKvChJA" type="Name"/>
         <children xmi:type="notation:BasicDecorationNode" xmi:id="_08nZFaMwEeqjKKCFKvChJA" type="Parent"/>
-        <children xmi:type="notation:SemanticListCompartment" xmi:id="_08nZFqMwEeqjKKCFKvChJA" type="AttributeCompartment"/>
-        <children xmi:type="notation:SemanticListCompartment" xmi:id="_08nZF6MwEeqjKKCFKvChJA" type="OperationCompartment"/>
+        <children xmi:type="notation:SemanticListCompartment" xmi:id="_08nZFqMwEeqjKKCFKvChJA" type="AttributeCompartment">
+          <layoutConstraint xmi:type="notation:Ratio" xmi:id="_6aYZcKtYEeqlnc3zj35kPg" value="0.09069437883797828"/>
+        </children>
+        <children xmi:type="notation:SemanticListCompartment" xmi:id="_08nZF6MwEeqjKKCFKvChJA" type="OperationCompartment">
+          <layoutConstraint xmi:type="notation:Ratio" xmi:id="_6aZAgKtYEeqlnc3zj35kPg" value="0.9093056211620217"/>
+        </children>
         <children xmi:type="notation:SemanticListCompartment" xmi:id="_08nZGKMwEeqjKKCFKvChJA" visible="false" type="SignalCompartment"/>
         <children xmi:type="umlnotation:UMLShapeCompartment" xmi:id="_08nZGaMwEeqjKKCFKvChJA" visible="false" type="StructureCompartment"/>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_08nZGqMwEeqjKKCFKvChJA" x="12144" y="4620" height="1836"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_08nZGqMwEeqjKKCFKvChJA" x="10578" y="4182" width="5953" height="5482"/>
       </children>
       <children xmi:type="umlnotation:UMLClassifierShape" xmi:id="_08nZG6MwEeqjKKCFKvChJA" element="_08nZxKMwEeqjKKCFKvChJA" fontName="Segoe UI Emoji" fontHeight="8" showListSignature="true" transparency="0" lineColor="14263149" lineWidth="1" showStereotype="Label" useClassifierShape="true">
         <children xmi:type="notation:DecorationNode" xmi:id="_08nZHKMwEeqjKKCFKvChJA" type="ImageCompartment">
@@ -39,7 +43,7 @@
         <styles xmi:type="notation:BooleanValueStyle" xmi:id="_08nZK6MwEeqjKKCFKvChJA" name="classifier_qualifier_ordered"/>
         <styles xmi:type="notation:BooleanValueStyle" xmi:id="_08nZLKMwEeqjKKCFKvChJA" name="classifier_qualifier_static" booleanValue="true"/>
         <styles xmi:type="notation:BooleanValueStyle" xmi:id="_08nZLaMwEeqjKKCFKvChJA" name="classifier_qualifier_derived" booleanValue="true"/>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_08nZLqMwEeqjKKCFKvChJA" x="1320" y="-1056" width="8283" height="4853"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_08nZLqMwEeqjKKCFKvChJA" x="984" y="-1353" width="8618" height="5945"/>
       </children>
       <children xmi:type="umlnotation:UMLShape" xmi:id="_08nZL6MwEeqjKKCFKvChJA" element="_08nZ1qMwEeqjKKCFKvChJA" fontName="Segoe UI" fontHeight="8" showListSignature="true" transparency="0" lineColor="14263149" lineWidth="1" showStereotype="Label">
         <children xmi:type="notation:DecorationNode" xmi:id="_08nZMKMwEeqjKKCFKvChJA" type="ImageCompartment">
@@ -52,7 +56,7 @@
         <children xmi:type="notation:SemanticListCompartment" xmi:id="_08nZNqMwEeqjKKCFKvChJA" type="OperationCompartment"/>
         <children xmi:type="notation:SemanticListCompartment" xmi:id="_08nZN6MwEeqjKKCFKvChJA" visible="false" type="SignalCompartment"/>
         <children xmi:type="umlnotation:UMLShapeCompartment" xmi:id="_08nZOKMwEeqjKKCFKvChJA" visible="false" type="StructureCompartment"/>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_08nZOaMwEeqjKKCFKvChJA" x="3036" y="4620" width="6292"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_08nZOaMwEeqjKKCFKvChJA" x="2829" y="5289" width="6292"/>
       </children>
       <children xmi:type="umlnotation:UMLShape" xmi:id="_08nZOqMwEeqjKKCFKvChJA" element="_08oAHqMwEeqjKKCFKvChJA" fontName="Segoe UI" fontHeight="8" transparency="0" lineColor="14263149" lineWidth="1" showStereotype="Label">
         <children xmi:type="notation:DecorationNode" xmi:id="_08nZO6MwEeqjKKCFKvChJA" type="ImageCompartment">
@@ -129,7 +133,7 @@
         <children xmi:type="notation:SemanticListCompartment" xmi:id="_08nZd6MwEeqjKKCFKvChJA" type="AttributeCompartment"/>
         <children xmi:type="notation:SemanticListCompartment" xmi:id="_08nZeKMwEeqjKKCFKvChJA" type="OperationCompartment"/>
         <children xmi:type="notation:SemanticListCompartment" xmi:id="_08nZeaMwEeqjKKCFKvChJA" visible="false" type="SignalCompartment"/>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_08nZeqMwEeqjKKCFKvChJA" x="11088" y="8712"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_08nZeqMwEeqjKKCFKvChJA" x="10578" y="11562"/>
       </children>
       <children xmi:type="umlnotation:UMLClassifierShape" xmi:id="_08nZe6MwEeqjKKCFKvChJA" element="_08oAOaMwEeqjKKCFKvChJA" fontName="Segoe UI" fontHeight="8" transparency="0" lineColor="14263149" lineWidth="1" showStereotype="Label" useClassifierShape="true">
         <children xmi:type="notation:DecorationNode" xmi:id="_08nZfKMwEeqjKKCFKvChJA" type="ImageCompartment">
@@ -142,7 +146,7 @@
         <children xmi:type="notation:SemanticListCompartment" xmi:id="_08nZgqMwEeqjKKCFKvChJA" type="AttributeCompartment"/>
         <children xmi:type="notation:SemanticListCompartment" xmi:id="_08nZg6MwEeqjKKCFKvChJA" type="OperationCompartment"/>
         <children xmi:type="notation:SemanticListCompartment" xmi:id="_08nZhKMwEeqjKKCFKvChJA" visible="false" type="SignalCompartment"/>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_08nZhaMwEeqjKKCFKvChJA" x="14388" y="8712"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_08nZhaMwEeqjKKCFKvChJA" x="15498" y="11685"/>
       </children>
       <children xmi:type="umlnotation:UMLShape" xmi:id="_e1fe8KMyEeqjKKCFKvChJA" element="_e1Z_YKMyEeqjKKCFKvChJA" fontName="Segoe UI" fontHeight="8" showListSignature="true" transparency="0" lineColor="14263149" lineWidth="1" showStereotype="Label">
         <children xmi:type="notation:DecorationNode" xmi:id="_e1hUIKMyEeqjKKCFKvChJA" type="ImageCompartment">
@@ -270,6 +274,26 @@
   <packagedElement xmi:type="uml:Class" xmi:id="_08nZwaMwEeqjKKCFKvChJA" name="SqlProductoDAO" clientDependency="_08nZw6MwEeqjKKCFKvChJA _08oAMKMwEeqjKKCFKvChJA _08oAN6MwEeqjKKCFKvChJA _08oAOqMwEeqjKKCFKvChJA _08oAO6MwEeqjKKCFKvChJA">
     <ownedAttribute xmi:id="_08nZwqMwEeqjKKCFKvChJA" name="dbAdapter" visibility="private" type="_08oAMaMwEeqjKKCFKvChJA"/>
     <interfaceRealization xmi:id="_08nZw6MwEeqjKKCFKvChJA" supplier="_08nZxKMwEeqjKKCFKvChJA" client="_08nZwaMwEeqjKKCFKvChJA" contract="_08nZxKMwEeqjKKCFKvChJA"/>
+    <ownedOperation xmi:id="_YJPEcKtYEeqlnc3zj35kPg" name="getAll"/>
+    <ownedOperation xmi:id="_muCxsKtYEeqlnc3zj35kPg" name="getById">
+      <ownedParameter xmi:id="_oRb3EKtYEeqlnc3zj35kPg" name="id" type="_RYfCAKtbEeqlnc3zj35kPg"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_oux6YKtYEeqlnc3zj35kPg" name="getPCById">
+      <ownedParameter xmi:id="_SgHjAKtcEeqlnc3zj35kPg" name="id" type="_RYfCAKtbEeqlnc3zj35kPg"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_rYnqcKtYEeqlnc3zj35kPg" name="getPerifericoById"/>
+    <ownedOperation xmi:id="_uyz5YKtYEeqlnc3zj35kPg" name="getProductoByUPC"/>
+    <ownedOperation xmi:id="_wuoF0KtYEeqlnc3zj35kPg" name="altaProducto"/>
+    <ownedOperation xmi:id="_yclccKtYEeqlnc3zj35kPg" name="altaPC"/>
+    <ownedOperation xmi:id="_zobkgKtYEeqlnc3zj35kPg" name="altaPeriferico"/>
+    <ownedOperation xmi:id="_1B3coKtYEeqlnc3zj35kPg" name="reactivarProducto"/>
+    <ownedOperation xmi:id="_90HVYKtYEeqlnc3zj35kPg" name="bajaProducto"/>
+    <ownedOperation xmi:id="__sUNIKtYEeqlnc3zj35kPg" name="modificarProducto"/>
+    <ownedOperation xmi:id="_BfvSkKtZEeqlnc3zj35kPg" name="modificarPC"/>
+    <ownedOperation xmi:id="_CrAy4KtZEeqlnc3zj35kPg" name="modificarPeriferico"/>
+    <ownedOperation xmi:id="_EEvl8KtZEeqlnc3zj35kPg" name="getProductoByName"/>
+    <ownedOperation xmi:id="_HAdJIKtZEeqlnc3zj35kPg" name="listarPorMarca"/>
+    <ownedOperation xmi:id="_IQjfEKtZEeqlnc3zj35kPg" name="listarPorPrecio"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Interface" xmi:id="_08nZxKMwEeqjKKCFKvChJA" name="IProductoDAO" clientDependency="_08oAHaMwEeqjKKCFKvChJA _3Qvs4KMyEeqjKKCFKvChJA _X8GIwKMzEeqjKKCFKvChJA" isAbstract="true">
     <elementImport xmi:id="_08nZxaMwEeqjKKCFKvChJA" importedElement="_08oAHqMwEeqjKKCFKvChJA"/>
@@ -286,22 +310,59 @@
       </ownedParameter>
     </ownedOperation>
     <ownedOperation xmi:id="_08nZzKMwEeqjKKCFKvChJA" name="modificarProducto" isAbstract="true">
-      <ownedParameter xmi:id="_08nZzaMwEeqjKKCFKvChJA" name="id">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
-      </ownedParameter>
-      <ownedParameter xmi:id="_08nZzqMwEeqjKKCFKvChJA" name="cliente" type="_08nZ1qMwEeqjKKCFKvChJA"/>
+      <ownedParameter xmi:id="_08nZzaMwEeqjKKCFKvChJA" name="producto" type="_08nZ1qMwEeqjKKCFKvChJA"/>
     </ownedOperation>
-    <ownedOperation xmi:id="_08nZz6MwEeqjKKCFKvChJA" name="mostrarProducto" isAbstract="true">
-      <ownedParameter xmi:id="_08nZ0KMwEeqjKKCFKvChJA" name="dni">
+    <ownedOperation xmi:id="_E6WtYKtbEeqlnc3zj35kPg" name="getProductoByName">
+      <ownedParameter xmi:id="_HOwY8KtbEeqlnc3zj35kPg" name="name">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
       </ownedParameter>
-      <ownedParameter xmi:id="_08nZ0aMwEeqjKKCFKvChJA" name="Parameter1" type="_08nZ1qMwEeqjKKCFKvChJA" direction="return"/>
     </ownedOperation>
-    <ownedOperation xmi:id="_08nZ0qMwEeqjKKCFKvChJA" name="listarProductos" isAbstract="true">
-      <ownedParameter xmi:id="_08nZ06MwEeqjKKCFKvChJA" name="Parameter1" type="_08oAHqMwEeqjKKCFKvChJA" direction="return"/>
+    <ownedOperation xmi:id="_Ir66gKtbEeqlnc3zj35kPg" name="getProductoByUPC">
+      <ownedParameter xmi:id="_KXfEcKtbEeqlnc3zj35kPg" name="upc">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
     </ownedOperation>
-    <ownedOperation xmi:id="_4rf-MKMzEeqjKKCFKvChJA" name="buscarPorMarca"/>
-    <ownedOperation xmi:id="_6MPYMKMzEeqjKKCFKvChJA" name="buscarPorPrecio"/>
+    <ownedOperation xmi:id="_QAVjUKtbEeqlnc3zj35kPg" name="getPcById">
+      <ownedParameter xmi:id="_RL0fAKtbEeqlnc3zj35kPg" name="id" type="_RYfCAKtbEeqlnc3zj35kPg"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_UjqkkKtbEeqlnc3zj35kPg" name="getPerifericoById">
+      <ownedParameter xmi:id="_WOH7QKtbEeqlnc3zj35kPg" name="id" type="_RYfCAKtbEeqlnc3zj35kPg"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_YaSQ0KtbEeqlnc3zj35kPg" name="altaPc">
+      <ownedParameter xmi:id="_cOSt8KtbEeqlnc3zj35kPg" name="pc" type="_fNUq4KtbEeqlnc3zj35kPg"/>
+      <ownedParameter xmi:id="_ciYuoatbEeqlnc3zj35kPg" name="id" type="_RYfCAKtbEeqlnc3zj35kPg"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_fvVLwKtbEeqlnc3zj35kPg" name="altaPeriferico">
+      <ownedParameter xmi:id="_kg4PMKtbEeqlnc3zj35kPg" name="periferico" type="_ktXzEKtbEeqlnc3zj35kPg"/>
+      <ownedParameter xmi:id="_ktXzEatbEeqlnc3zj35kPg" name="id" type="_RYfCAKtbEeqlnc3zj35kPg"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_luB-0KtbEeqlnc3zj35kPg" name="reactivarProducto">
+      <ownedParameter xmi:id="_no-okKtbEeqlnc3zj35kPg" name="id" type="_RYfCAKtbEeqlnc3zj35kPg"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_qTE3UKtbEeqlnc3zj35kPg" name="getAll">
+      <ownedParameter xmi:id="_rdvToKtbEeqlnc3zj35kPg" name="Parameter1" type="_08oAHqMwEeqjKKCFKvChJA" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_s-Z1IKtbEeqlnc3zj35kPg" name="getById">
+      <ownedParameter xmi:id="_uBQZQKtbEeqlnc3zj35kPg" name="id" type="_RYfCAKtbEeqlnc3zj35kPg"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_ykzc8KtbEeqlnc3zj35kPg" name="modificarPC">
+      <ownedParameter xmi:id="_ztC3YKtbEeqlnc3zj35kPg" name="pc" type="_ciYuoKtbEeqlnc3zj35kPg"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_0szrQKtbEeqlnc3zj35kPg" name="modificarPeriférico">
+      <ownedParameter xmi:id="_26o0wKtbEeqlnc3zj35kPg" name="periférico" type="_e1Z_YKMyEeqjKKCFKvChJA"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_4QPVwKtbEeqlnc3zj35kPg" name="cambiarUnidades">
+      <ownedParameter xmi:id="_5q588KtbEeqlnc3zj35kPg" name="id" type="_RYfCAKtbEeqlnc3zj35kPg"/>
+      <ownedParameter xmi:id="_5q588atbEeqlnc3zj35kPg" name="unidades" type="_RYfCAKtbEeqlnc3zj35kPg"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_60ATAKtbEeqlnc3zj35kPg" name="listarPorMarca">
+      <ownedParameter xmi:id="_8teWEKtbEeqlnc3zj35kPg" name="id" type="_RYfCAKtbEeqlnc3zj35kPg"/>
+      <ownedParameter xmi:id="_8teWEatbEeqlnc3zj35kPg" name="Parameter1" type="_08oAHqMwEeqjKKCFKvChJA" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_-NIyAKtbEeqlnc3zj35kPg" name="listarPorPrecio">
+      <ownedParameter xmi:id="_ADa-MKtcEeqlnc3zj35kPg" name="precioSuperior" type="_FRu2IKtcEeqlnc3zj35kPg"/>
+      <ownedParameter xmi:id="_FRvdMKtcEeqlnc3zj35kPg" name="precioInferior" type="_FRu2IKtcEeqlnc3zj35kPg"/>
+    </ownedOperation>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_08nZ1qMwEeqjKKCFKvChJA" name="TProducto">
     <eAnnotations xmi:id="_VBUZsKMzEeqjKKCFKvChJA" source="http://www.eclipse.org/uml2/2.0.0/UML">
@@ -316,15 +377,20 @@
     <ownedAttribute xmi:id="_gl0iMKM0EeqjKKCFKvChJA" name="idMarca" visibility="private">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
     </ownedAttribute>
-    <ownedAttribute xmi:id="_k5Mb4KM0EeqjKKCFKvChJA" name="precio" visibility="private">
-      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#float"/>
-    </ownedAttribute>
+    <ownedAttribute xmi:id="_k5Mb4KM0EeqjKKCFKvChJA" name="precio" visibility="private" type="_FRu2IKtcEeqlnc3zj35kPg"/>
     <ownedAttribute xmi:id="_on1Q0KM0EeqjKKCFKvChJA" name="descripcion" visibility="private">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
     </ownedAttribute>
     <ownedAttribute xmi:id="_sAgc0KM0EeqjKKCFKvChJA" name="activo" visibility="private">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
     </ownedAttribute>
+    <ownedAttribute xmi:id="_fdhNkKtcEeqlnc3zj35kPg" name="UPC" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_i2etcKtcEeqlnc3zj35kPg" name="tipo" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_oEXHkKtcEeqlnc3zj35kPg" name="cantidad" visibility="private" type="_RYfCAKtbEeqlnc3zj35kPg"/>
     <ownedOperation xmi:id="_08nZ3KMwEeqjKKCFKvChJA" name="getId">
       <ownedParameter xmi:id="_d5K5QKM1EeqjKKCFKvChJA" name="Parameter1" direction="return">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
@@ -375,10 +441,34 @@
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
       </ownedParameter>
     </ownedOperation>
-    <ownedOperation xmi:id="_08oAG6MwEeqjKKCFKvChJA" name="setActivo">
-      <ownedParameter xmi:id="_08oAHKMwEeqjKKCFKvChJA" name="activo">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+    <ownedOperation xmi:id="_ild18KtcEeqlnc3zj35kPg" name="setId">
+      <ownedParameter xmi:id="_soD8QKtcEeqlnc3zj35kPg" name="id" type="_RYfCAKtbEeqlnc3zj35kPg"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_uzpqEKtcEeqlnc3zj35kPg" name="getTipo">
+      <ownedParameter xmi:id="_x75NYKtcEeqlnc3zj35kPg" name="Parameter1" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
       </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_z4TPsKtcEeqlnc3zj35kPg" name="setTipo">
+      <ownedParameter xmi:id="_1GGfkKtcEeqlnc3zj35kPg" name="tipo">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_4K7igKtcEeqlnc3zj35kPg" name="getUPC">
+      <ownedParameter xmi:id="_5VfRIKtcEeqlnc3zj35kPg" name="Parameter1" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_6JaBYKtcEeqlnc3zj35kPg" name="setUPC">
+      <ownedParameter xmi:id="_77Tc0KtcEeqlnc3zj35kPg" name="UPC">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_-KWHQKtcEeqlnc3zj35kPg" name="getCantidad">
+      <ownedParameter xmi:id="__aECsKtcEeqlnc3zj35kPg" name="Parameter1" type="_RYfCAKtbEeqlnc3zj35kPg" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_Aj_fMKtdEeqlnc3zj35kPg" name="setCantidad">
+      <ownedParameter xmi:id="_C6HCAKtdEeqlnc3zj35kPg" name="cantidad" type="_RYfCAKtbEeqlnc3zj35kPg"/>
     </ownedOperation>
   </packagedElement>
   <packagedElement xmi:type="uml:Dependency" xmi:id="_08oAHaMwEeqjKKCFKvChJA" supplier="_08nZ1qMwEeqjKKCFKvChJA" client="_08nZxKMwEeqjKKCFKvChJA"/>
@@ -431,31 +521,27 @@
   <packagedElement xmi:type="uml:Dependency" xmi:id="_08oAOqMwEeqjKKCFKvChJA" supplier="_08oAOKMwEeqjKKCFKvChJA" client="_08nZwaMwEeqjKKCFKvChJA"/>
   <packagedElement xmi:type="uml:Dependency" xmi:id="_08oAO6MwEeqjKKCFKvChJA" supplier="_08oAOaMwEeqjKKCFKvChJA" client="_08nZwaMwEeqjKKCFKvChJA"/>
   <packagedElement xmi:type="uml:Class" xmi:id="_e1Z_YKMyEeqjKKCFKvChJA" name="TPeriférico" clientDependency="_k6-5sKM2EeqjKKCFKvChJA _mLRc4KM2EeqjKKCFKvChJA">
-    <ownedAttribute xmi:id="_18qHcKM1EeqjKKCFKvChJA" name="tipoConexion" visibility="private">
+    <ownedAttribute xmi:id="_18qHcKM1EeqjKKCFKvChJA" name="tipoPeriférico" visibility="private">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
     </ownedAttribute>
-    <ownedAttribute xmi:id="_Jkg30KM2EeqjKKCFKvChJA" name="entrada/salida" visibility="private">
-      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#char"/>
+    <ownedAttribute xmi:id="_Jkg30KM2EeqjKKCFKvChJA" name="conexión" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
     </ownedAttribute>
-    <ownedOperation xmi:id="_Ne-iQKM2EeqjKKCFKvChJA" name="getTipoConexion">
+    <ownedOperation xmi:id="_Ne-iQKM2EeqjKKCFKvChJA" name="getTipoPeriférico">
       <ownedParameter xmi:id="_XGic8KM3EeqjKKCFKvChJA" name="Parameter1" direction="return">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
       </ownedParameter>
     </ownedOperation>
-    <ownedOperation xmi:id="_Oq0DQKM2EeqjKKCFKvChJA" name="setTipoConexion">
-      <ownedParameter xmi:id="_YKu6UKM2EeqjKKCFKvChJA" name="tipo">
+    <ownedOperation xmi:id="_Kkc-4KtaEeqlnc3zj35kPg" name="setTipoPeriférico">
+      <ownedParameter xmi:id="_L3t9kKtaEeqlnc3zj35kPg" name="tipo String"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_QTY3oKtaEeqlnc3zj35kPg" name="getConexión">
+      <ownedParameter xmi:id="_RsvQMKtaEeqlnc3zj35kPg" name="Parameter1" direction="return">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
       </ownedParameter>
     </ownedOperation>
-    <ownedOperation xmi:id="_SUSEUKM2EeqjKKCFKvChJA" name="getE/S">
-      <ownedParameter xmi:id="_YcCQQKM3EeqjKKCFKvChJA" name="Parameter1" direction="return">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#char"/>
-      </ownedParameter>
-    </ownedOperation>
-    <ownedOperation xmi:id="_Tf7YEKM2EeqjKKCFKvChJA" name="setE/S">
-      <ownedParameter xmi:id="_dBHacKM2EeqjKKCFKvChJA" name="e/s">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#char"/>
-      </ownedParameter>
+    <ownedOperation xmi:id="_UfpcsKtaEeqlnc3zj35kPg" name="setConexion">
+      <ownedParameter xmi:id="_V05_cKtaEeqlnc3zj35kPg" name="conexion String"/>
     </ownedOperation>
   </packagedElement>
   <packagedElement xmi:type="uml:Dependency" xmi:id="_3Qvs4KMyEeqjKKCFKvChJA" supplier="_e1Z_YKMyEeqjKKCFKvChJA" client="_08nZxKMwEeqjKKCFKvChJA"/>
@@ -477,6 +563,9 @@
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
     </ownedAttribute>
     <ownedAttribute xmi:id="_6CBk4KM2EeqjKKCFKvChJA" name="placa_base" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_a2RnkKtaEeqlnc3zj35kPg" name="tarjetaGráfica" visibility="private">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
     </ownedAttribute>
     <ownedOperation xmi:id="_diRKQKM3EeqjKKCFKvChJA" name="getProcesador">
@@ -519,9 +608,27 @@
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
       </ownedParameter>
     </ownedOperation>
+    <ownedOperation xmi:id="_eaiYgKtaEeqlnc3zj35kPg" name="get tarjetaGráfica">
+      <ownedParameter xmi:id="_gBsjkKtaEeqlnc3zj35kPg" name="Parameter1" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_hgA7sKtaEeqlnc3zj35kPg" name="setTarjetaGráfica">
+      <ownedParameter xmi:id="_kItcQKtaEeqlnc3zj35kPg" name="tarjeta">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+    </ownedOperation>
   </packagedElement>
   <packagedElement xmi:type="uml:Dependency" xmi:id="_qpetkKM2EeqjKKCFKvChJA" supplier="_7ptw4KM1EeqjKKCFKvChJA" client="_oSgPIKM2EeqjKKCFKvChJA"/>
   <packagedElement xmi:type="uml:Realization" xmi:id="_rNfZkKM2EeqjKKCFKvChJA" supplier="_08nZ1qMwEeqjKKCFKvChJA" client="_oSgPIKM2EeqjKKCFKvChJA"/>
+  <packagedElement xmi:type="uml:Package" xmi:id="_sbAxAKtXEeqlnc3zj35kPg" name="Package1"/>
+  <packagedElement xmi:type="uml:Package" xmi:id="_RYea8KtbEeqlnc3zj35kPg" name="PrimitiveTypes">
+    <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_RYfCAKtbEeqlnc3zj35kPg" name="int"/>
+    <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_ciYuoKtbEeqlnc3zj35kPg" name="TPc"/>
+    <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_fNUq4KtbEeqlnc3zj35kPg" name="Tpc"/>
+    <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_ktXzEKtbEeqlnc3zj35kPg" name="tPeriferico"/>
+    <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_FRu2IKtcEeqlnc3zj35kPg" name="double"/>
+  </packagedElement>
   <profileApplication xmi:id="_08oAPKMwEeqjKKCFKvChJA">
     <eAnnotations xmi:id="_08oAPaMwEeqjKKCFKvChJA" source="http://www.eclipse.org/uml2/2.0.0/UML">
       <references xmi:type="ecore:EPackage" href="pathmap://UML_PROFILES/Standard.profile.uml#_yzU58YinEdqtvbnfB2L_5w"/>
