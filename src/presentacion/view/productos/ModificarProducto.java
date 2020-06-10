@@ -360,8 +360,10 @@ private ProductoController controlador;
 	
 	private void limpiar() {
 		idTF.setText("");
+		upcTF.setText("");
 		nombreTF.setText("");
 		precioTF.setText("");
+		cantidadTF.setText("");
 		procesadorTF.setText("");
 		discoDuroTF.setText("");
 		ramTF.setText("");

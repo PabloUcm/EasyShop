@@ -402,7 +402,7 @@ public class Modelo {
 		SqlProductoDAO productoDAO = (SqlProductoDAO) factoryDAO.getProductoDAO();
 		
 		TProducto productoID = productoDAO.getById(producto.getId());
-		TProducto productoUPC = productoDAO.getProductoByUPC(producto.getNombre());
+		TProducto productoUPC = productoDAO.getProductoByUPC(producto.getUPC());
 		
 		if (productoID == null) throw new Exception("Producto inexistente.");
 		if (!productoID.isActivo()) throw new Exception("Producto inactivo.");

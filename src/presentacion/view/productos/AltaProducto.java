@@ -404,8 +404,10 @@ public class AltaProducto {
 	}
 	
 	private void limpiar() {
+		upcTF.setText("");
 		nombreTF.setText("");
 		precioTF.setText("");
+		cantidadTF.setText("");
 		procesadorTF.setText("");
 		discoDuroTF.setText("");
 		ramTF.setText("");
