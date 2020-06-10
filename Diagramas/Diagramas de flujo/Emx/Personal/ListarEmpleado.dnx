@@ -240,7 +240,7 @@
         <layoutConstraint xmi:type="notation:Bounds" xmi:id="_w3-aUapAEeqvC5XLdDrCnw" y="317"/>
       </children>
       <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_w33soapAEeqvC5XLdDrCnw" points="[0, 0, 0, 0]$[0, 0, 0, 0]"/>
-      <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_w4D54KpAEeqvC5XLdDrCnw" id="18:564"/>
+      <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_w4D54KpAEeqvC5XLdDrCnw" id="18:158"/>
       <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_w4D54apAEeqvC5XLdDrCnw" id="19:0"/>
     </edges>
     <edges xmi:type="umlnotation:UMLConnector" xmi:id="_3vg54KpAEeqvC5XLdDrCnw" element="_3se0AKpAEeqvC5XLdDrCnw" source="_jokEoKo-EeqoeNJ9fa6V4g" target="_u1OxYKo-EeqoeNJ9fa6V4g" fontName=".AppleSystemUIFont" fontHeight="8" lineColor="8421504" lineWidth="1" showStereotype="Text">
@@ -333,6 +333,16 @@
       <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_6ez8QKpBEeqvC5XLdDrCnw" id="1048:900"/>
       <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_6ez8QapBEeqvC5XLdDrCnw" id="1110:0"/>
     </edges>
+    <edges xmi:type="umlnotation:UMLConnector" xmi:id="__FMMcKs8Eeqlnc3zj35kPg" element="__EdzsKs8Eeqlnc3zj35kPg" source="_jokEoKo-EeqoeNJ9fa6V4g" target="_jokEoKo-EeqoeNJ9fa6V4g" fontName=".AppleSystemUIFont" fontHeight="8" lineColor="8421504" lineWidth="1" showStereotype="Text">
+      <children xmi:type="notation:DecorationNode" xmi:id="__FMzgKs8Eeqlnc3zj35kPg" type="MessageNameLabel">
+        <children xmi:type="notation:BasicDecorationNode" xmi:id="__FMzgqs8Eeqlnc3zj35kPg" type="Stereotype"/>
+        <children xmi:type="notation:BasicDecorationNode" xmi:id="__FNakKs8Eeqlnc3zj35kPg" type="Name"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="__FMzgas8Eeqlnc3zj35kPg" y="-211"/>
+      </children>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="__FMMcas8Eeqlnc3zj35kPg" points="[0, 0, 0, -16]$[0, 16, 0, 0]"/>
+      <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="__FRE8Ks8Eeqlnc3zj35kPg" id="1498:140"/>
+      <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="__FRE8as8Eeqlnc3zj35kPg" id="1503:265"/>
+    </edges>
   </umlnotation:UMLDiagram>
   <uml:Package xmi:id="_hc8hoKo-EeqoeNJ9fa6V4g">
     <packagedElement xmi:type="uml:Collaboration" xmi:id="_hc8hoao-EeqoeNJ9fa6V4g">
@@ -381,13 +391,17 @@
           <end xmi:id="_2W_yUKpBEeqvC5XLdDrCnw" role="_ijONMao-EeqoeNJ9fa6V4g"/>
           <end xmi:id="_2W_yUapBEeqvC5XLdDrCnw" role="_iQLVYao-EeqoeNJ9fa6V4g"/>
         </ownedConnector>
+        <ownedConnector xmi:id="__EheEKs8Eeqlnc3zj35kPg">
+          <end xmi:id="__EiFIKs8Eeqlnc3zj35kPg" role="_johoYao-EeqoeNJ9fa6V4g"/>
+          <end xmi:id="__EisMKs8Eeqlnc3zj35kPg" role="_johoYao-EeqoeNJ9fa6V4g"/>
+        </ownedConnector>
         <lifeline xmi:id="_h7thQKo-EeqoeNJ9fa6V4g" name="Property" represents="_h7uvYKo-EeqoeNJ9fa6V4g" coveredBy="_zcjh0ao-EeqoeNJ9fa6V4g _6eLDEapBEeqvC5XLdDrCnw"/>
         <lifeline xmi:id="_iQLVYKo-EeqoeNJ9fa6V4g" name="Property2" represents="_iQLVYao-EeqoeNJ9fa6V4g" coveredBy="_zcjh0qo-EeqoeNJ9fa6V4g _zckI4Ko-EeqoeNJ9fa6V4g _zckI4ao-EeqoeNJ9fa6V4g _FSJqYKo_EeqoeNJ9fa6V4g _uUoeYapBEeqvC5XLdDrCnw _2W9WEapBEeqvC5XLdDrCnw _6eLDEKpBEeqvC5XLdDrCnw"/>
         <lifeline xmi:id="_ijONMKo-EeqoeNJ9fa6V4g" name="Property3" represents="_ijONMao-EeqoeNJ9fa6V4g" coveredBy="_2W99IKpBEeqvC5XLdDrCnw _2W99IapBEeqvC5XLdDrCnw _2W-kMKpBEeqvC5XLdDrCnw"/>
         <lifeline xmi:id="_i2ypcKo-EeqoeNJ9fa6V4g" name="Property4" represents="_i2ypcao-EeqoeNJ9fa6V4g" coveredBy="_FSJqYao_EeqoeNJ9fa6V4g _FSJqYqo_EeqoeNJ9fa6V4g _FSJqY6o_EeqoeNJ9fa6V4g _IgGNEao_EeqoeNJ9fa6V4g _IgG0JKo_EeqoeNJ9fa6V4g _uUoeYKpBEeqvC5XLdDrCnw"/>
         <lifeline xmi:id="_jH19MKo-EeqoeNJ9fa6V4g" name="Property5" represents="_jH2kQKo-EeqoeNJ9fa6V4g" coveredBy="_IgG0IKo_EeqoeNJ9fa6V4g _IgG0Iao_EeqoeNJ9fa6V4g _IgG0Iqo_EeqoeNJ9fa6V4g _KmHeYao_EeqoeNJ9fa6V4g _KmIsgKo_EeqoeNJ9fa6V4g _ZptZYKo_EeqoeNJ9fa6V4g _ZpuAcao_EeqoeNJ9fa6V4g"/>
         <lifeline xmi:id="_jYjSsKo-EeqoeNJ9fa6V4g" name="Property6" represents="_jYj5wKo-EeqoeNJ9fa6V4g" coveredBy="_KmIFcKo_EeqoeNJ9fa6V4g _KmIFcao_EeqoeNJ9fa6V4g _KmIFcqo_EeqoeNJ9fa6V4g _PrLTsao_EeqoeNJ9fa6V4g _PrMh0Ko_EeqoeNJ9fa6V4g"/>
-        <lifeline xmi:id="_johoYKo-EeqoeNJ9fa6V4g" name="Property7" represents="_johoYao-EeqoeNJ9fa6V4g" coveredBy="_PrL6wKo_EeqoeNJ9fa6V4g _PrL6wao_EeqoeNJ9fa6V4g _PrL6wqo_EeqoeNJ9fa6V4g _ZptZYao_EeqoeNJ9fa6V4g _ZptZYqo_EeqoeNJ9fa6V4g _ZptZY6o_EeqoeNJ9fa6V4g _3smv0KpAEeqvC5XLdDrCnw _3spMEapAEeqvC5XLdDrCnw _5yJgAKpAEeqvC5XLdDrCnw _D1yIIKpBEeqvC5XLdDrCnw _D1zWQKpBEeqvC5XLdDrCnw _LyJhwKpBEeqvC5XLdDrCnw _NeiyIKpBEeqvC5XLdDrCnw"/>
+        <lifeline xmi:id="_johoYKo-EeqoeNJ9fa6V4g" name="Property7" represents="_johoYao-EeqoeNJ9fa6V4g" coveredBy="_PrL6wKo_EeqoeNJ9fa6V4g _PrL6wao_EeqoeNJ9fa6V4g _PrL6wqo_EeqoeNJ9fa6V4g _ZptZYao_EeqoeNJ9fa6V4g _ZptZYqo_EeqoeNJ9fa6V4g _ZptZY6o_EeqoeNJ9fa6V4g _3smv0KpAEeqvC5XLdDrCnw _3spMEapAEeqvC5XLdDrCnw _5yJgAKpAEeqvC5XLdDrCnw _D1yIIKpBEeqvC5XLdDrCnw _D1zWQKpBEeqvC5XLdDrCnw _LyJhwKpBEeqvC5XLdDrCnw _NeiyIKpBEeqvC5XLdDrCnw __Efo4Ks8Eeqlnc3zj35kPg __EgP8Ks8Eeqlnc3zj35kPg"/>
         <lifeline xmi:id="_j3ss0Ko-EeqoeNJ9fa6V4g" name="Property8" represents="_j3ss0ao-EeqoeNJ9fa6V4g" coveredBy="_5yJgAapAEeqvC5XLdDrCnw _5yKHEKpAEeqvC5XLdDrCnw _5yKHEapAEeqvC5XLdDrCnw _LyJhwKpBEeqvC5XLdDrCnw _NeiyIapBEeqvC5XLdDrCnw _NejZMKpBEeqvC5XLdDrCnw _NejZMapBEeqvC5XLdDrCnw"/>
         <lifeline xmi:id="_u1M8MKo-EeqoeNJ9fa6V4g" name="Property9" represents="_u1M8Mao-EeqoeNJ9fa6V4g" coveredBy="_3snW4KpAEeqvC5XLdDrCnw _3sn98KpAEeqvC5XLdDrCnw _3solAKpAEeqvC5XLdDrCnw"/>
         <lifeline xmi:id="_CDR6oKo_EeqoeNJ9fa6V4g" name="Property10" represents="_CDR6oao_EeqoeNJ9fa6V4g" coveredBy="_D1yIIapBEeqvC5XLdDrCnw _D1yvMKpBEeqvC5XLdDrCnw _D1yvMapBEeqvC5XLdDrCnw"/>
@@ -443,6 +457,8 @@
             <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_NejZMapBEeqvC5XLdDrCnw" covered="_j3ss0Ko-EeqoeNJ9fa6V4g"/>
           </operand>
         </fragment>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="__Efo4Ks8Eeqlnc3zj35kPg" covered="_johoYKo-EeqoeNJ9fa6V4g" message="__EdzsKs8Eeqlnc3zj35kPg"/>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="__EgP8Ks8Eeqlnc3zj35kPg" covered="_johoYKo-EeqoeNJ9fa6V4g" message="__EdzsKs8Eeqlnc3zj35kPg"/>
         <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_ZptZY6o_EeqoeNJ9fa6V4g" covered="_johoYKo-EeqoeNJ9fa6V4g" message="_ZpuAcKo_EeqoeNJ9fa6V4g"/>
         <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_ZpuAcao_EeqoeNJ9fa6V4g" covered="_jH19MKo-EeqoeNJ9fa6V4g" message="_ZpuAcKo_EeqoeNJ9fa6V4g"/>
         <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_IgG0Iqo_EeqoeNJ9fa6V4g" covered="_jH19MKo-EeqoeNJ9fa6V4g" message="_IgG0I6o_EeqoeNJ9fa6V4g"/>
@@ -476,6 +492,7 @@
         <message xmi:id="_uUn3UKpBEeqvC5XLdDrCnw" name="Listar Empleados" messageSort="asynchCall" receiveEvent="_uUoeYapBEeqvC5XLdDrCnw" sendEvent="_uUoeYKpBEeqvC5XLdDrCnw" connector="_FSKRcqo_EeqoeNJ9fa6V4g"/>
         <message xmi:id="_2W9WEKpBEeqvC5XLdDrCnw" name="Actualizar Tabla" receiveEvent="_2W99IKpBEeqvC5XLdDrCnw" sendEvent="_2W9WEapBEeqvC5XLdDrCnw" connector="_2W_LQKpBEeqvC5XLdDrCnw"/>
         <message xmi:id="_6eKcAKpBEeqvC5XLdDrCnw" name="Visualizar Vista" messageSort="asynchCall" receiveEvent="_6eLDEapBEeqvC5XLdDrCnw" sendEvent="_6eLDEKpBEeqvC5XLdDrCnw" connector="_zckI5Ko-EeqoeNJ9fa6V4g"/>
+        <message xmi:id="__EdzsKs8Eeqlnc3zj35kPg" name="Cerrar Conexión" messageSort="asynchCall" receiveEvent="__EgP8Ks8Eeqlnc3zj35kPg" sendEvent="__Efo4Ks8Eeqlnc3zj35kPg" connector="__EheEKs8Eeqlnc3zj35kPg"/>
       </ownedBehavior>
       <ownedAttribute xmi:id="_h7uvYKo-EeqoeNJ9fa6V4g" name="Usuario"/>
       <ownedAttribute xmi:id="_iQLVYao-EeqoeNJ9fa6V4g" name="Vista AltaPersonal"/>
