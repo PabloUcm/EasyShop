@@ -189,8 +189,6 @@ public class Modelo {
 		SqlPersonalDAO empleadoDAO = (SqlPersonalDAO) factoryDAO.getEmpleadoDAO();
 		List<TPersonal> empleadoList = empleadoDAO.getAllEmpleados();
 		
-		logObserver.listar(Entity.PERSONAL);
-		
 		return empleadoList;	
 	}
 	
@@ -280,8 +278,6 @@ public class Modelo {
 	public List<TMarca> listarMarcas() {
 		SqlMarcaDAO marcaDAO = (SqlMarcaDAO) factoryDAO.getMarcaDAO();
 		List<TMarca> marcaList = marcaDAO.getAllMarcas();
-		
-		logObserver.listar(Entity.MARCA);
 		
 		return marcaList;		
 	}

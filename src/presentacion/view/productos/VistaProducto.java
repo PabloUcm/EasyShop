@@ -23,7 +23,7 @@ public class VistaProducto {
 	private ModificarProducto modProducto;
 	private MostrarProducto mostrarProducto;
 	private ListarProducto listarProducto;
-	private ListarPorMarca listarPorMarca;
+	private BuscarProducto listarPorMarca;
 	private ListarPorPrecio listarPorPrecio;
 	//private BuscarProducto buscarProducto;
 	
@@ -38,7 +38,7 @@ public class VistaProducto {
 		modProducto = new ModificarProducto(controlador);
 		mostrarProducto = new MostrarProducto(controlador);
 		listarProducto = new ListarProducto(controlador);
-		listarPorMarca = new ListarPorMarca(controlador);
+		listarPorMarca = new BuscarProducto(controlador);
 		listarPorPrecio = new ListarPorPrecio(controlador);
 		//buscarProducto = new BuscarProducto(controlador);
 		

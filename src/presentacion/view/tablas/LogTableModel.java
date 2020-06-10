@@ -70,16 +70,4 @@ public class LogTableModel extends AbstractTableModel implements LogObserver {
 		fireTableStructureChanged();
 	}
 
-	@Override
-	public void mostrar(Entity entity) {
-		logs.add(new Log(logs.size()+1,"Mostrar",entity, new Date()));
-		fireTableStructureChanged();
-	}
-
-	@Override
-	public void listar(Entity entity) {
-		logs.add(new Log(logs.size()+1,"Listar",entity, new Date()));	
-		fireTableStructureChanged();	
-	}
-
 }
