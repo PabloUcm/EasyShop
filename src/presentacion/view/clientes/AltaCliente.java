@@ -92,6 +92,10 @@ public class AltaCliente{
 	
 	private void alta() {
 		try {
+			if (dniTF.getText().trim().equals("") || nombreTF.getText().trim().equals("")) {
+				throw new Exception("Campos(s) sin rellenar.");
+			}
+			
 			String telefono = tfnoTF.getText().trim();
 			if (telefono.equals("")) telefono = null;
 			else telefono = tfnoTF.getText();
@@ -125,10 +129,13 @@ public class AltaCliente{
 					if (n == JOptionPane.YES_OPTION) {
 						cliente.setId(clienteYaRegistrado.getId());
 						controlador.modificarCliente(cliente);
+						JOptionPane.showMessageDialog(null,"Cliente " + cliente.getNombre() + " reactivado con exito",
+								  "INFO",JOptionPane.INFORMATION_MESSAGE);
 					}
-					
-					JOptionPane.showMessageDialog(null,"Cliente " + clienteYaRegistrado.getNombre() + " reactivado con exito",
+					else {
+						JOptionPane.showMessageDialog(null,"Cliente " + clienteYaRegistrado.getNombre() + " reactivado con exito",
 												  "INFO",JOptionPane.INFORMATION_MESSAGE);
+					}
 				}
 				limpiar();
 			}

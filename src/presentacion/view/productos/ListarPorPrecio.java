@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -88,12 +89,20 @@ private ProductoController controlador;
 	}
 	
 	private void listarPorPrecio() {
-		double precioSuperior = Double.parseDouble(superiorTF.getText());
-		double precioInferior = Double.parseDouble(inferiorTF.getText());
-		
-		List<TProducto> listaProductos = controlador.listarProductosPorPrecio(precioSuperior,precioInferior);
-		
-		tableModel.setProductos(listaProductos);
+		try {
+			double precioSuperior = Double.parseDouble(superiorTF.getText());
+			double precioInferior = Double.parseDouble(inferiorTF.getText());
+			
+			List<TProducto> listaProductos = controlador.listarProductosPorPrecio(precioSuperior,precioInferior);
+			
+			tableModel.setProductos(listaProductos);
+		}
+		catch(NumberFormatException nfe) {
+			JOptionPane.showMessageDialog(null,"Los campos 'precio superior' y 'precio inferior' deben ser un numero", 
+										  "ERROR",JOptionPane.ERROR_MESSAGE);
+			superiorTF.setText("");
+			inferiorTF.setText("");
+		}
 	}
 	
 }

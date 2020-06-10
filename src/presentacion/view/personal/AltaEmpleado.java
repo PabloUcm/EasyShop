@@ -110,6 +110,13 @@ public class AltaEmpleado{
 	
 	private void alta() {
 		try {
+			if (dniTF.getText().trim().equals("") || nombreTF.getText().trim().equals("") || 
+				tfnoTF.getText().trim().equals("") || sueldoTF.getText().trim().equals("") || 
+				horarioTF.getText().trim().equals("")) 
+	    	{
+	    			throw new Exception("Campo(s) sin rellenar.");
+	    	}
+			
 			TPersonal personal = new TPersonal();
 			
 			personal.setDni(dniTF.getText());
@@ -141,14 +148,21 @@ public class AltaEmpleado{
 					if (n == JOptionPane.YES_OPTION) {
 						personal.setId(personalYaRegistrado.getId());
 						controlador.modificarPersonal(personal);
+						JOptionPane.showMessageDialog(null,"Empleado " + personal.getNombre() + " reactivado con exito",
+				                  "INFO",JOptionPane.INFORMATION_MESSAGE);
 					}
-					
-					JOptionPane.showMessageDialog(null,"Empleado " + personalYaRegistrado.getNombre() + " reactivado con exito",
+					else {
+						JOptionPane.showMessageDialog(null,"Empleado " + personalYaRegistrado.getNombre() + " reactivado con exito",
 								                  "INFO",JOptionPane.INFORMATION_MESSAGE);
+					}
 				}
 				limpiar();
 			}
-		}catch(Exception ex) {
+		}
+		catch(NumberFormatException nfe) {
+			JOptionPane.showMessageDialog(null,"El campo 'sueldo' debe ser un numero.", "ERROR",JOptionPane.ERROR_MESSAGE);
+		}
+		catch(Exception ex) {
 			JOptionPane.showMessageDialog(null,ex.getMessage(), "ERROR",JOptionPane.ERROR_MESSAGE);
 		}
 	}

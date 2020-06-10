@@ -11,6 +11,7 @@ public interface IMarcaDAO {
 	public List<TMarca> getAllMarcas();
 	public int altaMarca(TMarca marca);
 	public void bajaMarca(int id);
+	public void reactivarMarca(int id);
 	public void modificarMarca(TMarca marca);
 	public List<String> getNombreMarcas();
 }

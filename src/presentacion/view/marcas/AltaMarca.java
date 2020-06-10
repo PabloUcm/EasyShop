@@ -94,6 +94,11 @@ public class AltaMarca{
 	
 	private void alta() {
 		try {
+			if (cifTF.getText().trim().equals("") || nombreTF.getText().trim().equals("") || 
+				paisTF.getText().trim().equals("")) 
+			{
+	    		throw new Exception("Campo(s) sin rellenar.");
+	    	}
 			
 			TMarca marca = new TMarca();
 			
@@ -101,9 +106,38 @@ public class AltaMarca{
 			marca.setNombre(nombreTF.getText());
 			marca.setPais(paisTF.getText());
 			
-			controlador.altaMarca(marca);
-			JOptionPane.showMessageDialog(null, "Marca " + nombreTF.getText() + " registrada con exito",
-										  "Error icon", JOptionPane.INFORMATION_MESSAGE);
+			TMarca marcaYaRegistrada = controlador.altaMarca(marca);
+			
+			if (marcaYaRegistrada == null) {
+				JOptionPane.showMessageDialog(null, "Marca " + nombreTF.getText() + " registrada con exito",
+						  "Error icon", JOptionPane.INFORMATION_MESSAGE);
+				limpiar();
+			}
+			else {
+				Object[] options = {"Modificar","No modificar","No reactivar"};
+				int n = JOptionPane.showOptionDialog(null,
+						 "Esta marca ya estaba registrada, ¿Quieres reactivarla y modificar sus valores?:", "Advertencia",
+						 JOptionPane.YES_NO_CANCEL_OPTION,
+						 JOptionPane.WARNING_MESSAGE,
+						 null,
+						 options,
+						 options[1]); 
+				if(n == JOptionPane.YES_OPTION || n == JOptionPane.NO_OPTION ){
+					controlador.reactivarMarca(marcaYaRegistrada.getId());
+					
+					if (n == JOptionPane.YES_OPTION) {
+						marca.setId(marcaYaRegistrada.getId());
+						controlador.modificarMarca(marca);
+						JOptionPane.showMessageDialog(null,"Marca " + marca.getNombre() + " reactivada con exito",
+								  "INFO",JOptionPane.INFORMATION_MESSAGE);
+					}
+					else {
+						JOptionPane.showMessageDialog(null,"Marca " + marcaYaRegistrada.getNombre() + " reactivada con exito",
+												  "INFO",JOptionPane.INFORMATION_MESSAGE);
+					}
+				}
+				limpiar();
+			}
 			
 		}catch(Exception ex) {
 			JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);

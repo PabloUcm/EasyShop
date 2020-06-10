@@ -51,7 +51,7 @@ private Modelo modelo;
 		return modelo.getPerifericoById(id);
 	}
 	
-	public void modificarProducto(TProducto producto) {
+	public void modificarProducto(TProducto producto) throws Exception {
 		modelo.modificarProducto(producto);
 	}
 	

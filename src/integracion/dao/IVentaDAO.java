@@ -10,4 +10,5 @@ public interface IVentaDAO {
 	public int altaVenta(TVenta venta);
 	public List<TVenta> getAllVentas();
 	public List<TVenta> getComprasCliente(int id);
+	public List<TVenta> getHistorialEmpleado(int id);
 }

@@ -187,4 +187,35 @@ public class SqlVentaDAO implements IVentaDAO{
 		
 		return null;
 	}
+	
+	@Override
+	public List<TVenta> getHistorialEmpleado(int id) {
+		Connection connection = dbAdapter.getConnection();
+		List<TVenta> compras = new ArrayList<>();
+		
+		try {
+			PreparedStatement statement = connection.prepareStatement("SELECT * FROM VENTA WHERE PERSONAL = ?");
+			
+			statement.setInt(1, id);
+			ResultSet results = statement.executeQuery();
+			
+			while(results.next()) {
+				compras.add(new TVenta(results.getInt(1),results.getInt(2), results.getInt(3),results.getDate(4), 
+										  null, results.getDouble(5)));
+			}
+			
+			return compras;
+					
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return null;
+	}
 }

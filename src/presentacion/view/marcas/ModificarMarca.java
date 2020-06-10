@@ -107,7 +107,8 @@ public class ModificarMarca {
 
 	private void modificar() {
 		try {
-    		if (idTF.getText().isEmpty() || cifTF.getText().isEmpty() || nombreTF.getText().isEmpty()) {
+    		if (idTF.getText().trim().equals("") || cifTF.getText().trim().equals("") || 
+    			nombreTF.getText().trim().equals("") || paisTF.getText().trim().equals("")) {
     			throw new Exception("Campo(s) sin rellenar.");
     		}
 			
@@ -129,7 +130,12 @@ public class ModificarMarca {
             	JOptionPane.showMessageDialog(null,"Marca con ID " + idTF.getText() + " modificada con exito.",
 						  					  "INFO",JOptionPane.INFORMATION_MESSAGE);
             }
+            limpiar();
 		} 
+		catch(NumberFormatException nfe) {
+			JOptionPane.showMessageDialog(null,"El campo 'ID' debe ser un numero.", "ERROR",JOptionPane.ERROR_MESSAGE);
+			idTF.setText("");
+		}
 		catch(Exception ex) {
 			JOptionPane.showMessageDialog(null,ex.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
 		}

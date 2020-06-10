@@ -283,20 +283,12 @@ public class AltaProducto {
 			limpiar();
 			
 		}
+		catch(NumberFormatException nfe) {
+			JOptionPane.showMessageDialog(null,"Los campos 'precio' y 'cantidad' deben ser un numero.", "ERROR",JOptionPane.ERROR_MESSAGE);
+		}
 		catch(Exception ex) {
 			JOptionPane.showMessageDialog(null,ex.getMessage(), "ERROR",JOptionPane.ERROR_MESSAGE);
 		}
-	}
-	
-	private void limpiar() {
-		nombreTF.setText("");
-		precioTF.setText("");
-		procesadorTF.setText("");
-		discoDuroTF.setText("");
-		ramTF.setText("");
-		tarjetaGraficaTF.setText("");
-		placaBaseTF.setText("");
-		conexionTF.setText("");
 	}
 	
 	private void altaPC(String desc, String nombreMarca) throws Exception {
@@ -345,10 +337,13 @@ public class AltaProducto {
 				if (n == JOptionPane.YES_OPTION) {
 					pc.setId(pcYaRegistrado.getId());
 					controlador.modificarProducto(pc);
+					JOptionPane.showMessageDialog(null,"PC " + pc.getNombre() + " reactivado con exito",
+							   "INFO",JOptionPane.INFORMATION_MESSAGE);
 				}
-				
-				JOptionPane.showMessageDialog(null,"PC " + pc.getNombre() + " reactivado con exito",
-						   "INFO",JOptionPane.INFORMATION_MESSAGE);
+				else {
+					JOptionPane.showMessageDialog(null,"PC " + pcYaRegistrado.getNombre() + " reactivado con exito",
+												  "INFO",JOptionPane.INFORMATION_MESSAGE);
+				}
 			}
 		}
 	}
@@ -389,10 +384,13 @@ public class AltaProducto {
 				if (n == JOptionPane.YES_OPTION) {
 					periferico.setId(prfcoYaRegistrado.getId());
 					controlador.modificarProducto(periferico);
+					JOptionPane.showMessageDialog(null,"Periferico " + periferico.getNombre() + " reactivado con exito",
+							   "INFO",JOptionPane.INFORMATION_MESSAGE);
 				}
-				
-				JOptionPane.showMessageDialog(null,"Periferico " + periferico.getNombre() + " reactivado con exito",
-						   "INFO",JOptionPane.INFORMATION_MESSAGE);
+				else {
+					JOptionPane.showMessageDialog(null,"Periferico " + prfcoYaRegistrado.getNombre() + " reactivado con exito",
+												"INFO",JOptionPane.INFORMATION_MESSAGE);
+				}
 			}
 		}
 	}	
@@ -403,5 +401,16 @@ public class AltaProducto {
 		marcasBox.setModel(new DefaultComboBoxModel<String>(marcas.toArray(new String[0])));
 		
 		if (marcas.size() > 0) marcasBox.setSelectedIndex(0); 
+	}
+	
+	private void limpiar() {
+		nombreTF.setText("");
+		precioTF.setText("");
+		procesadorTF.setText("");
+		discoDuroTF.setText("");
+		ramTF.setText("");
+		tarjetaGraficaTF.setText("");
+		placaBaseTF.setText("");
+		conexionTF.setText("");
 	}
 }

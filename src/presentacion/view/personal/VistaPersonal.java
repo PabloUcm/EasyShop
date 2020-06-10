@@ -25,7 +25,7 @@ public class VistaPersonal {
 	private ModificarEmpleado modEmp;
 	private MostrarEmpleado mostrarEmp;
 	private ListarEmpleados listarEmp;
-	//private HistorialEmpleado histEmp;
+	private HistorialEmpleado histEmp;
 	
 	private ModuloMenu personalMenu;
 	private JPanel personalFuncion;
@@ -38,7 +38,7 @@ public class VistaPersonal {
 		modEmp = new ModificarEmpleado(controlador);
 		mostrarEmp = new MostrarEmpleado(controlador);
 		listarEmp = new ListarEmpleados(controlador);
-		//histEmp = HistorialEmpleado(controlador);
+		histEmp = new HistorialEmpleado(controlador);
 		
 		initGUI();
 	}
@@ -57,7 +57,7 @@ public class VistaPersonal {
 				   "modempleado", "ModificarEmpleado");
 		addFunction(mostrarEmp.getDefaultLayout(), new JButton("  Mostrar empleado"), "mostrarempleado", "MostrarEmpleado");
 		addFunction(listarEmp.getDefaultLayout(), new JButton("   Listar empleado"), "listarempleado", "ListarEmpleados");
-		//addFunction(histEmp.getDefaultLayout(), new JButton("Historial empleado"), "historialempleado", "HistorialCliente");
+		addFunction(histEmp.getDefaultLayout(), new JButton("Historial empleado"), "historialempleado", "HistorialCliente");
 	}
 	
 	public JPanel getDefaultLayout() {

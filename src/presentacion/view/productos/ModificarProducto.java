@@ -265,18 +265,6 @@ private ProductoController controlador;
 		
 		return modProductoPanel;
 	}
-	
-	private void limpiar() {
-		nombreTF.setText("");
-		precioTF.setText("");
-		procesadorTF.setText("");
-		discoDuroTF.setText("");
-		ramTF.setText("");
-		tarjetaGraficaTF.setText("");
-		placaBaseTF.setText("");
-		conexionTF.setText("");
-	}
-	
 	private void setNombreMarcas() {
 		marcas = controlador.getNombreMarcas();
 		
@@ -293,9 +281,23 @@ private ProductoController controlador;
 		TPeriferico periferico = null;
 		
 		try {
+			if (idTF.getText().trim().equals("") || upcTF.getText().trim().equals("") ||
+				nombreTF.getText().trim().equals("") || precioTF.getText().trim().equals("") ||
+				cantidadTF.getText().trim().equals("")) 
+			{
+				throw new Exception("Campo(s) sin rellenar.");
+			}
 			
-			if(productosBox.getSelectedItem() == "PC") pc = (TPc) controlador.getProductoById(Integer.parseInt(idTF.getText()), "PC");
-			else periferico = (TPeriferico) controlador.getProductoById(Integer.parseInt(idTF.getText()),"PERIFERICO");
+			String desc;
+			if (descripcion.getText().trim().equals("")) desc = null;
+			else desc = descripcion.getText();
+			
+			if (productosBox.getSelectedItem().equals("PC")) {
+				pc = (TPc) controlador.getProductoById(Integer.parseInt(idTF.getText()), "PC");
+			}
+			else if (productosBox.getSelectedItem().equals("Periferico")) {
+				periferico = (TPeriferico) controlador.getProductoById(Integer.parseInt(idTF.getText()),"PERIFERICO");
+			}
 			
     		
 			String msg = "¿Quieres cambiar los datos de este producto?";
@@ -305,6 +307,12 @@ private ProductoController controlador;
 			
 			if(input == JOptionPane.YES_OPTION) {
 				if(pc != null) {
+					if (procesadorTF.getText().trim().equals("") || ramTF.getText().trim().equals("") ||
+						discoDuroTF.getText().trim().equals("") || placaBaseTF.getText().trim().equals(""))
+					{
+						throw new Exception("Campo(s) sin rellenar.");
+					}
+					
 					pc.setUPC(upcTF.getText());
 					pc.setNombre(nombreTF.getText());	
 					pc.setPrecio(Double.parseDouble(precioTF.getText()));
@@ -313,27 +321,52 @@ private ProductoController controlador;
 					pc.setRam(ramTF.getText());
 					pc.setDiscoduro(discoDuroTF.getText());
 					pc.setPlacabase(placaBaseTF.getText());
-					pc.setDescripcion(descripcion.getText());
+					pc.setDescripcion(desc);
+					
 					controlador.modificarProducto(pc);
 					
+					JOptionPane.showMessageDialog(null,"Producto con ID " + idTF.getText() + " modificado con exito.",
+							  "INFO",JOptionPane.INFORMATION_MESSAGE);
+					limpiar();
+					
 				}else {
+					if (conexionTF.getText().trim().equals("")) throw new Exception("Campo sin rellenar.");
+					
 					periferico.setUPC(upcTF.getText());
 					periferico.setNombre(nombreTF.getText());
 					periferico.setPrecio(Double.parseDouble(precioTF.getText()));
 					periferico.setCantidad(Integer.parseInt(cantidadTF.getText()));
 					periferico.setTipoPeriferico(tPerifericoBox.getSelectedItem().toString());
 					periferico.setConexion(conexionTF.getText());
-					periferico.setDescripcion(descripcion.getText());
+					periferico.setDescripcion(desc);
+					
 					controlador.modificarProducto(periferico);
+					
+					JOptionPane.showMessageDialog(null,"Producto con ID " + idTF.getText() + " modificado con exito.",
+							  "INFO",JOptionPane.INFORMATION_MESSAGE);
+					limpiar();
 				}
 			}
-			
-			JOptionPane.showMessageDialog(null,"Producto con ID " + idTF.getText() + " modificado con exito.",
-					  "INFO",JOptionPane.INFORMATION_MESSAGE);
 	
 		} 
+		catch(NumberFormatException nfe) {
+			JOptionPane.showMessageDialog(null,"Los campos 'ID', 'precio' y 'cantidad' deben ser un numero.", 
+										  "ERROR",JOptionPane.ERROR_MESSAGE);
+		}
 		catch(Exception ex) {
 			JOptionPane.showMessageDialog(null,ex.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
 		}
+	}
+	
+	private void limpiar() {
+		idTF.setText("");
+		nombreTF.setText("");
+		precioTF.setText("");
+		procesadorTF.setText("");
+		discoDuroTF.setText("");
+		ramTF.setText("");
+		tarjetaGraficaTF.setText("");
+		placaBaseTF.setText("");
+		conexionTF.setText("");
 	}
 }

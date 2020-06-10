@@ -205,27 +205,37 @@ public class Modelo {
 		return empleado;
 	}
 	
-	
+	public List<TVenta> getHistorialVentas(int id) throws Exception {
+		SqlPersonalDAO personalDAO = (SqlPersonalDAO) factoryDAO.getEmpleadoDAO();
+		SqlVentaDAO ventaDAO = (SqlVentaDAO) factoryDAO.getVentaDAO();
+		
+		TPersonal personal = getPersonal(id);
+		List<TVenta> compras = ventaDAO.getHistorialEmpleado(id);
+		
+		return compras;
+	}
 	
 	 //-------------MARCAS-----------------//
 	
 	
 	
-	public void altaMarca(TMarca marca) throws Exception {
+	public TMarca altaMarca(TMarca marca) throws Exception {
 		SqlMarcaDAO marcaDAO = (SqlMarcaDAO) factoryDAO.getMarcaDAO();
 		
 		TMarca marcaYaRegistrada = marcaDAO.getMarcaByCIF(marca.getCIF());
 		
 		if(marcaYaRegistrada != null && marcaYaRegistrada.isActivo()) throw new Exception("Marca ya existente.");
+		if(marcaYaRegistrada != null && !marcaYaRegistrada.isActivo()) return marcaYaRegistrada;
 		
 		logObserver.alta(Entity.MARCA);
 		
 		marcaDAO.altaMarca(marca);
+		
+		return null;
 	}
 	
 	public void bajaMarca(int id) throws Exception {
 		SqlMarcaDAO marcaDAO = (SqlMarcaDAO) factoryDAO.getMarcaDAO();
-		SqlProductoDAO productoDAO = (SqlProductoDAO) factoryDAO.getProductoDAO();
 		
 		TMarca marca = marcaDAO.getMarcaByID(id);
 		
@@ -239,6 +249,17 @@ public class Modelo {
 		logObserver.baja(Entity.MARCA);
 		
 		marcaDAO.bajaMarca(id);	
+	}
+	
+	public void reactivarMarca(int id) throws Exception {
+		SqlMarcaDAO marcaDAO = (SqlMarcaDAO) factoryDAO.getMarcaDAO();
+		
+		TMarca marca = marcaDAO.getMarcaByID(id);
+		
+		if (marca == null) throw new Exception("Marca inexistente.");
+		
+		marcaDAO.reactivarMarca(id);
+		
 	}
 	
 	public void modificarMarca(TMarca marca) throws Exception {
@@ -377,8 +398,15 @@ public class Modelo {
 		return producto;
 	}
 	
-	public void modificarProducto(TProducto producto) {
+	public void modificarProducto(TProducto producto) throws Exception {
 		SqlProductoDAO productoDAO = (SqlProductoDAO) factoryDAO.getProductoDAO();
+		
+		TProducto productoID = productoDAO.getById(producto.getId());
+		TProducto productoUPC = productoDAO.getProductoByUPC(producto.getNombre());
+		
+		if (productoID == null) throw new Exception("Producto inexistente.");
+		if (!productoID.isActivo()) throw new Exception("Producto inactivo.");
+		if (productoUPC != null && producto.getId() != productoUPC.getId()) throw new Exception("Ya existe otro producto con ese UPC.");
 		
 		productoDAO.modificarProducto(producto);
 		if(producto.getTipo().equals("PC")) productoDAO.modificarPc((TPc) producto);

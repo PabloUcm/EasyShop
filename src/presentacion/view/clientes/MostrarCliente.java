@@ -113,11 +113,15 @@ public class MostrarCliente{
 	
 	private void mostrar() {
 		try {
-			if (idTF.getText().isEmpty()) throw new Exception("Campo sin rellenar.");
+			if (idTF.getText().trim().equals("")) throw new Exception("Campo sin rellenar.");
 			
 			TCliente cliente = controlador.getCliente(Integer.parseInt(idTF.getText()));
 			
 			datosTA.setText(busquedaToString(cliente));
+		}
+		catch(NumberFormatException nfe) {
+			JOptionPane.showMessageDialog(null,"El campo 'ID' debe ser un numero.", "ERROR",JOptionPane.ERROR_MESSAGE);
+			limpiar();
 		}
 		catch(Exception ex) {
 			JOptionPane.showMessageDialog(null,ex.getMessage(), "Error",JOptionPane.ERROR_MESSAGE);

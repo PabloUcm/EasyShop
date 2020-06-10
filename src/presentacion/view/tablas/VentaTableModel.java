@@ -10,7 +10,7 @@ import integracion.transfers.TVenta;
 
 
 public class VentaTableModel extends AbstractTableModel{
-	private  String[] columnNames = {"ID", "ID Empleado", "ID Cliente", "Importe"};
+	private  String[] columnNames = {"ID", "ID Cliente", "ID Empleado", "Importe", "Fecha"};
 	private List<TVenta> ventas;
 	
 	public VentaTableModel() {
@@ -47,9 +47,10 @@ public class VentaTableModel extends AbstractTableModel{
 		
 		switch(columnIndex) {
 			case 0: return v.getId();
-			case 1: return v.getIdPersonal();
-			case 2: return v.getIdCliente();
+			case 1: return v.getIdCliente();
+			case 2: return v.getIdPersonal();
 			case 3: return v.getTotal();
+			case 4: return v.getFecha();
 			default: return null;
 		}
 	}

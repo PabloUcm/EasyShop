@@ -51,7 +51,7 @@ public class HistorialCliente {
 		
 		buscar.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e ) {
-	    		getCompras(Integer.parseInt(idTF.getText()));
+	    		getCompras();
 	    	}
 	    });
 		
@@ -101,10 +101,15 @@ public class HistorialCliente {
 		return histClientePanel;
 	}
 	
-	private void getCompras(int id) {
+	private void getCompras() {
 		try {
+			if (idTF.getText().trim().equals("")) throw new Exception("Campo sin rellenar.");
+			
+			int id = Integer.parseInt(idTF.getText());
 			List<TVenta> listaCompras = controlador.getCompras(id);
 			tableModel.setCompras(listaCompras);
+		} catch(NumberFormatException nfe) {
+			JOptionPane.showMessageDialog(null,"El campo 'ID' debe ser un numero.", "ERROR",JOptionPane.ERROR_MESSAGE);
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(null,ex.getMessage(), "ERROR",JOptionPane.ERROR_MESSAGE);
 		}

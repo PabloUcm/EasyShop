@@ -106,7 +106,9 @@ public class ModificarCliente{
 	
 	private void modificar() {
 		try {
-    		if (idTF.getText().isEmpty() || dniTF.getText().isEmpty() || nombreTF.getText().isEmpty()) {
+    		if (idTF.getText().trim().equals("") || dniTF.getText().trim().equals("") || 
+    			nombreTF.getText().trim().equals("")) 
+    		{
     			throw new Exception("Campo(s) sin rellenar.");
     		}
 			
@@ -137,7 +139,9 @@ public class ModificarCliente{
             	JOptionPane.showMessageDialog(null,"Cliente con ID " + idTF.getText() + " modificado con �xito.",
 						  					  "INFO",JOptionPane.INFORMATION_MESSAGE);
             }
-		} 
+		} catch(NumberFormatException nfe) {
+			JOptionPane.showMessageDialog(null,"El campo 'ID' debe ser un numero.", "ERROR",JOptionPane.ERROR_MESSAGE);
+		}
 		catch(Exception ex) {
 			JOptionPane.showMessageDialog(null,ex.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
 		}

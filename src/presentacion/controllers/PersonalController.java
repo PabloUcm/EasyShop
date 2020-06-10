@@ -4,6 +4,7 @@ package presentacion.controllers;
 import java.util.List;
 
 import integracion.transfers.TPersonal;
+import integracion.transfers.TVenta;
 import negocio.Modelo;
 
 public class PersonalController {
@@ -24,14 +25,21 @@ private Modelo modelo;
 	public void bajaPersonal(int id) throws Exception {
 		 modelo.bajaPersonal(id);
 	}
+	
 	public void modificarPersonal(TPersonal personal) throws Exception{
 		modelo.modificarPersonal(personal);
 	}
+	
 	public List<TPersonal> listarPersonal(){
 		return modelo.listarPersonal();
 	}
+	
 	public TPersonal getPersonal(int id) throws Exception {
 		return modelo.getPersonal(id);
+	}
+	
+	public List<TVenta> getHistorialVentas(int id) throws Exception{
+		return modelo.getHistorialVentas(id);
 	}
 
 }

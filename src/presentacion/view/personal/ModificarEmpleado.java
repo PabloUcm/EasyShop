@@ -122,7 +122,10 @@ public class ModificarEmpleado{
 	
 	private void modificar(){
 		try {
-    		if (idTF.getText().isEmpty() || dniTF.getText().isEmpty() || nombreTF.getText().isEmpty()) {
+    		if (idTF.getText().trim().equals("") || dniTF.getText().trim().equals("") || 
+    			nombreTF.getText().trim().equals("") || tfnoTF.getText().trim().equals("") ||
+    			sueldoTF.getText().trim().equals("") || horarioTF.getText().trim().equals("")) 
+    		{
     			throw new Exception("Campo(s) sin rellenar.");
     		}
 			
@@ -151,6 +154,9 @@ public class ModificarEmpleado{
             }
             limpiar();
 		} 
+		catch(NumberFormatException nfe) {
+			JOptionPane.showMessageDialog(null,"Los campos 'ID' y 'sueldo' deben ser un numero.", "ERROR",JOptionPane.ERROR_MESSAGE);
+		}
 		catch(Exception ex) {
 			JOptionPane.showMessageDialog(null,ex.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
 		}

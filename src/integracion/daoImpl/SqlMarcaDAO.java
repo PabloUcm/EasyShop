@@ -199,6 +199,26 @@ public class SqlMarcaDAO implements IMarcaDAO {
 		}
 		
 	}
+	
+	@Override
+	public void reactivarMarca(int id) {
+		Connection connection = dbAdapter.getConnection();
+		try {
+			PreparedStatement statement = connection.prepareStatement("UPDATE Marca SET ACTIVO = TRUE WHERE id=?");
+			statement.setInt(1, id);
+			
+			statement.executeUpdate();
+					
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}	
+	}
 
 	@Override
 	public void modificarMarca(TMarca marca) {

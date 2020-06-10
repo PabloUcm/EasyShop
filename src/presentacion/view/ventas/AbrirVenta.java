@@ -214,6 +214,12 @@ public class AbrirVenta implements ActionListener{
 	
 	private void cerrarVenta() {
 		try {
+			if (clienteTF.getText().trim().equals("") || personalTF.getText().trim().equals("")) {
+				throw new Exception("Campo sin rellenar.");
+			}
+			
+			if (selectedProductsModel.getSize() == 0) throw new Exception("Lista de productos a vender vacia.");
+			
 			TCliente cliente = controlador.getCliente(Integer.parseInt(clienteTF.getText()));
 			TPersonal personal = controlador.getPersonal(Integer.parseInt(personalTF.getText()));
 			
@@ -241,8 +247,12 @@ public class AbrirVenta implements ActionListener{
 			
 			JOptionPane.showMessageDialog(null,"Venta efectuada con exito",
 					  "INFO",JOptionPane.INFORMATION_MESSAGE);
+			limpiar();
 		
-		} catch (Exception ex) {
+		} catch(NumberFormatException nfe) {
+			JOptionPane.showMessageDialog(null,"Los campos 'ID cliente' e 'ID empleado' deben ser un numero.", 
+										  "ERROR",JOptionPane.ERROR_MESSAGE);
+		}catch (Exception ex) {
 			JOptionPane.showMessageDialog(null,ex.getMessage(), "ERROR",JOptionPane.ERROR_MESSAGE);
 		}
 	}

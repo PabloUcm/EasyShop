@@ -78,6 +78,8 @@ public class BajaProducto {
 	
 	private void baja() {
 		try{
+			if (idTF.getText().trim().equals("")) throw new Exception("Campo sin rellenar.");
+			
 			TProducto producto = controlador.getProductoById(Integer.parseInt(idTF.getText()),"NONE");
 			
 			String msg = "ID: "+ producto.getId()+"\nMarcaId: "+producto.getMarcaId()+"\nNOMBRE: "+ producto.getNombre() +
@@ -88,13 +90,22 @@ public class BajaProducto {
 			
 			
 			  if(input == JOptionPane.OK_OPTION) {
-	            	controlador.bajaProducto(Integer.parseInt(idTF.getText()));
+				  controlador.bajaProducto(Integer.parseInt(idTF.getText()));
 	            	
-	            	JOptionPane.showMessageDialog(null,"Producto con ID " + idTF.getText() + " dado de baja con exito.",
+				  JOptionPane.showMessageDialog(null,"Producto con ID " + idTF.getText() + " dado de baja con exito.",
 							  					  "INFO",JOptionPane.INFORMATION_MESSAGE);
-	            }
-		}catch(Exception ex) {
+	          }
+			  limpiar();
+		}
+		catch(NumberFormatException nfe) {
+			JOptionPane.showMessageDialog(null,"El campo 'ID' debe ser un numero.", "ERROR",JOptionPane.ERROR_MESSAGE);
+		}
+		catch(Exception ex) {
 			JOptionPane.showMessageDialog(null,ex.getMessage(), "ERROR",JOptionPane.ERROR_MESSAGE);
 		}
+	}
+	
+	private void limpiar() {
+		idTF.setText("");
 	}
 }

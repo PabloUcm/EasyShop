@@ -119,7 +119,11 @@ public class MostrarProducto {
 		if (producto.getTipo().equals("PC")) PcToString(busqstr, (TPc) producto);
 		else if (producto.getTipo().equals("Periferico")) PerifericoToString(busqstr, (TPeriferico) producto); 
 		
-		busqstr.append("    Descripcion: "+producto.getDescripcion()+"\n\n");
+		String desc;
+		if (producto.getDescripcion() == null) desc = "Sin descripcion";
+		else desc = producto.getDescripcion();
+		
+		busqstr.append("    Descripcion: "+desc+"\n\n");
 		
 		return busqstr.toString();
 	}
@@ -150,6 +154,10 @@ public class MostrarProducto {
 			
 			datosTA.setText(busquedaToString(producto));
 			datosTA.setCaretPosition(0);
+		}
+		catch(NumberFormatException nfe) {
+			JOptionPane.showMessageDialog(null,"El campo 'ID' debe ser un numero.", "ERROR",JOptionPane.ERROR_MESSAGE);
+			limpiar();
 		}
 		catch(Exception ex) {
 			JOptionPane.showMessageDialog(null,ex.getMessage(), "Error",JOptionPane.ERROR_MESSAGE);
