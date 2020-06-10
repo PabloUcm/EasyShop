@@ -70,7 +70,7 @@ public class HistorialCliente {
 		tablaSP.setMinimumSize(new Dimension(600,700));
 		
 		JPanel barraBusqueda = new JPanel(new FlowLayout( FlowLayout.CENTER));
-		barraBusqueda.add(SwingFactory.getJLabel(new Dimension(160,50), " ID CLIENTE:" ,25));
+		barraBusqueda.add(SwingFactory.getJLabel(new Dimension(160,50), "ID CLIENTE:" ,25));
 		barraBusqueda.add(idTF);
 		barraBusqueda.add(Box.createRigidArea(new Dimension(10, 0)));
 		barraBusqueda.add(buscar);

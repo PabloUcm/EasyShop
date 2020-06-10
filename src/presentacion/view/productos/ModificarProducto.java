@@ -268,11 +268,9 @@ private ProductoController controlador;
 	private void setNombreMarcas() {
 		marcas = controlador.getNombreMarcas();
 		
-		if (marcas.size() == 0) {
-			String[] nombreMarcas = {"[Vacio]"};
-			marcasBox.setModel(new DefaultComboBoxModel<String>(nombreMarcas));
-		}
-		else marcasBox.setModel(new DefaultComboBoxModel<String>(marcas.toArray(new String[0])));
+		marcasBox.setModel(new DefaultComboBoxModel<String>(marcas.toArray(new String[0])));
+		
+		if (marcas.size() > 0) marcasBox.setSelectedIndex(0); 
 	}
 	
 	
@@ -287,6 +285,9 @@ private ProductoController controlador;
 			{
 				throw new Exception("Campo(s) sin rellenar.");
 			}
+			
+			if (productosBox.getSelectedItem() == null) throw new Exception("El producto debe ser de un tipo.");
+			if (productosBox.getSelectedItem() == null) throw new Exception("El producto debe estar asociado a una marca.");
 			
 			String desc;
 			if (descripcion.getText().trim().equals("")) desc = null;

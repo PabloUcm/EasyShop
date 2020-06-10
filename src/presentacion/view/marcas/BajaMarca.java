@@ -56,7 +56,7 @@ public class BajaMarca {
 	    c.gridy = 0;
 	    c.gridwidth = 1;
 	    c.gridheight = 1;
-	    bajaMarca.add(SwingFactory.getJLabel(new Dimension(300,50),"  ID MARCA:",50), c);
+	    bajaMarca.add(SwingFactory.getJLabel(new Dimension(300,50),"ID MARCA:",50), c);
 	    c.gridx = 1;
 	    c.gridy = 0;
 	    c.gridwidth = 1;

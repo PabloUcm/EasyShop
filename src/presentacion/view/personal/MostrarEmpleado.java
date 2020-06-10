@@ -64,7 +64,7 @@ public class MostrarEmpleado{
 		datosSP.setMinimumSize(new Dimension(550,150));
 		
 		JPanel barraBusqueda = new JPanel(new FlowLayout( FlowLayout.CENTER));
-		barraBusqueda.add(SwingFactory.getJLabel(new Dimension(190,50), " ID EMPLEADO:" ,25));
+		barraBusqueda.add(SwingFactory.getJLabel(new Dimension(190,50), "ID EMPLEADO:" ,25));
 		barraBusqueda.add(idTF);
 		barraBusqueda.add(Box.createRigidArea(new Dimension(10, 0)));
 		barraBusqueda.add(buscar);

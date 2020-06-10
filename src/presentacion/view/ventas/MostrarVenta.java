@@ -62,9 +62,9 @@ public class MostrarVenta {
 		GridBagConstraints c = new GridBagConstraints();
 		
 		JScrollPane datosSP = new JScrollPane(datosTA);
-		datosSP.setPreferredSize(new Dimension(550,250));
+		datosSP.setPreferredSize(new Dimension(550,450));
 		datosSP.setMaximumSize(datosSP.getPreferredSize());
-		datosSP.setMinimumSize(new Dimension(550,150));
+		datosSP.setMinimumSize(new Dimension(550,250));
 		
 		JPanel barraBusqueda = new JPanel(new FlowLayout( FlowLayout.CENTER));
 		barraBusqueda.add(SwingFactory.getJLabel(new Dimension(160,50), "    ID VENTA:" ,25));

@@ -23,9 +23,7 @@ public class VistaProducto {
 	private ModificarProducto modProducto;
 	private MostrarProducto mostrarProducto;
 	private ListarProducto listarProducto;
-	private BuscarProducto listarPorMarca;
-	private ListarPorPrecio listarPorPrecio;
-	//private BuscarProducto buscarProducto;
+	private BuscarProducto buscarProducto;
 	
 	private ModuloMenu productosMenu;
 	private JPanel productosFuncion;
@@ -38,9 +36,7 @@ public class VistaProducto {
 		modProducto = new ModificarProducto(controlador);
 		mostrarProducto = new MostrarProducto(controlador);
 		listarProducto = new ListarProducto(controlador);
-		listarPorMarca = new BuscarProducto(controlador);
-		listarPorPrecio = new ListarPorPrecio(controlador);
-		//buscarProducto = new BuscarProducto(controlador);
+		buscarProducto = new BuscarProducto(controlador);
 		
 		initGUI();
 	}
@@ -55,10 +51,8 @@ public class VistaProducto {
 		addFunction(bajaProducto.getDefaultLayout(), new JButton("   Baja producto"), "bajaproducto", "BajaProducto");
 		addFunction(modProducto.getDefaultLayout(), new JButton("Modificar producto"), "modproducto", "ModificarProducto");
 		addFunction(mostrarProducto.getDefaultLayout(), new JButton("Mostrar producto"), "mostrarproducto", "MostrarProducto");
-		addFunction(listarProducto.getDefaultLayout(), new JButton("Listar productos"), "listarproducto", "ListarProductos");
-		addFunction(listarPorMarca.getDefaultLayout(),new JButton("Listar por marca"), "listarpormarca", "ListarPorMarca");
-		addFunction(listarPorPrecio.getDefaultLayout(),new JButton("Listar por precio"), "listarporprecio", "ListarPorPrecio");
-		//addFunction(buscarProducto.getDefaultLayout(), new JButton("Buscar productos"), "buscarproducto", "BuscarProductos");
+		addFunction(listarProducto.getDefaultLayout(), new JButton("Listar productos"), "listarproducto", "ListarProductos");;
+		addFunction(buscarProducto.getDefaultLayout(), new JButton("Buscar productos"), "buscarproducto", "BuscarProductos");
 	}
 	
 	public JPanel getDefaultLayout() {

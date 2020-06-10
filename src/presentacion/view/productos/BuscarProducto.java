@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.Box;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -32,8 +33,11 @@ import presentacion.view.tablas.ProductoTableModel;
 public class BuscarProducto {
 	private ProductoController controlador;
 	
-	private JTable productosTable;
-	private ProductoTableModel tableModel;
+	private JTable porPrecioTable;
+	private ProductoTableModel porPreciotableModel;
+	
+	private JTable porMarcaTable;
+	private ProductoTableModel porMarcatableModel;
 
 	private JTextField superiorTF;
 	private JTextField inferiorTF;
@@ -41,7 +45,7 @@ public class BuscarProducto {
 	JRadioButton buscarPorPrecio,buscarPorMarca;
 	ButtonGroup btnGroup;
 	
-	private JButton confirmar;
+	private JButton buscar;
 	
 	private JComboBox<String> marcasBox;
 	private List<String> marcas;
@@ -52,8 +56,11 @@ public class BuscarProducto {
 	}
 	
 	private void initGUI() {
-		tableModel = new ProductoTableModel();
-		productosTable = new JTable(tableModel);
+		porPreciotableModel = new ProductoTableModel();
+		porPrecioTable = new JTable(porPreciotableModel);
+		
+		porMarcatableModel = new ProductoTableModel();
+		porMarcaTable = new JTable(porMarcatableModel);
 		
 		marcasBox = new JComboBox<String>();
 		setNombreMarcas();
@@ -62,7 +69,9 @@ public class BuscarProducto {
 		marcasBox.setFont(new Font(marcasBox.getFont().toString(), Font.PLAIN, 20));
 		
 		buscarPorPrecio = new JRadioButton("Por Precio");
+		buscarPorPrecio.setFont(new Font(buscarPorPrecio.getFont().toString(), Font.PLAIN, 20));
 		buscarPorMarca = new JRadioButton("Por Marca");
+		buscarPorMarca.setFont(new Font(buscarPorMarca.getFont().toString(), Font.PLAIN, 20));
 		
 		superiorTF = SwingFactory.getJTextField(new Dimension(550,25), 20);
 		inferiorTF = SwingFactory.getJTextField(new Dimension(550,25), 20);
@@ -74,10 +83,10 @@ public class BuscarProducto {
 		btnGroup.add(buscarPorPrecio);
 		btnGroup.add(buscarPorMarca);
 		
-		confirmar = SwingFactory.getJButton(new Dimension(250,60), "CONFIRMAR ALTA DE PRODUCTO", 
-				"icons/confirmar", 50, Color.GREEN, new Color(130,200,21));
+		buscar = SwingFactory.getJButton(new Dimension(140,30), "BUSCAR", 
+				 "icons/lupa", 20, new Color(8,213,249), new Color(6,160,190));
 		
-		confirmar.addActionListener(new ActionListener() {
+		buscar.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e ) { listarPorPrecio(); }
 	    });
 		
@@ -93,15 +102,25 @@ public class BuscarProducto {
 		JPanel buscarProductosPanel = new JPanel(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		
-		JPanel panelRadioButtons = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		panelRadioButtons.add(buscarPorPrecio);
-		panelRadioButtons.add(buscarPorMarca);
+		JPanel panelRadioButtons = new JPanel(new GridBagLayout());
+		GridBagConstraints constraintsButtons = new GridBagConstraints();
+		
+		constraintsButtons.gridx = 0;
+		constraintsButtons.gridx = 0;
+		panelRadioButtons.add(buscarPorPrecio, constraintsButtons);
+		constraintsButtons.gridx = 0;
+		constraintsButtons.gridx = 1;
+		panelRadioButtons.add(buscarPorMarca, constraintsButtons);
 		
 		c.gridx = 0;
 		c.gridy = 0;
-		buscarProductosPanel.add(SwingFactory.getJLabel(new Dimension(200,45), "BUSCAR POR:" ,25), c);
+		buscarProductosPanel.add(Box.createRigidArea(new Dimension(150, 0)), c);
 		c.gridx = 1;
 		c.gridy = 0;
+		buscarProductosPanel.add(SwingFactory.getJLabel(new Dimension(220,45), "BUSCAR POR:" ,25), c);
+		c.gridx = 2;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START; 
 		buscarProductosPanel.add(panelRadioButtons,c);
 		
 		
@@ -110,6 +129,9 @@ public class BuscarProducto {
 		
 		busquedas.add(getMarcaLayout(),"marca");
 		busquedas.add(getPrecioLayout(),"precio");
+		busquedas.setPreferredSize(new Dimension(700,800));
+		
+		if (marcasBox.getSelectedItem() != null)listarPorMarca(marcasBox.getSelectedItem().toString());
 		
 		buscarPorPrecio.addActionListener(new ActionListener() {
 	        @Override
@@ -125,9 +147,17 @@ public class BuscarProducto {
 	        }
 	    });
 		
+		buscarPorPrecio.setSelected(true);
+		card.show(busquedas,"precio");
+		
+		c.gridx = 0;
+		c.gridy = 1;
+		buscarProductosPanel.add(Box.createRigidArea(new Dimension(0, 20)), c);
 		c.gridx = 0;
 		c.gridy = 2;
-		c.gridwidth = 2;
+		c.gridwidth = 3;
+		c.gridheight= 1;
+		c.fill = GridBagConstraints.BOTH;
 		buscarProductosPanel.add(busquedas,c);
 		
 		return buscarProductosPanel;
@@ -137,15 +167,19 @@ public class BuscarProducto {
 		JPanel listarProductosPanel = new JPanel(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		
-		productosTable.setPreferredScrollableViewportSize(new Dimension(600,700));
+		porMarcaTable.setPreferredScrollableViewportSize(new Dimension(600,600));
 		
-		JScrollPane tablaSP = new JScrollPane(productosTable);
+		JScrollPane tablaSP = new JScrollPane(porMarcaTable);
 		tablaSP.getViewport().setBackground(Color.WHITE);
-		tablaSP.setPreferredSize(new Dimension(600,650));
+		tablaSP.setPreferredSize(new Dimension(600,600));
+		tablaSP.setMinimumSize(new Dimension(600,600));
 		
 		c.gridx = 0;
 		c.gridy = 0;
 		listarProductosPanel.add(marcasBox, c);
+		c.gridx = 0;
+		c.gridy = 1;
+		listarProductosPanel.add(Box.createRigidArea(new Dimension(0,15)), c);
 		c.gridx = 0;
 		c.gridy = 2;
 		listarProductosPanel.add(tablaSP, c);
@@ -157,31 +191,43 @@ public class BuscarProducto {
 		JPanel listarProductosPanel = new JPanel(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		
-		productosTable.setPreferredScrollableViewportSize(new Dimension(100,100));
+		porPrecioTable.setPreferredScrollableViewportSize(new Dimension(600,500));
 		
-		JScrollPane tablaSP = new JScrollPane(productosTable);
+		JScrollPane tablaSP = new JScrollPane(porPrecioTable);
 		tablaSP.getViewport().setBackground(Color.WHITE);
-		tablaSP.setPreferredSize(new Dimension(600,650));
+		tablaSP.setPreferredSize(new Dimension(600,500));
+		tablaSP.setMinimumSize(new Dimension(600,500));
 
 		c.gridx = 0;
 		c.gridy = 0;
-		listarProductosPanel.add(SwingFactory.getJLabel(new Dimension(300,45), "SUPERIOR A:" ,25), c);
+		listarProductosPanel.add(SwingFactory.getJLabel(new Dimension(600,45), "SUPERIOR A:" ,25), c);
 		c.gridx = 1;
 		c.gridy = 0;
 		listarProductosPanel.add(superiorTF, c);
 		c.gridx = 0;
 		c.gridy = 1;
-		listarProductosPanel.add(SwingFactory.getJLabel(new Dimension(300,45), "INFERIOR A:" ,25), c);
+		listarProductosPanel.add(SwingFactory.getJLabel(new Dimension(600,45), "INFERIOR A:" ,25), c);
 		c.gridx = 1;
 		c.gridy = 1;
 		listarProductosPanel.add(inferiorTF, c);
 		c.gridx = 0;
 		c.gridy = 2;
-		listarProductosPanel.add(confirmar, c);
+		listarProductosPanel.add(Box.createRigidArea(new Dimension(0,5)), c);
 		c.gridx = 0;
 		c.gridy = 3;
+		c.gridwidth = 2;
+		c.gridheight= 1;
+		listarProductosPanel.add(buscar, c);
+		c.gridx = 0;
+		c.gridy = 4;
+		c.gridwidth = 1;
+		c.gridheight= 1;
+		listarProductosPanel.add(Box.createRigidArea(new Dimension(0,15)), c);
+		c.gridx = 0;
+		c.gridy = 5;
+		c.gridwidth = 2;
+		c.gridheight= 1;
 		listarProductosPanel.add(tablaSP, c);
-		
 		
 		return listarProductosPanel;
 	}
@@ -194,7 +240,7 @@ public class BuscarProducto {
 			JOptionPane.showMessageDialog(null,ex.getMessage(), "ERROR",JOptionPane.ERROR_MESSAGE);
 		}
 		
-    	tableModel.setProductos(listaProductos);
+		porMarcatableModel.setProductos(listaProductos);
 	}
 	
 	private void listarPorPrecio() {
@@ -204,7 +250,7 @@ public class BuscarProducto {
 			
 			List<TProducto> listaProductos = controlador.listarProductosPorPrecio(precioSuperior,precioInferior);
 			
-			tableModel.setProductos(listaProductos);
+			porPreciotableModel.setProductos(listaProductos);
 		}
 		catch(NumberFormatException nfe) {
 			JOptionPane.showMessageDialog(null,"Los campos 'precio superior' y 'precio inferior' deben ser un numero", 
