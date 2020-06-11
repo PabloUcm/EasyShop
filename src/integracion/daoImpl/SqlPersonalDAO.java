@@ -32,7 +32,7 @@ public class SqlPersonalDAO implements IPersonalDAO{
 			ResultSet results = statement.executeQuery();
 			
 			if(results.next()) return new TPersonal(results.getInt(1),results.getString(2),results.getString(3),results.getString(4),
-					    					       results.getDouble(5),results.getString(7),results.getBoolean(8));
+					    					       results.getDouble(5),results.getString(6),results.getBoolean(7));
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -55,7 +55,7 @@ public class SqlPersonalDAO implements IPersonalDAO{
 			
 			ResultSet results = statement.executeQuery();
 			if(results.next()) return new TPersonal(results.getInt(1),results.getString(2),results.getString(3),results.getString(4),
-												   results.getDouble(5), results.getString(7),results.getBoolean(8));
+												   results.getDouble(5), results.getString(6),results.getBoolean(7));
 					
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -80,7 +80,7 @@ public class SqlPersonalDAO implements IPersonalDAO{
 			
 			while(results.next()) {
 				empleadoList.add(new TPersonal(results.getInt(1),results.getString(2),results.getString(3),results.getString(4),
-						results.getDouble(5),results.getString(7),results.getBoolean(8)));
+						results.getDouble(5),results.getString(6),results.getBoolean(7)));
 			}
 						
 			return empleadoList;

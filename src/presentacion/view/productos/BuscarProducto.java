@@ -160,6 +160,12 @@ public class BuscarProducto {
 		c.fill = GridBagConstraints.BOTH;
 		buscarProductosPanel.add(busquedas,c);
 		
+		buscarProductosPanel.addComponentListener(new java.awt.event.ComponentAdapter() {
+	        public void componentShown(java.awt.event.ComponentEvent evt) {
+	        	setNombreMarcas();
+	        }
+	    });
+		
 		return buscarProductosPanel;
 	}
 	

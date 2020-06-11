@@ -440,7 +440,7 @@ public class SqlProductoDAO implements IProductoDAO{
 		List<TProducto> productoList = new ArrayList<>();
 		
 		try {
-			PreparedStatement statement = connection.prepareStatement("SELECT * FROM PRODUCTO WHERE MARCA = ?");
+			PreparedStatement statement = connection.prepareStatement("SELECT * FROM PRODUCTO WHERE ACTIVO=TRUE AND MARCA = ?");
 			
 			statement.setInt(1, id);
 			ResultSet results = statement.executeQuery();
@@ -470,7 +470,7 @@ public class SqlProductoDAO implements IProductoDAO{
 		List<TProducto> productoList = new ArrayList<>();
 		
 		try {
-			PreparedStatement statement = connection.prepareStatement("SELECT * FROM PRODUCTO WHERE PRECIO BETWEEN ? AND ?");
+			PreparedStatement statement = connection.prepareStatement("SELECT * FROM PRODUCTO WHERE ACTIVO=TRUE AND PRECIO BETWEEN ? AND ?");
 			
 			statement.setDouble(1, precioSuperior);
 			statement.setDouble(2, precioInferior);

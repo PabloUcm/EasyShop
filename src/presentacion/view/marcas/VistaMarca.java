@@ -40,7 +40,7 @@ public class VistaMarca {
 		CardLayout cardLayout = new CardLayout();
 		marcasFuncion = new JPanel(cardLayout);
 		CardSwitcher switcher = new CardSwitcher(marcasFuncion, cardLayout);
-		marcasMenu = new ModuloMenu(switcher, 45);
+		marcasMenu = new ModuloMenu(switcher, 30);
 		
 		addFunction(altaMarca.getDefaultLayout(), new JButton("   Alta marca"), 
 				   "altamarca", "AltaMarca");

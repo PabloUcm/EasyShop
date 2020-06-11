@@ -45,7 +45,7 @@ public class VistaProducto {
 		CardLayout cardLayout = new CardLayout();
 		productosFuncion = new JPanel(cardLayout);
 		CardSwitcher switcher = new CardSwitcher(productosFuncion, cardLayout);
-		productosMenu = new ModuloMenu(switcher, 45);
+		productosMenu = new ModuloMenu(switcher, 30);
 		
 		addFunction(altaProducto.getDefaultLayout(), new JButton("   Alta producto"), "altaproducto", "AltaProducto");
 		addFunction(bajaProducto.getDefaultLayout(), new JButton("   Baja producto"), "bajaproducto", "BajaProducto");
