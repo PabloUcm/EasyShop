@@ -30,7 +30,8 @@ public class SwingFactory {
 		tf.setFont(new Font(tf.getFont().toString(), Font.PLAIN, fontSize));
 		tf.setPreferredSize(dimension);
 		tf.setMaximumSize(tf.getPreferredSize());
-		tf.setMinimumSize(tf.getPreferredSize());
+		if (dimension.width > 250) tf.setMinimumSize(new Dimension(dimension.width - 150, dimension.height));
+		else tf.setMinimumSize(tf.getPreferredSize());
 		return tf;
 	}
 	

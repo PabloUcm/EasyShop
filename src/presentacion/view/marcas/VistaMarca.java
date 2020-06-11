@@ -55,7 +55,7 @@ public class VistaMarca {
 		JPanel marcaPanel = new JPanel(new BorderLayout());
 		
 		marcaPanel.add(marcasFuncion, BorderLayout.CENTER);
-		marcaPanel.add(marcasMenu.getDefaultLayout(), BorderLayout.NORTH);
+		marcaPanel.add(marcasMenu.getToolBar(), BorderLayout.NORTH);
 		
 		return marcaPanel;
 	}

@@ -59,7 +59,7 @@ public class VistaProducto {
 		JPanel productoPanel = new JPanel(new BorderLayout());
 		
 		productoPanel.add(productosFuncion, BorderLayout.CENTER);
-		productoPanel.add(productosMenu.getDefaultLayout(), BorderLayout.NORTH);
+		productoPanel.add(productosMenu.getToolBar(), BorderLayout.NORTH);
 		
 		productoPanel.addComponentListener(new java.awt.event.ComponentAdapter() {
 	        public void componentShown(java.awt.event.ComponentEvent evt) {

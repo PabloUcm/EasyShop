@@ -40,7 +40,7 @@ public class VistaLogs {
 		JPanel logPanel = new JPanel(new BorderLayout());
 		
 		logPanel.add(logsFuncion, BorderLayout.CENTER);
-		logPanel.add(logsMenu.getDefaultLayout(), BorderLayout.NORTH);
+		logPanel.add(logsMenu.getToolBar(), BorderLayout.NORTH);
 		
 		return logPanel;
 	}

@@ -63,7 +63,7 @@ public class VistaCliente {
 		JPanel clientePanel = new JPanel(new BorderLayout());
 		
 		clientePanel.add(clientesFuncion, BorderLayout.CENTER);
-		clientePanel.add(clientesMenu.getDefaultLayout(), BorderLayout.NORTH);
+		clientePanel.add(clientesMenu.getToolBar(), BorderLayout.NORTH);
 		
 		return clientePanel;
 	}

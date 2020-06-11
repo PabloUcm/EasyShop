@@ -64,7 +64,7 @@ public class VistaPersonal {
 		JPanel personalPanel = new JPanel(new BorderLayout());
 		
 		personalPanel.add(personalFuncion, BorderLayout.CENTER);
-		personalPanel.add(personalMenu.getDefaultLayout(), BorderLayout.NORTH);
+		personalPanel.add(personalMenu.getToolBar(), BorderLayout.NORTH);
 		
 		return personalPanel;
 	}

@@ -48,7 +48,7 @@ public class VistaVenta {
 		JPanel ventaPanel = new JPanel(new BorderLayout());
 		
 		ventaPanel.add(ventasPanel, BorderLayout.CENTER);
-		ventaPanel.add(ventasMenu.getDefaultLayout(), BorderLayout.NORTH);
+		ventaPanel.add(ventasMenu.getToolBar(), BorderLayout.NORTH);
 		
 		ventaPanel.addComponentListener(new java.awt.event.ComponentAdapter() {
 	        public void componentShown(java.awt.event.ComponentEvent evt) {

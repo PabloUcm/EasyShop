@@ -9,9 +9,11 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JToolBar;
 
 import presentacion.view.CardSwitcher;
 
@@ -41,6 +43,24 @@ public class ModuloMenu {
 		return moduloMenuPanel;
 	}
 	
+	
+	public JToolBar getToolBar() {
+		JToolBar toolbar = new JToolBar();
+		
+		toolbar.setFloatable(false);
+		toolbar.setBackground(Color.gray.brighter());
+		toolbar.setBorder( BorderFactory.createBevelBorder(1));
+		
+		toolbar.add(Box.createRigidArea(new Dimension(0, 55)));
+		
+		for (JButton button : buttons) { 
+			toolbar.add(Box.createRigidArea(new Dimension(5, 0)));
+			toolbar.add(button);
+		}
+		
+		return toolbar;
+	}
+	
 	public void addButton(JButton button, String iconDir, String card) {
 		buttons.add(button);
 		button.setBorder(BorderFactory.createRaisedBevelBorder());
@@ -56,6 +76,7 @@ public class ModuloMenu {
 		button.setOpaque(true);
 		button.setPreferredSize(new Dimension(170,45));
 		button.setMaximumSize(button.getPreferredSize());
+		button.setMinimumSize(new Dimension(100,35));
 		
 		ImageIcon icon = new ImageIcon("icons/"+iconDir+".png"); 
 		Image image = icon.getImage(); 
