@@ -14,13 +14,12 @@ import presentacion.controllers.LogController;
 @SuppressWarnings("serial")
 public class LogTableModel extends AbstractTableModel implements LogObserver {
 	
-	private LogController controller;
+	
 	private String[] columnNames = {"Numero", "Tipo", "Entidad", "Hora"};
 	private List<Log> logs;
 	
 	
 	public LogTableModel(LogController controller) {
-		this.controller = controller;
 		controller.addObserver(this);
 		logs = new ArrayList<>();
 	}

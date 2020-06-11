@@ -10,10 +10,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import integracion.transfers.TCliente;
+
 import integracion.transfers.TPersonal;
 import presentacion.controllers.PersonalController;
-import presentacion.view.tablas.ClienteTableModel;
 import presentacion.view.tablas.PersonalTableModel;
 
 

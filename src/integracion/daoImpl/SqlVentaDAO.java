@@ -11,7 +11,6 @@ import java.util.List;
 import integracion.dao.IVentaDAO;
 import integracion.dbadapters.IDBAdapter;
 import integracion.factorias.DBFactory;
-import integracion.transfers.TCliente;
 import integracion.transfers.TLineaVenta;
 import integracion.transfers.TVenta;
 

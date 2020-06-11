@@ -114,10 +114,9 @@ public class Modelo {
 	}
 	
 	public List<TVenta> getCompras(int id) throws Exception{
-		SqlClienteDAO clienteDAO = (SqlClienteDAO) factoryDAO.getClienteDAO();
 		SqlVentaDAO ventaDAO = (SqlVentaDAO) factoryDAO.getVentaDAO();
 		
-		TCliente cliente = getCliente(id);
+		getCliente(id);
 		List<TVenta> compras = ventaDAO.getComprasCliente(id);
 		
 		return compras;
@@ -204,10 +203,9 @@ public class Modelo {
 	}
 	
 	public List<TVenta> getHistorialVentas(int id) throws Exception {
-		SqlPersonalDAO personalDAO = (SqlPersonalDAO) factoryDAO.getEmpleadoDAO();
 		SqlVentaDAO ventaDAO = (SqlVentaDAO) factoryDAO.getVentaDAO();
 		
-		TPersonal personal = getPersonal(id);
+		getPersonal(id);
 		List<TVenta> compras = ventaDAO.getHistorialEmpleado(id);
 		
 		return compras;

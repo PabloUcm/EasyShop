@@ -6,10 +6,11 @@ import java.util.List;
 import javax.swing.SwingUtilities;
 import javax.swing.table.AbstractTableModel;
 
-import integracion.transfers.TCliente;
-import integracion.transfers.TProducto;
-import presentacion.controllers.ProductoController;
 
+import integracion.transfers.TProducto;
+
+
+@SuppressWarnings("serial")
 public class ProductoTableModel extends AbstractTableModel{
 
 	private  String[] columnNames = {"ID", "UPC", "Nombre", "Tipo", "Precio", "Cantidad"};

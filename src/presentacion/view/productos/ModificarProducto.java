@@ -25,7 +25,6 @@ import javax.swing.JTextField;
 
 import integracion.transfers.TPc;
 import integracion.transfers.TPeriferico;
-import integracion.transfers.TProducto;
 import presentacion.controllers.ProductoController;
 import presentacion.view.SwingFactory;
 

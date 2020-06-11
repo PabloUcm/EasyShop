@@ -6,9 +6,9 @@ import java.util.List;
 import javax.swing.SwingUtilities;
 import javax.swing.table.AbstractTableModel;
 
-import integracion.transfers.TCliente;
 import integracion.transfers.TVenta;
 
+@SuppressWarnings("serial")
 public class HistVentasTableModel extends AbstractTableModel{
 
 	private  String[] columnNames = {"ID", "ID CLIENTE", "IMPORTE", "FECHA"};

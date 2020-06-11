@@ -7,10 +7,10 @@ import javax.swing.SwingUtilities;
 import javax.swing.table.AbstractTableModel;
 
 import integracion.transfers.TCliente;
-import presentacion.controllers.ClienteController;
 
-
+@SuppressWarnings("serial")
 public class ClienteTableModel extends AbstractTableModel{
+	
 	private  String[] columnNames = {"ID", "DNI", "Nombre", "Telefono"};
 	private List<TCliente> clientes;
 	

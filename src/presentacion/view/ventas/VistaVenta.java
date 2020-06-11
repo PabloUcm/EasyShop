@@ -6,7 +6,6 @@ import javax.swing.JPanel;
 import negocio.Modelo;
 import presentacion.controllers.VentaController;
 import presentacion.view.CardSwitcher;
-import presentacion.view.marcas.AltaMarca;
 import presentacion.view.menus.ModuloMenu;
 
 import java.awt.BorderLayout;

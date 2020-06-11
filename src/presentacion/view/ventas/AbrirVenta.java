@@ -25,8 +25,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
-import integracion.transfers.TCliente;
-import integracion.transfers.TPersonal;
 import integracion.transfers.TProducto;
 import integracion.transfers.TVenta;
 import presentacion.controllers.VentaController;
@@ -194,7 +192,8 @@ public class AbrirVenta implements ActionListener{
 			List<String> from = productsList.getSelectedValuesList();
 			for (String s : from) selectedProductsModel.addElement(s);
 		}else if(e.getSource() == buttonUnselect) {
-			 List<String> to = selectedProductsList.getSelectedValuesList();
+			 @SuppressWarnings("unused")
+			List<String> to = selectedProductsList.getSelectedValuesList();
 			 int[] toindex = selectedProductsList.getSelectedIndices();
 
 			 for(i = (toindex.length-1); i >=0; i--)
@@ -222,8 +221,8 @@ public class AbrirVenta implements ActionListener{
 			
 			if (selectedProductsModel.getSize() == 0) throw new Exception("Lista de productos a vender vacia.");
 			
-			TCliente cliente = controlador.getCliente(Integer.parseInt(clienteTF.getText()));
-			TPersonal personal = controlador.getPersonal(Integer.parseInt(personalTF.getText()));
+			controlador.getCliente(Integer.parseInt(clienteTF.getText()));
+			controlador.getPersonal(Integer.parseInt(personalTF.getText()));
 			
 			mapaProductos = new HashMap<>();
 			

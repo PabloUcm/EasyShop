@@ -10,8 +10,6 @@ import java.util.List;
 import integracion.dao.IProductoDAO;
 import integracion.dbadapters.IDBAdapter;
 import integracion.factorias.DBFactory;
-import integracion.transfers.TCliente;
-import integracion.transfers.TMarca;
 import integracion.transfers.TPc;
 import integracion.transfers.TPeriferico;
 import integracion.transfers.TProducto;

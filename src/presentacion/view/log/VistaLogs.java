@@ -7,7 +7,6 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import negocio.Modelo;
-import presentacion.controllers.ClienteController;
 import presentacion.controllers.LogController;
 import presentacion.view.CardSwitcher;
 import presentacion.view.menus.ModuloMenu;

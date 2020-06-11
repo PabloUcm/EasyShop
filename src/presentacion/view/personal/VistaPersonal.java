@@ -2,8 +2,6 @@ package presentacion.view.personal;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -11,9 +9,6 @@ import javax.swing.JPanel;
 import negocio.Modelo;
 import presentacion.controllers.PersonalController;
 import presentacion.view.CardSwitcher;
-import presentacion.view.clientes.AltaCliente;
-import presentacion.view.clientes.BajaCliente;
-import presentacion.view.marcas.AltaMarca;
 import presentacion.view.menus.ModuloMenu;
 
 public class VistaPersonal {

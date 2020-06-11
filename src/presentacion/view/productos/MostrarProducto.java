@@ -16,11 +16,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import integracion.transfers.TCliente;
 import integracion.transfers.TPc;
 import integracion.transfers.TPeriferico;
 import integracion.transfers.TProducto;
-import presentacion.controllers.ClienteController;
 import presentacion.controllers.ProductoController;
 import presentacion.view.SwingFactory;
 

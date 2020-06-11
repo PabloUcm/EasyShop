@@ -17,10 +17,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import integracion.transfers.TLineaVenta;
-import integracion.transfers.TMarca;
-import integracion.transfers.TProducto;
 import integracion.transfers.TVenta;
-import presentacion.controllers.MarcaController;
 import presentacion.controllers.VentaController;
 import presentacion.view.SwingFactory;
 

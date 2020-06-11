@@ -9,9 +9,7 @@ import javax.swing.JPanel;
 import negocio.Modelo;
 import presentacion.controllers.ProductoController;
 import presentacion.view.CardSwitcher;
-import presentacion.view.marcas.AltaMarca;
 import presentacion.view.menus.ModuloMenu;
-import presentacion.view.personal.AltaEmpleado;
 
 public class VistaProducto {
 	

@@ -8,6 +8,7 @@ public class DAOServiceFactory {
 	private final static String DAO_FACTORY="metaInf/DAOFactory.properties";
 	private final static String DAO_FACTORY_PROPERTY="defaultFactory";
 
+	@SuppressWarnings("deprecation")
 	public static IDAOServiceFactory getDefaultFactory() {
 		Properties p = PropertiesUtil.loadProperty(DAO_FACTORY);
 		String factory = p.getProperty(DAO_FACTORY_PROPERTY);

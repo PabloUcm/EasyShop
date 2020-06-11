@@ -6,11 +6,10 @@ import java.util.List;
 import javax.swing.SwingUtilities;
 import javax.swing.table.AbstractTableModel;
 
-import integracion.transfers.TCliente;
 import integracion.transfers.TVenta;
 
+@SuppressWarnings("serial")
 public class ComprasTableModel extends AbstractTableModel{
-
 	private  String[] columnNames = {"ID", "ID EMPLEADO", "IMPORTE", "FECHA"};
 	private List<TVenta> compras;
 	

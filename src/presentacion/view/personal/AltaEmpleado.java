@@ -15,7 +15,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import integracion.transfers.TCliente;
 import integracion.transfers.TPersonal;
 import presentacion.controllers.PersonalController;
 import presentacion.view.SwingFactory;

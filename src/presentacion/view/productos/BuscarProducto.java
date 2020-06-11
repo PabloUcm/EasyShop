@@ -22,7 +22,6 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import java.awt.FlowLayout;
 
 
 import integracion.transfers.TProducto;

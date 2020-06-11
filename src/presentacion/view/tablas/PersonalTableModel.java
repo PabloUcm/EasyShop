@@ -6,11 +6,11 @@ import java.util.List;
 import javax.swing.SwingUtilities;
 import javax.swing.table.AbstractTableModel;
 
-import integracion.transfers.TCliente;
+
 import integracion.transfers.TPersonal;
 
-import presentacion.controllers.PersonalController;
 
+@SuppressWarnings("serial")
 public class PersonalTableModel extends AbstractTableModel{
 	private  String[] columnNames = {"ID", "DNI", "Nombre", "Sueldo","Telefono"};
 	private List<TPersonal> empleados;

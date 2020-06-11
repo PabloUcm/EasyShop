@@ -10,7 +10,6 @@ import java.util.List;
 import integracion.dao.IPersonalDAO;
 import integracion.dbadapters.IDBAdapter;
 import integracion.factorias.DBFactory;
-import integracion.transfers.TCliente;
 import integracion.transfers.TPersonal;
 
 public class SqlPersonalDAO implements IPersonalDAO{
