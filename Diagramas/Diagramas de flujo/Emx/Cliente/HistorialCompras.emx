@@ -23,7 +23,7 @@
                 <children xmi:type="notation:BasicDecorationNode" xmi:id="_IC7q4Ks6Eeqz4e4r_x6NYw" type="Stereotype"/>
                 <children xmi:type="notation:BasicDecorationNode" xmi:id="_IC8R8Ks6Eeqz4e4r_x6NYw" type="Name"/>
                 <children xmi:type="notation:BasicDecorationNode" xmi:id="_IC8R8as6Eeqz4e4r_x6NYw" type="Parent"/>
-                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_IC6cwas6Eeqz4e4r_x6NYw" x="264" y="132" width="4099" height="48495"/>
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_IC6cwas6Eeqz4e4r_x6NYw" x="392" y="581" width="4099" height="48495"/>
               </children>
               <children xmi:type="umlnotation:UMLShape" xmi:id="_cNomcKs2Eeqz4e4r_x6NYw" element="_cNjG4Ks2Eeqz4e4r_x6NYw" fontName="Segoe UI" fontHeight="8" fillColor="16116705" transparency="0" lineColor="14263149" lineWidth="1" showStereotype="Label">
                 <eAnnotations xmi:id="_cNpNgKs2Eeqz4e4r_x6NYw" source="com.ibm.xtools.uml.ui.diagram.internal.styles">
@@ -612,6 +612,7 @@
       </ownedConnector>
       <lifeline xmi:id="_BIuOoKs2Eeqz4e4r_x6NYw" name="usuario" represents="_BIu1sKs2Eeqz4e4r_x6NYw" coveredBy="_f4UIcKs2Eeqz4e4r_x6NYw _0uurwas4Eeqz4e4r_x6NYw _0uvS0Ks4Eeqz4e4r_x6NYw _0uv54Ks4Eeqz4e4r_x6NYw"/>
       <lifeline xmi:id="_HsIRQKs2Eeqz4e4r_x6NYw" name="vistaHistorialCompras" represents="_HsI4UKs2Eeqz4e4r_x6NYw" coveredBy="_f4UIcas2Eeqz4e4r_x6NYw _f4UvgKs2Eeqz4e4r_x6NYw _f4Uvgas2Eeqz4e4r_x6NYw _hhK8oKs2Eeqz4e4r_x6NYw _vEbbYas4Eeqz4e4r_x6NYw _0uurwKs4Eeqz4e4r_x6NYw _Xx9IgKs6Eeqz4e4r_x6NYw"/>
+      <lifeline xmi:id="_ICdJwKs6Eeqz4e4r_x6NYw" name="comprasTableModel" represents="_ICdw0Ks6Eeqz4e4r_x6NYw" coveredBy="_Xx9vkKs6Eeqz4e4r_x6NYw _Xx9vkas6Eeqz4e4r_x6NYw _Xx-WoKs6Eeqz4e4r_x6NYw"/>
       <lifeline xmi:id="_Kp1YgKs2Eeqz4e4r_x6NYw" name="clienteController" represents="_Kp1Ygas2Eeqz4e4r_x6NYw" coveredBy="_hhLjsKs2Eeqz4e4r_x6NYw _hhMKwKs2Eeqz4e4r_x6NYw _hhMKwas2Eeqz4e4r_x6NYw _jXDgMKs2Eeqz4e4r_x6NYw _nrTRsKs4Eeqz4e4r_x6NYw _vEbbYKs4Eeqz4e4r_x6NYw"/>
       <lifeline xmi:id="_L5sd4Ks2Eeqz4e4r_x6NYw" name="modelo" represents="_L5tE8Ks2Eeqz4e4r_x6NYw" coveredBy="_jXDgMas2Eeqz4e4r_x6NYw _jXEHQKs2Eeqz4e4r_x6NYw _jXEHQas2Eeqz4e4r_x6NYw _lC8aQKs2Eeqz4e4r_x6NYw _lC-PcKs2Eeqz4e4r_x6NYw _pHdYkKs2Eeqz4e4r_x6NYw _pHhC8Ks2Eeqz4e4r_x6NYw _JCr_EKs3Eeqz4e4r_x6NYw _JCr_Eas3Eeqz4e4r_x6NYw _04UiEKs3Eeqz4e4r_x6NYw _04VwMas3Eeqz4e4r_x6NYw _6N-_MKs3Eeqz4e4r_x6NYw _6OA0YKs3Eeqz4e4r_x6NYw _nrSqoas4Eeqz4e4r_x6NYw"/>
       <lifeline xmi:id="_Q3nJYKs2Eeqz4e4r_x6NYw" name="factoryDAOService" represents="_Q3nJYas2Eeqz4e4r_x6NYw" coveredBy="_lC8aQas2Eeqz4e4r_x6NYw _lC9BUKs2Eeqz4e4r_x6NYw _lC9oYKs2Eeqz4e4r_x6NYw _my8_UKs2Eeqz4e4r_x6NYw _my-Ncqs2Eeqz4e4r_x6NYw _04VJIKs3Eeqz4e4r_x6NYw _04VJIas3Eeqz4e4r_x6NYw _04VJIqs3Eeqz4e4r_x6NYw _33SNkKs3Eeqz4e4r_x6NYw _33Tbsas3Eeqz4e4r_x6NYw"/>
@@ -621,7 +622,6 @@
       <lifeline xmi:id="_Ziyw0Ks2Eeqz4e4r_x6NYw" name="tVenta" represents="_Ziyw0as2Eeqz4e4r_x6NYw" coveredBy="_-mOx0as3Eeqz4e4r_x6NYw _-mPY4Ks3Eeqz4e4r_x6NYw _-mPY4as3Eeqz4e4r_x6NYw _MKAf4Ks4Eeqz4e4r_x6NYw _QTdBgKs4Eeqz4e4r_x6NYw _QTdokKs4Eeqz4e4r_x6NYw _QTePoKs4Eeqz4e4r_x6NYw"/>
       <lifeline xmi:id="_bLX4MKs2Eeqz4e4r_x6NYw" name="dBAdapter" represents="_bLYfQKs2Eeqz4e4r_x6NYw" coveredBy="_uDueQas2Eeqz4e4r_x6NYw _uDvFUKs2Eeqz4e4r_x6NYw _uDvFUas2Eeqz4e4r_x6NYw _804I8as3Eeqz4e4r_x6NYw _804wAKs3Eeqz4e4r_x6NYw _804wAas3Eeqz4e4r_x6NYw"/>
       <lifeline xmi:id="_cNjG4Ks2Eeqz4e4r_x6NYw" name="bD" represents="_cNjt8Ks2Eeqz4e4r_x6NYw" coveredBy="_fmVLIKs3Eeqz4e4r_x6NYw _fmVyMKs3Eeqz4e4r_x6NYw _fmVyMas3Eeqz4e4r_x6NYw _Esj24as4Eeqz4e4r_x6NYw _Eskd8Ks4Eeqz4e4r_x6NYw _Eskd8as4Eeqz4e4r_x6NYw"/>
-      <lifeline xmi:id="_ICdJwKs6Eeqz4e4r_x6NYw" name="comprasTableModel" represents="_ICdw0Ks6Eeqz4e4r_x6NYw" coveredBy="_Xx9vkKs6Eeqz4e4r_x6NYw _Xx9vkas6Eeqz4e4r_x6NYw _Xx-WoKs6Eeqz4e4r_x6NYw"/>
       <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_f4UIcKs2Eeqz4e4r_x6NYw" covered="_BIuOoKs2Eeqz4e4r_x6NYw" event="_gjInEKs2Eeqz4e4r_x6NYw" message="_f4ThYKs2Eeqz4e4r_x6NYw"/>
       <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_f4UIcas2Eeqz4e4r_x6NYw" covered="_HsIRQKs2Eeqz4e4r_x6NYw" event="_gjInEas2Eeqz4e4r_x6NYw" message="_f4ThYKs2Eeqz4e4r_x6NYw"/>
       <fragment xmi:type="uml:BehaviorExecutionSpecification" xmi:id="_f4UvgKs2Eeqz4e4r_x6NYw" covered="_HsIRQKs2Eeqz4e4r_x6NYw" start="_f4UIcas2Eeqz4e4r_x6NYw" finish="_f4Uvgas2Eeqz4e4r_x6NYw"/>
