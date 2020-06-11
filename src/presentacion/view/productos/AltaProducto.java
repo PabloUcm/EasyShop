@@ -234,7 +234,7 @@ public class AltaProducto {
 		constraintsCampos.gridy = 8;
 		constraintsCampos.gridheight = 1;
 		constraintsCampos.gridwidth = 2;
-		campos.add(SwingFactory.getJLabel(new Dimension(265,50), "      DESCRIPCION:" ,25), constraintsCampos);
+		campos.add(SwingFactory.getJLabel(new Dimension(265,50), "DESCRIPCION:" ,25), constraintsCampos);
 		constraintsCampos.gridx = 0;
 		constraintsCampos.gridy = 9;
 		campos.add(descripcionSP, constraintsCampos);

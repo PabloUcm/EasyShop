@@ -83,9 +83,9 @@ public class BajaProducto {
 			TProducto producto = controlador.getProductoById(Integer.parseInt(idTF.getText()),"NONE");
 			
 			String msg = "ID: "+ producto.getId()+"\nMarcaId: "+producto.getMarcaId()+"\nNOMBRE: "+ producto.getNombre() +
-				      "\nPRECIO: "+producto.getPrecio()+"\n\n ï¿½Quieres dar de baja a este cliente?";
+				      "\nPRECIO: "+producto.getPrecio()+"\n\n ¿Quieres dar de baja a este producto?";
 			
-			int input = JOptionPane.showConfirmDialog(null, msg,"Confirmar baja de cliente", 
+			int input = JOptionPane.showConfirmDialog(null, msg,"Confirmar baja de producto.", 
       		    JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, bajaIcon);
 			
 			

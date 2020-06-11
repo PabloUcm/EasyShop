@@ -386,7 +386,7 @@ public class Modelo {
 		TProducto producto = productoDAO.getById(id);
 		
 		if(producto == null || !producto.isActivo()) throw new Exception("Producto inexistente.");
-		if(producto != null && !tipo.equals("NONE") && !producto.getTipo().equals(tipo)) throw new Exception("Tipo de producto erroneo.");
+		if(producto != null && !producto.getTipo().equals(tipo) && !tipo.equals("NONE")) throw new Exception("Tipo de producto erroneo.");
 		
 		if (tipo.equals("PC")) producto = productoDAO.getPCByID(id);
 		else if (tipo.equals("Periferico")) producto = productoDAO.getPerifericoByID(id);

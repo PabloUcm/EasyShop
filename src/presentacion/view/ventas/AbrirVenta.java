@@ -100,8 +100,10 @@ public class AbrirVenta implements ActionListener{
 		
 		JScrollPane list1 = new JScrollPane(productsList);
 		list1.setPreferredSize(new Dimension(200,350));
+		list1.setMinimumSize(new Dimension(100,250));
 		JScrollPane list2 = new JScrollPane(selectedProductsList);
 		list2.setPreferredSize(new Dimension(200,350));
+		list1.setMinimumSize(new Dimension(100,250));
 		
 		JPanel campos = new JPanel(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();

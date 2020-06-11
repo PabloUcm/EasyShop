@@ -297,7 +297,7 @@ private ProductoController controlador;
 				pc = (TPc) controlador.getProductoById(Integer.parseInt(idTF.getText()), "PC");
 			}
 			else if (productosBox.getSelectedItem().equals("Periferico")) {
-				periferico = (TPeriferico) controlador.getProductoById(Integer.parseInt(idTF.getText()),"PERIFERICO");
+				periferico = (TPeriferico) controlador.getProductoById(Integer.parseInt(idTF.getText()),"Periferico");
 			}
 			
     		

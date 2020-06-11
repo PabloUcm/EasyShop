@@ -35,6 +35,7 @@ public class MostrarLogs {
 		
 		JScrollPane tablaSP = new JScrollPane(logsTable);
 		tablaSP.getViewport().setBackground(Color.WHITE);
+		tablaSP.setMinimumSize(new Dimension(400,500));
 		
 		c.gridx = 0;
 		c.gridy = 0;

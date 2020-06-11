@@ -39,7 +39,7 @@ public class ListarProducto {
 		
 		JScrollPane tablaSP = new JScrollPane(productosTable);
 		tablaSP.getViewport().setBackground(Color.WHITE);
-		tablaSP.setMinimumSize(new Dimension(600,700));
+		tablaSP.setMinimumSize(new Dimension(600,500));
 		
 		c.gridx = 0;
 		c.gridy = 0;
